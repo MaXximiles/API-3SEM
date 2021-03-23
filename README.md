@@ -1,7 +1,7 @@
 ### API 3º Semestre de Banco de Dados
 Projeto API do 3º Semestre da turma de Banco de Dados FATEC
 
-![](https://user-images.githubusercontent.com/18652465/111546167-feb24d00-8755-11eb-890a-aa3e33d5274d.png)
+![](https://user-images.githubusercontent.com/18652465/111547833-88631a00-8758-11eb-863c-ccf1e6e93f39.png)
 
 ## Integrantes:
 
