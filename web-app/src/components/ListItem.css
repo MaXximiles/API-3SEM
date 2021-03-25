@@ -1,0 +1,30 @@
+.list-item.item i.folder {
+  color: #f8d775;
+}
+
+.list-item.item i.file {
+  color: cornflowerblue;
+}
+
+.list-item.item i.straight.down {
+  border-left: 2px solid #edeff1;
+  height: 100%;
+  margin-right: 5px;
+}
+
+.list-item .content .content-title {
+  cursor: pointer;
+}
+
+.list-item i:hover {
+  color: cadetblue;
+}
+
+.context-menu .ui.dropdown .menu > .header {
+  margin: 1rem 0 0.75rem;
+  padding: 0 1.14285714rem;
+  color: rgba(0, 0, 0, 0.85);
+  font-size: 0.78571429em;
+  font-weight: 700;
+  text-transform: uppercase;
+}
