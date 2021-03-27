@@ -17,10 +17,7 @@ const ListItemContext = () => {
         Criar Novo...
         <div className={`menu ${isDropdownActive ? "transition visible" : ""}`}>
           <div className="header">Tipo</div>
-          <div className="item">Documento</div>
-          <div className="item">Seção</div>
-          <div className="item">Subseção</div>
-          <div className="item">Bloco</div>
+          <div className="item">Diretório</div>
         </div>
       </div>
     </div>

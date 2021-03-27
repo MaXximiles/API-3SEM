@@ -1,18 +1,30 @@
-import React, { useEffect, useState } from "react";
-import List from "./List";
-import { mockupResponse } from "../apis/json";
+import React from "react";
+import Codelist from "./Codelist";
+import Login from "./Login";
+import Route from "./Route";
+import restAPI from "../apis/restAPI";
 
 const App = () => {
-  const [folderItems, setFolderItems] = useState([]);
+  const validateAccount = async (usrEmail, usrSenha) => {
+    const { data } = await restAPI.post("/validateuser", {
+      data: {
+        usrEmail,
+        usrSenha,
+      },
+    });
 
-  useEffect(() => {
-    setFolderItems(mockupResponse());
-  }, []);
+    return data;
+  };
 
   return (
-    <div className="ui container">
-      <List content={folderItems} />
-    </div>
+    <React.Fragment>
+      <Route path="/">
+        <Login onSubmit={validateAccount} />
+      </Route>
+      <Route path="/codelist">
+        <Codelist />
+      </Route>
+    </React.Fragment>
   );
 };
 

@@ -18,7 +18,7 @@ const listItemConfig = {
   },
 };
 
-const ListItem = ({ name, content }) => {
+const ListItem = ({ name, lastModified, type, content }) => {
   const [isCollapsed, setCollapsed] = useState(false);
   const [contextPosition, setContextPosition] = useState({
     left: null,
@@ -28,10 +28,11 @@ const ListItem = ({ name, content }) => {
   const childrenRef = useRef();
 
   // Temporary, remove once date comes from API
-  const date = new Date();
-  const cur = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
+  // const date = new Date();
+  // const cur = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
   //
-  const itemType = content ? (isCollapsed ? "folderOpen" : "folder") : "file";
+  const itemType =
+    type === "FOLDER" ? (isCollapsed ? "folderOpen" : "folder") : "file";
   const { dropIcon, typeIcon } = listItemConfig[itemType];
 
   useEffect(() => {
@@ -86,8 +87,13 @@ const ListItem = ({ name, content }) => {
     if (content && isCollapsed) {
       return content.map((item) => {
         return (
-          <div key={item.id} className="list">
-            <ListItem name={item.name} content={item.content} />
+          <div key={item.docId} className="list">
+            <ListItem
+              name={item.docName}
+              content={item.docChildren}
+              lastModified={item.docLastmodified}
+              type={item.docType}
+            />
           </div>
         );
       });
@@ -109,7 +115,7 @@ const ListItem = ({ name, content }) => {
       <div className="content">
         <div className="content-title">
           <div className="header">{name}</div>
-          <div className="description">{`Ultima modificação em ${cur}`}</div>
+          <div className="description">{`Ultima modificação em ${lastModified}`}</div>
         </div>
         <div ref={childrenRef}>{renderedChildren(content)}</div>
       </div>
