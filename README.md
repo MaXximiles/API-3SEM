@@ -12,7 +12,8 @@ Projeto API do 3º Semestre da turma de Banco de Dados FATEC
 - [![Linkedin](https://img.shields.io/badge/LinkedIn-blue?style=for-the-badge&logo=Linkedin)](https://www.linkedin.com/in/maxx-barcelos-aaa106b2) Maximiles Barcelos
  
  ## Proposta:
- 
+ Após uma entrevista cedida pela indústria Embraer, identificou-se quatro limitações no método vigente. Essas quatro limitações são: o codelist está armazenado e é operado manualmente em planilhas com extensão do tipo .xlsx. Ademais, extrair a composição estabelecida de um traço no documento é complexo e não existem mecanismos que validem ou integrem-os. 
+Sabendo disso, a fim de otimizar essas limitações de forma simplificada, o Trace Finder poder-se-á ser utilizado para construção de uma interface limpa e automatizada. O Trace Finder busca otimizar os processos, como a geração automática de LEP, contêm um sistema de autenticação ordinário e possibilita o uso de tags utilizadas para agrupamento e identificação.
  
  
  - [Story Cards](https://github.com/MaXximiles/API-3SEM/tree/main/User%20Story%20Cards)
