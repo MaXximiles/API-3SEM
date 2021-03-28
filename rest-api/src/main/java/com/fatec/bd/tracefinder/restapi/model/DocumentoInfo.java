@@ -22,11 +22,22 @@ public class DocumentoInfo {
     private String docType;
     private List<DocumentoInfo> docChildren = new ArrayList<DocumentoInfo>();
     
+    public DocumentoInfo() {}
+
     public DocumentoInfo(int docId, String docName, Date docLastmodified, String docType) {
         this.docId = docId;
         this.docName = docName;
         this.docLastmodified = docLastmodified;
         this.docType = docType;
+    }
+
+    public DocumentoInfo(int docId, String docName, Integer docParentId, Date docLastmodified, String docType, List<DocumentoInfo> docChildren) {
+        this.docId = docId;
+        this.docName = docName;
+        this.docParentId = docParentId;
+        this.docLastmodified = docLastmodified;
+        this.docType = docType;
+        this.docChildren = docChildren;
     }
 
     public int getDocId() {

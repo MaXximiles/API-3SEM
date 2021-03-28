@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 
-const ListItemContext = () => {
+const ListItemContext = React.forwardRef(({ createNew }, ref) => {
   const [isDropdownActive, toggleDropdown] = useState(false);
 
   return (
-    <div className="ui secondary vertical menu">
+    <div ref={ref} className="ui secondary vertical menu">
       <div className="ui dropdown item">Deletar</div>
       <div className="ui dropdown item">Fazer Upload</div>
       <div
@@ -17,11 +17,13 @@ const ListItemContext = () => {
         Criar Novo...
         <div className={`menu ${isDropdownActive ? "transition visible" : ""}`}>
           <div className="header">Tipo</div>
-          <div className="item">Diretório</div>
+          <div className="item" onClick={createNew}>
+            Diretório
+          </div>
         </div>
       </div>
     </div>
   );
-};
+});
 
 export default ListItemContext;

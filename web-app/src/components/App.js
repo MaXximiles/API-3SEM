@@ -7,10 +7,8 @@ import restAPI from "../apis/restAPI";
 const App = () => {
   const validateAccount = async (usrEmail, usrSenha) => {
     const { data } = await restAPI.post("/validateuser", {
-      data: {
-        usrEmail,
-        usrSenha,
-      },
+      usrEmail,
+      usrSenha,
     });
 
     return data;

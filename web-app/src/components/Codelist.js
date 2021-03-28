@@ -1,23 +1,25 @@
 import React, { useState, useEffect } from "react";
-import List from "./List";
 import restAPI from "../apis/restAPI";
+import List from "./List";
 
 const Codelist = () => {
-  const [folderItems, setFolderItems] = useState([]);
+  const [content, setContent] = useState([]);
 
   useEffect(() => {
     const codelist = async () => {
       const { data } = await restAPI.get("/codelist");
-      console.log(data);
-      setFolderItems(data);
+
+      setContent(data);
     };
 
-    codelist();
-  }, []);
+    if (!content.length) {
+      codelist();
+    }
+  }, [content]);
 
   return (
     <div className="ui container">
-      <List content={folderItems} />
+      <List content={content} />
     </div>
   );
 };

@@ -20,10 +20,10 @@ public class UserController {
 	JdbcTemplate jdbcTemplate;
 
 	@PostMapping("/validateuser")
-	public ResponseEntity<Boolean> validateCredentials(@RequestBody Map<String, Usuario> payload) {
+	public ResponseEntity<Boolean> validateCredentials(@RequestBody Usuario payload) {
 		try {
 			String sql = "SELECT usr_id, usr_nome, usr_login, usr_senha, usr_email FROM usuario WHERE usr_email = ? AND usr_senha = ?";
-        	List<Usuario> usuarios = jdbcTemplate.query(sql, new BeanPropertyRowMapper<Usuario>(Usuario.class), payload.get("data").getUsrEmail(), payload.get("data").getUsrSenha());
+        	List<Usuario> usuarios = jdbcTemplate.query(sql, new BeanPropertyRowMapper<Usuario>(Usuario.class), payload.getUsrEmail(), payload.getUsrSenha());
 
 			if (usuarios.size() > 0) {
 				return ResponseEntity.ok().body(true);

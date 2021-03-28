@@ -2,6 +2,7 @@ import "./ListItem.css";
 import React, { useEffect, useRef, useState } from "react";
 import ContextMenu from "./ContextMenu";
 import ListItemContext from "./ListItemContext";
+import ListItemCreation from "./ListItemCreation";
 
 const listItemConfig = {
   file: {
@@ -18,19 +19,17 @@ const listItemConfig = {
   },
 };
 
-const ListItem = ({ name, lastModified, type, content }) => {
+const ListItem = ({ id, name, lastModified, type, content }) => {
   const [isCollapsed, setCollapsed] = useState(false);
+  const [isCreatingNew, setIsCreatingNew] = useState(false);
   const [contextPosition, setContextPosition] = useState({
     left: null,
     top: null,
   });
   const ref = useRef();
   const childrenRef = useRef();
+  const contextRef = useRef();
 
-  // Temporary, remove once date comes from API
-  // const date = new Date();
-  // const cur = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
-  //
   const itemType =
     type === "FOLDER" ? (isCollapsed ? "folderOpen" : "folder") : "file";
   const { dropIcon, typeIcon } = listItemConfig[itemType];
@@ -59,8 +58,12 @@ const ListItem = ({ name, lastModified, type, content }) => {
   }, []);
 
   const collapseChildren = (event) => {
-    if (childrenRef.current && childrenRef.current.contains(event.target))
+    if (
+      (childrenRef.current && childrenRef.current.contains(event.target)) ||
+      (contextRef.current && contextRef.current.contains(event.target))
+    ) {
       return;
+    }
 
     setCollapsed(!isCollapsed);
   };
@@ -78,7 +81,7 @@ const ListItem = ({ name, lastModified, type, content }) => {
 
     return (
       <ContextMenu xy={contextPosition}>
-        <ListItemContext />
+        <ListItemContext ref={contextRef} createNew={setIsCreatingNew} />
       </ContextMenu>
     );
   };
@@ -89,6 +92,7 @@ const ListItem = ({ name, lastModified, type, content }) => {
         return (
           <div key={item.docId} className="list">
             <ListItem
+              id={item.docId}
               name={item.docName}
               content={item.docChildren}
               lastModified={item.docLastmodified}
@@ -97,6 +101,18 @@ const ListItem = ({ name, lastModified, type, content }) => {
           </div>
         );
       });
+    }
+
+    return null;
+  };
+
+  const renderListItemCreation = () => {
+    if (isCreatingNew) {
+      return (
+        <div key={-1} className="list">
+          <ListItemCreation parent={id} isCreatingNew={setIsCreatingNew} />
+        </div>
+      );
     }
 
     return null;
@@ -117,6 +133,7 @@ const ListItem = ({ name, lastModified, type, content }) => {
           <div className="header">{name}</div>
           <div className="description">{`Ultima modificação em ${lastModified}`}</div>
         </div>
+        <div>{renderListItemCreation()}</div>
         <div ref={childrenRef}>{renderedChildren(content)}</div>
       </div>
     </div>

@@ -13,6 +13,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -49,7 +51,19 @@ public class DocumentInfoController {
             });
             return ResponseEntity.ok().body(response);
         } catch (Exception e) {
-            System.out.println(e.getStackTrace()[0]);
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
+    @PostMapping("/codelist")
+    public ResponseEntity<Object> insertDocuments(@RequestBody DocumentoInfo payload) {
+        try {
+            String sql = "INSERT INTO documento_info (doc_name, doc_parent_id, doc_lastmodified, doc_type) VALUES (?, ?, SYSDATE, ?)";
+            jdbcTemplate.update(sql, payload.getDocName(), payload.getDocParentId(), payload.getDocType());
+
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
             return ResponseEntity.badRequest().build();
         }
     }

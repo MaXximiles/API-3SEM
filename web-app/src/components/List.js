@@ -6,6 +6,7 @@ const List = ({ content }) => {
     return (
       <ListItem
         key={item.docId}
+        id={item.docId}
         name={item.docName}
         lastModified={item.docLastmodified}
         type={item.docType}
