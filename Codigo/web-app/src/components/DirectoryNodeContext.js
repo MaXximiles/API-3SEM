@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const ListItemContext = React.forwardRef(({ createNew }, ref) => {
+const DirectoryNodeContext = React.forwardRef(({ createNew }, ref) => {
   const [isDropdownActive, toggleDropdown] = useState(false);
 
   return (
@@ -26,4 +26,4 @@ const ListItemContext = React.forwardRef(({ createNew }, ref) => {
   );
 });
 
-export default ListItemContext;
+export default DirectoryNodeContext;

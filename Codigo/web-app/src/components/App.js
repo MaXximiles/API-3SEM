@@ -1,5 +1,5 @@
 import React from "react";
-import Codelist from "./Codelist";
+import DirectoryTree from "./DirectoryTree";
 import Login from "./Login";
 import Route from "./Route";
 import restAPI from "../apis/restAPI";
@@ -20,7 +20,7 @@ const App = () => {
         <Login onSubmit={validateAccount} />
       </Route>
       <Route path="/codelist">
-        <Codelist />
+        <DirectoryTree />
       </Route>
     </React.Fragment>
   );

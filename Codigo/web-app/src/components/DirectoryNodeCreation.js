@@ -1,22 +1,19 @@
 import React, { useEffect, useRef, useState } from "react";
-import restAPI from "../apis/restAPI";
 
-const ListItemCreation = ({ parent, isCreatingNew, createdNew }) => {
+const DirectoryNodeCreation = ({ parent, isCreatingNew, createChild }) => {
   const [title, setTitle] = useState("");
   const inputRef = useRef();
 
-  const createNew = (docParentId, docName, docType) => {
-    restAPI.post("/codelist", {
-      docParentId,
-      docName,
-      docType,
-    });
+  const createNew = async (docParentId, docName, docType) => {
+    await createChild(docParentId, docName, docType);
 
     isCreatingNew(false);
   };
 
   useEffect(() => {
-    inputRef.current.focus();
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
   }, []);
 
   return (
@@ -44,4 +41,4 @@ const ListItemCreation = ({ parent, isCreatingNew, createdNew }) => {
   );
 };
 
-export default ListItemCreation;
+export default DirectoryNodeCreation;
