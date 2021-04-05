@@ -21,4 +21,4 @@ Sabendo disso, a fim de otimizar essas limitações de forma simplificada, o Tra
  - [Documentação](https://github.com/MaXximiles/API-3SEM/tree/main/Documenta%C3%A7%C3%A3o)
  
 ## Sprint 1:
- - [Código](https://github.com/MaXximiles/API-3SEM/tree/main/Codigo)
+ - [Fim da 1ª sprint](https://github.com/MaXximiles/API-3SEM/tree/sprint-1)

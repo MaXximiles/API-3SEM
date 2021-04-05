@@ -6,4 +6,4 @@
 ![](https://github.com/MaXximiles/API-3SEM/blob/main/User%20Story%20Cards/StoryCard5.png)
 ![](https://github.com/MaXximiles/API-3SEM/blob/main/User%20Story%20Cards/StoryCard6.png)
 ![](https://github.com/MaXximiles/API-3SEM/blob/main/User%20Story%20Cards/StoryCard7.png)
-![]()
+![](https://github.com/MaXximiles/API-3SEM/blob/main/User%20Story%20Cards/StoryCard8.png)
