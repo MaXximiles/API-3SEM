@@ -92,12 +92,11 @@ const Dropdown = ({ label, options, selected, onSelectedChange }) => {
 
 			setSelectedSelections((selectedSelections) => [
 				...selectedSelections,
-				...selected.map((selectedOption, index) => {
-					return (index >= initialIndex && index <= endIndex) ? selectedOption : null;
-				}),
+				...selected.filter((selectedOption, index) => (index >= initialIndex && index <= endIndex)),
 			]);
     } else if (event.ctrlKey) {
       if (selectedSelections.includes(option)) {
+				console.log(selectedSelections);
         setSelectedSelections(
           selectedSelections.filter(
             (selected) => selected.value !== option.value
