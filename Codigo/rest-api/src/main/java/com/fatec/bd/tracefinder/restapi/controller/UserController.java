@@ -1,5 +1,6 @@
 package com.fatec.bd.tracefinder.restapi.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -9,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -36,7 +37,18 @@ public class UserController {
 		}
 	}
 
-	@CrossOrigin
+	@GetMapping("/mock")
+	public ResponseEntity<List<Usuario>> mockup() {
+		List<Usuario> listUsuario = new ArrayList<>();
+		Usuario usuario = new Usuario("Rodrigo", "radtenoradtenoradteno", "AbC0223233243", "rodrigo.tenorio1705@gmail.com");
+		usuario.setUsrId(444444444);
+		for (int i = 0; i < 100; i++) {
+			listUsuario.add(usuario);
+		}
+
+		return ResponseEntity.ok().body(listUsuario);
+	}
+
 	@PostMapping("/createusuario")
 	public ResponseEntity<Map<String, Integer>> insertUsuario(@RequestBody Map<String, String> payload) {
 		try {
