@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState, useLayoutEffect } from "react";
 const Dropdown = ({ label, options, selected, onSelectedChange }) => {
   const [isOpen, setOpen] = useState(false);
   const [search, setSearch] = useState("");
+  const [selectedSelections, setSelectedSelections] = useState([]);
   const [visible, setVisible] = useState(false);
   const [inputWidth, setInputWidth] = useState("auto");
   const inputRef = useRef();
@@ -69,8 +70,6 @@ const Dropdown = ({ label, options, selected, onSelectedChange }) => {
       return option != null;
     });
 
-		console.log(renderedOptions, checkOptions);
-
     if (checkOptions) {
       return renderedOptions;
     }
@@ -78,24 +77,71 @@ const Dropdown = ({ label, options, selected, onSelectedChange }) => {
     return <div className="message">Nenhum resultado encontrado.</div>;
   };
 
+  const toggleSelection = (event, option) => {
+    event.stopPropagation();
+
+    if (event.shiftKey) {
+			var initialIndex = selected.indexOf(selectedSelections[selectedSelections.length - 1]);
+      var endIndex = selected.indexOf(option);
+			
+			if (initialIndex > endIndex) {
+				const temp = initialIndex;
+				initialIndex = endIndex;
+				endIndex = temp;
+			}
+
+			setSelectedSelections((selectedSelections) => [
+				...selectedSelections,
+				...selected.map((selectedOption, index) => {
+					return (index >= initialIndex && index <= endIndex) ? selectedOption : null;
+				}),
+			]);
+    } else if (event.ctrlKey) {
+      if (selectedSelections.includes(option)) {
+        setSelectedSelections(
+          selectedSelections.filter(
+            (selected) => selected.value !== option.value
+          )
+        );
+      } else {
+        setSelectedSelections((selectedSelections) => [
+          ...selectedSelections,
+          option,
+        ]);
+      }
+    } else {
+				setSelectedSelections([option]);
+    }
+  };
+
+  const unselectSelection = (event, option) => {
+    event.stopPropagation();
+
+    onSelectedChange(
+      selected.filter(
+        (selectedOption) =>
+          !selectedSelections.includes(selectedOption) &&
+          selectedOption !== option
+      )
+    );
+
+    setSelectedSelections([]);
+  };
+
   const renderedSelected = selected.map((option) => {
     return (
       <div
         key={option.value}
-        className="ui label transition visible"
-        data-value="AL"
-        style={{ display: "inline-block !important" }}
+        className={`ui label transition visible ${
+          selectedSelections.includes(option) ? "active" : null
+        }`}
+        style={{ display: "inline-block !important", cursor: "pointer" }}
+        onClick={(e) => toggleSelection(e, option)}
       >
         {option.label}
         <i
           className="delete icon"
-          onClick={() =>
-            onSelectedChange(
-              selected.filter(
-                (selectedOption) => selectedOption.value !== option.value
-              )
-            )
-          }
+          onClick={(e) => unselectSelection(e, option)}
         ></i>
       </div>
     );
