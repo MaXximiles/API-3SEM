@@ -7,7 +7,17 @@ const Modal = ({ title, isOpen, setOpen, fadeDuration = 500, children }) => {
   const [fadeTimer, setFadeTimer] = useState(fadeDuration);
   const [modalAnimation, setModalAnimation] = useState("");
   const [modalContentAnimation, setModalContentAnimation] = useState("");
+	const containerRef = useRef();
   const ref = useRef();
+
+  const hasElementOverflown = ({
+    clientWidth,
+    clientHeight,
+    scrollWidth,
+    scrollHeight,
+  }) => {
+    return scrollHeight > clientHeight || scrollWidth > clientWidth;
+  };
 
   useEffect(() => {
     const onBodyClick = (event) => {
@@ -18,9 +28,23 @@ const Modal = ({ title, isOpen, setOpen, fadeDuration = 500, children }) => {
       setOpen(false);
     };
 
+    const onResize = () => {
+      document.body.classList.toggle(
+        "scrolling",
+        hasElementOverflown(containerRef.current)
+      );
+
+      ref.current.classList.toggle(
+        "scrolling",
+        hasElementOverflown(containerRef.current)
+      );
+    };
+
     document.body.addEventListener("click", onBodyClick);
+    window.addEventListener("resize", onResize);
 
     return () => {
+      window.removeEventListener("resize", onResize);
       document.body.removeEventListener("click", onBodyClick);
     };
   });
@@ -35,16 +59,10 @@ const Modal = ({ title, isOpen, setOpen, fadeDuration = 500, children }) => {
         setModalContentAnimation("animating scale out");
       }
 
-			const hasBodyOverflown = ({
-				clientWidth,
-				clientHeight,
-				scrollWidth,
-				scrollHeight,
-			}) => {
-				return scrollHeight > clientHeight || scrollWidth > clientWidth;
-			};
-
-			document.body.classList.toggle("scrolling", hasBodyOverflown(document.body));
+      document.body.classList.toggle(
+        "scrolling",
+        hasElementOverflown(containerRef.current)
+      );
 
       setFadeTimer(fadeDuration);
 
@@ -68,6 +86,7 @@ const Modal = ({ title, isOpen, setOpen, fadeDuration = 500, children }) => {
 
   return ReactDOM.createPortal(
     <div
+			ref={containerRef}
       className={`ui dimmer modals page transition ${modalAnimation}`}
       style={{ animationDuration: fadeTimer }}
     >
@@ -77,7 +96,7 @@ const Modal = ({ title, isOpen, setOpen, fadeDuration = 500, children }) => {
         style={{ animationDuration: fadeTimer }}
       >
         <div className="header">{title}</div>
-        {children}
+        {isOpen && children}
       </div>
     </div>,
     document.body

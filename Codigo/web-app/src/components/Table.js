@@ -70,25 +70,7 @@ const Table = ({ data }) => {
       isOpen={isCreatingNew}
       setOpen={setIsCreatingNew}
     >
-      <table className="ui celled table unstackable">
-        <thead>
-          <tr ref={thead}>{rendredTableHead}</tr>
-        </thead>
-        <tbody ref={tbody}>{renderedTableBody}</tbody>
-        <tfoot className="full-width">
-          <tr>
-            <th colSpan={data.length ? Object.keys(data[0]).length : 0}>
-              <div
-                className="ui right floated small primary labeled icon button"
-                onClick={() => setIsCreatingNew(true)}
-              >
-                <i className="plus icon"></i>
-                Adicionar Bloco
-              </div>
-            </th>
-          </tr>
-        </tfoot>
-      </table>
+      
     </Modal>
   );
 
