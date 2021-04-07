@@ -1,0 +1,18 @@
+.ui.dimmer.modals.page.transition.animating {
+    display: flex !important;
+    animation-duration: 500ms;
+}
+
+.ui.dimmer.modals.page.transition.visible.active {
+    display: flex !important;
+    overflow: auto;
+}
+
+.ui.standard.modal.transition.animating {
+    display: block !important;
+    animation-duration: 500ms;
+}
+
+.ui.standard.modal.transition.visible.active {
+    display: block !important;
+}
