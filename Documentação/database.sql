@@ -95,7 +95,7 @@ INSERT INTO codelist (codelist_secao, codelist_subsecao, codelist_nbloco, codeli
 VALUES ('Seção 00','Subseção 01','Nome Bloco','Code Bloco 22','C://caminho/bloco/', '1');
 
 /* Inserindo arquivos(blocos) no codelist */
-INSERT INTO arquivos ( arquivo_nome, codelist ) VALUES ('arquivo1', '1');
+INSERT INTO arquivo ( arquivo_nome, codelist_id ) VALUES ('arquivo1', '1');
 
 /* Lendo as paginas do arquivo(LEP)*/
 INSERT INTO arquivo_pagina (arquivo_id, arquivo_pagina_pagina, arquivo_pagina_modificacao, arquivo_pagina_revisao, arquivo_pagina_data_modificacao) 
@@ -123,4 +123,4 @@ INSERT INTO relacao_documento_traco (traco_id, doc_id) VALUES ('1','1');
 
 /* Inserindo usuarios */ 
 INSERT INTO usuario (usuario_nome, usuario_email, usuario_senha, usuario_nivel, usuario_login) 
-VALUES ('Horacio Jandelinho','horacio@gmail.com','horacio123','1','horacio')
+VALUES ('Horacio Jandelinho','horacio@gmail.com','horacio123','1','horacio');
