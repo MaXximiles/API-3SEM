@@ -96,7 +96,9 @@ const Modal = ({ title, isOpen, setOpen, fadeDuration = 500, children }) => {
         style={{ animationDuration: fadeTimer }}
       >
         <div className="header">{title}</div>
-        {isOpen && children}
+				<div className="content">
+					{isOpen && children}
+				</div>
       </div>
     </div>,
     document.body

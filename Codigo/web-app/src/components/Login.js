@@ -9,9 +9,13 @@ const Login = ({ onSubmit, href }) => {
     header: "",
     message: "",
   });
+  const [isLoading, setIsLoading] = useState(false);
 
   const onLogin = async (event) => {
     event.preventDefault();
+
+    setIsLoading(true);
+
     if (await onSubmit(email, senha)) {
       window.history.pushState({}, "", href);
 
@@ -23,6 +27,8 @@ const Login = ({ onSubmit, href }) => {
         message: "Email ou senha incorretos",
       });
     }
+
+    setIsLoading(false);
   };
 
   const showError = () => {
@@ -46,7 +52,10 @@ const Login = ({ onSubmit, href }) => {
               />
               <div className="content">Faça login em sua conta</div>
             </h2>
-            <form className="ui form" onSubmit={(e) => onLogin(e)}>
+            <form
+              className={`ui form ${isLoading ? "loading" : ""}`}
+              onSubmit={(e) => onLogin(e)}
+            >
               <div className="ui stacked segment">
                 {showError()}
                 <div className="field">

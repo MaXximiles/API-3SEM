@@ -5,24 +5,64 @@ import restAPI from "../apis/restAPI";
 
 const options = [
   {
-    label: "Marte",
+    label: "Mercúrio",
     value: 1,
   },
   {
-    label: "Saturno",
+    label: "Vênus",
     value: 2,
   },
   {
-    label: "Mercúrio",
+    label: "Terra",
     value: 3,
   },
 	{
-    label: "Plutão",
+    label: "Marte",
     value: 4,
   },
 	{
-    label: "Vênus",
+    label: "Júpiter",
     value: 5,
+  },
+	{
+    label: "Saturno",
+    value: 6,
+  },
+  {
+    label: "Urano",
+    value: 7,
+  },
+  {
+    label: "Netuno",
+    value: 8,
+  },
+	{
+    label: "Plutão",
+    value: 9,
+  },
+	{
+    label: "Sol",
+    value: 10,
+  },
+	{
+    label: "Alpha Centauri",
+    value: 11,
+  },
+  {
+    label: "VY Canis Majoris",
+    value: 12,
+  },
+  {
+    label: "Canopus",
+    value: 13,
+  },
+	{
+    label: "Rigel",
+    value: 14,
+  },
+	{
+    label: "Vega",
+    value: 15,
   },
 ];
 
@@ -55,6 +95,7 @@ const Codelist = () => {
               <div className="field">
                 <Dropdown
                   label="Traço"
+									defaultText="Selecione um ou mais traços"
                   options={options}
                   selected={selectedTrace}
                   onSelectedChange={setSelectedTrace}

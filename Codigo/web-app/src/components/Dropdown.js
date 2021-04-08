@@ -1,13 +1,21 @@
 import React, { useEffect, useRef, useState, useLayoutEffect } from "react";
 
-const Dropdown = ({ label, options, selected, onSelectedChange }) => {
+const Dropdown = ({
+  label,
+  defaultText,
+  options,
+  selected,
+  onSelectedChange,
+}) => {
   const [isOpen, setOpen] = useState(false);
   const [search, setSearch] = useState("");
+  const [hoveredOption, setHoveredOption] = useState(null);
   const [selectedSelections, setSelectedSelections] = useState([]);
   const [visible, setVisible] = useState(false);
   const [inputWidth, setInputWidth] = useState("auto");
   const inputRef = useRef();
   const measurerRef = useRef();
+  const selectedRef = useRef();
   const ref = useRef();
 
   useEffect(() => {
@@ -16,6 +24,7 @@ const Dropdown = ({ label, options, selected, onSelectedChange }) => {
         return;
       }
 
+			setHoveredOption(null);
       setOpen(false);
     };
 
@@ -25,6 +34,12 @@ const Dropdown = ({ label, options, selected, onSelectedChange }) => {
       document.body.removeEventListener("click", onBodyClick);
     };
   }, []);
+
+  useLayoutEffect(() => {
+    if (selectedRef.current) {
+      selectedRef.current.scrollIntoView(false);
+    }
+  }, [hoveredOption]);
 
   useEffect(() => {
     setVisible(true);
@@ -47,18 +62,18 @@ const Dropdown = ({ label, options, selected, onSelectedChange }) => {
   };
 
   const renderMenu = () => {
-    const renderedOptions = options.map((option) => {
-      if (
-        selected.includes(option) ||
-        (!option.label.includes(search) && search)
-      ) {
-        return null;
-      }
+    const filteredOptions = options.filter(
+      (option) =>
+        !selected.includes(option) &&
+        option.label.toLowerCase().includes(search.toLowerCase())
+    );
 
+    const renderedOptions = filteredOptions.map((option, index) => {
       return (
         <div
           key={option.value}
-          className="item"
+          ref={hoveredOption === index ? selectedRef : null}
+          className={`item ${hoveredOption === index ? "selected" : ""}`}
           onClick={() => onSelectedChange((selected) => [...selected, option])}
         >
           {option.label}
@@ -66,11 +81,7 @@ const Dropdown = ({ label, options, selected, onSelectedChange }) => {
       );
     });
 
-    const checkOptions = renderedOptions.some((option) => {
-      return option != null;
-    });
-
-    if (checkOptions) {
+    if (renderedOptions.length) {
       return renderedOptions;
     }
 
@@ -81,22 +92,26 @@ const Dropdown = ({ label, options, selected, onSelectedChange }) => {
     event.stopPropagation();
 
     if (event.shiftKey) {
-			var initialIndex = selected.indexOf(selectedSelections[selectedSelections.length - 1]);
+      var initialIndex = selected.indexOf(
+        selectedSelections[selectedSelections.length - 1]
+      );
       var endIndex = selected.indexOf(option);
-			
-			if (initialIndex > endIndex) {
-				const temp = initialIndex;
-				initialIndex = endIndex;
-				endIndex = temp;
-			}
 
-			setSelectedSelections((selectedSelections) => [
-				...selectedSelections,
-				...selected.filter((selectedOption, index) => (index >= initialIndex && index <= endIndex)),
-			]);
+      if (initialIndex > endIndex) {
+        const temp = initialIndex;
+        initialIndex = endIndex;
+        endIndex = temp;
+      }
+
+      setSelectedSelections((selectedSelections) => [
+        ...selectedSelections,
+        ...selected.filter(
+          (selectedOption, index) => index >= initialIndex && index <= endIndex
+        ),
+      ]);
     } else if (event.ctrlKey) {
       if (selectedSelections.includes(option)) {
-				console.log(selectedSelections);
+        console.log(selectedSelections);
         setSelectedSelections(
           selectedSelections.filter(
             (selected) => selected.value !== option.value
@@ -109,7 +124,7 @@ const Dropdown = ({ label, options, selected, onSelectedChange }) => {
         ]);
       }
     } else {
-				setSelectedSelections([option]);
+      setSelectedSelections([option]);
     }
   };
 
@@ -125,6 +140,49 @@ const Dropdown = ({ label, options, selected, onSelectedChange }) => {
     );
 
     setSelectedSelections([]);
+  };
+
+  const onKeyDown = (event) => {
+    const filteredOptions = options.filter(
+      (option) =>
+        !selected.includes(option) &&
+        option.label.toLowerCase().includes(search.toLowerCase())
+    );
+
+    if (filteredOptions.length === 0) {
+      return;
+    }
+
+    if (
+      (event.key === "ArrowDown" || event.key === "ArrowUp") &&
+      hoveredOption === null
+    ) {
+      setHoveredOption(0);
+      return;
+    }
+
+    switch (event.key) {
+      case "ArrowDown":
+        setHoveredOption(
+          hoveredOption < filteredOptions.length - 1
+            ? hoveredOption + 1
+            : hoveredOption
+        );
+        break;
+      case "ArrowUp":
+        setHoveredOption(hoveredOption > 0 ? hoveredOption - 1 : hoveredOption);
+        break;
+      case "Enter":
+        if (hoveredOption !== null) {
+          onSelectedChange((selected) => [
+            ...selected,
+            filteredOptions[hoveredOption],
+          ]);
+        }
+        break;
+      default:
+        break;
+    }
   };
 
   const renderedSelected = selected.map((option) => {
@@ -146,6 +204,8 @@ const Dropdown = ({ label, options, selected, onSelectedChange }) => {
     );
   });
 
+  const renderedPlaceholder = <div className="default text">{defaultText}</div>;
+
   return (
     <div ref={ref} className="field">
       <label className="label">{label}</label>
@@ -161,12 +221,14 @@ const Dropdown = ({ label, options, selected, onSelectedChange }) => {
           ref={inputRef}
           className="search"
           value={search}
+          onKeyDown={(e) => onKeyDown(e)}
           onChange={(e) => setSearch(e.target.value)}
           style={{ width: inputWidth + 1 }}
         ></input>
         <span ref={measurerRef} style={{ display: "inline" }} className="sizer">
           {visible && search}
         </span>
+        {!search && renderedPlaceholder}
         <div className="text">{selected.label}</div>
         <div className={`menu ${isOpen ? "visible transition" : ""}`}>
           {renderMenu()}
