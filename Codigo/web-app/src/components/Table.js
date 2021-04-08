@@ -1,11 +1,35 @@
 import "./Table.css";
 import React, { useEffect, useRef, useState } from "react";
+import ContextMenu from "./ContextMenu";
 
 const Table = ({ data, onEdit }) => {
   const [columnStyle, setColumnStyle] = useState([]);
   const [contextPosition, setContextPosition] = useState({});
+  const [selectedItem, setSelectedItem] = useState({});
   const thead = useRef();
   const tbody = useRef();
+
+  useEffect(() => {
+    const onBodyClick = () => {
+      setContextPosition({ left: null, top: null });
+      setSelectedItem({});
+    };
+
+    const onBodyContextMenu = (event) => {
+      if (tbody.current && !tbody.current.contains(event.target)) {
+        setContextPosition({ left: null, top: null });
+        setSelectedItem({});
+      }
+    };
+
+    document.body.addEventListener("click", onBodyClick);
+    document.body.addEventListener("contextmenu", onBodyContextMenu);
+
+    return () => {
+      document.body.removeEventListener("click", onBodyClick);
+      document.body.removeEventListener("contextmenu", onBodyContextMenu);
+    };
+  }, []);
 
   useEffect(() => {
     if (tbody.current.children[0]) {
@@ -41,9 +65,33 @@ const Table = ({ data, onEdit }) => {
     }
   }, [data]);
 
-  const onContextMenu = (event) => {
+  const editItem = (event, item) => {
+    setContextPosition({ left: null, top: null });
+    setSelectedItem({});
 
+    onEdit(event, item);
   }
+
+  const onContextMenu = (event, item) => {
+    event.preventDefault();
+
+    setSelectedItem(item);
+    setContextPosition({ left: event.clientX, top: event.clientY });
+  };
+
+  const renderContextMenu = () => {
+    if (contextPosition.left || contextPosition.top) {
+      return (
+        <ContextMenu xy={contextPosition}>
+          <div className="ui secondary vertical menu">
+            <div className="ui dropdown item" onClick={(e) => editItem(e, selectedItem)}>Editar Bloco</div>
+          </div>
+        </ContextMenu>
+      );
+    }
+
+    return null;
+  };
 
   const rendredTableHead = data.length
     ? Object.keys(data[0]).map((key, index) => {
@@ -58,18 +106,27 @@ const Table = ({ data, onEdit }) => {
   const renderedTableBody = data.map((item, rowIndex) => {
     const renderedTableCells = Object.entries(item).map((value, index) => {
       return (
-        <td key={value[0]} data-label={value[0]} style={columnStyle[index]} onContextMenu={(e) => onContextMenu(e)}>
+        <td key={value[0]} data-label={value[0]} style={columnStyle[index]}>
           {value[1]}
         </td>
       );
     });
 
-    return <tr key={rowIndex}>{renderedTableCells}</tr>;
+    return (
+      <tr
+        key={rowIndex}
+        className={selectedItem === item ? "active" : ""}
+        onContextMenu={(e) => onContextMenu(e, item)}
+      >
+        {renderedTableCells}
+      </tr>
+    );
   });
 
   return (
     <div className="Table">
-      <table className="ui celled table unstackable">
+      {renderContextMenu()}
+      <table className="ui selectable celled table unstackable">
         <thead>
           <tr ref={thead}>{rendredTableHead}</tr>
         </thead>

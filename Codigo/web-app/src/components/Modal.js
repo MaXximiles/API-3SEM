@@ -95,7 +95,7 @@ const Modal = ({ title, isOpen, setIsOpen, fadeDuration = 500, children }) => {
         className={`ui standard modal transition ${modalContentAnimation}`}
         style={{ animationDuration: fadeTimer }}
       >
-				<i className="close icon" onClick={(e) => setIsOpen(false)}></i>
+				<i className="close icon" onClick={() => setIsOpen(false)}></i>
         <div className="header">{title}</div>
         {children}
       </div>

@@ -71,7 +71,7 @@ const options = [
 const Codelist = () => {
   const [data, setData] = useState([]);
 	const [isEditing, setIsEditing] = useState(false);
-	const [dataEntry, setDataEntry] = useState({});
+	const [dataEntry, setDataEntry] = useState(null);
   const [selectedTrace, setSelectedTrace] = useState([]);
 	const [name, setName] = useState("");
 
@@ -86,23 +86,33 @@ const Codelist = () => {
 	};
 
 
-	const onSubmit = async (data) => {
-		console.log(data);
-		const response = await restAPI.post("/codelist/", data);
+	const onSubmit = async (data, oldData) => {
+		var response;
+
+		if (oldData) {
+			if (data === oldData) {
+				return;
+			}
+			
+			const response = await restAPI.put("/codelist/", data);
+		} else {
+			const response = await restAPI.post("/codelist/", data);
+		}
 
 		console.log(response);
 		setIsEditing(false);
 		getData();
 	}
 
-	const onEdit = (event) => {
+	const onEdit = (event, item = null) => {
 		event.stopPropagation();
+		setDataEntry(item ? item : null);
 		setIsEditing(!isEditing);
 	}
 
 	const renderedEditModal = (
     <Modal title="Criando Novo Bloco" isOpen={isEditing} setIsOpen={setIsEditing}>
-      <CodelistEdit onSubmit={onSubmit} />
+      <CodelistEdit onSubmit={onSubmit} dataEntry={dataEntry} />
     </Modal>
   );
 
