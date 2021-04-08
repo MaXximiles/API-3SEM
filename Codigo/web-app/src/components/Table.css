@@ -1,0 +1,11 @@
+.Table {
+  height: 100%;
+}
+
+thead, tbody { display: block; }
+
+tbody {
+    height: fit-content;
+    max-height: 500px;
+    overflow-y: auto !important;    /* Trigger vertical scroll    */
+}

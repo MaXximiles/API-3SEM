@@ -3,7 +3,7 @@ import React from "react";
 
 const ContextMenu = ({ xy, children }) => {
   return (
-    <div className="context-menu" style={xy}>
+    <div className="Context-Menu" style={xy}>
       {children}
     </div>
   );
