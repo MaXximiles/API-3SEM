@@ -75,4 +75,52 @@ CREATE TABLE `trace_finder`.`documento` (
   `usuario_login` VARCHAR(45) NULL,
   PRIMARY KEY (`usuario_id`));
 
+ /* ALTER TABLE'S*/ 
   
+  ALTER TABLE `trace_finder`.`codelist` 
+ADD COLUMN `documento_id` VARCHAR(45) NULL AFTER `codelist_caminho`;
+
+ALTER TABLE `trace_finder`.`relacao_documento_traco` 
+DROP COLUMN `arquivo_id`;
+
+
+/*INSERT'S*/
+
+
+/* Inserindo novo manual*/
+INSERT INTO documento (documento_nome, documento_pn, documento_caminho) VALUES ('ABC', '1234', 'C://caminho/docuemnto');
+
+/* Inserindo linha do codelist do manual*/
+INSERT INTO codelist (codelist_secao, codelist_subsecao, codelist_nbloco, codelist_codebloco, codelist_caminho, documento_id)
+VALUES ('Seção 00','Subseção 01','Nome Bloco','Code Bloco 22','C://caminho/bloco/', '1');
+
+/* Inserindo arquivos(blocos) no codelist */
+INSERT INTO arquivos ( arquivo_nome, codelist ) VALUES ('arquivo1', '1');
+
+/* Lendo as paginas do arquivo(LEP)*/
+INSERT INTO arquivo_pagina (arquivo_id, arquivo_pagina_pagina, arquivo_pagina_modificacao, arquivo_pagina_revisao, arquivo_pagina_data_modificacao) 
+VALUES ('1','1','','Original','01/04/2021' );
+INSERT INTO arquivo_pagina (arquivo_id, arquivo_pagina_pagina, arquivo_pagina_modificacao, arquivo_pagina_revisao, arquivo_pagina_data_modificacao) 
+VALUES ('1','2','new','Revisão 1','07/04/2021' );
+INSERT INTO arquivo_pagina (arquivo_id, arquivo_pagina_pagina, arquivo_pagina_modificacao, arquivo_pagina_revisao, arquivo_pagina_data_modificacao) 
+VALUES ('1','3','new','Revisão 1','07/04/2021' );
+INSERT INTO arquivo_pagina (arquivo_id, arquivo_pagina_pagina, arquivo_pagina_modificacao, arquivo_pagina_revisao, arquivo_pagina_data_modificacao) 
+VALUES ('1','4','del','Original','06/04/2021' );
+
+/* Inserindo tracos dos arquivos(blocos)*/
+INSERT INTO traco_arquivo (traco_arquivo_nome, traco_arquivo_descricao, traco_arquivo_codigo)
+VALUES ('Traço 1','Este é o primeiro traço do arquivo(bloco)','50');
+
+/* Inserindo tracos dos manuais*/
+INSERT INTO traco_doc (traco_doc_nome, traco_doc_descricao, traco_doc_codigo)
+VALUES ('Traço 1','Este é o primeiro traço do documento','74');
+
+/* Relacionando os tracos da tabela tracos de arquivos com os arquivos*/
+INSERT INTO relacao_arquivo_traco (traco_id, arquivo_id) VALUES ('1','1');
+
+/* Relacionando os tracos da tabela tracos de documento com os documentos(manuais)*/
+INSERT INTO relacao_documento_traco (traco_id, doc_id) VALUES ('1','1');
+
+/* Inserindo usuarios */ 
+INSERT INTO usuario (usuario_nome, usuario_email, usuario_senha, usuario_nivel, usuario_login) 
+VALUES ('Horacio Jandelinho','horacio@gmail.com','horacio123','1','horacio')
