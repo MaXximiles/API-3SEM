@@ -17,12 +17,10 @@ const CodelistEdit = ({ onSubmit, dataEntry }) => {
 
 	const submit = async () => {
 		const submitedEntry = {
-			codelist_id: dataEntry.codelist_id,
-			codelist_codebloco: block,
-			codelist_nbloco: blockCode,
+			codelist_codebloco: blockCode,
+			codelist_nbloco: block,
 			codelist_secao: section,
 			codelist_subsecao: subsection,
-			codelist_caminho: dataEntry.codelist_caminho,
 		};
 
 		if (dataEntry) {

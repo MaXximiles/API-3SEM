@@ -2,7 +2,7 @@ import "./Table.css";
 import React, { useEffect, useRef, useState } from "react";
 import ContextMenu from "./ContextMenu";
 
-const Table = ({ data, onEdit }) => {
+const Table = ({ data, onEdit, onDelete }) => {
   const [columnStyle, setColumnStyle] = useState([]);
   const [contextPosition, setContextPosition] = useState({});
   const [selectedItem, setSelectedItem] = useState({});
@@ -72,6 +72,12 @@ const Table = ({ data, onEdit }) => {
     onEdit(event, item);
   }
 
+  const deleteItem = (item) => {
+    setSelectedItem({});
+
+    onDelete(item);
+  }
+
   const onContextMenu = (event, item) => {
     event.preventDefault();
 
@@ -85,6 +91,7 @@ const Table = ({ data, onEdit }) => {
         <ContextMenu xy={contextPosition}>
           <div className="ui secondary vertical menu">
             <div className="ui dropdown item" onClick={(e) => editItem(e, selectedItem)}>Editar Bloco</div>
+            <div className="ui dropdown item" onClick={(e) => deleteItem(selectedItem)}>Deletar Bloco</div>
           </div>
         </ContextMenu>
       );

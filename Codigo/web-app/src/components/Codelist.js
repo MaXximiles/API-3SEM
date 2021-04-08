@@ -18,15 +18,15 @@ const options = [
     label: "Terra",
     value: 3,
   },
-	{
+  {
     label: "Marte",
     value: 4,
   },
-	{
+  {
     label: "Júpiter",
     value: 5,
   },
-	{
+  {
     label: "Saturno",
     value: 6,
   },
@@ -38,15 +38,15 @@ const options = [
     label: "Netuno",
     value: 8,
   },
-	{
+  {
     label: "Plutão",
     value: 9,
   },
-	{
+  {
     label: "Sol",
     value: 10,
   },
-	{
+  {
     label: "Alpha Centauri",
     value: 11,
   },
@@ -58,11 +58,11 @@ const options = [
     label: "Canopus",
     value: 13,
   },
-	{
+  {
     label: "Rigel",
     value: 14,
   },
-	{
+  {
     label: "Vega",
     value: 15,
   },
@@ -70,55 +70,64 @@ const options = [
 
 const Codelist = () => {
   const [data, setData] = useState([]);
-	const [isEditing, setIsEditing] = useState(false);
-	const [dataEntry, setDataEntry] = useState(null);
+  const [isEditing, setIsEditing] = useState(false);
+  const [dataEntry, setDataEntry] = useState(null);
   const [selectedTrace, setSelectedTrace] = useState([]);
-	const [name, setName] = useState("");
+  const [name, setName] = useState("");
 
   useEffect(() => {
     getData();
   }, []);
 
-	const getData = async () => {
-		const response = await restAPI.get("/codelist/");
+  const getData = async () => {
+    const response = await restAPI.get("/codelist/");
 
-		setData(response.data);
-	};
+    setData(response.data);
+  };
 
+  const onSubmit = async (data, oldData) => {
+    if (data === oldData) {
+      return;
+    }
 
-	const onSubmit = async (data, oldData) => {
-		var response;
+		console.log(data, oldData);
 
-		if (oldData) {
-			if (data === oldData) {
-				return;
-			}
-			
-			const response = await restAPI.put("/codelist/", data);
-		} else {
-			const response = await restAPI.post("/codelist/", data);
-		}
+    const response = oldData
+      ? await restAPI.put(`/codelist/${oldData.codelist_id}`, data)
+      : await restAPI.post("/codelist/", data);
 
+    console.log(response);
+    setIsEditing(false);
+    getData();
+  };
+
+	const onDelete = async (data) => {
+		const response = await restAPI.delete(`/codelist/${data.codelist_id}`);
+		
 		console.log(response);
-		setIsEditing(false);
+		
 		getData();
 	}
 
-	const onEdit = (event, item = null) => {
-		event.stopPropagation();
-		setDataEntry(item ? item : null);
-		setIsEditing(!isEditing);
-	}
+  const onEdit = (event, item = null) => {
+    event.stopPropagation();
+    setDataEntry(item ? item : null);
+    setIsEditing(!isEditing);
+  };
 
-	const renderedEditModal = (
-    <Modal title="Criando Novo Bloco" isOpen={isEditing} setIsOpen={setIsEditing}>
+  const renderedEditModal = (
+    <Modal
+      title="Criando Novo Bloco"
+      isOpen={isEditing}
+      setIsOpen={setIsEditing}
+    >
       <CodelistEdit onSubmit={onSubmit} dataEntry={dataEntry} />
     </Modal>
   );
 
   return (
     <div className="Codelist">
-			{renderedEditModal}
+      {renderedEditModal}
       <div className="ui one column stackable grid container">
         <div className="column">
           <div className="ui form">
@@ -126,12 +135,20 @@ const Codelist = () => {
             <div className="two fields">
               <div className="field">
                 <label>Nome</label>
-                <input type="text" name="manualName" placeholder="Nome-PN" value={name} onChange={(e) => {setName(e.target.value)}} />
+                <input
+                  type="text"
+                  name="manualName"
+                  placeholder="Nome-PN"
+                  value={name}
+                  onChange={(e) => {
+                    setName(e.target.value);
+                  }}
+                />
               </div>
               <div className="field">
                 <Dropdown
                   label="Traço"
-									defaultText="Selecione um ou mais traços"
+                  defaultText="Selecione um ou mais traços"
                   options={options}
                   selected={selectedTrace}
                   onSelectedChange={setSelectedTrace}
@@ -141,7 +158,7 @@ const Codelist = () => {
           </div>
         </div>
         <div className="column">
-          <Table data={data} onEdit={onEdit} />
+          <Table data={data} onEdit={onEdit} onDelete={onDelete} />
         </div>
       </div>
     </div>
