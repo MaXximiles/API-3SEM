@@ -66,15 +66,12 @@ const Table = ({ data, onEdit, onDelete }) => {
   }, [data]);
 
   const editItem = (event, item) => {
-    setContextPosition({ left: null, top: null });
-    setSelectedItem({});
+    event.stopPropagation();
 
-    onEdit(event, item);
+    onEdit(item);
   }
 
   const deleteItem = (item) => {
-    setSelectedItem({});
-
     onDelete(item);
   }
 
@@ -143,7 +140,7 @@ const Table = ({ data, onEdit, onDelete }) => {
             <th colSpan={data.length ? Object.keys(data[0]).length : 0}>
               <div
                 className="ui right floated small primary labeled icon button"
-                onClick={(e) => onEdit(e)}
+                onClick={(e) => editItem(e)}
               >
                 <i className="plus icon"></i>
                 Adicionar Bloco

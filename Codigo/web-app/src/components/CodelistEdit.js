@@ -12,8 +12,17 @@ const CodelistEdit = ({ onSubmit, dataEntry }) => {
 			setSubsection(dataEntry.codelist_subsecao);
 			setBlock(dataEntry.codelist_nbloco);
 			setBlockCode(dataEntry.codelist_codebloco);
-		}
-	}, [dataEntry])
+		} else {
+      clearFields();
+    }
+	}, [dataEntry]);
+
+  const clearFields = () => {
+    setSection("");
+		setSubsection("");
+		setBlock("");
+		setBlockCode("");
+  }
 
 	const submit = async () => {
 		const submitedEntry = {
@@ -29,10 +38,7 @@ const CodelistEdit = ({ onSubmit, dataEntry }) => {
 			await onSubmit(submitedEntry);
 		}
 
-		setSection("");
-		setSubsection("");
-		setBlock("");
-		setBlockCode("");
+    clearFields();
 	}
 
   return (

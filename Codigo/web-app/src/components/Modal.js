@@ -1,10 +1,16 @@
 import "./Modal.css";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import ReactDOM from "react-dom";
 
-const Modal = ({ title, isOpen, setIsOpen, fadeDuration = 500, children }) => {
+const Modal = ({
+  title,
+  isOpen,
+  setIsOpen,
+  size = "standard",
+  forceChoice = false,
+  children,
+}) => {
   const [wasModalOpen, setWasModalOpen] = useState(isOpen);
-  const [fadeTimer, setFadeTimer] = useState(fadeDuration);
   const [modalAnimation, setModalAnimation] = useState("");
   const [modalContentAnimation, setModalContentAnimation] = useState("");
   const containerRef = useRef();
@@ -40,16 +46,29 @@ const Modal = ({ title, isOpen, setIsOpen, fadeDuration = 500, children }) => {
       );
     };
 
-    document.body.addEventListener("click", onBodyClick);
+    if (!forceChoice) {
+      document.body.addEventListener("mousedown", onBodyClick);
+    }
+
     window.addEventListener("resize", onResize);
 
     return () => {
-      document.body.removeEventListener("click", onBodyClick);
+      document.body.removeEventListener("mousedown", onBodyClick);
       window.removeEventListener("resize", onResize);
     };
-  }, [setIsOpen]);
+  }, [setIsOpen, forceChoice]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
+    document.body.classList.toggle(
+      "scrolling",
+      hasElementOverflown(containerRef.current)
+    );
+
+    ref.current.classList.toggle(
+      "scrolling",
+      hasElementOverflown(containerRef.current)
+    );
+
     if (wasModalOpen !== isOpen) {
       if (!wasModalOpen && isOpen) {
         setModalAnimation("animating fade in");
@@ -59,16 +78,9 @@ const Modal = ({ title, isOpen, setIsOpen, fadeDuration = 500, children }) => {
         setModalContentAnimation("animating scale out");
       }
 
-      document.body.classList.toggle(
-        "scrolling",
-        hasElementOverflown(containerRef.current)
-      );
-
-      setFadeTimer(fadeDuration);
-
       setTimeout(() => {
         setWasModalOpen(isOpen);
-      }, fadeDuration / 2);
+      }, 250);
     } else {
       if (wasModalOpen && isOpen) {
         setModalAnimation("visible active");
@@ -79,23 +91,21 @@ const Modal = ({ title, isOpen, setIsOpen, fadeDuration = 500, children }) => {
       }
 
       document.body.classList.toggle("dimmed", wasModalOpen && isOpen);
-
-      setFadeTimer(0);
     }
-  }, [isOpen, wasModalOpen, fadeDuration]);
+  }, [isOpen, wasModalOpen]);
 
   return ReactDOM.createPortal(
     <div
       ref={containerRef}
       className={`ui dimmer modals page transition ${modalAnimation}`}
-      style={{ animationDuration: fadeTimer }}
     >
       <div
         ref={ref}
-        className={`ui standard modal transition ${modalContentAnimation}`}
-        style={{ animationDuration: fadeTimer }}
+        className={`ui ${size} modal transition ${modalContentAnimation}`}
       >
-				<i className="close icon" onClick={() => setIsOpen(false)}></i>
+        {!forceChoice && (
+          <i className="close icon" onClick={() => setIsOpen(false)}></i>
+        )}
         <div className="header">{title}</div>
         {children}
       </div>
