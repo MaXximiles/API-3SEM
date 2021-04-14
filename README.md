@@ -18,7 +18,6 @@ Projeto API do 3º Semestre da turma de Banco de Dados FATEC
  - [Story Cards](https://github.com/MaXximiles/API-3SEM/tree/main/User%20Story%20Cards)
  - [Wireframes](https://github.com/MaXximiles/API-3SEM/tree/main/Wireframes)
  - [Documentação](https://github.com/MaXximiles/API-3SEM/tree/main/Documenta%C3%A7%C3%A3o)
- - 
  
 <h2>Sprints</h2>
        <table>
