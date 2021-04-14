@@ -8,7 +8,7 @@ CREATE TABLE `trace_finder`.`documento` (
   `documento_caminho` VARCHAR(255) NULL,
   PRIMARY KEY (`documento_id`));
 
- /* Tabela traço pertencente ao documento*/
+ /* Tabela traÃ§o pertencente ao documento*/
  CREATE TABLE `trace_finder`.`traco_doc` (
   `traco_doc_id` INT NOT NULL AUTO_INCREMENT,
   `traco_doc_nome` VARCHAR(45) NULL,
@@ -16,7 +16,7 @@ CREATE TABLE `trace_finder`.`documento` (
   `traco_doc_codigo` VARCHAR(45) NULL,
   PRIMARY KEY (`traco_doc_id`));
 
- /* Tabela relação documento com Traço */ 
+ /* Tabela relaÃ§Ã£o documento com TraÃ§o */ 
  CREATE TABLE `trace_finder`.`relacao_documento_traco` (
   `relacao_documento_traco_id` INT NOT NULL AUTO_INCREMENT,
   `traco_id` INT NULL,
@@ -40,7 +40,7 @@ CREATE TABLE `trace_finder`.`documento` (
   `codelist_id` VARCHAR(45) NULL,
   PRIMARY KEY (`arquivo_id`));
   
-  /* Tabela traços dos arquivos */ 
+  /* Tabela traÃ§os dos arquivos */ 
   CREATE TABLE `trace_finder`.`traco_arquivo` (
   `traco_arquivo_id` INT NOT NULL AUTO_INCREMENT,
   `traco_arquivo_nome` VARCHAR(45) NULL,
@@ -48,7 +48,7 @@ CREATE TABLE `trace_finder`.`documento` (
   `traco_arquivo_codigo` VARCHAR(45) NULL,
   PRIMARY KEY (`traco_arquivo_id`));
 
-  /* Tabela relação arquivo para traços */
+  /* Tabela relaÃ§Ã£o arquivo para traÃ§os */
  CREATE TABLE `trace_finder`.`relacao_arquivo_traco` (
   `relacao_arquivo_traco_id` INT NOT NULL AUTO_INCREMENT,
   `traco_id` INT NULL,
@@ -92,7 +92,7 @@ INSERT INTO documento (documento_nome, documento_pn, documento_caminho) VALUES (
 
 /* Inserindo linha do codelist do manual*/
 INSERT INTO codelist (codelist_secao, codelist_subsecao, codelist_nbloco, codelist_codebloco, codelist_caminho, documento_id)
-VALUES ('Seção 00','Subseção 01','Nome Bloco','Code Bloco 22','C://caminho/bloco/', '1');
+VALUES ('SeÃ§Ã£o 00','SubseÃ§Ã£o 01','Nome Bloco','Code Bloco 22','C://caminho/bloco/', '1');
 
 /* Inserindo arquivos(blocos) no codelist */
 INSERT INTO arquivo ( arquivo_nome, codelist_id ) VALUES ('arquivo1', '1');
@@ -101,19 +101,19 @@ INSERT INTO arquivo ( arquivo_nome, codelist_id ) VALUES ('arquivo1', '1');
 INSERT INTO arquivo_pagina (arquivo_id, arquivo_pagina_pagina, arquivo_pagina_modificacao, arquivo_pagina_revisao, arquivo_pagina_data_modificacao) 
 VALUES ('1','1','','Original','01/04/2021' );
 INSERT INTO arquivo_pagina (arquivo_id, arquivo_pagina_pagina, arquivo_pagina_modificacao, arquivo_pagina_revisao, arquivo_pagina_data_modificacao) 
-VALUES ('1','2','new','Revisão 1','07/04/2021' );
+VALUES ('1','2','new','RevisÃ£o 1','07/04/2021' );
 INSERT INTO arquivo_pagina (arquivo_id, arquivo_pagina_pagina, arquivo_pagina_modificacao, arquivo_pagina_revisao, arquivo_pagina_data_modificacao) 
-VALUES ('1','3','new','Revisão 1','07/04/2021' );
+VALUES ('1','3','new','RevisÃ£o 1','07/04/2021' );
 INSERT INTO arquivo_pagina (arquivo_id, arquivo_pagina_pagina, arquivo_pagina_modificacao, arquivo_pagina_revisao, arquivo_pagina_data_modificacao) 
 VALUES ('1','4','del','Original','06/04/2021' );
 
 /* Inserindo tracos dos arquivos(blocos)*/
 INSERT INTO traco_arquivo (traco_arquivo_nome, traco_arquivo_descricao, traco_arquivo_codigo)
-VALUES ('Traço 1','Este é o primeiro traço do arquivo(bloco)','50');
+VALUES ('TraÃ§o 1','Este Ã© o primeiro traÃ§o do arquivo(bloco)','50');
 
 /* Inserindo tracos dos manuais*/
 INSERT INTO traco_doc (traco_doc_nome, traco_doc_descricao, traco_doc_codigo)
-VALUES ('Traço 1','Este é o primeiro traço do documento','74');
+VALUES ('TraÃ§o 1','Este Ã© o primeiro traÃ§o do documento','74');
 
 /* Relacionando os tracos da tabela tracos de arquivos com os arquivos*/
 INSERT INTO relacao_arquivo_traco (traco_id, arquivo_id) VALUES ('1','1');
@@ -124,3 +124,16 @@ INSERT INTO relacao_documento_traco (traco_id, doc_id) VALUES ('1','1');
 /* Inserindo usuarios */ 
 INSERT INTO usuario (usuario_nome, usuario_email, usuario_senha, usuario_nivel, usuario_login) 
 VALUES ('Horacio Jandelinho','horacio@gmail.com','horacio123','1','horacio');
+
+/* Aumentando campo de senha para criptografia*/
+ALTER TABLE `trace_finder`.`usuario` 
+CHANGE COLUMN `usuario_senha` `usuario_senha` VARCHAR(255) NULL DEFAULT NULL ;
+
+/* Arrumando campo documento_id para INT */
+ALTER TABLE `trace_finder`.`codelist` DROP COLUMN `documento_id`;
+
+ALTER TABLE `trace_finder`.`codelist` ADD COLUMN `documento_id` INT(11) NULL AFTER `codelist_caminho`;
+
+/* Adicionando relacionamentos entre tabelas */
+/* Codelist > Documento */
+ALTER TABLE codelist ADD CONSTRAINT fk_documento_codelist FOREIGN KEY (documento_id) REFERENCES documento(documento_id);
