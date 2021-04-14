@@ -8,12 +8,12 @@
   overflow: auto;
 }
 
-.ui.standard.modal.transition.animating {
+.ui.modal.transition.animating {
   display: block !important;
   animation-duration: 500ms;
 }
 
-.ui.standard.modal.transition.visible.active {
+.ui.modal.transition.visible.active {
   display: block !important;
 }
 

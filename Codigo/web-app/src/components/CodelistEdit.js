@@ -1,23 +1,44 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
-const CodelistEdit = ({ onSubmit }) => {
+const CodelistEdit = ({ onSubmit, dataEntry }) => {
   const [section, setSection] = useState("");
   const [subsection, setSubsection] = useState("");
   const [block, setBlock] = useState("");
 	const [blockCode, setBlockCode] = useState("");
 
-	const submit = async () => {
-		await onSubmit({
-			codelist_codebloco: block,
-			codelist_nbloco: blockCode,
-			codelist_secao: section,
-			codelist_subsecao: subsection,
-		});
+	useEffect(() => {
+		if (dataEntry) {
+			setSection(dataEntry.codelist_secao);
+			setSubsection(dataEntry.codelist_subsecao);
+			setBlock(dataEntry.codelist_nbloco);
+			setBlockCode(dataEntry.codelist_codebloco);
+		} else {
+      clearFields();
+    }
+	}, [dataEntry]);
 
-		setSection("");
+  const clearFields = () => {
+    setSection("");
 		setSubsection("");
 		setBlock("");
 		setBlockCode("");
+  }
+
+	const submit = async () => {
+		const submitedEntry = {
+			codelist_codebloco: blockCode,
+			codelist_nbloco: block,
+			codelist_secao: section,
+			codelist_subsecao: subsection,
+		};
+
+		if (dataEntry) {
+			await onSubmit(submitedEntry, dataEntry);
+		} else {
+			await onSubmit(submitedEntry);
+		}
+
+    clearFields();
 	}
 
   return (

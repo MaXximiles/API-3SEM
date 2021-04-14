@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
+import Loader from "./Loader";
 import Table from "./Table";
 import Dropdown from "./Dropdown";
 import Modal from "./Modal";
 import CodelistEdit from "./CodelistEdit";
+import CodelistDelete from "./CodelistDelete";
 import restAPI from "../apis/restAPI";
 
 const options = [
@@ -18,15 +20,15 @@ const options = [
     label: "Terra",
     value: 3,
   },
-	{
+  {
     label: "Marte",
     value: 4,
   },
-	{
+  {
     label: "Júpiter",
     value: 5,
   },
-	{
+  {
     label: "Saturno",
     value: 6,
   },
@@ -38,15 +40,15 @@ const options = [
     label: "Netuno",
     value: 8,
   },
-	{
+  {
     label: "Plutão",
     value: 9,
   },
-	{
+  {
     label: "Sol",
     value: 10,
   },
-	{
+  {
     label: "Alpha Centauri",
     value: 11,
   },
@@ -58,11 +60,11 @@ const options = [
     label: "Canopus",
     value: 13,
   },
-	{
+  {
     label: "Rigel",
     value: 14,
   },
-	{
+  {
     label: "Vega",
     value: 15,
   },
@@ -70,45 +72,93 @@ const options = [
 
 const Codelist = () => {
   const [data, setData] = useState([]);
-	const [isEditing, setIsEditing] = useState(false);
-	const [dataEntry, setDataEntry] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [dataEntry, setDataEntry] = useState(null);
   const [selectedTrace, setSelectedTrace] = useState([]);
-	const [name, setName] = useState("");
+  const [name, setName] = useState("");
 
   useEffect(() => {
     getData();
   }, []);
 
-	const getData = async () => {
-		const response = await restAPI.get("/codelist/");
+  const getData = async () => {
+    setIsLoading(true);
 
-		setData(response.data);
-	};
+    const response = await restAPI.get("/codelist/");
 
+    setData(response.data);
 
-	const onSubmit = async (data) => {
-		console.log(data);
-		const response = await restAPI.post("/codelist/", data);
+    setIsLoading(false);
+  };
 
-		console.log(response);
-		setIsEditing(false);
-		getData();
-	}
+  const onSubmit = async (data, oldData) => {
+    setIsEditing(false);
 
-	const onEdit = (event) => {
-		event.stopPropagation();
-		setIsEditing(!isEditing);
-	}
+    if (data === oldData) {
+      return;
+    }
 
-	const renderedEditModal = (
-    <Modal title="Criando Novo Bloco" isOpen={isEditing} setIsOpen={setIsEditing}>
-      <CodelistEdit onSubmit={onSubmit} />
+    const response = oldData
+      ? await restAPI.put(`/codelist/${oldData.codelist_id}`, data)
+      : await restAPI.post("/codelist/", data);
+
+    console.log(response);
+
+    getData();
+  };
+
+  const onDelete = async (data) => {
+    setIsDeleting(false);
+
+    if (!data) {
+      return;
+    }
+
+    const response = await restAPI.delete(`/codelist/${data.codelist_id}`);
+
+    console.log(response);
+
+    getData();
+  };
+
+  const deleteItem = (item) => {
+    setDataEntry(item);
+    setIsDeleting(true);
+  };
+
+  const editItem = (item) => {
+    setDataEntry(item);
+    setIsEditing(true);
+  };
+
+  const renderedEditModal = (
+    <Modal
+      title={`${dataEntry ? "Editando" : "Criando Novo"} Bloco`}
+      isOpen={isEditing}
+      setIsOpen={setIsEditing}
+    >
+      <CodelistEdit onSubmit={onSubmit} dataEntry={dataEntry} />
+    </Modal>
+  );
+
+  const renderedDeleteModal = (
+    <Modal
+      title="Deletando Bloco"
+      isOpen={isDeleting}
+      setIsOpen={setIsDeleting}
+      size="tiny"
+      forceChoice={true}
+    >
+      <CodelistDelete onSubmit={onDelete} dataEntry={dataEntry} />
     </Modal>
   );
 
   return (
     <div className="Codelist">
-			{renderedEditModal}
+      {renderedEditModal}
+      {renderedDeleteModal}
       <div className="ui one column stackable grid container">
         <div className="column">
           <div className="ui form">
@@ -116,12 +166,20 @@ const Codelist = () => {
             <div className="two fields">
               <div className="field">
                 <label>Nome</label>
-                <input type="text" name="manualName" placeholder="Nome-PN" value={name} onChange={(e) => {setName(e.target.value)}} />
+                <input
+                  type="text"
+                  name="manualName"
+                  placeholder="Nome-PN"
+                  value={name}
+                  onChange={(e) => {
+                    setName(e.target.value);
+                  }}
+                />
               </div>
               <div className="field">
                 <Dropdown
                   label="Traço"
-									defaultText="Selecione um ou mais traços"
+                  defaultText="Selecione um ou mais traços"
                   options={options}
                   selected={selectedTrace}
                   onSelectedChange={setSelectedTrace}
@@ -131,7 +189,8 @@ const Codelist = () => {
           </div>
         </div>
         <div className="column">
-          <Table data={data} onEdit={onEdit} />
+          <Loader isLoading={isLoading} />
+          <Table data={data} onEdit={editItem} onDelete={deleteItem} />
         </div>
       </div>
     </div>
