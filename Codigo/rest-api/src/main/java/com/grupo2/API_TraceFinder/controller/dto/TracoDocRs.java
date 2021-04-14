@@ -4,51 +4,53 @@ import com.grupo2.API_TraceFinder.classes.TracoDoc;
 
 public class TracoDocRs {
 	
-	private Long traco_doc_id;
-	private String traco_doc_nome;
-	private String traco_doc_descricao;
-	private String traco_doc_codigo;
+	private Long tracodocid;
+	private String tracodocnome;
+	private String tracodocdescricao;
+	private String tracodoccodigo;
 	
 	public static TracoDocRs converter(TracoDoc tracoDoc) {
 		var tracoDocumento = new TracoDocRs();
-		tracoDocumento.setTraco_doc_id(tracoDoc.getTraco_doc_id());
-		tracoDocumento.setTraco_doc_nome(tracoDoc.getTraco_doc_nome());
-		tracoDocumento.setTraco_doc_descricao(tracoDoc.getTraco_doc_descricao());
-		tracoDocumento.setTraco_doc_codigo(tracoDoc.getTraco_doc_codigo());
+		tracoDocumento.setTracodocid(tracoDoc.getTracodocid());
+		tracoDocumento.setTracodocnome(tracoDoc.getTracodocnome());
+		tracoDocumento.setTracodocdescricao(tracoDoc.getTracodocdescricao());
+		tracoDocumento.setTracodoccodigo(tracoDoc.getTracodoccodigo());
 		return tracoDocumento;
 		
 	}
 
-	public Long getTraco_doc_id() {
-		return traco_doc_id;
+	public Long getTracodocid() {
+		return tracodocid;
 	}
 
-	public void setTraco_doc_id(Long traco_doc_id) {
-		this.traco_doc_id = traco_doc_id;
+	public void setTracodocid(Long tracodocid) {
+		this.tracodocid = tracodocid;
 	}
 
-	public String getTraco_doc_nome() {
-		return traco_doc_nome;
+	public String getTracodocnome() {
+		return tracodocnome;
 	}
 
-	public void setTraco_doc_nome(String traco_doc_nome) {
-		this.traco_doc_nome = traco_doc_nome;
+	public void setTracodocnome(String tracodocnome) {
+		this.tracodocnome = tracodocnome;
 	}
 
-	public String getTraco_doc_descricao() {
-		return traco_doc_descricao;
+	public String getTracodocdescricao() {
+		return tracodocdescricao;
 	}
 
-	public void setTraco_doc_descricao(String traco_doc_descricao) {
-		this.traco_doc_descricao = traco_doc_descricao;
+	public void setTracodocdescricao(String tracodocdescricao) {
+		this.tracodocdescricao = tracodocdescricao;
 	}
 
-	public String getTraco_doc_codigo() {
-		return traco_doc_codigo;
+	public String getTracodoccodigo() {
+		return tracodoccodigo;
 	}
 
-	public void setTraco_doc_codigo(String traco_doc_codigo) {
-		this.traco_doc_codigo = traco_doc_codigo;
-	}	
+	public void setTracodoccodigo(String tracodoccodigo) {
+		this.tracodoccodigo = tracodoccodigo;
+	}
+
+	
 	
 }

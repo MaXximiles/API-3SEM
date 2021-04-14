@@ -50,8 +50,8 @@ public class RelacaoArqTracoController {
 	public void insertRelacaoArqTraco(@RequestBody RelacaoArqTracoRq relArqTraco)
 	{
 		var rArqTraco = new RelacaoArqTraco();
-		rArqTraco.setArquivo_id(relArqTraco.getArquivo_id());
-		rArqTraco.setTraco_id(relArqTraco.getTraco_id());
+		rArqTraco.setArquivoid(relArqTraco.getArquivoid());
+		rArqTraco.setTracoid(relArqTraco.getTracoid());
 		RelacaoArqTracoRepository.save(rArqTraco);
 	}
 		
@@ -64,8 +64,8 @@ public class RelacaoArqTracoController {
 		if(rArqTraco.isPresent())
 		{
 			var rArqTraco2 = rArqTraco.get();
-			rArqTraco2.setArquivo_id(relArqTraco.getArquivo_id());
-			rArqTraco2.setTraco_id(relArqTraco.getTraco_id());
+			rArqTraco2.setArquivoid(relArqTraco.getArquivoid());
+			rArqTraco2.setTracoid(relArqTraco.getTracoid());
 			RelacaoArqTracoRepository.save(rArqTraco2);
 		}
 		else { throw new Exception("Documento não encontrado"); }

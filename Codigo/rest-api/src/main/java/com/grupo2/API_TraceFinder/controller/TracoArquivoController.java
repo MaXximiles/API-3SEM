@@ -46,9 +46,9 @@ public class TracoArquivoController {
 	public void insertTracoArquivo(@RequestBody TracoArquivoRq tArquivo)
 	{
 		var tArq = new TracoArquivo();
-		tArq.setTraco_arquivo_nome(tArquivo.getTraco_arquivo_nome());
-		tArq.setTraco_arquivo_descricao(tArquivo.getTraco_arquivo_descricao());
-		tArq.setTraco_arquivo_codigo(tArquivo.getTraco_arquivo_codigo());
+		tArq.setTracoarquivonome(tArquivo.getTracoarquivonome());
+		tArq.setTracoarquivodescricao(tArquivo.getTracoarquivodescricao());
+		tArq.setTracoarquivocodigo(tArquivo.getTracoarquivocodigo());
 		tracoArquivoRepository.save(tArq);
 	}
 		
@@ -61,9 +61,9 @@ public class TracoArquivoController {
 		if(tArq.isPresent())
 		{
 			var tArq2 = tArq.get();
-			tArq2.setTraco_arquivo_nome(tArquivo.getTraco_arquivo_nome());
-			tArq2.setTraco_arquivo_descricao(tArquivo.getTraco_arquivo_descricao());
-			tArq2.setTraco_arquivo_codigo(tArquivo.getTraco_arquivo_codigo());
+			tArq2.setTracoarquivonome(tArquivo.getTracoarquivonome());
+			tArq2.setTracoarquivodescricao(tArquivo.getTracoarquivodescricao());
+			tArq2.setTracoarquivocodigo(tArquivo.getTracoarquivocodigo());
 			tracoArquivoRepository.save(tArq2);
 		}
 		else { throw new Exception("Documento não encontrado"); }

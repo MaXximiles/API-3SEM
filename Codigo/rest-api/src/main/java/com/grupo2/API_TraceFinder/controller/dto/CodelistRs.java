@@ -4,58 +4,86 @@ import com.grupo2.API_TraceFinder.classes.Codelist;
 
 public class CodelistRs {
 	
-	private Long codelist_id;
-	private String codelist_secao;
-	private String codelist_subsecao;
-	private String codelist_nbloco;
-	private String codelist_codebloco;
-	private String codelist_caminho;
+	private Long codelistid;	
+	private String codelistsecao;
+	private String codelistsubsecao;
+	private String codelistnbloco;
+	private String codelistcodebloco;
+	private String codelistcaminho;
+	private String codelistdocumentoid;
 	
 	public static CodelistRs converter(Codelist code) {
 		var codelist = new CodelistRs();
-		codelist.setCodelist_id(code.getCodelist_id());
-		codelist.setCodelist_caminho(code.getCodelist_caminho());
-		codelist.setCodelist_codebloco(code.getCodelist_codebloco());
-		codelist.setCodelist_nbloco(code.getCodelist_nbloco());
-		codelist.setCodelist_secao(code.getCodelist_secao());
-		codelist.setCodelist_subsecao(code.getCodelist_subsecao());
+		codelist.setCodelistid(code.getCodelistid());
+		codelist.setCodelistcaminho(code.getCodelistcaminho());
+		codelist.setCodelistcodebloco(code.getCodelistcodebloco());
+		codelist.setCodelistnbloco(code.getCodelistnbloco());
+		codelist.setCodelistsecao(code.getCodelistsecao());
+		codelist.setCodelistsubsecao(code.getCodelistsubsecao());
+		codelist.setCodelistdocumentoid(code.getCodelistdocumentoid());
 		return codelist;
 	}
+
 	
-	public Long getCodelist_id() {
-		return codelist_id;
+	public String getCodelistdocumentoid() {
+		return codelistdocumentoid;
 	}
-	public void setCodelist_id(Long codelist_id) {
-		this.codelist_id = codelist_id;
+
+
+	public void setCodelistdocumentoid(String codelistdocumentoid) {
+		this.codelistdocumentoid = codelistdocumentoid;
 	}
-	public String getCodelist_secao() {
-		return codelist_secao;
+
+
+	public Long getCodelistid() {
+		return codelistid;
 	}
-	public void setCodelist_secao(String codelist_secao) {
-		this.codelist_secao = codelist_secao;
+
+	public void setCodelistid(Long codelistid) {
+		this.codelistid = codelistid;
 	}
-	public String getCodelist_subsecao() {
-		return codelist_subsecao;
+
+	public String getCodelistsecao() {
+		return codelistsecao;
 	}
-	public void setCodelist_subsecao(String codelist_subsecao) {
-		this.codelist_subsecao = codelist_subsecao;
+
+	public void setCodelistsecao(String codelistsecao) {
+		this.codelistsecao = codelistsecao;
 	}
-	public String getCodelist_nbloco() {
-		return codelist_nbloco;
+
+	public String getCodelistsubsecao() {
+		return codelistsubsecao;
 	}
-	public void setCodelist_nbloco(String codelist_nbloco) {
-		this.codelist_nbloco = codelist_nbloco;
+
+	public void setCodelistsubsecao(String codelistsubsecao) {
+		this.codelistsubsecao = codelistsubsecao;
 	}
-	public String getCodelist_codebloco() {
-		return codelist_codebloco;
+
+	public String getCodelistnbloco() {
+		return codelistnbloco;
 	}
-	public void setCodelist_codebloco(String codelist_codebloco) {
-		this.codelist_codebloco = codelist_codebloco;
+
+	public void setCodelistnbloco(String codelistnbloco) {
+		this.codelistnbloco = codelistnbloco;
 	}
-	public String getCodelist_caminho() {
-		return codelist_caminho;
+
+	public String getCodelistcodebloco() {
+		return codelistcodebloco;
 	}
-	public void setCodelist_caminho(String codelist_caminho) {
-		this.codelist_caminho = codelist_caminho;
+
+	public void setCodelistcodebloco(String codelistcodebloco) {
+		this.codelistcodebloco = codelistcodebloco;
 	}
+
+	public String getCodelistcaminho() {
+		return codelistcaminho;
+	}
+
+	public void setCodelistcaminho(String codelistcaminho) {
+		this.codelistcaminho = codelistcaminho;
+	}
+	
+	
+	
+	
 }

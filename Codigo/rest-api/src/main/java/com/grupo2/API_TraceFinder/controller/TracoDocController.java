@@ -46,9 +46,9 @@ public class TracoDocController {
 	public void insertTracoDoc(@RequestBody TracoDocRq tDocumento)
 	{
 		var tDoc = new TracoDoc();
-		tDoc.setTraco_doc_nome(tDocumento.getTraco_doc_nome());
-		tDoc.setTraco_doc_descricao(tDocumento.getTraco_doc_descricao());
-		tDoc.setTraco_doc_codigo(tDocumento.getTraco_doc_codigo());
+		tDoc.setTracodocnome(tDocumento.getTracodocnome());
+		tDoc.setTracodocdescricao(tDocumento.getTracodocdescricao());
+		tDoc.setTracodoccodigo(tDocumento.getTracodoccodigo());
 		tracoDocRepository.save(tDoc);
 	}
 		
@@ -61,9 +61,9 @@ public class TracoDocController {
 		if(tDoc.isPresent())
 		{
 			var tDoc2 = tDoc.get();
-			tDoc2.setTraco_doc_nome(tDocumento.getTraco_doc_nome());
-			tDoc2.setTraco_doc_descricao(tDocumento.getTraco_doc_descricao());
-			tDoc2.setTraco_doc_codigo(tDocumento.getTraco_doc_codigo());
+			tDoc2.setTracodocnome(tDocumento.getTracodocnome());
+			tDoc2.setTracodocdescricao(tDocumento.getTracodocdescricao());
+			tDoc2.setTracodoccodigo(tDocumento.getTracodoccodigo());
 			tracoDocRepository.save(tDoc2);
 		}
 		else { throw new Exception("Documento não encontrado"); }

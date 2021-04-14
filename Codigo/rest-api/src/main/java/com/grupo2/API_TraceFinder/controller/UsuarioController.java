@@ -10,15 +10,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.grupo2.API_TraceFinder.classes.Usuario;
+import com.grupo2.API_TraceFinder.controller.dto.DocumentoRs;
 import com.grupo2.API_TraceFinder.controller.dto.UsuarioRq;
 import com.grupo2.API_TraceFinder.controller.dto.UsuarioRs;
 import com.grupo2.API_TraceFinder.repository.UsuarioRepository;
 
 @RestController
-@RequestMapping("/usuarios")
+@RequestMapping(value = "/usuarios")
 public class UsuarioController {
 	
 	private UsuarioRepository usuarioRepository = null;
@@ -41,17 +43,37 @@ public class UsuarioController {
 		return UsuarioRs.converter(user);
 	}
 	
+	// SELECT por Nome
+	@GetMapping("/filtronome")
+	public List<UsuarioRs> findUsuarioByusuarionome(@RequestParam("usuarionome") String usuarionome)
+	{
+		return this.usuarioRepository.findByusuarionomeContains(usuarionome)
+			.stream()
+			.map(UsuarioRs::converter)
+			.collect(Collectors.toList());
+	}
+	
+	// SELECT por Nome
+	@GetMapping("/filtrologin")
+	public List<UsuarioRs> findUsuarioByusuariologin(@RequestParam("usuariologin") String usuariologin)
+	{
+		return this.usuarioRepository.findByusuariologinContains(usuariologin)
+			.stream()
+			.map(UsuarioRs::converter)
+			.collect(Collectors.toList());
+	}
+	
 	// INSERT //
 	@PostMapping("/")
 	public void insertUsuario(@RequestBody UsuarioRq usuario)
 	{
 		var user = new Usuario();
 		
-		user.setUsuario_nome(usuario.getUsuario_nome());
-		user.setUsuario_login(usuario.getUsuario_login());
-		user.setUsuario_senha(usuario.getUsuario_senha());
-		user.setUsuario_email(usuario.getUsuario_email());
-		user.setUsuario_nivel(usuario.getUsuario_nivel());
+		user.setUsuarionome(usuario.getUsuarionome());
+		user.setUsuariologin(usuario.getUsuariologin());
+		user.setUsuariosenha(usuario.getUsuariosenha());
+		user.setUsuarioemail(usuario.getUsuarioemail());
+		user.setUsuarionivel(usuario.getUsuarionivel());
 		usuarioRepository.save(user);
 		
 	}
@@ -66,11 +88,11 @@ public class UsuarioController {
 		{
 			var user2 = user.get();
 			
-			user2.setUsuario_nome(usuario.getUsuario_nome());
-			user2.setUsuario_login(usuario.getUsuario_login());
-			user2.setUsuario_senha(usuario.getUsuario_senha());
-			user2.setUsuario_email(usuario.getUsuario_email());
-			user2.setUsuario_nivel(usuario.getUsuario_nivel());
+			user2.setUsuarionome(usuario.getUsuarionome());
+			user2.setUsuariologin(usuario.getUsuariologin());
+			user2.setUsuariosenha(usuario.getUsuariosenha());
+			user2.setUsuarioemail(usuario.getUsuarioemail());
+			user2.setUsuarionivel(usuario.getUsuarionivel());
 			usuarioRepository.save(user2);
 			
 		}

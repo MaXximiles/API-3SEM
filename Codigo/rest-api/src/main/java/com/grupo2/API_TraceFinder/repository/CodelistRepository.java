@@ -7,5 +7,6 @@ import com.grupo2.API_TraceFinder.classes.Codelist;
 
 @Repository
 public interface CodelistRepository extends JpaRepository<Codelist, Long> {
-
+	
+	
 }

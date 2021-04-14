@@ -4,36 +4,43 @@ import com.grupo2.API_TraceFinder.classes.RelacaoArqTraco;
 
 public class RelacaoArqTracoRs {
 
-	private Long relacao_arquivo_traco_id;
-	private String traco_id;
-	private String arquivo_id;
+	private Long relacaoarquivotracoid;
+	private String tracoid;
+	private String arquivoid;
 	
 	public static RelacaoArqTracoRs converter(RelacaoArqTraco rArqTraco) {
 		var relacaoArqTraco = new RelacaoArqTracoRs();
-		relacaoArqTraco.setRelacao_arquivo_traco_id(rArqTraco.getRelacao_arquivo_traco_id());
-		relacaoArqTraco.setArquivo_id(rArqTraco.getArquivo_id());
-		relacaoArqTraco.setTraco_id(rArqTraco.getTraco_id());
+		relacaoArqTraco.setRelacaoarquivotracoid(rArqTraco.getRelacaoarquivotracoid());
+		relacaoArqTraco.setArquivoid(rArqTraco.getArquivoid());
+		relacaoArqTraco.setTracoid(rArqTraco.getTracoid());
 		return relacaoArqTraco;
 	}
+
+	public Long getRelacaoarquivotracoid() {
+		return relacaoarquivotracoid;
+	}
+
+	public void setRelacaoarquivotracoid(Long relacaoarquivotracoid) {
+		this.relacaoarquivotracoid = relacaoarquivotracoid;
+	}
+
+	public String getTracoid() {
+		return tracoid;
+	}
+
+	public void setTracoid(String tracoid) {
+		this.tracoid = tracoid;
+	}
+
+	public String getArquivoid() {
+		return arquivoid;
+	}
+
+	public void setArquivoid(String arquivoid) {
+		this.arquivoid = arquivoid;
+	}
 	
-	public Long getRelacao_arquivo_traco_id() {
-		return relacao_arquivo_traco_id;
-	}
-	public void setRelacao_arquivo_traco_id(Long relacao_arquivo_traco_id) {
-		this.relacao_arquivo_traco_id = relacao_arquivo_traco_id;
-	}
-	public String getTraco_id() {
-		return traco_id;
-	}
-	public void setTraco_id(String traco_id) {
-		this.traco_id = traco_id;
-	}
-	public String getArquivo_id() {
-		return arquivo_id;
-	}
-	public void setArquivo_id(String arquivo_id) {
-		this.arquivo_id = arquivo_id;
-	}
+	
 	
 	
 }

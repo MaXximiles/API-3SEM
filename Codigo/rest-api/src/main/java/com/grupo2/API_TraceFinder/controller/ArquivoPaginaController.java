@@ -52,12 +52,12 @@ public class ArquivoPaginaController {
 	{
 		var arqPag = new ArquivoPagina();
 		
-		arqPag.setArquivo_pagina_id(ArqPag.getArquivo_pagina_id());
-		arqPag.setArquivo_id(ArqPag.getArquivo_id());
-		arqPag.setArquivo_pagina_data_modificacao(ArqPag.getArquivo_pagina_data_modificacao());
-		arqPag.setArquivo_pagina_modificacao(ArqPag.getArquivo_pagina_modificacao());
-		arqPag.setArquivo_pagina_pagina(ArqPag.getArquivo_pagina_pagina());
-		arqPag.setArquivo_pagina_revisao(ArqPag.getArquivo_pagina_revisao());
+		arqPag.setArquivopaginaid(ArqPag.getArquivopaginaid());
+		arqPag.setArquivoid(ArqPag.getArquivoid());
+		arqPag.setArquivopaginadatamodificacao(ArqPag.getArquivopaginadatamodificacao());
+		arqPag.setArquivopaginamodificacao(ArqPag.getArquivopaginamodificacao());
+		arqPag.setArquivopaginapagina(ArqPag.getArquivopaginapagina());
+		arqPag.setArquivopaginarevisao(ArqPag.getArquivopaginarevisao());
 		arquivoPaginaRepository.save(arqPag);
 	}
 	
@@ -71,12 +71,12 @@ public class ArquivoPaginaController {
 		{
 			var arqPag2 = arqPag.get();
 			
-			arqPag2.setArquivo_pagina_id(ArqPag.getArquivo_pagina_id());
-			arqPag2.setArquivo_id(ArqPag.getArquivo_id());
-			arqPag2.setArquivo_pagina_data_modificacao(ArqPag.getArquivo_pagina_data_modificacao());
-			arqPag2.setArquivo_pagina_modificacao(ArqPag.getArquivo_pagina_modificacao());
-			arqPag2.setArquivo_pagina_pagina(ArqPag.getArquivo_pagina_pagina());
-			arqPag2.setArquivo_pagina_revisao(ArqPag.getArquivo_pagina_revisao());
+			arqPag2.setArquivopaginaid(ArqPag.getArquivopaginaid());
+			arqPag2.setArquivoid(ArqPag.getArquivoid());
+			arqPag2.setArquivopaginadatamodificacao(ArqPag.getArquivopaginadatamodificacao());
+			arqPag2.setArquivopaginamodificacao(ArqPag.getArquivopaginamodificacao());
+			arqPag2.setArquivopaginapagina(ArqPag.getArquivopaginapagina());
+			arqPag2.setArquivopaginarevisao(ArqPag.getArquivopaginarevisao());
 			arquivoPaginaRepository.save(arqPag2);
 		}
 		else { throw new Exception("Documento não encontrado"); }

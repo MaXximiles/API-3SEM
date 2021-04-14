@@ -2,51 +2,49 @@ package com.grupo2.API_TraceFinder.controller.dto;
 
 public class UsuarioRq {
 	
-	private Long usuario_id;
-	private String usuario_nome;
-	private String usuario_email;
-	private String usuario_senha;
-	private String usuario_nivel;
-	private String usuario_login;
+	private Long usuarioid;
+	private String usuarionome;
+	private String usuarioemail;
+	private String usuariosenha;
+	private String usuarionivel;
+	private String usuariologin;
 	
-	
-	public Long getUsuario_id() {
-		return usuario_id;
+	public Long getUsuarioid() {
+		return usuarioid;
 	}
-	public void setUsuario_id(Long usuario_id) {
-		this.usuario_id = usuario_id;
+	public void setUsuarioid(Long usuarioid) {
+		this.usuarioid = usuarioid;
 	}
-	public String getUsuario_nome() {
-		return usuario_nome;
+	public String getUsuarionome() {
+		return usuarionome;
 	}
-	public void setUsuario_nome(String usuario_nome) {
-		this.usuario_nome = usuario_nome;
+	public void setUsuarionome(String usuarionome) {
+		this.usuarionome = usuarionome;
 	}
-	public String getUsuario_email() {
-		return usuario_email;
+	public String getUsuarioemail() {
+		return usuarioemail;
 	}
-	public void setUsuario_email(String usuario_email) {
-		this.usuario_email = usuario_email;
+	public void setUsuarioemail(String usuarioemail) {
+		this.usuarioemail = usuarioemail;
 	}
-	public String getUsuario_senha() {
-		return usuario_senha;
+	public String getUsuariosenha() {
+		return usuariosenha;
 	}
-	public void setUsuario_senha(String usuario_senha) {
-		this.usuario_senha = usuario_senha;
+	public void setUsuariosenha(String usuariosenha) {
+		this.usuariosenha = usuariosenha;
 	}
-	public String getUsuario_nivel() {
-		return usuario_nivel;
+	public String getUsuarionivel() {
+		return usuarionivel;
 	}
-	public void setUsuario_nivel(String usuario_nivel) {
-		this.usuario_nivel = usuario_nivel;
+	public void setUsuarionivel(String usuarionivel) {
+		this.usuarionivel = usuarionivel;
 	}
-	public String getUsuario_login() {
-		return usuario_login;
+	public String getUsuariologin() {
+		return usuariologin;
 	}
-	public void setUsuario_login(String usuario_login) {
-		this.usuario_login = usuario_login;
+	public void setUsuariologin(String usuariologin) {
+		this.usuariologin = usuariologin;
 	}
-	
-	
+		
 	
 }

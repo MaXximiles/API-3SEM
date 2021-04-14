@@ -4,61 +4,86 @@ import com.grupo2.API_TraceFinder.classes.ArquivoPagina;
 
 public class ArquivoPaginaRs {
 	
-	private Long arquivo_pagina_id;
-	private String arquivo_id;
-	private String arquivo_pagina_pagina;
-	private String arquivo_pagina_modificacao;
-	private String arquivo_pagina_revisao;
-	private String arquivo_pagina_data_modificacao;
+	private Long arquivopaginaid;
+	private String arquivoid;
+	private String arquivopaginapagina;
+	private String arquivopaginamodificacao;
+	private String arquivopaginarevisao;
+	private String arquivopaginadatamodificacao;
 	
 	
-	public static ArquivoPaginaRs converter(ArquivoPagina arqPag) {
+	public static ArquivoPaginaRs converter(ArquivoPagina arqPag) 
+	{
 		var arquivo = new ArquivoPaginaRs();
-		arquivo.setArquivo_id(arqPag.getArquivo_id());
-		arquivo.setArquivo_pagina_data_modificacao(arqPag.getArquivo_pagina_data_modificacao());
-		arquivo.setArquivo_pagina_id(arqPag.getArquivo_pagina_id());
-		arquivo.setArquivo_pagina_modificacao(arqPag.getArquivo_pagina_modificacao());
-		arquivo.setArquivo_pagina_pagina(arqPag.getArquivo_pagina_pagina());
-		arquivo.setArquivo_pagina_revisao(arqPag.getArquivo_pagina_revisao());
-		return arquivo;
-		
+		arquivo.setArquivoid(arqPag.getArquivoid());
+		arquivo.setArquivopaginadatamodificacao(arqPag.getArquivopaginadatamodificacao());
+		arquivo.setArquivopaginaid(arqPag.getArquivopaginaid());
+		arquivo.setArquivopaginamodificacao(arqPag.getArquivopaginamodificacao());
+		arquivo.setArquivopaginapagina(arqPag.getArquivopaginapagina());
+		arquivo.setArquivopaginarevisao(arqPag.getArquivopaginarevisao());
+		return arquivo;	
+	}
+
+
+	public Long getArquivopaginaid() {
+		return arquivopaginaid;
+	}
+
+
+	public void setArquivopaginaid(Long arquivopaginaid) {
+		this.arquivopaginaid = arquivopaginaid;
+	}
+
+
+	public String getArquivoid() {
+		return arquivoid;
+	}
+
+
+	public void setArquivoid(String arquivoid) {
+		this.arquivoid = arquivoid;
+	}
+
+
+	public String getArquivopaginapagina() {
+		return arquivopaginapagina;
+	}
+
+
+	public void setArquivopaginapagina(String arquivopaginapagina) {
+		this.arquivopaginapagina = arquivopaginapagina;
+	}
+
+
+	public String getArquivopaginamodificacao() {
+		return arquivopaginamodificacao;
+	}
+
+
+	public void setArquivopaginamodificacao(String arquivopaginamodificacao) {
+		this.arquivopaginamodificacao = arquivopaginamodificacao;
+	}
+
+
+	public String getArquivopaginarevisao() {
+		return arquivopaginarevisao;
+	}
+
+
+	public void setArquivopaginarevisao(String arquivopaginarevisao) {
+		this.arquivopaginarevisao = arquivopaginarevisao;
+	}
+
+
+	public String getArquivopaginadatamodificacao() {
+		return arquivopaginadatamodificacao;
+	}
+
+
+	public void setArquivopaginadatamodificacao(String arquivopaginadatamodificacao) {
+		this.arquivopaginadatamodificacao = arquivopaginadatamodificacao;
 	}
 	
-	public Long getArquivo_pagina_id() {
-		return arquivo_pagina_id;
-	}
-	public void setArquivo_pagina_id(Long arquivo_pagina_id) {
-		this.arquivo_pagina_id = arquivo_pagina_id;
-	}
-	public String getArquivo_id() {
-		return arquivo_id;
-	}
-	public void setArquivo_id(String arquivo_id) {
-		this.arquivo_id = arquivo_id;
-	}
-	public String getArquivo_pagina_pagina() {
-		return arquivo_pagina_pagina;
-	}
-	public void setArquivo_pagina_pagina(String arquivo_pagina_pagina) {
-		this.arquivo_pagina_pagina = arquivo_pagina_pagina;
-	}
-	public String getArquivo_pagina_modificacao() {
-		return arquivo_pagina_modificacao;
-	}
-	public void setArquivo_pagina_modificacao(String arquivo_pagina_modificacao) {
-		this.arquivo_pagina_modificacao = arquivo_pagina_modificacao;
-	}
-	public String getArquivo_pagina_revisao() {
-		return arquivo_pagina_revisao;
-	}
-	public void setArquivo_pagina_revisao(String arquivo_pagina_revisao) {
-		this.arquivo_pagina_revisao = arquivo_pagina_revisao;
-	}
-	public String getArquivo_pagina_data_modificacao() {
-		return arquivo_pagina_data_modificacao;
-	}
-	public void setArquivo_pagina_data_modificacao(String arquivo_pagina_data_modificacao) {
-		this.arquivo_pagina_data_modificacao = arquivo_pagina_data_modificacao;
-	}
+	
 
 }

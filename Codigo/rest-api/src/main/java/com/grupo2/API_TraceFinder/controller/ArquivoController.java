@@ -48,8 +48,8 @@ public class ArquivoController {
 	{
 		var arq = new Arquivo();
 		
-		arq.setArquivo_nome(arquivo.getArquivo_nome());
-		arq.setCodelist_id(arquivo.getCodelist_id());
+		arq.setArquivonome(arquivo.getArquivonome());
+		arq.setCodelistid(arquivo.getCodelistid());
 		arquivoRepository.save(arq);
 		
 	}
@@ -64,8 +64,8 @@ public class ArquivoController {
 		{
 			var arq2 = arq.get();
 			
-			arq2.setArquivo_nome(arquivo.getArquivo_nome());
-			arq2.setCodelist_id(arquivo.getCodelist_id());
+			arq2.setArquivonome(arquivo.getArquivonome());
+			arq2.setCodelistid(arquivo.getCodelistid());
 			arquivoRepository.save(arq2);
 			
 		}

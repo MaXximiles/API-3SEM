@@ -2,32 +2,28 @@ package com.grupo2.API_TraceFinder.controller.dto;
 
 public class RelacaoDocTracoRq {
 	
-	private Long relacao_documento_traco_id;
-	private String traco_id;
-	private String doc_id;
+	private Long relacaodocumentotracoid;
+	private String tracoid;
+	private String docid;
+	
+	public Long getRelacaodocumentotracoid() {
+		return relacaodocumentotracoid;
+	}
+	public void setRelacaodocumentotracoid(Long relacaodocumentotracoid) {
+		this.relacaodocumentotracoid = relacaodocumentotracoid;
+	}
+	public String getTracoid() {
+		return tracoid;
+	}
+	public void setTracoid(String tracoid) {
+		this.tracoid = tracoid;
+	}
+	public String getDocid() {
+		return docid;
+	}
+	public void setDocid(String docid) {
+		this.docid = docid;
+	}
 	
 	
-	public Long getRelacao_documento_traco_id() {
-		return relacao_documento_traco_id;
-	}
-
-	public void setRelacao_documento_traco_id(Long relacao_documento_traco_id) {
-		this.relacao_documento_traco_id = relacao_documento_traco_id;
-	}
-
-	public String getTraco_id() {
-		return traco_id;
-	}
-
-	public void setTraco_id(String traco_id) {
-		this.traco_id = traco_id;
-	}
-
-	public String getDoc_id() {
-		return doc_id;
-	}
-
-	public void setDoc_id(String doc_id) {
-		this.doc_id = doc_id;
-	}
 }

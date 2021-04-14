@@ -15,26 +15,51 @@ public class Documento {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="documento_id")
-	private Long documento_id;
+	private Long documentoid;
 	
 	@Column(name="documento_nome")
-	private String documento_nome;
+	private String documentonome;
 	
 	@Column(name="documento_pn")
-	private String documento_pn;
+	private String documentopn;
 	
 	@Column(name="documento_caminho")
-	private String documento_caminho;
+	private String documentocaminho;
+
+	public Long getDocumentoid() {
+		return documentoid;
+	}
+
+	public void setDocumentoid(Long documentoid) {
+		this.documentoid = documentoid;
+	}
+
+	public String getDocumentonome() {
+		return documentonome;
+	}
+
+	public void setDocumentonome(String documentonome) {
+		this.documentonome = documentonome;
+	}
+
+	public String getDocumentopn() {
+		return documentopn;
+	}
+
+	public void setDocumentopn(String documentopn) {
+		this.documentopn = documentopn;
+	}
+
+	public String getDocumentocaminho() {
+		return documentocaminho;
+	}
+
+	public void setDocumentocaminho(String documentocaminho) {
+		this.documentocaminho = documentocaminho;
+	}
 	
 	
-	public Long getDocumento_id() {return documento_id;}
-	public void setDocumento_id(Long documento_id) {	this.documento_id = documento_id;}
-	public String getDocumento_nome() {	return documento_nome;}
-	public void setDocumento_nome(String documento_nome) {this.documento_nome = documento_nome;	}
-	public String getDocumento_pn() {return documento_pn;}
-	public void setDocumento_pn(String documento_pn) {this.documento_pn = documento_pn;}
-	public String getDocumento_caminho() {return documento_caminho;	}
-	public void setDocumento_caminho(String documento_caminho) {this.documento_caminho = documento_caminho;	}
+	
 		
 	
 }

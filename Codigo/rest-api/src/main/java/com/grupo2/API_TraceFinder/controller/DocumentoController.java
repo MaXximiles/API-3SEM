@@ -1,5 +1,6 @@
 package com.grupo2.API_TraceFinder.controller;
 
+import org.springframework.beans.factory.annotation.Required;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -7,13 +8,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.grupo2.API_TraceFinder.classes.Documento;
 import com.grupo2.API_TraceFinder.controller.dto.DocumentoRq;
 import com.grupo2.API_TraceFinder.controller.dto.DocumentoRs;
-import com.grupo2.API_TraceFinder.repository.documentoRepository;
+import com.grupo2.API_TraceFinder.repository.DocumentoCustomRepository;
+import com.grupo2.API_TraceFinder.repository.DocumentoRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,18 +26,21 @@ import java.util.stream.Collectors;
 public class DocumentoController 
 {
 	
-	private documentoRepository DocumentoRepository = null;
-	
-	public DocumentoController(documentoRepository DocumentoRepository) {
-		this.DocumentoRepository = DocumentoRepository;
+	private DocumentoRepository documentoRepository = null;
+	private DocumentoCustomRepository documentoCustomRepository = null;
+		
+	public DocumentoController(DocumentoRepository documentoRepository, DocumentoCustomRepository documentoCustomRepository) 
+	{
+		this.documentoRepository = documentoRepository;
+		this.documentoCustomRepository = documentoCustomRepository;
 	}
-	
+		
 	
 	// SELECT de todos//
 	@GetMapping("/")
 	public List<DocumentoRs> selectAll()
 	{
-		var documentos = DocumentoRepository.findAll();
+		var documentos = documentoRepository.findAll();
 		return documentos.stream().map((doc) -> DocumentoRs.converter(doc)).collect(Collectors.toList());	
 	}
 	
@@ -41,10 +48,36 @@ public class DocumentoController
 	@GetMapping("/{id}")
 	public DocumentoRs selectID(@PathVariable("id") Long id)
 	{
-		var doc = DocumentoRepository.getOne(id);
-		
+		var doc = documentoRepository.getOne(id);
 		return DocumentoRs.converter(doc);
 	}
+	
+	// SELECT por Nome
+	@GetMapping("/filtronome")
+	public List<DocumentoRs> findDocumentoBydocumentonome(@RequestParam("documentonome") String documentonome)
+	{
+		return this.documentoRepository.findBydocumentonomeContains(documentonome)
+				.stream()
+				.map(DocumentoRs::converter)
+				.collect(Collectors.toList());
+	}
+	
+		
+	// SELECT CUSTOM por Nome e PN
+	@GetMapping("/filtronomepn")
+	public List<DocumentoRs> findDocumentoBydocumentonomepn(
+			@RequestParam(value = "documentoid", required = false) Long documentoid, 
+			@RequestParam(value = "documentonome", required = false) String documentonome,
+			@RequestParam(value = "documentopn", required = false) String documentopn,
+			@RequestParam(value = "documentocaminho", required = false) String documentocaminho
+	)
+	{
+		return this.documentoCustomRepository.find(documentoid, documentonome, documentopn, documentocaminho)
+				.stream()
+				.map(DocumentoRs::converter)
+				.collect(Collectors.toList());
+	}
+	
 	
 	// INSERT //
 	@PostMapping("/")
@@ -52,25 +85,25 @@ public class DocumentoController
 	{
 		var doc = new Documento();
 		
-		doc.setDocumento_nome(documento.getDocumento_nome());
-		doc.setDocumento_pn(documento.getDocumento_pn());
-		doc.setDocumento_caminho(documento.getDocumento_caminho());
-		DocumentoRepository.save(doc);
+		doc.setDocumentonome(documento.getDocumentonome());
+		doc.setDocumentopn(documento.getDocumentopn());
+		doc.setDocumentocaminho(documento.getDocumentocaminho());
+		documentoRepository.save(doc);
 	}
 	
 	// UPDATE
 	@PutMapping("/{id}")
 	public void updateDocumento(@PathVariable Long id, @RequestBody DocumentoRq documento) throws Exception
 	{
-		var doc = DocumentoRepository.findById(id);
+		var doc = documentoRepository.findById(id);
 		
 		if(doc.isPresent())
 		{
 			var doc2 = doc.get();
-			doc2.setDocumento_nome(documento.getDocumento_nome());
-			doc2.setDocumento_pn(documento.getDocumento_pn());
-			doc2.setDocumento_caminho(documento.getDocumento_caminho());
-			DocumentoRepository.save(doc2);
+			doc2.setDocumentonome(documento.getDocumentonome());
+			doc2.setDocumentopn(documento.getDocumentopn());
+			doc2.setDocumentocaminho(documento.getDocumentocaminho());
+			documentoRepository.save(doc2);
 		}
 		else { throw new Exception("Documento não encontrado"); }
 	}
@@ -79,7 +112,10 @@ public class DocumentoController
 	@DeleteMapping("/{id}")
 	public void deleteDocumento(@PathVariable Long id)
 	{	
-		DocumentoRepository.deleteById(id);
+		documentoRepository.deleteById(id);
 	}
+
+
+	
 	
 }
