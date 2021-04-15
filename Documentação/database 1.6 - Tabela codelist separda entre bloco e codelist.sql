@@ -1,3 +1,15 @@
+/* DATABASE VERSÃO 1.6 MODIFCADO EM 15/04/2021 POR MAXIMILES*/
+/* MODIFICAÇÕES
+- CRIAÇÃO DA TABELA BLOCO
+- TABELA CODELIST TORNOU-SE RELAÇÃO ENTRE TABELA BLOCO E TABELA DOCUMENTO
+- INSERTS ATUALIZADOS CONFORME MODIFICAÇÕES
+- COLUNA USUARIO_SENHA ALTERADO DE VARCHAR(45) PARA VARCHAR(255) DEVIDO A SENHA SER CRIPTOGRAFADA
+*/
+
+/* Executar comando abaixo somente uma vez */
+/* ****DROP SCHEMA `trace_finder` ; /***** */
+/* *************************************** */
+
 CREATE SCHEMA `trace_finder` ;
 
 /* Tabela documento = Manual*/
@@ -23,23 +35,30 @@ CREATE TABLE `trace_finder`.`documento` (
   `doc_id` INT NULL,
   PRIMARY KEY (`relacao_documento_traco_id`));
 
- /* Codelist */ 
+/* Codelist Realação entra blocos e documento*/ 
  CREATE TABLE `trace_finder`.`codelist` (
   `codelist_id` INT NOT NULL AUTO_INCREMENT,
-  `codelist_secao` VARCHAR(45) NULL,
-  `codelist_subsecao` VARCHAR(45) NULL,
-  `codelist_nbloco` VARCHAR(45) NULL,
-  `codelist_codebloco` VARCHAR(45) NULL,
-  `codelist_caminho` VARCHAR(255) NULL,
+  `bloco_id` INT(11) NULL,
+  `documento_id` INT(11) NULL,
   PRIMARY KEY (`codelist_id`));
+
+ /* Tabela Bloco */ 
+ CREATE TABLE `trace_finder`.`bloco` (
+  `bloco_id` INT NOT NULL AUTO_INCREMENT,
+  `bloco_secao` VARCHAR(45) NULL,
+  `bloco_subsecao` VARCHAR(45) NULL,
+  `bloco_nomebloco` VARCHAR(45) NULL,
+  `bloco_codebloco` VARCHAR(45) NULL,
+  `bloco_caminho` VARCHAR(255) NULL,
+  PRIMARY KEY (`bloco_id`));
 
  /* Tabela arquivo = Bloco*/  
   CREATE TABLE `trace_finder`.`arquivo` (
   `arquivo_id` INT NOT NULL AUTO_INCREMENT,
   `arquivo_nome` VARCHAR(45) NULL,
-  `codelist_id` VARCHAR(45) NULL,
+  `bloco_id` INT(11) NULL,
   PRIMARY KEY (`arquivo_id`));
-  
+ 
   /* Tabela traços dos arquivos */ 
   CREATE TABLE `trace_finder`.`traco_arquivo` (
   `traco_arquivo_id` INT NOT NULL AUTO_INCREMENT,
@@ -70,32 +89,28 @@ CREATE TABLE `trace_finder`.`documento` (
   `usuario_id` INT NOT NULL AUTO_INCREMENT,
   `usuario_nome` VARCHAR(45) NULL,
   `usuario_email` VARCHAR(45) NULL,
-  `usuario_senha` VARCHAR(45) NULL,
+  `usuario_senha` VARCHAR(255) NULL,
   `usuario_nivel` VARCHAR(45) NULL,
   `usuario_login` VARCHAR(45) NULL,
   PRIMARY KEY (`usuario_id`));
 
- /* ALTER TABLE'S*/ 
-  
-  ALTER TABLE `trace_finder`.`codelist` 
-ADD COLUMN `documento_id` VARCHAR(45) NULL AFTER `codelist_caminho`;
-
-ALTER TABLE `trace_finder`.`relacao_documento_traco` 
-DROP COLUMN `arquivo_id`;
-
+USE trace_finder;
 
 /*INSERT'S*/
-
 
 /* Inserindo novo manual*/
 INSERT INTO documento (documento_nome, documento_pn, documento_caminho) VALUES ('ABC', '1234', 'C://caminho/docuemnto');
 
 /* Inserindo linha do codelist do manual*/
-INSERT INTO codelist (codelist_secao, codelist_subsecao, codelist_nbloco, codelist_codebloco, codelist_caminho, documento_id)
-VALUES ('Seção 00','Subseção 01','Nome Bloco','Code Bloco 22','C://caminho/bloco/', '1');
+INSERT INTO bloco (bloco_secao, bloco_subsecao, bloco_nomebloco, bloco_codebloco, bloco_caminho)
+VALUES ('Seção 00','Subseção 01','Nome Bloco','Code Bloco 22','C://caminho/bloco/');
+
+/* Inserindo relação de blocos no documento */
+INSERT INTO codelist (documento_id, bloco_id)
+VALUES ('1','1');
 
 /* Inserindo arquivos(blocos) no codelist */
-INSERT INTO arquivo ( arquivo_nome, codelist_id ) VALUES ('arquivo1', '1');
+INSERT INTO arquivo ( arquivo_nome, bloco_id ) VALUES ('arquivo1', '1');
 
 /* Lendo as paginas do arquivo(LEP)*/
 INSERT INTO arquivo_pagina (arquivo_id, arquivo_pagina_pagina, arquivo_pagina_modificacao, arquivo_pagina_revisao, arquivo_pagina_data_modificacao) 
@@ -123,17 +138,7 @@ INSERT INTO relacao_documento_traco (traco_id, doc_id) VALUES ('1','1');
 
 /* Inserindo usuarios */ 
 INSERT INTO usuario (usuario_nome, usuario_email, usuario_senha, usuario_nivel, usuario_login) 
-VALUES ('Horacio Jandelinho','horacio@gmail.com','horacio123','1','horacio');
+VALUES ('Teste','teste@gmail.com','$2a$10$lmr6SRlyL0dbggpRZV9E6OhJNQqO.wan.IIR0rqFOh4Si3aqH4gR2','1','teste');
 
-/* Aumentando campo de senha para criptografia*/
-ALTER TABLE `trace_finder`.`usuario` 
-CHANGE COLUMN `usuario_senha` `usuario_senha` VARCHAR(255) NULL DEFAULT NULL ;
-
-/* Arrumando campo documento_id para INT */
-ALTER TABLE `trace_finder`.`codelist` DROP COLUMN `documento_id`;
-
-ALTER TABLE `trace_finder`.`codelist` ADD COLUMN `documento_id` INT(11) NULL AFTER `codelist_caminho`;
-
-/* Adicionando relacionamentos entre tabelas */
-/* Codelist > Documento */
-ALTER TABLE codelist ADD CONSTRAINT fk_documento_codelist FOREIGN KEY (documento_id) REFERENCES documento(documento_id);
+INSERT INTO usuario (usuario_nome, usuario_email, usuario_senha, usuario_nivel, usuario_login) 
+VALUES ('Teste123','teste@gmail.com','123','1','teste123');

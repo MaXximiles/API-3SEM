@@ -15,13 +15,13 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 
-@Entity(name = "documento")
+@Entity
 @Table(name = "documento")
 public class Documento {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id")
+	@Column(name="documento_id")
 	private Long documentoid;
 	
 	@Column(name="documento_nome")

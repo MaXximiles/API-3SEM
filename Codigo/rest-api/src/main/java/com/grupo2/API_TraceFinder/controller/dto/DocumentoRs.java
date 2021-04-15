@@ -16,7 +16,6 @@ public class DocumentoRs {
 		documento.setDocumentopn(doc.getDocumentopn());
 		documento.setDocumentocaminho(doc.getDocumentocaminho());
 		return documento;
-		
 	}
 
 	public Long getDocumentoid() {
