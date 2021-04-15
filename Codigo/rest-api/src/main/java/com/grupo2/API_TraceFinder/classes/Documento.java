@@ -78,5 +78,4 @@ public class Documento {
   public void setDocumentocaminho(String documentocaminho) {
     this.documentocaminho = documentocaminho;
   }
-
 }

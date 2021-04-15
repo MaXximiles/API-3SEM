@@ -35,10 +35,10 @@ public class DocumentoCustomRepository {
 		
 		
 		var sql = em.createQuery(query, Documento.class);
-		if(documentoid != null){sql.setParameter("documento_id", documentoid );}
+		if(documentoid != null){sql.setParameter("documentoid", documentoid );}
 		if(documentonome != null){sql.setParameter("documentonome", documentonome );}
 		if(documentopn != null){sql.setParameter("documentopn", documentopn );}
-		if(documentocaminho != null){sql.setParameter("documento_caminho", documentocaminho );}
+		if(documentocaminho != null){sql.setParameter("documentocaminho", documentocaminho );}
 		
 		return sql.getResultList();
 	}
