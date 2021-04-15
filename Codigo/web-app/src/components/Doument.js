@@ -16,13 +16,27 @@ const Document = () => {
   const [name, setName] = useState("");
 
   useEffect(() => {
+    const getData = async () => {
+      setIsLoading(true);
+
+      const response = await restAPI.get(
+        `/documentos/filtronome?documentonome=${name}`
+      );
+
+      setData(response.data);
+
+      setIsLoading(false);
+    };
+
     getData();
   }, [name, pn]);
 
   const getData = async () => {
     setIsLoading(true);
 
-    const response = await restAPI.get("/documentos/");
+    const response = await restAPI.get(
+      `/documentos/filtronome?documentonome=${name}`
+    );
 
     setData(response.data);
 

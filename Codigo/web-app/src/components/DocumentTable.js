@@ -93,13 +93,13 @@ const Table = ({ data, onEdit, onDelete }) => {
               className="ui dropdown item"
               onClick={(e) => editItem(e, selectedItem)}
             >
-              Editar Bloco
+              Editar Manual
             </div>
             <div
               className="ui dropdown item"
               onClick={(e) => deleteItem(e, selectedItem)}
             >
-              Deletar Bloco
+              Deletar Manual
             </div>
           </div>
         </ContextMenu>
