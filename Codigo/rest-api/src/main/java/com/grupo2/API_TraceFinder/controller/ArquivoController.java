@@ -47,11 +47,9 @@ public class ArquivoController {
 	public void insertArquivo(@RequestBody ArquivoRq arquivo)
 	{
 		var arq = new Arquivo();
-		
 		arq.setArquivonome(arquivo.getArquivonome());
 		arq.setCodelistid(arquivo.getCodelistid());
 		arquivoRepository.save(arq);
-		
 	}
 		
 	// UPDATE
@@ -63,7 +61,6 @@ public class ArquivoController {
 		if(arq.isPresent())
 		{
 			var arq2 = arq.get();
-			
 			arq2.setArquivonome(arquivo.getArquivonome());
 			arq2.setCodelistid(arquivo.getCodelistid());
 			arquivoRepository.save(arq2);

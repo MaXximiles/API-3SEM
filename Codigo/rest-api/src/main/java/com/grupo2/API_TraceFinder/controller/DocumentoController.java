@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.grupo2.API_TraceFinder.classes.Documento;
+import com.grupo2.API_TraceFinder.controller.dto.BlocoRs;
 import com.grupo2.API_TraceFinder.controller.dto.DocumentoRq;
 import com.grupo2.API_TraceFinder.controller.dto.DocumentoRs;
 import com.grupo2.API_TraceFinder.repository.DocumentoCustomRepository;
@@ -77,6 +78,17 @@ public class DocumentoController
 				.map(DocumentoRs::converter)
 				.collect(Collectors.toList());
 	}
+	
+	
+	// SELECT com Query//
+	@GetMapping("/likenomepn")
+	public List<DocumentoRs> SelectLike(@RequestParam(value = "docnome", required = false) String docnome,
+			@RequestParam(value = "docpn", required = false) String docpn)
+	{
+		var doc = documentoRepository.SelectDocumentoLikeNomePn(docnome, docpn);
+		return doc.stream().map((BlList) -> DocumentoRs.converter(BlList)).collect(Collectors.toList());	
+	}
+	
 	
 	
 	// INSERT //

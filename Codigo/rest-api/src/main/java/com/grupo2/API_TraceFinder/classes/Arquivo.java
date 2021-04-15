@@ -11,7 +11,6 @@ import javax.persistence.Table;
 @Table(name = "arquivo")
 public class Arquivo {
 	
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="arquivo_id")

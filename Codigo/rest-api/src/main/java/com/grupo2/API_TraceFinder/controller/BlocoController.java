@@ -30,26 +30,24 @@ public class BlocoController {
 	public BlocoController(BlocoRepository blocoRepository, BlocoCustomRepository blocoCustomRepository) {
 		this.blocoRepository = blocoRepository;
 		this.blocoCustomRepository = blocoCustomRepository;
-		
 	}
-	
 	
 	// SELECT de todos//
 	@GetMapping("/")
 	public List<BlocoRs> selectAll()
 	{
 		var bloco = blocoRepository.findAll();
+		return bloco.stream().map((BList) -> BlocoRs.converter(BList)).collect(Collectors.toList());	
+	}
+	
+	// SELECT com Query//
+	@GetMapping("/joindocumento")
+	public List<BlocoRs> selectJoin(@RequestParam(value = "blocoid", required = false) Long blocoid)
+	{
+		var bloco = blocoRepository.SelectAll(blocoid);
 		return bloco.stream().map((BlList) -> BlocoRs.converter(BlList)).collect(Collectors.toList());	
 	}
-	
-	// SELECT de todos//
-	@GetMapping("/select")
-	public List<BlocoRs> selectAl(@RequestParam(value = "blocoid", required = false) Long blocoid)
-	{
-			var bloco = blocoRepository.SelectAll(blocoid);
-			return bloco;	
-	}
-	
+		
 	// SELECT por ID //
 	@GetMapping("/{id}")
 	public BlocoRs selectID(@PathVariable("id") Long id)
@@ -58,42 +56,7 @@ public class BlocoController {
 		return BlocoRs.converter(BlList);
 	}
 	
-	
-	@GetMapping("/joindocumento")
-	public List<BlocoRs> SelectBlocojoinDocumento(
-			@RequestParam(value = "blocoid", required = false) Long blocoid, 
-			@RequestParam(value = "blocosecao", required = false) String blocosecao,
-			@RequestParam(value = "blocosubsecao", required = false) String blocosubsecao,
-			@RequestParam(value = "bloconomebloco", required = false) String bloconomebloco,
-			@RequestParam(value = "blococodebloco", required = false) String blococodebloco,
-			@RequestParam(value = "blococaminho", required = false) String blococaminho	
-			)
-	{
-		return this.blocoCustomRepository.SelectJoinDocumento(blocoid, blocosecao, blocosubsecao, bloconomebloco, blococodebloco, blococaminho)
-				.stream()
-				.map((BlList) -> BlocoRs.converter(BlList))
-				.collect(Collectors.toList());
 		
-	}
-	
-	/* SELECT CUSTOM JOIN Documento
-	@GetMapping("/joindocumento")
-	public List<BlocoRs> findBlocoByjoinDocumento(
-				@RequestParam(value = "codelistid", required = false) Long codelistid, 
-				@RequestParam(value = "codelistsecao", required = false) String codelistsecao,
-				@RequestParam(value = "codelistsubsecao", required = false) String codelistsubsecao,
-				@RequestParam(value = "codelistnbloco", required = false) String codelistnbloco,
-				@RequestParam(value = "codelistcodebloco", required = false) String codelistcodebloco,
-				@RequestParam(value = "codelistcaminho", required = false) String codelistcaminho,
-				@RequestParam(value = "codelistdocumentoid", required = false) String codelistdocumentoid
-		)
-	{
-			return this.codelistCustomRepository.findJoinDocumento(codelistid, codelistsecao, codelistsubsecao, codelistnbloco, codelistcodebloco, codelistcaminho, codelistdocumentoid)
-					.stream()
-					.map(CodelistRs::converter)
-					.collect(Collectors.toList());
-		}*/
-	
 	
 	// INSERT //
 	@PostMapping("/")
