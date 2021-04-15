@@ -101,7 +101,7 @@ const Codelist = () => {
     }
 
     const response = oldData
-      ? await restAPI.put(`/codelist/${oldData.codelist_id}`, data)
+      ? await restAPI.put(`/codelist/${oldData.codelistid}`, data)
       : await restAPI.post("/codelist/", data);
 
     console.log(response);
@@ -116,7 +116,7 @@ const Codelist = () => {
       return;
     }
 
-    const response = await restAPI.delete(`/codelist/${data.codelist_id}`);
+    const response = await restAPI.delete(`/codelist/${data.codelistid}`);
 
     console.log(response);
 

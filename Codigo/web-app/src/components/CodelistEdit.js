@@ -4,42 +4,42 @@ const CodelistEdit = ({ onSubmit, dataEntry }) => {
   const [section, setSection] = useState("");
   const [subsection, setSubsection] = useState("");
   const [block, setBlock] = useState("");
-	const [blockCode, setBlockCode] = useState("");
+  const [blockCode, setBlockCode] = useState("");
 
-	useEffect(() => {
-		if (dataEntry) {
-			setSection(dataEntry.codelist_secao);
-			setSubsection(dataEntry.codelist_subsecao);
-			setBlock(dataEntry.codelist_nbloco);
-			setBlockCode(dataEntry.codelist_codebloco);
-		} else {
+  useEffect(() => {
+    if (dataEntry) {
+      setSection(dataEntry.codelistsecao);
+      setSubsection(dataEntry.codelistsubsecao);
+      setBlock(dataEntry.codelistnbloco);
+      setBlockCode(dataEntry.codelistcodebloco);
+    } else {
       clearFields();
     }
-	}, [dataEntry]);
+  }, [dataEntry]);
 
   const clearFields = () => {
     setSection("");
-		setSubsection("");
-		setBlock("");
-		setBlockCode("");
-  }
+    setSubsection("");
+    setBlock("");
+    setBlockCode("");
+  };
 
-	const submit = async () => {
-		const submitedEntry = {
-			codelist_codebloco: blockCode,
-			codelist_nbloco: block,
-			codelist_secao: section,
-			codelist_subsecao: subsection,
-		};
+  const submit = async () => {
+    const submitedEntry = {
+      codelistcodebloco: blockCode,
+      codelistnbloco: block,
+      codelistsecao: section,
+      codelistsubsecao: subsection,
+    };
 
-		if (dataEntry) {
-			await onSubmit(submitedEntry, dataEntry);
-		} else {
-			await onSubmit(submitedEntry);
-		}
+    if (dataEntry) {
+      await onSubmit(submitedEntry, dataEntry);
+    } else {
+      await onSubmit(submitedEntry);
+    }
 
     clearFields();
-	}
+  };
 
   return (
     <React.Fragment>
@@ -75,7 +75,7 @@ const CodelistEdit = ({ onSubmit, dataEntry }) => {
               onChange={(e) => setBlock(e.target.value)}
             />
           </div>
-					<div className="field">
+          <div className="field">
             <label>Código do bloco</label>
             <input
               type="text"

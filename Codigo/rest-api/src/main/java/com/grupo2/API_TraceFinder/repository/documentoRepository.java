@@ -9,8 +9,8 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface DocumentoRepository extends JpaRepository<Documento, Long> {
-	
-	// Contains traz tudo que contem substituindo o LIKE %% do mysql
-	List<Documento> findBydocumentonomeContains(String documentonome);
+
+  // Contains traz tudo que contem substituindo o LIKE %% do mysql
+  List<Documento> findBydocumentonomeContains(String documentonome);
 
 }

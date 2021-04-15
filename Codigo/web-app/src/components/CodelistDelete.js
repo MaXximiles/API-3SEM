@@ -5,7 +5,7 @@ const CodelistDelete = ({ onSubmit, dataEntry }) => {
     <React.Fragment>
       <div className="content">
         Tem certeza que deseja deletar o bloco{" "}
-        {dataEntry ? dataEntry.codelist_nbloco : ""}?
+        {dataEntry ? dataEntry.codelistnbloco : ""}?
       </div>
       <div className="actions">
         <div className="ui negative button" onClick={onSubmit}>
