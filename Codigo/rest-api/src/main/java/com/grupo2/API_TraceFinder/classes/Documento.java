@@ -1,20 +1,27 @@
 package com.grupo2.API_TraceFinder.classes; 
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 
-@Entity
+@Entity(name = "documento")
 @Table(name = "documento")
 public class Documento {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="documento_id")
+	@Column(name="id")
 	private Long documentoid;
 	
 	@Column(name="documento_nome")
@@ -25,6 +32,21 @@ public class Documento {
 	
 	@Column(name="documento_caminho")
 	private String documentocaminho;
+	
+	/*@OneToMany
+	@JoinTable(name = "codelist")
+	@JoinColumn(name = "documento_id")
+	private List<Codelist> codelist;
+	
+	
+	
+	public List<Codelist> getCodelist() {
+		return codelist;
+	}
+
+	public void setCodelist(List<Codelist> codelist) {
+		this.codelist = codelist;
+	}*/
 
 	public Long getDocumentoid() {
 		return documentoid;

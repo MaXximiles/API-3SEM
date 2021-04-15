@@ -23,10 +23,11 @@ public class CodelistCustomRepository {
 		// crie um alias (Documento AS D) para dizer que esta selecionando a classe ao invés da tabela
 		// e na class estará os apontamentos para os campos da tabela e a tabela
 		String query = "SELECT C FROM Codelist AS C ";
-			   query += " LEFT JOIN Documento D ON D.documento_id = C.documentoid";
+			   query += " JOIN C.Documento D ";
+			   query += " WHERE D.documento_id = 1 ";
 		String condicao = " WHERE ";
 				
-		/*if(documentonome != null)
+		/*if(documentonome != null) 
 		{
 			query += condicao + " documento_nome = :documentonome";
 			condicao = " AND ";
@@ -36,13 +37,14 @@ public class CodelistCustomRepository {
 			query += condicao + " documento_pn = :documentopn";
 		}*/
 		
-		var sql = em.createQuery(query, Codelist.class);
+		//var sql = em.createQuery(query, Codelist.class);
 		/*if(documentoid != null){sql.setParameter("documento_id", documentoid );}
 		if(documentonome != null){sql.setParameter("documentonome", documentonome );}
 		if(documentopn != null){sql.setParameter("documentopn", documentopn );}
 		if(documentocaminho != null){sql.setParameter("documento_caminho", documentocaminho );}*/
 		
-		return sql.getResultList();
+		//return sql.getResultList();
+		return null;
 	}
 	 
 }

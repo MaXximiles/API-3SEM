@@ -5,6 +5,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -30,10 +36,22 @@ public class Codelist {
 	
 	@Column(name="codelist_caminho")
 	private String codelistcaminho;
-
+	
 	@Column(name="documento_id")
 	private String codelistdocumentoid;
 	
+	/*@OneToOne
+	@JoinTable(name = "documento")
+	@JoinColumn(name = "id")
+	private Codelist codelist;
+	
+	public Codelist getCodelist() {
+		return codelist;
+	}
+
+	public void setCodelist(Codelist codelist) {
+		this.codelist = codelist;
+	}*/
 
 	public Long getCodelistid() {
 		return codelistid;
