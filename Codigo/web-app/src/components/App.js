@@ -5,6 +5,7 @@ import Codelist from "./Codelist";
 import Header from "./Header";
 import Route from "./Route";
 import restAPI from "../apis/restAPI";
+import Document from "./Doument";
 
 const App = () => {
   const validateAccount = async (usrEmail, usrSenha) => {
@@ -24,6 +25,9 @@ const App = () => {
       </Route>
       <Route path="/codelist">
         <Codelist />
+      </Route>
+      <Route path="/documento">
+        <Document />
       </Route>
     </div>
   );

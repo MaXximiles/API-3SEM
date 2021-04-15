@@ -69,11 +69,13 @@ const Table = ({ data, onEdit, onDelete }) => {
     event.stopPropagation();
 
     onEdit(item);
-  }
+  };
 
-  const deleteItem = (item) => {
+  const deleteItem = (event, item) => {
+    event.stopPropagation();
+
     onDelete(item);
-  }
+  };
 
   const onContextMenu = (event, item) => {
     event.preventDefault();
@@ -87,8 +89,18 @@ const Table = ({ data, onEdit, onDelete }) => {
       return (
         <ContextMenu xy={contextPosition}>
           <div className="ui secondary vertical menu">
-            <div className="ui dropdown item" onClick={(e) => editItem(e, selectedItem)}>Editar Bloco</div>
-            <div className="ui dropdown item" onClick={(e) => deleteItem(selectedItem)}>Deletar Bloco</div>
+            <div
+              className="ui dropdown item"
+              onClick={(e) => editItem(e, selectedItem)}
+            >
+              Editar Bloco
+            </div>
+            <div
+              className="ui dropdown item"
+              onClick={(e) => deleteItem(e, selectedItem)}
+            >
+              Deletar Bloco
+            </div>
           </div>
         </ContextMenu>
       );

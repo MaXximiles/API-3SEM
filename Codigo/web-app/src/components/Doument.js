@@ -1,92 +1,28 @@
 import React, { useEffect, useState } from "react";
 import Loader from "./Loader";
-import Table from "./CodelistTable";
-import Dropdown from "./Dropdown";
+import Table from "./DocumentTable";
+import DocumentDelete from "./DocumentDelete";
+import DocumentEdit from "./DocumentEdit";
 import Modal from "./Modal";
-import CodelistEdit from "./CodelistEdit";
-import CodelistDelete from "./CodelistDelete";
 import restAPI from "../apis/restAPI";
 
-const options = [
-  {
-    label: "Mercúrio",
-    value: 1,
-  },
-  {
-    label: "Vênus",
-    value: 2,
-  },
-  {
-    label: "Terra",
-    value: 3,
-  },
-  {
-    label: "Marte",
-    value: 4,
-  },
-  {
-    label: "Júpiter",
-    value: 5,
-  },
-  {
-    label: "Saturno",
-    value: 6,
-  },
-  {
-    label: "Urano",
-    value: 7,
-  },
-  {
-    label: "Netuno",
-    value: 8,
-  },
-  {
-    label: "Plutão",
-    value: 9,
-  },
-  {
-    label: "Sol",
-    value: 10,
-  },
-  {
-    label: "Alpha Centauri",
-    value: 11,
-  },
-  {
-    label: "VY Canis Majoris",
-    value: 12,
-  },
-  {
-    label: "Canopus",
-    value: 13,
-  },
-  {
-    label: "Rigel",
-    value: 14,
-  },
-  {
-    label: "Vega",
-    value: 15,
-  },
-];
-
-const Codelist = () => {
+const Document = () => {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
   const [dataEntry, setDataEntry] = useState(null);
-  const [selectedTrace, setSelectedTrace] = useState([]);
+  const [pn, setPn] = useState("");
   const [name, setName] = useState("");
 
   useEffect(() => {
     getData();
-  }, []);
+  }, [name, pn]);
 
   const getData = async () => {
     setIsLoading(true);
 
-    const response = await restAPI.get("/codelist/");
+    const response = await restAPI.get("/documentos/");
 
     setData(response.data);
 
@@ -101,8 +37,8 @@ const Codelist = () => {
     }
 
     const response = oldData
-      ? await restAPI.put(`/codelist/${oldData.codelistid}`, data)
-      : await restAPI.post("/codelist/", data);
+      ? await restAPI.put(`/documentos/${oldData.documentoid}`, data)
+      : await restAPI.post("/documentos/", data);
 
     console.log(response);
 
@@ -116,7 +52,7 @@ const Codelist = () => {
       return;
     }
 
-    const response = await restAPI.delete(`/codelist/${data.codelistid}`);
+    const response = await restAPI.delete(`/documentos/${data.documentoid}`);
 
     console.log(response);
 
@@ -135,41 +71,41 @@ const Codelist = () => {
 
   const renderedEditModal = (
     <Modal
-      title={`${dataEntry ? "Editando" : "Criando Novo"} Bloco`}
+      title={`${dataEntry ? "Editando" : "Criando Novo"} Manual`}
       isOpen={isEditing}
       setIsOpen={setIsEditing}
     >
-      <CodelistEdit onSubmit={onSubmit} dataEntry={dataEntry} />
+      <DocumentEdit onSubmit={onSubmit} dataEntry={dataEntry} />
     </Modal>
   );
 
   const renderedDeleteModal = (
     <Modal
-      title="Deletando Bloco"
+      title="Deletando Manual"
       isOpen={isDeleting}
       setIsOpen={setIsDeleting}
       size="tiny"
       forceChoice={true}
     >
-      <CodelistDelete onSubmit={onDelete} dataEntry={dataEntry} />
+      <DocumentDelete onSubmit={onDelete} dataEntry={dataEntry} />
     </Modal>
   );
 
   return (
-    <div className="Codelist">
+    <div className="Document">
       {renderedEditModal}
       {renderedDeleteModal}
       <div className="ui one column stackable grid container">
         <div className="column">
           <div className="ui form">
-            <h4 className="ui dividing header">Informações do manual</h4>
+            <h4 className="ui dividing header">Informações do Manual</h4>
             <div className="two fields">
               <div className="field">
                 <label>Nome</label>
                 <input
                   type="text"
                   name="manualName"
-                  placeholder="Nome-PN"
+                  placeholder="Nome"
                   value={name}
                   onChange={(e) => {
                     setName(e.target.value);
@@ -177,12 +113,15 @@ const Codelist = () => {
                 />
               </div>
               <div className="field">
-                <Dropdown
-                  label="Traço"
-                  defaultText="Selecione um ou mais traços"
-                  options={options}
-                  selected={selectedTrace}
-                  onSelectedChange={setSelectedTrace}
+                <label>PN</label>
+                <input
+                  type="text"
+                  name="manualPn"
+                  placeholder="PN"
+                  value={pn}
+                  onChange={(e) => {
+                    setPn(e.target.value);
+                  }}
                 />
               </div>
             </div>
@@ -197,4 +136,4 @@ const Codelist = () => {
   );
 };
 
-export default Codelist;
+export default Document;
