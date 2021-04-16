@@ -72,11 +72,12 @@ Com sede em São José dos Campos - SP, a empresa conta com mais de 18 mil funci
 
 ## Sprint Atual:
 
-Após a entrega da Sprint passada, focamos mais na comunicação com o cliente para um melhor entendimento do problema, através disso foi necessário uma reformulação da idéia inicial. <br> Conforme descrito pelo cliente há á necessidade de poder gerenciar o codelist(tabela que traz informações e regras sobre a estrutura do manual), podendo inserir novas linhas, alterar e exclui-las, possibilitando assim mais controle ao usuario.<br>
-Foi adicionado o CRUD de documentos que possibilita ao usuario inserir, pesquisar, editar e deletar manuais. <br>
-Inserimos a opção de controle de traços onde o usuario poderá inserir tantos traços quanto forem necessários e a possibilidade de vincula-los aos documentos.<br>
-A vinculação de traços tambem se aplica aos blocos dos manuais, porem, segue outra regra, somente serão atribuidos aos blocos traços que pertencem ao documento, sendo esta atribuição realizada no codelist.<br>
-Atendendo as necessidades da reformulação do projeto, nosso banco de dados foi atualizado seguindo o seguinte modelo:
+  Após a entrega da Sprint passada, focamos mais na comunicação com o cliente para um melhor entendimento do problema, através disso foi necessário uma reformulação da idéia inicial. <br>   
+  Conforme descrito pelo cliente há á necessidade de poder gerenciar o codelist(tabela que traz informações e regras sobre a estrutura do manual), podendo inserir novas linhas, alterar e exclui-las, possibilitando assim mais controle ao usuario.<br>
+  Foi adicionado o CRUD de documentos que possibilita ao usuario inserir, pesquisar, editar e deletar manuais. <br>
+  Inserimos a opção de controle de traços onde o usuario poderá inserir tantos traços quanto forem necessários e a possibilidade de vincula-los aos documentos.<br>
+  A vinculação de traços tambem se aplica aos blocos dos manuais, porem, segue outra regra, somente serão atribuidos aos blocos traços que pertencem ao documento, sendo esta atribuição realizada no codelist.<br>
+  Atendendo as necessidades da reformulação do projeto, nosso banco de dados foi atualizado seguindo o seguinte modelo:
 
 ******* PRINTS *******
 
