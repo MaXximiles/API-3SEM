@@ -4,11 +4,14 @@ import Link from "./Link";
 const Header = () => {
   return (
     <div className="ui secondary pointing menu">
-      <Link href="/codelist" className="item">
-        Codelist
+      <Link href="/documento" className="item">
+        Manuais
+      </Link>
+      <Link href="/bloco" className="item">
+        Blocos
       </Link>
       <Link href="/" className="right item">
-        Sign Out
+        Logout
       </Link>
     </div>
   );

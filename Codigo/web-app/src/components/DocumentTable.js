@@ -155,7 +155,7 @@ const Table = ({ data, onEdit, onDelete }) => {
                 onClick={(e) => editItem(e)}
               >
                 <i className="plus icon"></i>
-                Adicionar Bloco
+                Adicionar Manual
               </div>
             </th>
           </tr>

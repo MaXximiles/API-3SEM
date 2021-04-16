@@ -25,12 +25,12 @@ public class DocumentoCustomRepository {
 				
 		if(documentonome != null)
 		{
-			query += condicao + " documento_nome = :documentonome";
+			query += condicao + " documento_nome LIKE %:documentonome%";
 			condicao = " AND ";
 		}
 		if(documentopn != null)
 		{
-			query += condicao + " documento_pn = :documentopn";
+			query += condicao + " documento_pn LIKE %:documentopn%";
 		}
 		
 		

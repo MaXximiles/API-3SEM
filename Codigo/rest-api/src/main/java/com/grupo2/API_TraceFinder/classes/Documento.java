@@ -32,21 +32,6 @@ public class Documento {
   @Column(name = "documento_caminho")
   private String documentocaminho;
 
-  /*
-   * @OneToMany
-   * 
-   * @JoinTable(name = "codelist")
-   * 
-   * @JoinColumn(name = "documento_id") private List<Codelist> codelist;
-   * 
-   * 
-   * 
-   * public List<Codelist> getCodelist() { return codelist; }
-   * 
-   * public void setCodelist(List<Codelist> codelist) { this.codelist = codelist;
-   * }
-   */
-
   public Long getDocumentoid() {
     return documentoid;
   }
@@ -78,4 +63,40 @@ public class Documento {
   public void setDocumentocaminho(String documentocaminho) {
     this.documentocaminho = documentocaminho;
   }
-}
+
+  }
+
+  
+
+  
+
+  
+
+    
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
