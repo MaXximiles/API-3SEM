@@ -29,8 +29,13 @@ Projeto API do 3º Semestre da turma de Banco de Dados FATEC
               <tbody>
                      <tr>
                             <td align=center>Sprint 1<br>08/03/2021 a 28/03/2021</td>
-                            <td >Descrição Sprint1 </td>
-                            <td><p><a href="https://github.com/MaXximiles/API-3SEM/tree/sprint-1">Visualizar</a></p></td>
+                            <td >Descrição Sprint1
+                             Proposta
+                             Nesta 1ª entrega nosso projeto tráz uma estrutura de controle de diretórios em cascata para o controle dos manuais.
+                             A idéia é um controle de pastas, seguindo uma idéia de explorador de arquivos, possibilitando, criação, alteração e exclusão de diretórios, pensando na estrutura do Mockup enviado pelo cliente.
+                             Através desta vizualização facilitada da estrutura do Manual, ficará mais facil realizar as importações dos arquivos .pdf(blocos).                   
+                            </td>
+                            <td><p><a href="https://github.com/MaXximiles/API-3SEM/tree/sprint-1">Ver mais...</a></p></td>
                      </tr>
                      <tr>
                             <td align=center>Sprint 2<br>29/09/2021 a 18/04/2021</td>
