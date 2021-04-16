@@ -86,7 +86,7 @@ const Codelist = () => {
     const getData = async () => {
       setIsLoading(true);
 
-      const response = await restAPI.get(`/bloco/blocosdocumento?docid=${id}`);
+      const response = await restAPI.get(`/codelist/codelistdoc?docid=${id}`);
 
       setData(response.data);
 
