@@ -6,6 +6,7 @@ import Modal from "./Modal";
 import CodelistEdit from "./CodelistEdit";
 import CodelistDelete from "./CodelistDelete";
 import restAPI from "../apis/restAPI";
+import { useParams } from "react-router-dom";
 
 const options = [
   {
@@ -79,14 +80,28 @@ const Codelist = () => {
   const [selectedTrace, setSelectedTrace] = useState([]);
   const [name, setName] = useState("");
 
+  const { id } = useParams();
+
   useEffect(() => {
+    const getData = async () => {
+      setIsLoading(true);
+
+      const response = await restAPI.get(`/bloco/blocosdocumento?docid=${id}`);
+
+      setData(response.data);
+
+      setIsLoading(false);
+    };
+
     getData();
-  }, []);
+  }, [id]);
 
   const getData = async () => {
     setIsLoading(true);
 
-    const response = await restAPI.get("/codelist/");
+    const response = await restAPI.get(
+      `/documentos/joinbloco?documentoid=${id}`
+    );
 
     setData(response.data);
 

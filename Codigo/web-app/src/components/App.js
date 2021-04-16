@@ -4,7 +4,7 @@ import Login from "./Login";
 import Codelist from "./Codelist";
 import Document from "./Document";
 import Header from "./Header";
-import Route from "./Route";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import restAPI from "../apis/restAPI";
 
 const App = () => {
@@ -20,15 +20,17 @@ const App = () => {
   return (
     <div className="App">
       <Header />
-      <Route path="/">
-        <Login onSubmit={validateAccount} href="/codelist" />
-      </Route>
-      <Route path="/codelist">
-        <Codelist />
-      </Route>
-      <Route path="/documento">
-        <Document />
-      </Route>
+      <Router>
+        <Route exact path="/">
+          <Login onSubmit={validateAccount} href="/codelist" />
+        </Route>
+        <Route exact path="/documento">
+          <Document />
+        </Route>
+        <Route path="/documento/:id">
+          <Codelist />
+        </Route>
+      </Router>
     </div>
   );
 };

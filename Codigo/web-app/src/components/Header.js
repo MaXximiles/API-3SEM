@@ -1,18 +1,20 @@
 import React from "react";
-import Link from "./Link";
+import { Link, BrowserRouter as Router } from "react-router-dom";
 
 const Header = () => {
   return (
     <div className="ui secondary pointing menu">
-      <Link href="/documento" className="item">
-        Manuais
-      </Link>
-      <Link href="/bloco" className="item">
-        Blocos
-      </Link>
-      <Link href="/" className="right item">
-        Logout
-      </Link>
+      <Router>
+        <Link to="/documento" className="item">
+          Manuais
+        </Link>
+        <Link to="/bloco" className="item">
+          Blocos
+        </Link>
+        <Link to="/" className="right item">
+          Logout
+        </Link>
+      </Router>
     </div>
   );
 };

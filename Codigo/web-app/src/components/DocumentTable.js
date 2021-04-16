@@ -1,6 +1,7 @@
 import "./Table.css";
 import React, { useEffect, useRef, useState } from "react";
 import ContextMenu from "./ContextMenu";
+import { Link, useRouteMatch } from "react-router-dom";
 
 const Table = ({ data, onEdit, onDelete }) => {
   const [columnStyle, setColumnStyle] = useState([]);
@@ -8,6 +9,8 @@ const Table = ({ data, onEdit, onDelete }) => {
   const [selectedItem, setSelectedItem] = useState({});
   const thead = useRef();
   const tbody = useRef();
+
+  const { url } = useRouteMatch();
 
   useEffect(() => {
     const onBodyClick = () => {
@@ -101,6 +104,12 @@ const Table = ({ data, onEdit, onDelete }) => {
             >
               Deletar Manual
             </div>
+            <Link
+              className="ui dropdown item"
+              to={`${url}/${selectedItem.documentoid}`}
+            >
+              Ver Codelist
+            </Link>
           </div>
         </ContextMenu>
       );
