@@ -21,4 +21,10 @@ public interface BlocoRepository extends JpaRepository<Bloco, Long> {
 			+ " WHERE bloco.bloco_id = ?1  ", nativeQuery = true)
 	List<Bloco> SelectAll(Long id);
 	
+	 
+	@Query(value = "SELECT bloco.bloco_id, bloco_secao, bloco_subsecao, bloco_nomebloco, bloco_codebloco, bloco_caminho "
+			+ "	FROM codelist "
+			+ " INNER JOIN bloco ON bloco.bloco_id = codelist.bloco_id "
+			+ " WHERE codelist.documento_id = ?1  ", nativeQuery = true)
+	List<Bloco> SelectBlocoDoc(Long id);
 }
