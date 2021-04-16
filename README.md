@@ -41,8 +41,7 @@ Com sede em São José dos Campos - SP, a empresa conta com mais de 18 mil funci
               <tbody>
                      <tr>
                             <td align=center>Sprint 1<br>08/03/2021 a 28/03/2021</td>
-                            <td >Descrição Sprint1
-                             Proposta
+                            <td >Descrição Sprint1<br>
                              Nesta 1ª entrega nosso projeto tráz uma estrutura de controle de diretórios em cascata para o controle dos manuais.
                              A idéia é um controle de pastas, seguindo uma idéia de explorador de arquivos, possibilitando, criação, alteração e exclusão de diretórios, pensando na estrutura do Mockup enviado pelo cliente.
                              Através desta vizualização facilitada da estrutura do Manual, ficará mais facil realizar as importações dos arquivos .pdf(blocos).                   
@@ -51,7 +50,7 @@ Com sede em São José dos Campos - SP, a empresa conta com mais de 18 mil funci
                      </tr>
                      <tr>
                             <td align=center>Sprint 2<br>29/09/2021 a 18/04/2021</td>
-                            <td>Descrição Sprint2
+                            <td>Descrição Sprint2<br>
                              Nesta 2ª Sprint após novas conversas com o cliente tivemos uma reformulação na estrutura do projeto.
                              Seguindo conforme solicitado pelo cliente, a tela de controle do Codelist foi adicionada, onde agora é possivel pesquisar, inserir, alterar e deletar, linhas do codelist, proporcionando controle ao usuario. O mesmo segue tambem para manuais, onde tambem é possivel realizar as mesmas tarefas do codelist.
                              A função de inserção de traços e colecionamento do mesmo para os manuais tambem foi adicionada seguindo a regra de que um manual pode conter muitos traços que definem os blocos que o constituiram.
