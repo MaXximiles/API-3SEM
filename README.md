@@ -12,11 +12,11 @@ Projeto API do 3º Semestre da turma de Banco de Dados FATEC
 - [![Linkedin](https://img.shields.io/badge/LinkedIn-blue?style=for-the-badge&logo=Linkedin)](https://www.linkedin.com/in/maxx-barcelos-aaa106b2) Maximiles Barcelos
  
  ## Cliente:
+ 
+ <p align="center"> <img src="https://images-ext-2.discordapp.net/external/qs9oB7KZGcY3KhYPpksxNKz1cebbLrPIJUdqIyv2jIg/%3Fauto%3Dformat%26fit%3Dmax%26w%3D1200/https/img.ien.com/files/base/indm/ien/image/2019/09/Embraer_logo.5d8a763612cbb.png?width=400&height=242" width=180 heicht=180></p>
+ 
  A EMBRAER nasceu em 1968 após o vôo bem sucedido da aeronave Bandeirante, essa que teve aceitação tão grande que exigiu a criação de uma fábrica que organizasse sua produção em série. O sonho e dedicação de Ozires Silva e sua equipe se concretizaram em 19 de Agosto de 1969 com a oficialização da EMBRAER por decreto de lei.
 Com sede em São José dos Campos - SP, a empresa conta com mais de 18 mil funcionários ( dados de 2014) e possui diversas unidades no Brasil e no exterior, inclusive joint ventures na China e em Portugal.
-
-<p align="center"> <img src="https://images-ext-2.discordapp.net/external/qs9oB7KZGcY3KhYPpksxNKz1cebbLrPIJUdqIyv2jIg/%3Fauto%3Dformat%26fit%3Dmax%26w%3D1200/https/img.ien.com/files/base/indm/ien/image/2019/09/Embraer_logo.5d8a763612cbb.png?width=400&height=242" width=100 heicht=100></p>
- 
  
  ## Problema:
  Atualmente o cliente conta com diversos manuais referentes aos seus produtos, esses manuais possuem identificações primarias e secundárias e são criados a partir da junção de blocos fragmentados em arquivos pdf. Esses manuais possuem versões definidas por traços, que são compostos por determinados blocos que fazem parte do documento. O controle é feito através de planilhas alimentadas manualmente por usuarios que devem conhecer a estrutura do manual.
