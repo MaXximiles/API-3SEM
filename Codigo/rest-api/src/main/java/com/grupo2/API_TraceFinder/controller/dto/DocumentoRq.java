@@ -6,6 +6,8 @@ public class DocumentoRq {
 	private String documentonome;
 	private String documentopn;
 	private String documentocaminho;
+	
+	
 	public Long getDocumentoid() {
 		return documentoid;
 	}

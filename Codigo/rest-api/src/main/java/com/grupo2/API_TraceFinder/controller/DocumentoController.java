@@ -90,13 +90,30 @@ public class DocumentoController
 	}
 	
 	
+	// SELECT com Query//
+	@GetMapping("/joinbloco")
+	public List<DocumentoRs> selectJoin(@RequestParam(value = "documentoid", required = false) Long docid)
+	{
+		var documento = documentoRepository.SelectJoinBloco(docid);
+		return documento.stream().map((BlList) -> DocumentoRs.converter(BlList)).collect(Collectors.toList());	
+	}
+	
+	
+	// SELECT Documentos que contem aquele bloco//
+	@GetMapping("/documentobloco")
+	public List<DocumentoRs> selectDocBloco(@RequestParam(value = "blocoid", required = false) Long blocoid)
+	{
+		var documento = documentoRepository.SelectDocBloco(blocoid);
+		return documento.stream().map((BlList) -> DocumentoRs.converter(BlList)).collect(Collectors.toList());	
+	}
+	
+	
 	
 	// INSERT //
 	@PostMapping("/")
 	public void insertDocumento(@RequestBody DocumentoRq documento)
 	{
 		var doc = new Documento();
-		
 		doc.setDocumentonome(documento.getDocumentonome());
 		doc.setDocumentopn(documento.getDocumentopn());
 		doc.setDocumentocaminho(documento.getDocumentocaminho());

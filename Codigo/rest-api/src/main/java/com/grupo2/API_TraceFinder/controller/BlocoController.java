@@ -47,6 +47,15 @@ public class BlocoController {
 		var bloco = blocoRepository.SelectAll(blocoid);
 		return bloco.stream().map((BlList) -> BlocoRs.converter(BlList)).collect(Collectors.toList());	
 	}
+	
+	
+	// SELECT Blocos de um documento//
+	@GetMapping("/blocosdocumento")
+	public List<BlocoRs> selectBlocosDoc(@RequestParam(value = "docid", required = false) Long docid)
+	{
+		var doc = blocoRepository.SelectBlocoDoc(docid);
+		return doc.stream().map((BlList) -> BlocoRs.converter(BlList)).collect(Collectors.toList());	
+	}
 		
 	// SELECT por ID //
 	@GetMapping("/{id}")
