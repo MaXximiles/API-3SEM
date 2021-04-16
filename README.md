@@ -24,32 +24,27 @@ Projeto API do 3º Semestre da turma de Banco de Dados FATEC
               <thead>
                      <th width=100px>Entregas</th>
                      <th>Descrições</th>
-                     <th width=215px>Datas</th>
                      <th width=100px>Links</th>
               </thead>
               <tbody>
                      <tr>
-                            <td>Sprint 1</td>
+                            <td align=center>Sprint 1<br>08/03/2021 a 28/03/2021</td>
                             <td>Descrição Sprint1 </td>
-                            <td>08/03/2021 a 28/03/2021</td>
                             <td><p><a href="https://github.com/MaXximiles/API-3SEM/tree/sprint-1">Visualizar</a></p></td>
                      </tr>
                      <tr>
-                            <td>Sprint 2</td>
+                            <td>Sprint 2<br>29/09/2021 a 18/04/2021</td>
                             <td>Descrição Sprint2</td>
-                            <td>29/09/2021 a 18/04/2021</td>
                             <td><p>Em andamento</p></td>
                      </tr>
                      <tr>
-                            <td>Sprint 3</td>
+                            <td>Sprint 3<br>26/04/2021 a 17/05/2021</td>
                             <td>Descrição Sprint3</td>
-                            <td>26/04/2021 a 17/05/2021</td>
                             <td><p>Em andamento</p></td>
                      </tr>
                       <tr>
-                            <td>Sprint 4</td>
+                            <td>Sprint 4<br>17/05/2021 a 05/06/2021</td>
                             <td>Descrição Sprint4</td>
-                            <td>17/05/2021 a 05/06/2021</td>
                             <td><p>Em andamento</p></td>
                      </tr>
               </tbody>
