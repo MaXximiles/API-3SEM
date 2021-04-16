@@ -10,9 +10,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.grupo2.API_TraceFinder.classes.RelacaoDocTraco;
+import com.grupo2.API_TraceFinder.controller.dto.BlocoRs;
 import com.grupo2.API_TraceFinder.controller.dto.RelacaoDocTracoRq;
 import com.grupo2.API_TraceFinder.controller.dto.RelacaoDocTracoRs;
 import com.grupo2.API_TraceFinder.repository.RelacaoDocTracoRepository;
@@ -21,17 +23,17 @@ import com.grupo2.API_TraceFinder.repository.RelacaoDocTracoRepository;
 @RequestMapping("/relacao_doc_traco")
 public class RelacaoDocTracoController {
 	
-	private RelacaoDocTracoRepository RelacaoDocTracoRepository = null;
+	private RelacaoDocTracoRepository relacaoDocTracoRepository = null;
 	
 	public RelacaoDocTracoController(RelacaoDocTracoRepository relacaoDocTracoRepository) {
-		this.RelacaoDocTracoRepository = relacaoDocTracoRepository;
+		this.relacaoDocTracoRepository = relacaoDocTracoRepository;
 	}
 	
 	// SELECT de todos//
 	@GetMapping("/")
 	public List<RelacaoDocTracoRs> selectAll()
 	{
-		var RelDocTraco = RelacaoDocTracoRepository.findAll();
+		var RelDocTraco = relacaoDocTracoRepository.findAll();
 		return RelDocTraco.stream().map((relDocTraco) -> RelacaoDocTracoRs.converter(relDocTraco)).collect(Collectors.toList());	
 	}
 		
@@ -39,8 +41,16 @@ public class RelacaoDocTracoController {
 	@GetMapping("/{id}")
 	public RelacaoDocTracoRs selectID(@PathVariable("id") Long id)
 	{
-		var relDocTraco = RelacaoDocTracoRepository.getOne(id);		
+		var relDocTraco = relacaoDocTracoRepository.getOne(id);		
 		return RelacaoDocTracoRs.converter(relDocTraco);
+	}
+	
+	// SELECT Traços de um documento//
+	@GetMapping("/tracosdocumento")
+	public List<RelacaoDocTracoRs> selectTracosDoc(@RequestParam(value = "docid", required = false) Long docid)
+	{
+			var doc = relacaoDocTracoRepository.SelectTracosDoc(docid);
+			return doc.stream().map((TrList) -> RelacaoDocTracoRs.converter(TrList)).collect(Collectors.toList());	
 	}
 		
 	// INSERT //
@@ -50,21 +60,21 @@ public class RelacaoDocTracoController {
 		var rDocTraco = new RelacaoDocTraco();
 		rDocTraco.setDocid(relDocTraco.getDocid());
 		rDocTraco.setTracoid(relDocTraco.getTracoid());
-		RelacaoDocTracoRepository.save(rDocTraco);
+		relacaoDocTracoRepository.save(rDocTraco);
 	}
 		
 	// UPDATE
 	@PutMapping("/{id}")
 	public void updateRelacaoDocTraco(@PathVariable Long id, @RequestBody RelacaoDocTracoRq relDocTraco) throws Exception
 	{
-		var rDocTraco = RelacaoDocTracoRepository.findById(id);
+		var rDocTraco = relacaoDocTracoRepository.findById(id);
 			
 		if(rDocTraco.isPresent())
 		{
 			var rDocTraco2 = rDocTraco.get();
 			rDocTraco2.setDocid(relDocTraco.getDocid());
 			rDocTraco2.setTracoid(relDocTraco.getTracoid());
-			RelacaoDocTracoRepository.save(rDocTraco2);
+			relacaoDocTracoRepository.save(rDocTraco2);
 		}
 		else { throw new Exception("Documento não encontrado"); }
 	}
@@ -73,6 +83,6 @@ public class RelacaoDocTracoController {
 	@DeleteMapping("/{id}")
 	public void deleteRelacaoDocTraco(@PathVariable Long id)
 	{	
-		RelacaoDocTracoRepository.deleteById(id);
+		relacaoDocTracoRepository.deleteById(id);
 	}
 }
