@@ -23,99 +23,80 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/documentos")
-public class DocumentoController 
-{
-	
-	private DocumentoRepository documentoRepository = null;
-	private DocumentoCustomRepository documentoCustomRepository = null;
-		
-	public DocumentoController(DocumentoRepository documentoRepository, DocumentoCustomRepository documentoCustomRepository) 
-	{
-		this.documentoRepository = documentoRepository;
-		this.documentoCustomRepository = documentoCustomRepository;
-	}
-		
-	
-	// SELECT de todos//
-	@GetMapping("/")
-	public List<DocumentoRs> selectAll()
-	{
-		var documentos = documentoRepository.findAll();
-		return documentos.stream().map((doc) -> DocumentoRs.converter(doc)).collect(Collectors.toList());	
-	}
-	
-	// SELECT por ID //
-	@GetMapping("/{id}")
-	public DocumentoRs selectID(@PathVariable("id") Long id)
-	{
-		var doc = documentoRepository.getOne(id);
-		return DocumentoRs.converter(doc);
-	}
-	
-	// SELECT por Nome
-	@GetMapping("/filtronome")
-	public List<DocumentoRs> findDocumentoBydocumentonome(@RequestParam("documentonome") String documentonome)
-	{
-		return this.documentoRepository.findBydocumentonomeContains(documentonome)
-				.stream()
-				.map(DocumentoRs::converter)
-				.collect(Collectors.toList());
-	}
-	
-		
-	// SELECT CUSTOM por Nome e PN
-	@GetMapping("/filtronomepn")
-	public List<DocumentoRs> findDocumentoBydocumentonomepn(
-			@RequestParam(value = "documentoid", required = false) Long documentoid, 
-			@RequestParam(value = "documentonome", required = false) String documentonome,
-			@RequestParam(value = "documentopn", required = false) String documentopn,
-			@RequestParam(value = "documentocaminho", required = false) String documentocaminho
-	)
-	{
-		return this.documentoCustomRepository.find(documentoid, documentonome, documentopn, documentocaminho)
-				.stream()
-				.map(DocumentoRs::converter)
-				.collect(Collectors.toList());
-	}
-	
-	
-	// INSERT //
-	@PostMapping("/")
-	public void insertDocumento(@RequestBody DocumentoRq documento)
-	{
-		var doc = new Documento();
-		
-		doc.setDocumentonome(documento.getDocumentonome());
-		doc.setDocumentopn(documento.getDocumentopn());
-		doc.setDocumentocaminho(documento.getDocumentocaminho());
-		documentoRepository.save(doc);
-	}
-	
-	// UPDATE
-	@PutMapping("/{id}")
-	public void updateDocumento(@PathVariable Long id, @RequestBody DocumentoRq documento) throws Exception
-	{
-		var doc = documentoRepository.findById(id);
-		
-		if(doc.isPresent())
-		{
-			var doc2 = doc.get();
-			doc2.setDocumentonome(documento.getDocumentonome());
-			doc2.setDocumentopn(documento.getDocumentopn());
-			doc2.setDocumentocaminho(documento.getDocumentocaminho());
-			documentoRepository.save(doc2);
-		}
-		else { throw new Exception("Documento não encontrado"); }
-	}
-	
-	// DELETE
-	@DeleteMapping("/{id}")
-	public void deleteDocumento(@PathVariable Long id)
-	{	
-		documentoRepository.deleteById(id);
-	}
+public class DocumentoController {
 
+  private DocumentoRepository documentoRepository = null;
+  private DocumentoCustomRepository documentoCustomRepository = null;
 
-	
-	
+  public DocumentoController(DocumentoRepository documentoRepository,
+      DocumentoCustomRepository documentoCustomRepository) {
+    this.documentoRepository = documentoRepository;
+    this.documentoCustomRepository = documentoCustomRepository;
+  }
+
+  // SELECT de todos//
+  @GetMapping("/")
+  public List<DocumentoRs> selectAll() {
+    var documentos = documentoRepository.findAll();
+    return documentos.stream().map((doc) -> DocumentoRs.converter(doc)).collect(Collectors.toList());
+  }
+
+  // SELECT por ID //
+  @GetMapping("/{id}")
+  public DocumentoRs selectID(@PathVariable("id") Long id) {
+    var doc = documentoRepository.getOne(id);
+    return DocumentoRs.converter(doc);
+  }
+
+  // SELECT por Nome
+  @GetMapping("/filtronome")
+  public List<DocumentoRs> findDocumentoBydocumentonome(@RequestParam("documentonome") String documentonome) {
+    return this.documentoRepository.findBydocumentonomeContains(documentonome).stream().map(DocumentoRs::converter)
+        .collect(Collectors.toList());
+  }
+
+  // SELECT CUSTOM por Nome e PN
+  @GetMapping("/filtronomepn")
+  public List<DocumentoRs> findDocumentoBydocumentonomepn(
+      @RequestParam(value = "documentoid", required = false) Long documentoid,
+      @RequestParam(value = "documentonome", required = false) String documentonome,
+      @RequestParam(value = "documentopn", required = false) String documentopn,
+      @RequestParam(value = "documentocaminho", required = false) String documentocaminho) {
+    return this.documentoCustomRepository.find(documentoid, documentonome, documentopn, documentocaminho).stream()
+        .map(DocumentoRs::converter).collect(Collectors.toList());
+  }
+
+  // INSERT //
+  @PostMapping("/")
+  public void insertDocumento(@RequestBody DocumentoRq documento) {
+    var doc = new Documento();
+
+    doc.setDocumentonome(documento.getDocumentonome());
+    doc.setDocumentopn(documento.getDocumentopn());
+    doc.setDocumentocaminho(documento.getDocumentocaminho());
+    documentoRepository.save(doc);
+  }
+
+  // UPDATE
+  @PutMapping("/{id}")
+  public void updateDocumento(@PathVariable Long id, @RequestBody DocumentoRq documento) throws Exception {
+    var doc = documentoRepository.findById(id);
+
+    if (doc.isPresent()) {
+      var doc2 = doc.get();
+      doc2.setDocumentonome(documento.getDocumentonome());
+      doc2.setDocumentopn(documento.getDocumentopn());
+      doc2.setDocumentocaminho(documento.getDocumentocaminho());
+      documentoRepository.save(doc2);
+    } else {
+      throw new Exception("Documento não encontrado");
+    }
+  }
+
+  // DELETE
+  @DeleteMapping("/{id}")
+  public void deleteDocumento(@PathVariable Long id) {
+    documentoRepository.deleteById(id);
+  }
+
 }

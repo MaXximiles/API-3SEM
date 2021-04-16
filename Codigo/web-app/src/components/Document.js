@@ -20,7 +20,7 @@ const Document = () => {
       setIsLoading(true);
 
       const response = await restAPI.get(
-        `/documentos/filtronome?documentonome=${name}`
+        `/documentos/filtronomepn?documentonome=${name}&documentopn=${pn}`
       );
 
       setData(response.data);
