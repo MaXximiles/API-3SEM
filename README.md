@@ -11,12 +11,11 @@ Projeto API do 3º Semestre da turma de Banco de Dados FATEC
 - [![Linkedin](https://img.shields.io/badge/LinkedIn-blue?style=for-the-badge&logo=Linkedin)](https://www.linkedin.com/in/mateus-senne-172905149) Mateus de Senne
 - [![Linkedin](https://img.shields.io/badge/LinkedIn-blue?style=for-the-badge&logo=Linkedin)](https://www.linkedin.com/in/maxx-barcelos-aaa106b2) Maximiles Barcelos
  
- ## Cliente
+ ## Cliente:
  
  
- ## Problema
- 
- 
+ ## Problema:
+ Atualmente o cliente conta com diversos manuais referentes aos seus produtos, esses manuais possuem identificações primarias e secundárias e são criados a partir da junção de blocos fragmentados em arquivos pdf. Esses manuais possuem versões definidas por traços, que são compostos por determinados blocos que fazem parte do documento. O controle é feito através de planilhas alimentadas manualmente por usuarios que devem conhecer a estrutura do manual.
  
  ## Objetivo:
  O Trace Finder tem como objetivo ser uma aplicação que permite manter, customizar e versionar partes de documentos que são armazenados em arquivos PDF, a partir disso, utilizando regras específicas, é possível gerar documentos finais que integrem as partes selecionadas.
