@@ -1,3 +1,4 @@
+
 ### API 3º Semestre de Banco de Dados
 Projeto API do 3º Semestre da turma de Banco de Dados FATEC
 
@@ -16,18 +17,19 @@ Projeto API do 3º Semestre da turma de Banco de Dados FATEC
  <p align="center"> <img src="https://images-ext-2.discordapp.net/external/qs9oB7KZGcY3KhYPpksxNKz1cebbLrPIJUdqIyv2jIg/%3Fauto%3Dformat%26fit%3Dmax%26w%3D1200/https/img.ien.com/files/base/indm/ien/image/2019/09/Embraer_logo.5d8a763612cbb.png?width=400&height=242" width=180 heicht=180></p>
  
  A EMBRAER nasceu em 1968 após o vôo bem sucedido da aeronave Bandeirante, essa que teve aceitação tão grande que exigiu a criação de uma fábrica que organizasse sua produção em série. O sonho e dedicação de Ozires Silva e sua equipe se concretizaram em 19 de Agosto de 1969 com a oficialização da EMBRAER por decreto de lei.
-Com sede em São José dos Campos - SP, a empresa conta com mais de 18 mil funcionários ( dados de 2014) e possui diversas unidades no Brasil e no exterior, inclusive joint ventures na China e em Portugal.
- 
+Com sede em São José dos Campos - SP, a empresa conta com mais de 18 mil funcionários ( dados de 2014) e possui diversas unidades no Brasil e no exterior, inclusive joint ventures na China e em Portugal. Para mais informações acesse o [SITE EMBRAER]( https://embraer.com/br/pt) .
+
  ## Problema:
  Atualmente o cliente conta com diversos manuais referentes aos seus produtos, esses manuais possuem identificações primarias e secundárias e são criados a partir da junção de blocos fragmentados em arquivos pdf. Esses manuais possuem versões definidas por traços, que são compostos por determinados blocos que fazem parte do documento. O controle é feito através de planilhas alimentadas manualmente por usuarios que devem conhecer a estrutura do manual.
  
  ## Objetivo:
  O Trace Finder tem como objetivo ser uma aplicação que permite manter, customizar e versionar partes de documentos que são armazenados em arquivos PDF, a partir disso, utilizando regras específicas, é possível gerar documentos finais que integrem as partes selecionadas.
  
+  ## Documentação:
  
  - [Story Cards](https://github.com/MaXximiles/API-3SEM/tree/main/User%20Story%20Cards)
  - [Wireframes](https://github.com/MaXximiles/API-3SEM/tree/main/Wireframes)
- - [Documentação](https://github.com/MaXximiles/API-3SEM/tree/main/Documenta%C3%A7%C3%A3o)
+ - [Tutorial Instalação](https://github.com/MaXximiles/API-3SEM/tree/main/Documenta%C3%A7%C3%A3o)
  
 <h2>Sprints</h2>
        <table>
@@ -69,4 +71,3 @@ Com sede em São José dos Campos - SP, a empresa conta com mais de 18 mil funci
               </tbody>
        </table>
         
- ## Documentação:
