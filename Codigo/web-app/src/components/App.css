@@ -7,7 +7,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-html, body, #root, .App {
+html,
+body,
+#root,
+.App {
   height: 100vh;
   width: 100vw;
 }
