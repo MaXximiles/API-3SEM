@@ -7,4 +7,7 @@ import com.grupo2.API_TraceFinder.classes.TracoDoc;
 @Repository
 public interface TracoDocRepository extends JpaRepository<TracoDoc, Long>{
 
+	
+	
+	
 }

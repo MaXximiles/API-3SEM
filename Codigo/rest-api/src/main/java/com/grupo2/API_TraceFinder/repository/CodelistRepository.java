@@ -1,0 +1,19 @@
+package com.grupo2.API_TraceFinder.repository;
+
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
+
+import com.grupo2.API_TraceFinder.classes.Codelist;
+
+
+@Repository
+public interface CodelistRepository extends JpaRepository<Codelist, Long> {
+	
+	@Query(value = "SELECT codelist.codelist_id, codelist_secao, codelist_subsecao, codelist_nomebloco, codelist_codebloco, codelist_caminho, documento_id "
+			+ "	FROM codelist WHERE documento_id = ?1  ", nativeQuery = true)
+	List<Codelist> SelectCodelistDoc(Long id);
+	
+}
