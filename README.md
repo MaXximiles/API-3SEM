@@ -6,12 +6,12 @@ Projeto API do 3º Semestre da turma de Banco de Dados FATEC
 
 ## Integrantes:
 
-- [![Linkedin](https://img.shields.io/badge/LinkedIn-blue?style=for-the-badge&logo=Linkedin)](https://www.linkedin.com/in/rodrigo-am%C3%A2ncio-do-prado-ten%C3%B3rio-a56641174) Rodrigo Amancio - Scrum Master
-- [![Linkedin](https://img.shields.io/badge/LinkedIn-blue?style=for-the-badge&logo=Linkedin)](https://www.linkedin.com/in/luisaugustosb) Luís Augusto - Product Owner
-- [![Linkedin](https://img.shields.io/badge/LinkedIn-blue?style=for-the-badge&logo=Linkedin)](https://www.linkedin.com/in/bahij-noureddine-941b681b7/) Bahij Noureddine
-- [![Linkedin](https://img.shields.io/badge/LinkedIn-blue?style=for-the-badge&logo=Linkedin)](https://www.linkedin.com/in/mateus-senne-172905149) Mateus de Senne
-- [![Linkedin](https://img.shields.io/badge/LinkedIn-blue?style=for-the-badge&logo=Linkedin)](https://www.linkedin.com/in/maxx-barcelos-aaa106b2) Maximiles Barcelos
- 
+ <a  href="https://www.linkedin.com/in/rodrigo-am%C3%A2ncio-do-prado-ten%C3%B3rio-a56641174"> <img src="https://img.shields.io/badge/Rodrigo%20Amancio%20--%20Scrum%20Master-Linkedin-blue"></a>
+<a href="https://www.linkedin.com/in/luisaugustosb"> <img src="https://img.shields.io/badge/Lu%C3%ADs%20Augusto%20--%20Product%20Owner-Linkedin-blue"></a> 
+<a href="https://www.linkedin.com/in/bahij-noureddine-941b681b7/"> <img src= "https://img.shields.io/badge/Bahij%20Noureddine-Linkedin-blue"></a>
+<a href="https://www.linkedin.com/in/mateus-senne-172905149"> <img src= "https://img.shields.io/badge/Mateus%20Senne-Linkedin-blue"></a> 
+<a href="https://www.linkedin.com/in/maxx-barcelos-aaa106b2"> <img src= "https://img.shields.io/badge/Maximiles%20Barcelos-Linkedin-blue"></a> 
+
  ## Cliente:
  
  <p align="center"> <img src="https://images-ext-2.discordapp.net/external/qs9oB7KZGcY3KhYPpksxNKz1cebbLrPIJUdqIyv2jIg/%3Fauto%3Dformat%26fit%3Dmax%26w%3D1200/https/img.ien.com/files/base/indm/ien/image/2019/09/Embraer_logo.5d8a763612cbb.png?width=400&height=242" width=180 heicht=180></p>
