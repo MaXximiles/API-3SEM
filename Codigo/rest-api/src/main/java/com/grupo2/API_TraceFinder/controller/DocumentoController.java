@@ -88,15 +88,7 @@ public class DocumentoController
 		return doc.stream().map((BlList) -> DocumentoRs.converter(BlList)).collect(Collectors.toList());	
 	}
 	
-	
-	// SELECT com Query//
-	@GetMapping("/joinbloco")
-	public List<DocumentoRs> selectJoin(@RequestParam(value = "documentoid", required = false) Long docid)
-	{
-		var documento = documentoRepository.SelectJoinBloco(docid);
-		return documento.stream().map((BlList) -> DocumentoRs.converter(BlList)).collect(Collectors.toList());	
-	}
-	
+		
 	
 	// SELECT Documentos que contem aquele bloco//
 	@GetMapping("/documentobloco")

@@ -10,9 +10,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.grupo2.API_TraceFinder.classes.TracoDoc;
+import com.grupo2.API_TraceFinder.controller.dto.DocumentoRs;
 import com.grupo2.API_TraceFinder.controller.dto.TracoDocRq;
 import com.grupo2.API_TraceFinder.controller.dto.TracoDocRs;
 import com.grupo2.API_TraceFinder.repository.TracoDocRepository;
@@ -40,6 +42,16 @@ public class TracoDocController {
 		var tDoc = tracoDocRepository.getOne(id);	
 		return TracoDocRs.converter(tDoc);
 	}
+	
+	// SELECT de todos os traços de um Doc // 
+	@GetMapping("/tracodoc")
+	public List<TracoDocRs> SelectTracoDoc(@RequestParam(value = "docid", required = false) Long docid)
+	{
+		var doc = tracoDocRepository.SelectTracoDocumento(docid);
+		return doc.stream().map((TdList) -> TracoDocRs.converter(TdList)).collect(Collectors.toList());	
+	}
+		
+	
 	
 	// INSERT //
 	@PostMapping("/")
