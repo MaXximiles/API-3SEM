@@ -1,6 +1,5 @@
 package com.grupo2.API_TraceFinder.repository;
 
-import com.grupo2.API_TraceFinder.classes.Bloco;
 import com.grupo2.API_TraceFinder.classes.Documento;
 
 import java.util.List;

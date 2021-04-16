@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.grupo2.API_TraceFinder.classes.RelacaoDocTraco;
-import com.grupo2.API_TraceFinder.controller.dto.BlocoRs;
 import com.grupo2.API_TraceFinder.controller.dto.RelacaoDocTracoRq;
 import com.grupo2.API_TraceFinder.controller.dto.RelacaoDocTracoRs;
 import com.grupo2.API_TraceFinder.repository.RelacaoDocTracoRepository;
