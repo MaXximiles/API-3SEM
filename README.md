@@ -87,10 +87,10 @@ Resumo de modificações:
 
 - Atualização do banco de dados;
 - Inserção do Modulo Codelist:
- - Tabela para cadastro e alteração de registros do codelist;
- - Tabela de listagem do codelist;
- - Exclusão de registros;
+  - Tabela para cadastro e alteração de registros do codelist;
+  - Tabela de listagem do codelist;
+  - Exclusão de registros;
 - Modulo Traço Documentos:
- - Formulário para criação e alteração de traços;
- - Lista de traços existentes;
- - Relacionamento de traços pertencentes a um manual; 
+  - Formulário para criação e alteração de traços;
+  - Lista de traços existentes;
+  - Relacionamento de traços pertencentes a um manual; 
