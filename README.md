@@ -43,7 +43,6 @@ Projeto API do 3º Semestre da turma de Banco de Dados FATEC
                              Nesta 2ª Sprint após novas conversas com o cliente tivemos uma reformulação na estrutura do projeto.
                              Seguindo conforme solicitado pelo cliente, a tela de controle do Codelist foi adicionada, onde agora é possivel pesquisar, inserir, alterar e deletar, linhas do codelist, proporcionando controle ao usuario. O mesmo segue tambem para manuais, onde tambem é possivel realizar as mesmas tarefas do codelist.
                              A função de inserção de traços e colecionamento do mesmo para os manuais tambem foi adicionada seguindo a regra de que um manual pode conter muitos traços que definem os blocos que o constituiram.
-                        
                             </td>
                             <td><p>Em andamento</p></td>
                      </tr>
