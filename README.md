@@ -65,12 +65,12 @@ Com sede em São José dos Campos - SP, a empresa conta com mais de 18 mil funci
                      <tr>
                             <td align=center>Sprint 3<br>26/04/2021 a 17/05/2021</td>
                             <td>Descrição Sprint3</td>
-                            <td><p align="center"> ⚠ EM DE DESENVOLVIMENTO ⚠ </p></td>
+                            <td><p align="center"> ⚠ EM DESENVOLVIMENTO ⚠ </p></td>
                      </tr>
                       <tr>
                             <td align=center>Sprint 4<br>17/05/2021 a 05/06/2021</td>
                             <td>Descrição Sprint4</td>
-                            <td><p align="center"> ⚠ EM DE DESENVOLVIMENTO ⚠ </p></td>
+                            <td><p align="center"> ⚠ EM DESENVOLVIMENTO ⚠ </p></td>
                      </tr>
               </tbody>
        </table>
