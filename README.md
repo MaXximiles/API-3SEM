@@ -86,8 +86,6 @@ Com sede em São José dos Campos - SP, a empresa conta com mais de 18 mil funci
   
   <img src=https://user-images.githubusercontent.com/18652465/115090209-a86a3280-9eea-11eb-9f20-b9238a84cced.jpeg border=1 />
 
-******* PRINTS *******
-
 Resumo de modificações:
 
 - Atualização do banco de dados;
@@ -99,3 +97,41 @@ Resumo de modificações:
   - Formulário para criação e alteração de traços;
   - Lista de traços existentes;
   - Relacionamento de traços pertencentes a um manual; 
+
+## Screenshoots:
+ <p align=center>
+ Tela de busca de blocos</br>
+ <img src=https://user-images.githubusercontent.com/18652465/115096929-c55c3100-9efd-11eb-8313-74481135777b.png></br>
+ Nesta tela é possível visualizar o codelist de um determinado manual, podendo filtrar os blocos pelos traços que o documento possui, é possível também editar e deletar os blocos.
+</p></br><h1></h1>
+<p align=center>
+ Formulário de criação de bloco</br>
+ <img src=https://user-images.githubusercontent.com/18652465/115096927-c3926d80-9efd-11eb-91fa-f9831d3f2826.png></br>
+ Formulário responsável pela criação do bloco, onde deverá ser preenchido os campos seção, subseção, bloco e código do bloco.
+ </p></br><h1></h1>
+ <p align=center>
+ Formulário de edição de bloco
+ <img src=https://user-images.githubusercontent.com/18652465/115096928-c4c39a80-9efd-11eb-9c98-6cb9e6743c9d.png></br>
+ Formulário responsável pela edição dos blocos.
+ </p></br><h1></h1>
+<p align=center>
+Tela de busca de manuais
+<img src=https://user-images.githubusercontent.com/18652465/115096933-c68d5e00-9efd-11eb-9c6a-802e6345c1c6.png></br>
+Nesta tela temos a lista de manuais existentes no sistema, sendo possível efetuar uma busca filtrando por nome e pn do documento. Esta pesquisa possibilita a alteração e exclusão dos documentos e também a visualização do seu codelist.
+</p></br><h1></h1>
+<p align=center>
+Formulário de criação de manual
+<img src=https://user-images.githubusercontent.com/18652465/115096937-c8572180-9efd-11eb-99dc-ff1a344c00e6.png></br>
+Neste formulário criamos um novo manual e atribuímos traços a ele.
+</p></br><h1></h1>
+ <p align=center>
+ Formulário de edição de manual</br>
+ <img src=https://user-images.githubusercontent.com/18652465/115096935-c725f480-9efd-11eb-9dda-6ccc02474721.png></br>
+ Formulário responsável pela edição do manual e alteração de seus traços.
+</p></br><h1></h1>
+<p align=center>
+Confirmação de exclusão de manual</br>
+<img src=https://user-images.githubusercontent.com/18652465/115096934-c68d5e00-9efd-11eb-9b64-0a4a568c0294.png></br>
+</p></br><h1></h1>
+
+
