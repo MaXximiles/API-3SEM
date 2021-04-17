@@ -2,7 +2,7 @@
 ### API 3º Semestre de Banco de Dados
 Projeto API do 3º Semestre da turma de Banco de Dados FATEC
 
-![](https://user-images.githubusercontent.com/18652465/111547833-88631a00-8758-11eb-863c-ccf1e6e93f39.png)
+<p align="center"> <img src="https://user-images.githubusercontent.com/18652465/111547833-88631a00-8758-11eb-863c-ccf1e6e93f39.png"> </p>
 
 ## Integrantes:
 
@@ -53,7 +53,12 @@ Com sede em São José dos Campos - SP, a empresa conta com mais de 18 mil funci
                             <td>Descrição Sprint2<br>
                              Nesta 2ª Sprint após novas conversas com o cliente tivemos uma reformulação na estrutura do projeto.
                              Seguindo conforme solicitado pelo cliente, a tela de controle do Codelist foi adicionada, onde agora é possivel pesquisar, inserir, alterar e deletar, linhas do codelist, proporcionando controle ao usuario. O mesmo segue tambem para manuais, onde tambem é possivel realizar as mesmas tarefas do codelist.
-                             A função de inserção de traços e colecionamento do mesmo para os manuais tambem foi adicionada seguindo a regra de que um manual pode conter muitos traços que definem os blocos que o constituiram.
+                             A função de inserção de traços e colecionamento do mesmo para os manuais tambem foi adicionada seguindo a regra de que um manual pode conter muitos traços que definem os blocos que o constituiram.</br>
+                            <p align=center> 
+                            <img src=https://user-images.githubusercontent.com/18652465/115096933-c68d5e00-9efd-11eb-9c6a-802e6345c1c6.png width=200px height=170>
+                            <img src=https://user-images.githubusercontent.com/18652465/115096927-c3926d80-9efd-11eb-91fa-f9831d3f2826.png width=200px height=170>
+                            <img src=https://user-images.githubusercontent.com/18652465/115096932-c5f4c780-9efd-11eb-8b92-a6ac3be3d09c.png width=200px height=170>
+                            </p>
                             </td>
                             <td><p>Em andamento</p></td>
                      </tr>
