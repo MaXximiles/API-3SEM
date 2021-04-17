@@ -52,6 +52,14 @@ public class CodelistController {
 		return codelist.stream().map((codList) -> CodelistRs.converter(codList)).collect(Collectors.toList());	
 	}
 	
+	// SELECT os Codelist's de determinado documento//
+	@GetMapping("/blocotraco")
+	public List<CodelistRs> selectTracoBloco(@RequestParam(value = "tracoid", required = false) Long tracoid)
+	{
+		var codelist = codelistRepository.SelectTracoCodelist(tracoid);
+		return codelist.stream().map((codList) -> CodelistRs.converter(codList)).collect(Collectors.toList());	
+	}
+	
 	
 	
 	// INSERT //
