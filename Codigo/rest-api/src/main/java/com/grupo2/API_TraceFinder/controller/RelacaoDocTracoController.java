@@ -19,7 +19,7 @@ import com.grupo2.API_TraceFinder.controller.dto.RelacaoDocTracoRs;
 import com.grupo2.API_TraceFinder.repository.RelacaoDocTracoRepository;
 
 @RestController
-@RequestMapping("/relacao_doc_traco")
+@RequestMapping("/reldoctraco")
 public class RelacaoDocTracoController {
 	
 	private RelacaoDocTracoRepository relacaoDocTracoRepository = null;
@@ -77,11 +77,21 @@ public class RelacaoDocTracoController {
 		}
 		else { throw new Exception("Documento não encontrado"); }
 	}
-		
+		 
 	// DELETE
 	@DeleteMapping("/{id}")
 	public void deleteRelacaoDocTraco(@PathVariable Long id)
 	{	
 		relacaoDocTracoRepository.deleteById(id);
+	}
+	
+	// SELECT Traços de um documento//
+	@GetMapping("/deltracodoc")
+	public void deleteTracosDoc(
+			@RequestParam(value = "docid", required = false) Long docid,
+			@RequestParam(value = "tracoid", required = false) Long tracoid
+			)
+	{
+			relacaoDocTracoRepository.DeleteTracosDoc(docid, tracoid);
 	}
 }

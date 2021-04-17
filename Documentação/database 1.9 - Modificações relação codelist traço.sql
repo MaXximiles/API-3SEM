@@ -1,14 +1,12 @@
-/* DATABASE VERSÃO 1.8 MODIFCADO EM 16/04/2021 POR MAXIMILES*/
+/* DATABASE VERSÃO 1.8bloco MODIFCADO EM 16/04/2021 POR MAXIMILES*/
 /* MODIFICAÇÕES
-- Tabela Codelsit deletada
-- Tabela bloco agora é tabela Codelist
-- Relação Tabela Codelist com Tabela Documento através do campo documento_id na tabela codelist
-- Relação Tabela traco_doc com documentos 
-- Insert's atualizados conforme modificações
+- Mudança da tabela relacao_arquivo_traco para relacao_bloco_traco
+- Insert's de traco dos blocos
+- Tabela Relacao_documento_traco alterada para chave composta bloco_id + traco_id e coluna relacao_documento_traco_id excluida
 */
 
 /* Executar comando abaixo somente uma vez */
-DROP SCHEMA `trace_finder` ; /***** */
+/* ****DROP SCHEMA `trace_finder` ; /***** */
 /* *************************************** */
 
 CREATE SCHEMA `trace_finder` ;
@@ -31,10 +29,10 @@ CREATE TABLE `trace_finder`.`documento` (
 
  /* Tabela relação documento com Traço */ 
  CREATE TABLE `trace_finder`.`relacao_documento_traco` (
-  `relacao_documento_traco_id` INT NOT NULL AUTO_INCREMENT,
-  `traco_id` INT NULL,
-  `doc_id` INT NULL,
-  PRIMARY KEY (`relacao_documento_traco_id`));
+  `traco_id` INT(11) NOT NULL,
+  `doc_id` INT(11) NOT NULL,
+  PRIMARY KEY (traco_id, doc_id) );
+  
   
  /* Tabela Codelist */ 
  CREATE TABLE `trace_finder`.`codelist` (
@@ -81,6 +79,12 @@ CREATE TABLE `trace_finder`.`documento` (
   `usuario_login` VARCHAR(45) NULL,
   PRIMARY KEY (`usuario_id`));
 
+ALTER TABLE `trace_finder`.`relacao_arquivo_traco` 
+CHANGE COLUMN `arquivo_id` `bloco_id` VARCHAR(255) NULL DEFAULT NULL , RENAME TO  `trace_finder`.`relacao_traco_blocrelacao_arquivo_traco_ido` ;
+ALTER TABLE `trace_finder`.`relacao_traco_bloco` 
+CHANGE COLUMN `relacao_arquivo_traco_id` `relacao_traco_bloco_id` BIGINT NOT NULL AUTO_INCREMENT ;
+
+
 USE trace_finder;
 
 /*INSERT'S*/
@@ -113,6 +117,12 @@ INSERT INTO relacao_documento_traco (traco_id, doc_id) VALUES ('2','1');
 INSERT INTO relacao_documento_traco (traco_id, doc_id) VALUES ('3','2');
 INSERT INTO relacao_documento_traco (traco_id, doc_id) VALUES ('1','2');
 
+/* Inserindo tracos nos blocos */
+INSERT INTO relacao_traco_bloco (bloco_id, traco_id) VALUES ('1','1');
+INSERT INTO relacao_traco_bloco (bloco_id, traco_id) VALUES ('1','2');
+INSERT INTO relacao_traco_bloco (bloco_id, traco_id) VALUES ('2','2');
+INSERT INTO relacao_traco_bloco (bloco_id, traco_id) VALUES ('3','2');
+
 /* Inserindo arquivos(blocos) no codelist */
 INSERT INTO arquivo ( arquivo_nome, bloco_id ) VALUES ('arquivo1', '1');
 
@@ -137,10 +147,13 @@ VALUES ('Traço 1','Este é o primeiro traço do documento','74');*/
 /* Relacionando os tracos da tabela tracos de arquivos com os arquivos*/
 /*INSERT INTO relacao_arquivo_traco (traco_id, arquivo_id) VALUES ('1','1');*/
 
-
 /* Inserindo usuarios */ 
 INSERT INTO usuario (usuario_nome, usuario_email, usuario_senha, usuario_nivel, usuario_login) 
 VALUES ('Teste','teste@gmail.com','$2a$10$lmr6SRlyL0dbggpRZV9E6OhJNQqO.wan.IIR0rqFOh4Si3aqH4gR2','1','teste');
 
 INSERT INTO usuario (usuario_nome, usuario_email, usuario_senha, usuario_nivel, usuario_login) 
 VALUES ('Teste123','teste@gmail.com','123','1','teste123');
+
+SELECT * FROM relacao_documento_traco WHERE doc_id = 2;
+DELETE FROM relacao_documento_traco WHERE traco_id = '1' AND doc_id = '2';
+

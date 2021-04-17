@@ -2,7 +2,10 @@ package com.grupo2.API_TraceFinder.repository;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
@@ -17,4 +20,8 @@ public interface RelacaoDocTracoRepository extends JpaRepository<RelacaoDocTraco
 			+ " WHERE doc_id = ?1  ", nativeQuery = true)
 	List<RelacaoDocTraco> SelectTracosDoc(Long id);
 	
+	@Modifying
+	@Transactional
+	@Query(value = "DELETE FROM relacao_documento_traco WHERE doc_id = ?1 AND traco_id = ?2 ", nativeQuery = true)
+	void DeleteTracosDoc(Long docid, Long tracoid);
 }

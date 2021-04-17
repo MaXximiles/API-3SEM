@@ -4,24 +4,14 @@ import com.grupo2.API_TraceFinder.classes.RelacaoDocTraco;
 
 public class RelacaoDocTracoRs {
 
-	private Long relacaodocumentotracoid;
 	private String tracoid;
 	private String docid;
 	
 	public static RelacaoDocTracoRs converter(RelacaoDocTraco rDocTraco) {
 		var relacaoDocTraco = new RelacaoDocTracoRs();
-		relacaoDocTraco.setRelacaodocumentotracoid(rDocTraco.getRelacaodocumentotracoid());
 		relacaoDocTraco.setDocid(rDocTraco.getDocid());
 		relacaoDocTraco.setTracoid(rDocTraco.getTracoid());
 		return relacaoDocTraco;
-	}
-
-	public Long getRelacaodocumentotracoid() {
-		return relacaodocumentotracoid;
-	}
-
-	public void setRelacaodocumentotracoid(Long relacaodocumentotracoid) {
-		this.relacaodocumentotracoid = relacaodocumentotracoid;
 	}
 
 	public String getTracoid() {
