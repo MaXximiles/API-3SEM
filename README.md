@@ -65,12 +65,12 @@ Com sede em São José dos Campos - SP, a empresa conta com mais de 18 mil funci
                      <tr>
                             <td align=center>Sprint 3<br>26/04/2021 a 17/05/2021</td>
                             <td>Descrição Sprint3</td>
-                            <td><p>Em andamento</p></td>
+                            <td><p align="center"> ⚠ EM DE DESENVOLVIMENTO ⚠ </p></td>
                      </tr>
                       <tr>
                             <td align=center>Sprint 4<br>17/05/2021 a 05/06/2021</td>
                             <td>Descrição Sprint4</td>
-                            <td><p>Em andamento</p></td>
+                            <td><p align="center"> ⚠ EM DE DESENVOLVIMENTO ⚠ </p></td>
                      </tr>
               </tbody>
        </table>
@@ -109,6 +109,11 @@ Resumo de modificações:
   - Relacionamento de traços pertencentes a um manual; 
 
 ### Screenshoots:
+ <p align=center>
+ Tela inicial</br>
+ <img src=https://user-images.githubusercontent.com/18652465/115096941-c9884e80-9efd-11eb-852c-df3035b8b6b1.png></br>
+ 
+</p></br><h1></h1>
  <p align=center>
  Tela de busca de blocos</br>
  <img src=https://user-images.githubusercontent.com/18652465/115096929-c55c3100-9efd-11eb-8313-74481135777b.png></br>
