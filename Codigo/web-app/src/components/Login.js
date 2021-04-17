@@ -89,7 +89,6 @@ const Login = ({ onSubmit, href }) => {
                 />
               </div>
             </form>
-
             <div className="ui message">Não possuí uma conta? Cadastre-se</div>
           </div>
         </div>

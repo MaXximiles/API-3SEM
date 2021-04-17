@@ -4,6 +4,7 @@ import Login from "./Login";
 import Codelist from "./Codelist";
 import Document from "./Document";
 import Header from "./Header";
+import Index from "./Index";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import restAPI from "../apis/restAPI";
 
@@ -19,10 +20,13 @@ const App = () => {
 
   return (
     <div className="App">
-      <Header />
       <Router>
+        <Header />
         <Route exact path="/">
           <Login onSubmit={validateAccount} href="/codelist" />
+        </Route>
+        <Route exact path="/index">
+          <Index />
         </Route>
         <Route exact path="/documento">
           <Document />

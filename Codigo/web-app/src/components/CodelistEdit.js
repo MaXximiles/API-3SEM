@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-const CodelistEdit = ({ onSubmit, dataEntry }) => {
+const CodelistEdit = ({ onSubmit, dataEntry, docId }) => {
   const [section, setSection] = useState("");
   const [subsection, setSubsection] = useState("");
   const [block, setBlock] = useState("");
@@ -10,7 +10,7 @@ const CodelistEdit = ({ onSubmit, dataEntry }) => {
     if (dataEntry) {
       setSection(dataEntry.codelistsecao);
       setSubsection(dataEntry.codelistsubsecao);
-      setBlock(dataEntry.codelistnbloco);
+      setBlock(dataEntry.codelistnomebloco);
       setBlockCode(dataEntry.codelistcodebloco);
     } else {
       clearFields();
@@ -27,9 +27,10 @@ const CodelistEdit = ({ onSubmit, dataEntry }) => {
   const submit = async () => {
     const submitedEntry = {
       codelistcodebloco: blockCode,
-      codelistnbloco: block,
+      codelistnomebloco: block,
       codelistsecao: section,
       codelistsubsecao: subsection,
+      documentoid: docId,
     };
 
     if (dataEntry) {

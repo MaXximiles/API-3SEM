@@ -5,71 +5,8 @@ import Dropdown from "./Dropdown";
 import Modal from "./Modal";
 import CodelistEdit from "./CodelistEdit";
 import CodelistDelete from "./CodelistDelete";
-import restAPI from "../apis/restAPI";
 import { useParams } from "react-router-dom";
-
-const options = [
-  {
-    label: "Mercúrio",
-    value: 1,
-  },
-  {
-    label: "Vênus",
-    value: 2,
-  },
-  {
-    label: "Terra",
-    value: 3,
-  },
-  {
-    label: "Marte",
-    value: 4,
-  },
-  {
-    label: "Júpiter",
-    value: 5,
-  },
-  {
-    label: "Saturno",
-    value: 6,
-  },
-  {
-    label: "Urano",
-    value: 7,
-  },
-  {
-    label: "Netuno",
-    value: 8,
-  },
-  {
-    label: "Plutão",
-    value: 9,
-  },
-  {
-    label: "Sol",
-    value: 10,
-  },
-  {
-    label: "Alpha Centauri",
-    value: 11,
-  },
-  {
-    label: "VY Canis Majoris",
-    value: 12,
-  },
-  {
-    label: "Canopus",
-    value: 13,
-  },
-  {
-    label: "Rigel",
-    value: 14,
-  },
-  {
-    label: "Vega",
-    value: 15,
-  },
-];
+import restAPI from "../apis/restAPI";
 
 const Codelist = () => {
   const [data, setData] = useState([]);
@@ -77,12 +14,22 @@ const Codelist = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
   const [dataEntry, setDataEntry] = useState(null);
+  const [traceOptions, setTraceOptions] = useState([]);
   const [selectedTrace, setSelectedTrace] = useState([]);
-  const [name, setName] = useState("");
 
   const { id } = useParams();
 
   useEffect(() => {
+    const getTraceOptions = async () => {
+      const { data } = await restAPI.get(`/traco_doc/tracodoc?docid=${id}`);
+
+      const options = data.map((value) => {
+        return { value: value.tracodocid, label: value.tracodocnome };
+      });
+
+      setTraceOptions(options);
+    };
+
     const getData = async () => {
       setIsLoading(true);
 
@@ -93,15 +40,14 @@ const Codelist = () => {
       setIsLoading(false);
     };
 
+    getTraceOptions();
     getData();
   }, [id]);
 
   const getData = async () => {
     setIsLoading(true);
 
-    const response = await restAPI.get(
-      `/documentos/joinbloco?documentoid=${id}`
-    );
+    const response = await restAPI.get(`/codelist/codelistdoc?docid=${id}`);
 
     setData(response.data);
 
@@ -154,7 +100,7 @@ const Codelist = () => {
       isOpen={isEditing}
       setIsOpen={setIsEditing}
     >
-      <CodelistEdit onSubmit={onSubmit} dataEntry={dataEntry} />
+      <CodelistEdit onSubmit={onSubmit} dataEntry={dataEntry} docId={id} />
     </Modal>
   );
 
@@ -177,25 +123,13 @@ const Codelist = () => {
       <div className="ui one column stackable grid container">
         <div className="column">
           <div className="ui form">
-            <h4 className="ui dividing header">Informações do manual</h4>
-            <div className="two fields">
-              <div className="field">
-                <label>Nome</label>
-                <input
-                  type="text"
-                  name="manualName"
-                  placeholder="Nome-PN"
-                  value={name}
-                  onChange={(e) => {
-                    setName(e.target.value);
-                  }}
-                />
-              </div>
+            <h4 className="ui dividing header">Codelist do Manual</h4>
+            <div className="one field">
               <div className="field">
                 <Dropdown
                   label="Traço"
                   defaultText="Selecione um ou mais traços"
-                  options={options}
+                  options={traceOptions}
                   selected={selectedTrace}
                   onSelectedChange={setSelectedTrace}
                 />

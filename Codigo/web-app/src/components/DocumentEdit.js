@@ -1,8 +1,39 @@
 import React, { useState, useEffect } from "react";
+import Dropdown from "./Dropdown";
+import restAPI from "../apis/restAPI";
 
 const DocumentEdit = ({ onSubmit, dataEntry }) => {
   const [name, setName] = useState("");
   const [pn, setPn] = useState("");
+  const [traceOptions, setTraceOptions] = useState([]);
+  const [selectedTrace, setSelectedTrace] = useState([]);
+
+  useEffect(() => {
+    const getDocumentTraces = async () => {
+      const { data } = await restAPI.get(
+        `/traco_doc/tracodoc?docid=${dataEntry.documentoid}`
+      );
+
+      const options = data.map((value) => {
+        return { value: value.tracodocid, label: value.tracodocnome };
+      });
+
+      setSelectedTrace(options);
+    };
+
+    const getTraceOptions = async () => {
+      const { data } = await restAPI.get(`/traco_doc/`);
+
+      const options = data.map((value) => {
+        return { value: value.tracodocid, label: value.tracodocnome };
+      });
+
+      setTraceOptions(options);
+    };
+
+    getTraceOptions();
+    dataEntry && getDocumentTraces();
+  }, [dataEntry]);
 
   useEffect(() => {
     if (dataEntry) {
@@ -16,6 +47,7 @@ const DocumentEdit = ({ onSubmit, dataEntry }) => {
   const clearFields = () => {
     setName("");
     setPn("");
+    setSelectedTrace([]);
   };
 
   const submit = async () => {
@@ -55,6 +87,15 @@ const DocumentEdit = ({ onSubmit, dataEntry }) => {
               placeholder="Subseção"
               value={pn}
               onChange={(e) => setPn(e.target.value)}
+            />
+          </div>
+          <div className="field">
+            <Dropdown
+              label="Traço"
+              defaultText="Selecione um ou mais traços"
+              options={traceOptions}
+              selected={selectedTrace}
+              onSelectedChange={setSelectedTrace}
             />
           </div>
         </form>
