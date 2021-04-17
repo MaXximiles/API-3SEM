@@ -75,8 +75,18 @@ Com sede em São José dos Campos - SP, a empresa conta com mais de 18 mil funci
               </tbody>
        </table>
 
-## Sprint Atual:
+## Sprint Atual: 
+### Proposta:
+<p align=center>
 
+<img src="https://github.com/MaXximiles/API-3SEM/blob/main/User%20Story%20Cards/StoryCard5.png?raw=true" width=350 height=200>
+<img src="https://github.com/MaXximiles/API-3SEM/blob/main/User%20Story%20Cards/StoryCard8.png?raw=true" width=350 height=200>
+<img src="https://github.com/MaXximiles/API-3SEM/blob/main/User%20Story%20Cards/StoryCard7.png?raw=true" width=350 height=200>
+
+</p></br><h1></h1>
+
+
+### Detalhes da Sprint:
   Após a entrega da Sprint passada, focamos mais na comunicação com o cliente para um melhor entendimento do problema, através disso foi necessário uma reformulação da idéia inicial.<br>
   Conforme descrito pelo cliente há á necessidade de poder gerenciar o codelist(tabela que traz informações e regras sobre a estrutura do manual), podendo inserir novas linhas, alterar e exclui-las, possibilitando assim mais controle ao usuario.<br>
   Foi adicionado o CRUD de documentos que possibilita ao usuario inserir, pesquisar, editar e deletar manuais. <br>
@@ -98,7 +108,7 @@ Resumo de modificações:
   - Lista de traços existentes;
   - Relacionamento de traços pertencentes a um manual; 
 
-## Screenshoots:
+### Screenshoots:
  <p align=center>
  Tela de busca de blocos</br>
  <img src=https://user-images.githubusercontent.com/18652465/115096929-c55c3100-9efd-11eb-8313-74481135777b.png></br>
@@ -134,4 +144,12 @@ Confirmação de exclusão de manual</br>
 <img src=https://user-images.githubusercontent.com/18652465/115096934-c68d5e00-9efd-11eb-9b64-0a4a568c0294.png></br>
 </p></br><h1></h1>
 
+### Proposta para proxíma Sprint:
+<p align=center>
 
+<img src="https://github.com/MaXximiles/API-3SEM/blob/main/User%20Story%20Cards/StoryCard6.png?raw=true" width=350 height=200>
+<img src="https://github.com/MaXximiles/API-3SEM/blob/main/User%20Story%20Cards/StoryCard3.png?raw=true" width=350 height=200>
+
+</p></br>
+Para a proxíma entrega nosso grupo pretende implementar as tags referentes a blocos, manuais e traços.
+Será feita a implementação do importe de arquivos para criação da LEP automática.
