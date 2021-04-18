@@ -60,7 +60,7 @@ Com sede em São José dos Campos - SP, a empresa conta com mais de 18 mil funci
                             <img src=https://user-images.githubusercontent.com/18652465/115096932-c5f4c780-9efd-11eb-8b92-a6ac3be3d09c.png width=200px height=170>
                             </p>
                             </td>
-                            <td><p>Em andamento</p></td>
+                            <td><p><a href="https://github.com/MaXximiles/API-3SEM/tree/sprint-2">Ver mais... </a></p></td>
                      </tr>
                      <tr>
                             <td align=center>Sprint 3<br>26/04/2021 a 17/05/2021</td>
