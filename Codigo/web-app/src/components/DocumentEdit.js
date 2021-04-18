@@ -7,6 +7,7 @@ const DocumentEdit = ({ onSubmit, dataEntry }) => {
   const [pn, setPn] = useState("");
   const [traceOptions, setTraceOptions] = useState([]);
   const [selectedTrace, setSelectedTrace] = useState([]);
+  const [prevSelectedTrace, setPrevSelectedTrace] = useState(null);
 
   useEffect(() => {
     const getDocumentTraces = async () => {
@@ -19,6 +20,7 @@ const DocumentEdit = ({ onSubmit, dataEntry }) => {
       });
 
       setSelectedTrace(options);
+      setPrevSelectedTrace(options);
     };
 
     const getTraceOptions = async () => {
@@ -34,6 +36,49 @@ const DocumentEdit = ({ onSubmit, dataEntry }) => {
     getTraceOptions();
     dataEntry && getDocumentTraces();
   }, [dataEntry]);
+
+  useEffect(() => {
+    const toggleTraces = async () => {
+      if (
+        selectedTrace !== prevSelectedTrace &&
+        dataEntry &&
+        prevSelectedTrace
+      ) {
+        var addTraces = {};
+        selectedTrace.forEach((value) => {
+          if (!prevSelectedTrace.includes(value)) {
+            addTraces = {
+              docid: dataEntry.documentoid,
+              tracoid: value.value,
+            };
+          }
+        });
+
+        if (addTraces !== {}) {
+          const response = await restAPI.post(`/reldoctraco/`, addTraces);
+          console.log(response);
+        }
+
+        var removeTraces = [];
+        prevSelectedTrace.forEach((value) => {
+          if (!selectedTrace.includes(value)) {
+            removeTraces.push({
+              docid: dataEntry.documentoid,
+              tracoid: value.value,
+            });
+          }
+        });
+
+        // if (removeTraces.length > 0) {
+        //   await restAPI.delete(`/reldotraco/`)
+        // }
+
+        setPrevSelectedTrace(selectedTrace);
+      }
+    };
+
+    toggleTraces();
+  }, [selectedTrace, prevSelectedTrace, dataEntry]);
 
   useEffect(() => {
     if (dataEntry) {
@@ -54,6 +99,7 @@ const DocumentEdit = ({ onSubmit, dataEntry }) => {
     const submitedEntry = {
       documentonome: name,
       documentopn: pn,
+      documentotraco: selectedTrace,
     };
 
     if (dataEntry) {
@@ -90,13 +136,15 @@ const DocumentEdit = ({ onSubmit, dataEntry }) => {
             />
           </div>
           <div className="field">
-            <Dropdown
-              label="Traço"
-              defaultText="Selecione um ou mais traços"
-              options={traceOptions}
-              selected={selectedTrace}
-              onSelectedChange={setSelectedTrace}
-            />
+            {dataEntry && (
+              <Dropdown
+                label="Traço"
+                defaultText="Selecione um ou mais traços"
+                options={traceOptions}
+                selected={selectedTrace}
+                onSelectedChange={setSelectedTrace}
+              />
+            )}
           </div>
         </form>
       </div>

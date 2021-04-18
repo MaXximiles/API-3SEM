@@ -9,31 +9,27 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "relacao_documento_traco")
 public class RelacaoDocTraco {
-	
-	@EmbeddedId
-	@Column(name="traco_id")
-	private String tracoid;
-	@Column(name="doc_id")
-	private String docid;
 
-	public String getTracoid() {
-		return tracoid;
-	}
+  @EmbeddedId
+  @Column(name = "traco_id")
+  private String tracoid;
+  @Column(name = "doc_id")
+  private String docid;
 
-	public void setTracoid(String tracoid) {
-		this.tracoid = tracoid;
-	}
+  public String getTracoid() {
+    return tracoid;
+  }
 
-	public String getDocid() {
-		return docid;
-	}
+  public void setTracoid(String tracoid) {
+    this.tracoid = tracoid;
+  }
 
-	public void setDocid(String docid) {
-		this.docid = docid;
-	}
-	
+  public String getDocid() {
+    return docid;
+  }
 
-	
-	
-	
+  public void setDocid(String docid) {
+    this.docid = docid;
+  }
+
 }
