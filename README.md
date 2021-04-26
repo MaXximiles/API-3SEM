@@ -29,6 +29,7 @@ Com sede em São José dos Campos - SP, a empresa conta com mais de 18 mil funci
  
  - [Story Cards](https://github.com/MaXximiles/API-3SEM/tree/main/User%20Story%20Cards)
  - [Wireframes](https://github.com/MaXximiles/API-3SEM/tree/main/Wireframes)
+ - [BSC](https://github.com/MaXximiles/API-3SEM/tree/main/BSC)
  <!--- [Tutorial Instalação](https://github.com/MaXximiles/API-3SEM/tree/main/Documenta%C3%A7%C3%A3o) -->
  
 <h2>Sprints</h2>
