@@ -6,7 +6,7 @@ public class ArquivoRs {
 
 	private Long arquivoid;
 	private String arquivonome;
-	private String codelistid;
+	private Long codelistid;
 	
 	public static ArquivoRs converter(Arquivo arq) {
 		var arquivo = new ArquivoRs();
@@ -32,11 +32,11 @@ public class ArquivoRs {
 		this.arquivonome = arquivonome;
 	}
 
-	public String getCodelistid() {
+	public Long getCodelistid() {
 		return codelistid;
 	}
 
-	public void setCodelistid(String codelistid) {
+	public void setCodelistid(Long codelistid) {
 		this.codelistid = codelistid;
 	}
 	

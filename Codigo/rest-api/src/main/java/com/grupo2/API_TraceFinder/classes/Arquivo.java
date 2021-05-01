@@ -20,7 +20,7 @@ public class Arquivo {
 	private String arquivonome;
 	
 	@Column(name="codelist_id")
-	private String codelistid;
+	private Long codelistid;
 
 	public Long getArquivoid() {
 		return arquivoid;
@@ -38,11 +38,11 @@ public class Arquivo {
 		this.arquivonome = arquivonome;
 	}
 
-	public String getCodelistid() {
+	public Long getCodelistid() {
 		return codelistid;
 	}
 
-	public void setCodelistid(String codelistid) {
+	public void setCodelistid(Long codelistid) {
 		this.codelistid = codelistid;
 	}
 		

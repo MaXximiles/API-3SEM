@@ -8,7 +8,7 @@ public class CodelistRq {
 	private String codelistnomebloco;
 	private String codelistcodebloco;
 	private String codelistcaminho;
-	private String documentoid;
+	private Long documentoid;
 	
 	
 	public Long getCodelistid() {
@@ -47,10 +47,10 @@ public class CodelistRq {
 	public void setCodelistcaminho(String codelistcaminho) {
 		this.codelistcaminho = codelistcaminho;
 	}
-	public String getDocumentoid() {
+	public Long getDocumentoid() {
 		return documentoid;
 	}
-	public void setDocumentoid(String documentoid) {
+	public void setDocumentoid(Long documentoid) {
 		this.documentoid = documentoid;
 	}
 	

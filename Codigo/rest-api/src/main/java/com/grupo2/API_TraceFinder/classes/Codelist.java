@@ -32,7 +32,7 @@ public class Codelist {
 	private String codelistcaminho;
 
 	@Column(name="documento_id")
-	private String documentoid;
+	private Long documentoid;
 	
 
 	public Long getCodelistid() {
@@ -83,11 +83,11 @@ public class Codelist {
 		this.codelistcaminho = codelistcaminho;
 	}
 	
-	public String getDocumentoid() {
+	public Long getDocumentoid() {
 		return documentoid;
 	}
 
-	public void setDocumentoid(String documentoid) {
+	public void setDocumentoid(Long documentoid) {
 		this.documentoid = documentoid;
 	}
 

@@ -11,13 +11,22 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface DocumentoRepository extends JpaRepository<Documento, Long> {
 
+	
+	@Query(value = "SELECT documento_id, documento_nome, documento_pn, documento_caminho "
+			+ "	FROM documento WHERE documento_id = ?1  ", nativeQuery = true)
+	List<Documento> pesquisaDoc(Long id);
+	
+	
   // Contains traz tudo que contem substituindo o LIKE %% do mysql
   List<Documento> findBydocumentonomeContains(String documentonome);
 
+  
+  
   @Query(value = "SELECT documento_id, documento_nome, documento_pn, documento_caminho FROM documento"
       + " WHERE documento_nome LIKE %?1% AND documento_pn LIKE %?2% ", nativeQuery = true)
   List<Documento> SelectDocumentoLikeNomePn(String docnome, String docpn);
 
+  
   @Query(value = "SELECT documento.documento_id, documento_nome, documento_pn, documento_caminho " + "	FROM codelist "
       + " INNER JOIN documento ON documento.documento_id = codelist.documento_id "
       + " WHERE codelist.bloco_id = ?1  ", nativeQuery = true)

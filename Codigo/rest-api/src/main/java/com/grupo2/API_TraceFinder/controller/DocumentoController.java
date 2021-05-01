@@ -1,6 +1,5 @@
 package com.grupo2.API_TraceFinder.controller;
 
-import org.springframework.beans.factory.annotation.Required;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,12 +11,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.grupo2.API_TraceFinder.classes.Documento;
+import com.grupo2.API_TraceFinder.controller.dto.CodelistRq;
 import com.grupo2.API_TraceFinder.controller.dto.DocumentoRq;
 import com.grupo2.API_TraceFinder.controller.dto.DocumentoRs;
 import com.grupo2.API_TraceFinder.repository.DocumentoCustomRepository;
 import com.grupo2.API_TraceFinder.repository.DocumentoRepository;
 
-import java.util.ArrayList;
+import java.io.File;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -32,6 +32,9 @@ public class DocumentoController {
     this.documentoRepository = documentoRepository;
     this.documentoCustomRepository = documentoCustomRepository;
   }
+  
+  // Definindo raiz para criação dos diretórios dos manuais 
+  private String raiz = "C:\\trace_finder\\";
 
   // SELECT de todos//
   @GetMapping("/")
@@ -82,14 +85,19 @@ public class DocumentoController {
 
   // INSERT //
   @PostMapping("/")
-  public void insertDocumento(@RequestBody DocumentoRq documento) {
+  public void insertDocumento(@RequestBody DocumentoRq documento) 
+  {
     var doc = new Documento();
     doc.setDocumentonome(documento.getDocumentonome());
     doc.setDocumentopn(documento.getDocumentopn());
-    doc.setDocumentocaminho(documento.getDocumentocaminho());
+    doc.setDocumentocaminho(raiz);
     documentoRepository.save(doc);
+    
+    String pasta = documento.getDocumentonome() + "-" + documento.getDocumentopn();  
+    File newDir = new File(raiz + pasta);
+    newDir.mkdir();
   }
-
+  
   // UPDATE
   @PutMapping("/{id}")
   public void updateDocumento(@PathVariable Long id, @RequestBody DocumentoRq documento) throws Exception {
@@ -108,8 +116,25 @@ public class DocumentoController {
 
   // DELETE
   @DeleteMapping("/{id}")
-  public void deleteDocumento(@PathVariable Long id) {
-    documentoRepository.deleteById(id);
+  public void deleteDocumento(@PathVariable Long id)
+  {
+	  var doc = documentoRepository.getOne(id);	
+	  String docNome = doc.getDocumentonome();
+	  String docPn = doc.getDocumentopn();
+	  String docCaminho = doc.getDocumentocaminho();
+	   
+	  String pasta = docCaminho + "\\" + docNome + "-" + docPn;
+	  File folder = new File(pasta);
+	  if (folder.isDirectory()) 
+	  {
+	  	File[] sun = folder.listFiles();
+	  	for (File toDelete : sun){toDelete.delete();}
+	  	folder.delete();
+	  }
+	  
+	  documentoRepository.deleteById(id);
   }
-
+  
+  
+    
 }

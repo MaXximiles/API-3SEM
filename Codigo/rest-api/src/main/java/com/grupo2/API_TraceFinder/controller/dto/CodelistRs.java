@@ -10,7 +10,7 @@ public class CodelistRs {
 	private String codelistnomebloco;
 	private String codelistcodebloco;
 	private String codelistcaminho;
-	private String documentoid;
+	private Long documentoid;
 	
 	public static CodelistRs converter(Codelist code) {
 		var codelist = new CodelistRs();
@@ -73,11 +73,11 @@ public class CodelistRs {
 		this.codelistcaminho = codelistcaminho;
 	}
 
-	public String getDocumentoid() {
+	public Long getDocumentoid() {
 		return documentoid;
 	}
 
-	public void setDocumentoid(String documentoid) {
+	public void setDocumentoid(Long documentoid) {
 		this.documentoid = documentoid;
 	}
 

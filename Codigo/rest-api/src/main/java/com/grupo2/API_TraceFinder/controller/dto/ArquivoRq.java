@@ -5,7 +5,7 @@ public class ArquivoRq {
 	
 	private Long arquivoid;
 	private String arquivonome;
-	private String codelistid;
+	private Long codelistid;
 	
 	public Long getArquivoid() {
 		return arquivoid;
@@ -19,10 +19,10 @@ public class ArquivoRq {
 	public void setArquivonome(String arquivonome) {
 		this.arquivonome = arquivonome;
 	}
-	public String getCodelistid() {
+	public Long getCodelistid() {
 		return codelistid;
 	}
-	public void setCodelistid(String codelistid) {
+	public void setCodelistid(Long codelistid) {
 		this.codelistid = codelistid;
 	}
 	

@@ -1,5 +1,7 @@
 package com.grupo2.API_TraceFinder.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -10,12 +12,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.grupo2.API_TraceFinder.classes.Arquivo;
 import com.grupo2.API_TraceFinder.controller.dto.ArquivoRq;
 import com.grupo2.API_TraceFinder.controller.dto.ArquivoRs;
 import com.grupo2.API_TraceFinder.repository.ArquivoRepository;
+import com.grupo2.API_TraceFinder.repository.ArquivoUpload;
+import com.grupo2.API_TraceFinder.repository.CodelistRepository;
 
 
 @RestController
@@ -23,8 +29,15 @@ import com.grupo2.API_TraceFinder.repository.ArquivoRepository;
 public class ArquivoController {
 	
 	private ArquivoRepository arquivoRepository = null;
+	private ArquivoUpload arquivoUpload = null;
+	private CodelistRepository codelistRepository = null;
 	
-	public ArquivoController(ArquivoRepository ArquivoRepository) {	this.arquivoRepository = ArquivoRepository;	}
+	public ArquivoController(ArquivoRepository ArquivoRepository, ArquivoUpload ArquivoUpload, CodelistRepository CodelistRepository) 
+	{	
+		this.arquivoRepository = ArquivoRepository;	
+		this.arquivoUpload = ArquivoUpload;
+		this.codelistRepository = CodelistRepository;
+	}
 	
 	// SELECT de todos//
 	@GetMapping("/")
@@ -44,11 +57,11 @@ public class ArquivoController {
 	
 	// INSERT //   
 	@PostMapping("/")
-	public void insertArquivo(@RequestBody ArquivoRq arquivo)
+	public void insertArquivo(@RequestBody ArquivoRq arquivo, Long id, String nome)
 	{
 		var arq = new Arquivo();
-		arq.setArquivonome(arquivo.getArquivonome());
-		arq.setCodelistid(arquivo.getCodelistid());
+		arq.setArquivonome(nome);
+		arq.setCodelistid(id);
 		arquivoRepository.save(arq);
 	}
 		
@@ -70,9 +83,33 @@ public class ArquivoController {
 	}
 		
 	// DELETE
-	@DeleteMapping("/{id}")
-	public void deleteArquivo(@PathVariable Long id)
-	{	
-		arquivoRepository.deleteById(id);
+	@DeleteMapping("/{arqid}")
+	public void deleteArquivo(@PathVariable Long arqid)
+	{			 
+		 var arq = arquivoRepository.getOne(arqid);	
+		 Long codelist = arq.getCodelistid();
+		 String arqNome = arq.getArquivonome();
+		 		 
+		 var bloco = codelistRepository.getOne(codelist);	
+		 String blocoNome = bloco.getCodelistnomebloco();
+		 String blocoCaminho = bloco.getCodelistcaminho();
+		 String pasta = blocoCaminho + "\\" + blocoNome;
+		 
+		 String caminho = pasta + "\\" + arqNome;
+		 
+		 File file = new File(caminho);
+	 	 file.delete();
+
+	 	 arquivoRepository.deleteById(arqid);
+	}
+	
+	// Upload do arquivo necessário id do codelist
+	@PostMapping("/upload/{id}")
+	public void upload(@RequestParam MultipartFile arquivo, @PathVariable Long id) throws IOException
+	{
+		arquivoUpload.salvarArquivo(arquivo, id);
+		String arqNome = arquivo.getOriginalFilename();
+		
+		insertArquivo(null, id, arqNome);
 	}
 }
