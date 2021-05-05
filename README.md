@@ -97,8 +97,10 @@ As seguintes tecnologias foram utilizadas no desenvolvimento do projeto:
 ### Detalhes da Sprint:
 
 Resumo de modificações:
-
-
+- Criação dos User Stories; 
+- Criação dos Wireframes; 
+- Criação do acesso ao sistema através de login e senha do usuário;
+- Integração da parte web com a API;
 </p></br><h1></h1>
 
 ### Screenshoots:
@@ -255,17 +257,8 @@ Para a próxima entrega nosso grupo pretende aperfeiçoar e finalizar as funcion
 ### Detalhes da Sprint:
 
 Resumo de modificações:
-- Criação de pastas ao inserir documento(manual)
-- Criação de pastas ao inserir blocos
-- Exclusão de diretórios e subdiretórios quando manual e/ou bloco é excluído
-- Import de arquivos (será usado para importação de blocos)
-- Exclusão de arquivos importados do banco e da pasta
-- Leitura dos arquivos pdf upados para o sistema
-- Criação das classes, Repositorys e Controller's da LEP
-- Criação da LEP automática, gravando no arquivo pdf modelolep 
-- Criação de arquivo modelo de LEP.pdf
-- Mudança no nome do arquivo salvando no modelo do mackup 
-
+- Ferramenta de pesquisa, alteração e cadastro de novos usuários
+- Filtro de documentos "full" ou "delta"
 </p></br><h1></h1>
 
 ### Screenshoots:
