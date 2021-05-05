@@ -110,7 +110,7 @@ Resumo de modificações:
  
 </p></br><h1></h1>
 
-### Proposta para proxíma Sprint:
+### Proposta para próxima Sprint:
 <p align=center>
 <img src="https://github.com/MaXximiles/API-3SEM/blob/main/User%20Story%20Cards/StoryCard5.png?raw=true" width=350 height=200>
 <img src="https://github.com/MaXximiles/API-3SEM/blob/main/User%20Story%20Cards/StoryCard7.png?raw=true" width=350 height=200>
@@ -191,12 +191,12 @@ Banco de dados</br>
  
 </p></br><h1></h1>
 
-### Proposta para proxíma Sprint:
+### Proposta para próxima Sprint:
 <p align=center>
 <img src="https://github.com/MaXximiles/API-3SEM/blob/main/User%20Story%20Cards/StoryCard6.png?raw=true" width=350 height=200>
 <img src="https://github.com/MaXximiles/API-3SEM/blob/main/User%20Story%20Cards/StoryCard3.png?raw=true" width=350 height=200>
 </p></br>
-Para a proxíma entrega nosso grupo pretende implementar as tags referentes a blocos, manuais e traços.
+Para a próxima entrega nosso grupo pretende implementar as tags referentes a blocos, manuais e traços.
 Será feita a implementação do importe de arquivos para criação da LEP automática.
  
 </p></br><h1></h1>
@@ -234,7 +234,7 @@ Resumo de modificações:
  
 </p></br><h1></h1>
 
-### Proposta para proxíma Sprint:
+### Proposta para próxima Sprint:
 <p align=center>
 <img src="https://github.com/MaXximiles/API-3SEM/blob/main/User%20Story%20Cards/StoryCard2.png?raw=true" width=350 height=200>
 <img src="https://github.com/MaXximiles/API-3SEM/blob/main/User%20Story%20Cards/StoryCard4.png?raw=true" width=350 height=200>
