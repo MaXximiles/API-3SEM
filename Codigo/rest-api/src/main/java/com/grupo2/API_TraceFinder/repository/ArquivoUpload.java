@@ -58,12 +58,12 @@ public class ArquivoUpload {
 		String DocumentoPn = documento.getDocumentopn();
 		String DocNome = DocumentoNome+"-"+DocumentoPn;
 				
-		String nomeArquivo = DocNome+"-"+CodelistSecao; // Criando nome do arqvuivo seguindo padrão do mackup (nome doc + secao + subsecao + num - bloco)
+		String nomeArquivo = DocNome+"-"+CodelistSecao; // Criando nome do arquivo seguindo padrão do mockup (nome doc + secao + subsecao + num - bloco)
 		if(CodelistSubsecao != "") {nomeArquivo = nomeArquivo+"-"+CodelistSubsecao;}
 		nomeArquivo = nomeArquivo+"-"+nome;
 		
 		String arquivo = arq.getOriginalFilename();
-	
+
 		this.salvar(pasta, arq, nomeArquivo, CodelistId);
 
 		// Pegando quantidade de paginas do arquivo
@@ -72,7 +72,7 @@ public class ArquivoUpload {
 		int numPag = document.getNumberOfPages();
 		
 		// Laço para inserção das paginas na LEP
-		for(int i = 1; i <= numPag; i++)
+		/*for(int i = 1; i <= numPag; i++)
 		{
 			String pag = Integer.toString(i);
 			
@@ -85,10 +85,12 @@ public class ArquivoUpload {
 			lep1.setArquivoId(id);
 			lep1.setDocumentoid(DocumentoId);
 			lepRepository.save(lep1);
-		}
+		}*/
 		
-		/*document.save(pasta+"\\"+nomeArquivo+".pdf");
-        document.close();*/
+		//document.save(pasta+"\\"+nomeArquivo+".pdf");
+        document.close();
+        
+        new File(pasta+"\\"+arquivo).renameTo(new File(pasta+"\\"+nomeArquivo+".pdf")); // Renomeando o arquivo com o nome padrão mockup
 
 	}
 	
@@ -98,29 +100,13 @@ public class ArquivoUpload {
 		
 		Path diretorioPath = Paths.get(diretorio);
 		Path arquivoPath = diretorioPath.resolve(arquivo.getOriginalFilename());
-		
-		String ArquivoOriginal = arquivo.getOriginalFilename();
-		String Caminho = arquivoPath.toString();
-					
+							
 		try  
 		{
 			Files.createDirectories(diretorioPath);
 			arquivo.transferTo(arquivoPath.toFile());
 		} 
 		catch (IOException e) {	throw new RuntimeException("Problemas na tentativa de salvar arquivo.", e);	}
-		
-		/*System.out.println(Caminho);
-		System.out.println(ArquivoOriginal);
-		System.out.println(diretorio+"\\"+nomeArquivo+".pdf");*/
-		
-		/*File fileold = new File(diretorio+"\\"+nomeArquivo);
-		File file = new File(diretorio+"\\"+nomeArquivo+".pdf");
-		fileold.renameTo(file);
-		
-		var arq = new Arquivo();
-		arq.setArquivonome(nomeArquivo);
-		arq.setCodelistid(CodelistId);
-		arquivoRepository.save(arq);*/
 		
 	}
 	

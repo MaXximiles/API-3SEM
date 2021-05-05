@@ -19,5 +19,7 @@ public class ApiTraceFinderApplication {
 		// Criando pasta para armazenamento dos manuais
 		File newDir = new File("C:\\trace_finder\\");
 		newDir.mkdir();
+		
+		
 	}
 }
