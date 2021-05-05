@@ -1,8 +1,21 @@
-
-### API 3º Semestre de Banco de Dados
+## 💻 Projeto
 Projeto API do 3º Semestre da turma de Banco de Dados FATEC
 
 <p align="center"> <img src="https://user-images.githubusercontent.com/18652465/111547833-88631a00-8758-11eb-863c-ccf1e6e93f39.png"> </p>
+
+## 🛠 Tecnologias
+
+As seguintes tecnologias foram utilizadas no desenvolvimento do projeto:
+
+- [ReactJs][reactjs]
+- [NodeJS][nodejs]
+- [SpringBoot][springboot]
+- [Flyway][flyway]
+
+[reactjs]: https://pt-br.reactjs.org
+[nodejs]: https://nodejs.org/en/
+[flyway]: https://flywaydb.org
+[springboot]: https://spring.io/projects/spring-boot
 
 ## Integrantes:
 
