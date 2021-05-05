@@ -71,7 +71,82 @@ Projeto API do 3º Semestre da turma de Banco de Dados FATEC
               </tbody>
        </table>
 
-## Sprint Atual: 
+## Sprint 1: 
+### Proposta:
+<p align=center>
+
+<img src="https://github.com/MaXximiles/API-3SEM/blob/main/User%20Story%20Cards/StoryCard1.png?raw=true" width=350 height=200>
+
+
+</p></br><h1></h1>
+
+
+### Detalhes da Sprint:
+
+Resumo de modificações:
+
+
+</p></br><h1></h1>
+
+### Screenshoots:
+ <p align=center>
+ Título</br>
+ <img src=></br>
+ 
+</p></br><h1></h1>
+
+### Proposta para proxíma Sprint:
+<p align=center>
+<img src="https://github.com/MaXximiles/API-3SEM/blob/main/User%20Story%20Cards/StoryCard5.png?raw=true" width=350 height=200>
+<img src="https://github.com/MaXximiles/API-3SEM/blob/main/User%20Story%20Cards/StoryCard7.png?raw=true" width=350 height=200>
+<img src="https://github.com/MaXximiles/API-3SEM/blob/main/User%20Story%20Cards/StoryCard8.png?raw=true" width=350 height=200>
+</p></br>
+Para a próxima entrega nosso grupo pretende aperfeiçoar e finalizar as funcionalidades desejadas pelo cliente, além de, dentro do possível implementar funcionalidades extras ao projeto.
+ 
+</p></br><h1></h1>
+
+## Sprint 2: 
+### Proposta:
+<p align=center>
+
+<img src="https://github.com/MaXximiles/API-3SEM/blob/main/User%20Story%20Cards/StoryCard5.png?raw=true" width=350 height=200>
+<img src="https://github.com/MaXximiles/API-3SEM/blob/main/User%20Story%20Cards/StoryCard7.png?raw=true" width=350 height=200>
+<img src="https://github.com/MaXximiles/API-3SEM/blob/main/User%20Story%20Cards/StoryCard8.png?raw=true" width=350 height=200>
+
+</p></br><h1></h1>
+
+
+### Detalhes da Sprint:
+
+Resumo de modificações:
+-Inserção do Modulo Codelist:
+-Tabela para cadastro e alteração de registros do codelist;
+-Tabela de listagem do codelist;
+-Exclusão de registros;
+-Modulo Traço Documentos:
+-Formulário para criação e alteração de traços;
+-Lista de traços existentes;
+-Relacionamento de traços pertencentes a um manual;
+-Atualização do banco de dados;
+</p></br><h1></h1>
+
+### Screenshoots:
+ <p align=center>
+ Título</br>
+ <img src=></br>
+ 
+</p></br><h1></h1>
+
+### Proposta para proxíma Sprint:
+<p align=center>
+<img src="https://github.com/MaXximiles/API-3SEM/blob/main/User%20Story%20Cards/StoryCard6.png?raw=true" width=350 height=200>
+<img src="https://github.com/MaXximiles/API-3SEM/blob/main/User%20Story%20Cards/StoryCard3.png?raw=true" width=350 height=200>
+</p></br>
+Para a próxima entrega nosso grupo pretende aperfeiçoar e finalizar as funcionalidades desejadas pelo cliente, além de, dentro do possível implementar funcionalidades extras ao projeto.
+ 
+</p></br><h1></h1>
+
+## Sprint 3: 
 ### Proposta:
 <p align=center>
 
@@ -103,54 +178,6 @@ Resumo de modificações:
  <img src=></br>
  
 </p></br><h1></h1>
- 
- <p align=center>
- Título</br>
- <img src=></br>
- 
-</p></br><h1></h1>
- 
- <p align=center>
- Título</br>
- <img src=></br>
- 
-</p></br><h1></h1>
-
- <p align=center>
- Título</br>
- <img src=></br>
- 
-</p></br><h1></h1>
-
- <p align=center>
- Título</br>
- <img src=></br>
- 
-</p></br><h1></h1>
-
- <p align=center>
- Título</br>
- <img src=></br>
- 
-</p></br><h1></h1>
-
- <p align=center>
- Título</br>
- <img src=></br>
- 
-</p></br><h1></h1>
-
- <p align=center>
- Título</br>
- <img src=></br>
- 
-</p></br><h1></h1>
-
- <p align=center>
- Título</br>
- <img src=></br>
- 
-</p></br><h1></h1>
 
 ### Proposta para proxíma Sprint:
 <p align=center>
@@ -158,6 +185,40 @@ Resumo de modificações:
 <img src="https://github.com/MaXximiles/API-3SEM/blob/main/User%20Story%20Cards/StoryCard4.png?raw=true" width=350 height=200>
 </p></br>
 Para a próxima entrega nosso grupo pretende aperfeiçoar e finalizar as funcionalidades desejadas pelo cliente, além de, dentro do possível implementar funcionalidades extras ao projeto.
+ 
+</p></br><h1></h1>
+
+
+## Sprint 4: 
+### Proposta:
+<p align=center>
+
+<img src="https://github.com/MaXximiles/API-3SEM/blob/main/User%20Story%20Cards/StoryCard2.png?raw=true" width=350 height=200>
+<img src="https://github.com/MaXximiles/API-3SEM/blob/main/User%20Story%20Cards/StoryCard4.png?raw=true" width=350 height=200>
+
+</p></br><h1></h1>
+
+
+### Detalhes da Sprint:
+
+Resumo de modificações:
+- Criação de pastas ao inserir documento(manual)
+- Criação de pastas ao inserir blocos
+- Exclusão de diretórios e subdiretórios quando manual e/ou bloco é excluído
+- Import de arquivos (será usado para importação de blocos)
+- Exclusão de arquivos importados do banco e da pasta
+- Leitura dos arquivos pdf upados para o sistema
+- Criação das classes, Repositorys e Controller's da LEP
+- Criação da LEP automática, gravando no arquivo pdf modelolep 
+- Criação de arquivo modelo de LEP.pdf
+- Mudança no nome do arquivo salvando no modelo do mackup 
+
+</p></br><h1></h1>
+
+### Screenshoots:
+ <p align=center>
+ Título</br>
+ <img src=></br>
  
 </p></br><h1></h1>
 
