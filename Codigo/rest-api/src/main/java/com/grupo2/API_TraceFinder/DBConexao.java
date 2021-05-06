@@ -29,32 +29,6 @@ public class DBConexao {
     }
 }
     
-//    public static Statement conexao() throws Exception 
-//    {
-//      Connection connection = null;
-//      Statement statement = null;
-//      ResultSet resultSet = null;
-      
-//      connection=DriverManager.getConnection(DATABASE_URL,USERNAME,PASSWORD);
-//      statement=connection.createStatement();
-//        try{
-//
-//         
-//
-//      }catch(SQLException ex){}
-//       finally{
-//            resultSet.close();
-//            statement.close();
-//            connection.close();
-//         }
-//        return statement;
-//    }    
-//}
-//         resultSet=statement.executeQuery
-//            ("SELECT * FROM concessionaria");
-//         while(resultSet.next()){
-//            System.out.printf(resultSet.getString("concessionaria_id"));
-//         }
 
 
 
