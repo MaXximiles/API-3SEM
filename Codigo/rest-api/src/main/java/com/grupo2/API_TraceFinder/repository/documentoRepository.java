@@ -27,9 +27,20 @@ public interface DocumentoRepository extends JpaRepository<Documento, Long> {
   List<Documento> SelectDocumentoLikeNomePn(String docnome, String docpn);
 
   
+  
   @Query(value = "SELECT documento.documento_id, documento_nome, documento_pn, documento_caminho " + "	FROM codelist "
       + " INNER JOIN documento ON documento.documento_id = codelist.documento_id "
       + " WHERE codelist.bloco_id = ?1  ", nativeQuery = true)
   List<Documento> SelectDocBloco(Long id);
+  
+  
+  
+  @Query(value = "SELECT documento.documento_id, documento_nome, documento_pn, documento_caminho "
+		  + " FROM documento "
+	      + " INNER JOIN relacao_documento_traco ON relacao_documento_traco.doc_id = documento.documento_id "
+	      + " WHERE relacao_documento_traco.traco_id = ?1  ", nativeQuery = true)
+	  List<Documento> SelectDocTraco(Long id);
+  
+  
 
 }

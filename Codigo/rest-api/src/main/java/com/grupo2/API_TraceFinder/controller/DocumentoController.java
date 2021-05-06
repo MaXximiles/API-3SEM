@@ -82,6 +82,13 @@ public class DocumentoController {
     var documento = documentoRepository.SelectDocBloco(blocoid);
     return documento.stream().map((BlList) -> DocumentoRs.converter(BlList)).collect(Collectors.toList());
   }
+  
+  //SELECT Documentos que são daquele traço//
+ @GetMapping("/documentotraco")
+ public List<DocumentoRs> selectDocTraco(@RequestParam(value = "tracoid", required = false) Long tracoid) {
+   var documento = documentoRepository.SelectDocTraco(tracoid);
+   return documento.stream().map((TrList) -> DocumentoRs.converter(TrList)).collect(Collectors.toList());
+ }
 
   // INSERT //
   @PostMapping("/")

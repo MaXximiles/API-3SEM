@@ -49,6 +49,7 @@ public class RelacaoDocTracoController {
     var doc = relacaoDocTracoRepository.SelectTracosDoc(docid);
     return doc.stream().map((TrList) -> RelacaoDocTracoRs.converter(TrList)).collect(Collectors.toList());
   }
+  
 
   // INSERT //
   @PostMapping("/")

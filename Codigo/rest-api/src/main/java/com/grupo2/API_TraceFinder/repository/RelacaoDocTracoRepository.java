@@ -24,4 +24,5 @@ public interface RelacaoDocTracoRepository extends JpaRepository<RelacaoDocTraco
 	@Transactional
 	@Query(value = "DELETE FROM relacao_documento_traco WHERE doc_id = ?1 AND traco_id = ?2 ", nativeQuery = true)
 	void DeleteTracosDoc(Long docid, Long tracoid);
+	
 }
