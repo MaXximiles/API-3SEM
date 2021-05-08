@@ -54,32 +54,42 @@ As seguintes tecnologias foram utilizadas no desenvolvimento do projeto:
               <tbody>
                      <tr>
                             <td align=center>Sprint 1<br>08/03/2021 a 28/03/2021</td>
-                            <td ><br>
-                             Nesta 1ª entrega nosso projeto traz uma estrutura de controle de diretórios em cascata para o controle dos manuais. A ideia é um controle de pastas, seguindo uma ideia de explorador de arquivos, possibilitando, criação, alteração e exclusão de diretórios, pensando na estrutura do Mockup enviado pelo cliente. Através desta visualização facilitada da estrutura do Manual, ficará mais fácil realizar as importações dos arquivos .pdf(blocos).                 
+                            <td > <p align=center>
+                             ✔️ Criação dos User Stories; 
+                             ✔️ Criação dos Wireframes;  
+                             ✔️ Criação do acesso ao sistema através de login e senha do usuário;
+                             ✔️ Integração da parte web com a API;                 
                             </td>
-                            <td><p><a href="https://github.com/MaXximiles/API-3SEM/tree/sprint-1">Ver mais...</a></p></td>
+                            <td><p><a href="https://github.com/MaXximiles/API-3SEM#sprint-1">Ver mais...</a></p></td>
                      </tr>
                      <tr>
                             <td align=center>Sprint 2<br>29/09/2021 a 18/04/2021</td>
-                            <td><br>
-                             Nesta 2ª Sprint após novas conversas com o cliente tivemos uma reformulação na estrutura do projeto. Seguindo conforme solicitado pelo cliente, a tela de controle do codelist foi adicionada, onde agora é possível pesquisar, inserir, alterar e deletar, linhas do codelist, proporcionando controle ao usuário. O mesmo segue também para manuais, onde também é possível realizar as mesmas tarefas do codelist. A função de inserção de traços e colecionamento do mesmo para os manuais também foi adicionada seguindo a regra de que um manual pode conter muitos traços que definem os blocos que o constituem.</br>
-                            <p align=center> 
-                            <img src=https://user-images.githubusercontent.com/18652465/115096933-c68d5e00-9efd-11eb-9c6a-802e6345c1c6.png width=200px height=170>
-                            <img src=https://user-images.githubusercontent.com/18652465/115096927-c3926d80-9efd-11eb-91fa-f9831d3f2826.png width=200px height=170>
-                            <img src=https://user-images.githubusercontent.com/18652465/115096932-c5f4c780-9efd-11eb-8b92-a6ac3be3d09c.png width=200px height=170>
+                            <td> <p align=center>
+                             ✔️ Inserção do Modulo Codelist;
+                             ✔️ Modulo Traço Documentos;
+                             ✔️ Atualização do banco de dados;
+                            <p align=center>                          
                             </p>
                             </td>
-                            <td><p><a href="https://github.com/MaXximiles/API-3SEM/tree/sprint-2">Ver mais... </a></p></td>
+                            <td><p><a href="https://github.com/MaXximiles/API-3SEM#sprint-2">Ver mais... </a></p></td>
                      </tr>
                      <tr>
                             <td align=center>Sprint 3<br>26/04/2021 a 17/05/2021</td>
-                            <td>Descrição Sprint3</td>
-                            <td><p align="center"> ⚠ EM DESENVOLVIMENTO ⚠ </p></td>
+                            <td> <p align=center>
+                            ✔️ Manipulação de diretórios;
+                            ✔️ Manipulação de arquivos;
+                            ✔️ LEP automática;
+                            ✔️ Implementação de tag;
+                            ✔️ Versionamento do Banco de Dados;
+                      <p align=center>                          
+                      </p>
+                      </td>
+                            <td><p><a href="https://github.com/MaXximiles/API-3SEM#sprint-3">Ver mais... </a></p></td>
                      </tr>
                       <tr>
                             <td align=center>Sprint 4<br>17/05/2021 a 05/06/2021</td>
-                            <td>Descrição Sprint4</td>
-                            <td><p align="center"> ⚠ EM DESENVOLVIMENTO ⚠ </p></td>
+                            <td> <p align=center>⚠ EM DESENVOLVIMENTO ⚠</td>
+                            <td><p><a href="https://github.com/MaXximiles/API-3SEM#sprint-4">Ver mais... </a></p></td>
                      </tr>
               </tbody>
        </table>
