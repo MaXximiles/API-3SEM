@@ -79,8 +79,6 @@ const Table = ({ data, onEdit, onDelete }) => {
   };
 
   const uploadFile = (e, selectedItem) => {
-    e.stopPropagation();
-
     const input = document.createElement("input");
     input.id = "upload";
     input.type = "file";
@@ -101,11 +99,13 @@ const Table = ({ data, onEdit, onDelete }) => {
           },
         }
       );
-
-      document.body.click();
     };
 
     input.click();
+  };
+
+  const createLEP = async (e, selectedItem) => {
+    await restAPI.get(`/lep/gerarlep?codelistid=${selectedItem.codelistid}`);
   };
 
   const onContextMenu = (event, item) => {
@@ -137,6 +137,12 @@ const Table = ({ data, onEdit, onDelete }) => {
               onClick={(e) => uploadFile(e, selectedItem)}
             >
               Fazer upload
+            </div>
+            <div
+              className="ui dropdown item"
+              onClick={(e) => createLEP(e, selectedItem)}
+            >
+              Criar LEP
             </div>
           </div>
         </ContextMenu>
