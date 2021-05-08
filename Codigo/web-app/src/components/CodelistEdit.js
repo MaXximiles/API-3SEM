@@ -34,6 +34,7 @@ const CodelistEdit = ({ onSubmit, dataEntry, docId }) => {
     };
 
     if (dataEntry) {
+      submitedEntry["codelistcaminho"] = dataEntry.codelistcaminho;
       await onSubmit(submitedEntry, dataEntry);
     } else {
       await onSubmit(submitedEntry);

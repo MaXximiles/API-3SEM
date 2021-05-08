@@ -103,6 +103,10 @@ const DocumentEdit = ({ onSubmit, dataEntry }) => {
     };
 
     if (dataEntry) {
+      submitedEntry["documentocaminho"] = dataEntry.documentocaminho;
+    }
+
+    if (dataEntry) {
       await onSubmit(submitedEntry, dataEntry);
     } else {
       await onSubmit(submitedEntry);

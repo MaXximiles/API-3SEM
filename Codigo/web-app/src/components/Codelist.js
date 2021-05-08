@@ -63,7 +63,7 @@ const Codelist = () => {
 
     const response = oldData
       ? await restAPI.put(`/codelist/${oldData.codelistid}`, data)
-      : await restAPI.post("/codelist/", data);
+      : await restAPI.post(`/codelist/${id}`, data);
 
     console.log(response);
 

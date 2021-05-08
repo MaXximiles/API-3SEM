@@ -1,5 +1,6 @@
 import "./Table.css";
 import React, { useEffect, useRef, useState } from "react";
+import restAPI from "../apis/restAPI";
 import ContextMenu from "./ContextMenu";
 
 const Table = ({ data, onEdit, onDelete }) => {
@@ -77,6 +78,36 @@ const Table = ({ data, onEdit, onDelete }) => {
     onDelete(item);
   };
 
+  const uploadFile = (e, selectedItem) => {
+    e.stopPropagation();
+
+    const input = document.createElement("input");
+    input.id = "upload";
+    input.type = "file";
+    input.style.display = "none";
+
+    input.onchange = async (e) => {
+      const file = e.target.files[0];
+
+      const formData = new FormData();
+      formData.append("arquivo", file);
+
+      const response = await restAPI.post(
+        `/arquivos/upload/${selectedItem.codelistid}`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+
+      document.body.click();
+    };
+
+    input.click();
+  };
+
   const onContextMenu = (event, item) => {
     event.preventDefault();
 
@@ -100,6 +131,12 @@ const Table = ({ data, onEdit, onDelete }) => {
               onClick={(e) => deleteItem(e, selectedItem)}
             >
               Deletar Bloco
+            </div>
+            <div
+              className="ui dropdown item"
+              onClick={(e) => uploadFile(e, selectedItem)}
+            >
+              Fazer upload
             </div>
           </div>
         </ContextMenu>
