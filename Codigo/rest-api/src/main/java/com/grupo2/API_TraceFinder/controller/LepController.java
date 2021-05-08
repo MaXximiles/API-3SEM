@@ -69,16 +69,12 @@ public class LepController {
 	}
 		
 	
-	// Criar PDF LEP, precisa do ID do arquivo
+	// Criar PDF LEP, precisa do ID do codelist
 	@GetMapping("/gerarlep")
-	public List<LepRs> criarLep(@RequestParam(value = "arqid", required = false) Long arqid, MultipartFile arq) throws Exception
-	{
-		// Pegando ID do Codelist
-		var arquivo = arquivoRepository.getOne(arqid);
-		Long CodelistId = arquivo.getCodelistid();
-				
+	public List<LepRs> criarLep(@RequestParam(value = "codelistid", required = false) Long codelistid, MultipartFile arq) throws Exception
+	{			
 		// Pegando ID do Documento, e caminho para salvar arquivo LEP através do Codelist
-		var codelist = codelistRepository.getOne(CodelistId);
+		var codelist = codelistRepository.getOne(codelistid);
 		Long DocumentoId = codelist.getDocumentoid();
 		String CodelistCaminho = codelist.getCodelistcaminho();
 		String CodelistBloco = codelist.getCodelistnomebloco();
@@ -100,12 +96,9 @@ public class LepController {
 		nomeArquivo = nomeArquivo+"-"+CodelistBloco;
 				
 		/* ****************************************************************************************** */
-						
-		ArrayList<LepRs> variavel = new ArrayList<>();
-		var lep = lepRepository.SelectLepArquivo(arqid);
-		variavel = (ArrayList<LepRs>) lep.stream().map((LepList) -> LepRs.converter(LepList)).collect(Collectors.toList());	
-		
+								
 		PDDocument pDDocument = PDDocument.load(new File("src/main/resources/models/ModeloLEP.pdf"));
+		//PDDocument pDDocument = PDDocument.load(new File("C:\\trace_finder\\ModeloLEP.pdf"));
         PDAcroForm pDAcroForm = pDDocument.getDocumentCatalog().getAcroForm();       
                
         Connection conn = null;
@@ -113,7 +106,7 @@ public class LepController {
         conn = DBConexao.abrirConexao();
         Statement stm = conn.createStatement();
         
-        String sql = "SELECT lep_id, lep_bloco, lep_code, lep_pagina, lep_modificacao, lep_revisao, arquivo_id, documento_id FROM lep WHERE documento_id = "+arqid+";";
+        String sql = "SELECT lep_id, lep_bloco, lep_code, lep_pagina, lep_modificacao, lep_revisao, arquivo_id, documento_id FROM lep WHERE documento_id = "+DocumentoId+";";
         resultadoBanco = stm.executeQuery(sql);
         
         int i = 1;
@@ -127,7 +120,7 @@ public class LepController {
 		    	String lepmodificacao = (resultadoBanco.getString("lep_modificacao"));
 		    	String leprevisao = (resultadoBanco.getString("lep_revisao"));
 		    	int numPag = pDDocument.getNumberOfPages();
-	    			    		
+		    			    	
 	    		PDField field = pDAcroForm.getField("bloco"+num1);
 		        field.setValue(lepBloco);
 		        field = pDAcroForm.getField("code"+num1);
@@ -140,7 +133,7 @@ public class LepController {
 		        field.setValue(leprevisao);
 		        field = pDAcroForm.getField("numPage");
 		        field.setValue(Integer.toString(numPag));
-		        field = pDAcroForm.getField("docNome"); // Verificar pq não apareceu
+		        field = pDAcroForm.getField("docNome"); 
 		        field.setValue(DocNome);	
         
 	        i++;
@@ -154,7 +147,8 @@ public class LepController {
 	
 	// SELECT de todos//
 	@GetMapping("/")
-	public List<LepRs> selectAll() {
+	public List<LepRs> selectAll() 
+	{
 	   var lep = lepRepository.findAll();
 	   return lep.stream().map((lp) -> LepRs.converter(lp)).collect(Collectors.toList());
 	}

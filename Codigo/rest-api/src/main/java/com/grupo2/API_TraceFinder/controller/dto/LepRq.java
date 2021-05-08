@@ -6,7 +6,7 @@ public class LepRq {
 	private Long lepId;
 	private String lepBloco;
 	private String lepCode;
-	private String lepPagina;
+	private Long lepPagina;
 	private String lepModificacao;
 	private String lepRevisao;
 	private Long arquivoId;
@@ -37,10 +37,10 @@ public class LepRq {
 	public void setLepCode(String lepCode) {
 		this.lepCode = lepCode;
 	}
-	public String getLepPagina() {
+	public Long getLepPagina() {
 		return lepPagina;
 	}
-	public void setLepPagina(String lepPagina) {
+	public void setLepPagina( Long lepPagina) {
 		this.lepPagina = lepPagina;
 	}
 	public String getLepModificacao() {

@@ -23,7 +23,7 @@ public class Lep {
 	private String lepCode;
 	
 	@Column(name="lep_pagina")
-	private String lepPagina;
+	private Long lepPagina;
 	
 	@Column(name="lep_modificacao")
 	private String lepModificacao;
@@ -69,11 +69,11 @@ public class Lep {
 		this.lepCode = lepCode;
 	}
 
-	public String getLepPagina() {
+	public Long getLepPagina() {
 		return lepPagina;
 	}
 
-	public void setLepPagina(String lepPagina) {
+	public void setLepPagina(Long lepPagina) {
 		this.lepPagina = lepPagina;
 	}
 
