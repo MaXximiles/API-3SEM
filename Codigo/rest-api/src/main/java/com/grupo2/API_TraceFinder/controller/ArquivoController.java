@@ -107,9 +107,9 @@ public class ArquivoController {
 	@PostMapping("/upload/{id}")
 	public void upload(@RequestParam MultipartFile arquivo, @PathVariable Long id) throws IOException
 	{
+			
 		arquivoUpload.salvarArquivo(arquivo, id);
-		String arqNome = arquivo.getOriginalFilename();
+		//String arqNome = arquivo.getOriginalFilename();	
 		
-		insertArquivo(null, id, arqNome);
 	}
 }

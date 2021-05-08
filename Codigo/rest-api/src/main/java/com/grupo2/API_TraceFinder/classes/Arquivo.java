@@ -21,7 +21,7 @@ public class Arquivo {
 	
 	@Column(name="codelist_id")
 	private Long codelistid;
-
+ 
 	public Long getArquivoid() {
 		return arquivoid;
 	}

@@ -13,11 +13,13 @@ import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.encryption.InvalidPasswordException;
 import org.apache.pdfbox.pdmodel.interactive.form.PDAcroForm;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.grupo2.API_TraceFinder.classes.Arquivo;
 import com.grupo2.API_TraceFinder.classes.Lep;
 import com.grupo2.API_TraceFinder.controller.ArquivoController;
+import com.grupo2.API_TraceFinder.controller.dto.ArquivoRq;
 
 
 @Component
@@ -69,29 +71,38 @@ public class ArquivoUpload {
 		// Pegando quantidade de paginas do arquivo
 		File file = new File(pasta+"\\"+arquivo);
 		PDDocument document = PDDocument.load(file);
-		int numPag = document.getNumberOfPages();
+		document.close();
+        
+        new File(pasta+"\\"+arquivo).renameTo(new File(pasta+"\\"+nomeArquivo+".pdf")); // Renomeando o arquivo com o nome padrão mockup
 		
+	 	
+        Long arqId = insertArquivo(null, id, nomeArquivo+".pdf");
+	 	
+	 	
+	 	File file1 = new File(pasta+"\\"+nomeArquivo+".pdf");
+		PDDocument document1 = PDDocument.load(file1);
+	 	int numPag = document1.getNumberOfPages(); 
+		
+	 	
+	 	
 		// Laço para inserção das paginas na LEP
-		/*for(int i = 1; i <= numPag; i++)
+		for(int i = 1; i <= numPag; i++)
 		{
-			String pag = Integer.toString(i);
 			
+			Long pag = (long) i;
+						
 			var lep1 = new Lep();
 			lep1.setLepBloco(nome);
 			lep1.setLepCode(code);
 			lep1.setLepPagina(pag);
 			lep1.setLepModificacao(null); // mudar quando inserir modificacao
 			lep1.setLepRevisao(null); // mudar quando inserir revisao
-			lep1.setArquivoId(id);
+			lep1.setArquivoId(arqId);
 			lep1.setDocumentoid(DocumentoId);
 			lepRepository.save(lep1);
-		}*/
-		
-		//document.save(pasta+"\\"+nomeArquivo+".pdf");
-        document.close();
-        
-        new File(pasta+"\\"+arquivo).renameTo(new File(pasta+"\\"+nomeArquivo+".pdf")); // Renomeando o arquivo com o nome padrão mockup
 
+		}
+    	
 	}
 	
 	
@@ -108,6 +119,16 @@ public class ArquivoUpload {
 		} 
 		catch (IOException e) {	throw new RuntimeException("Problemas na tentativa de salvar arquivo.", e);	}
 		
+	}
+	
+	public Long insertArquivo(@RequestBody ArquivoRq arquivo, Long id, String nome)
+	{
+		var arq = new Arquivo();
+		arq.setArquivonome(nome);
+		arq.setCodelistid(id);
+		arquivoRepository.save(arq);
+		
+		return arq.getArquivoid();
 	}
 	
 	
