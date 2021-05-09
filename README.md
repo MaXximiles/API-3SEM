@@ -219,7 +219,7 @@ Resumo de modificações:
   - Criação de pastas ao inserir documento (manual)
   - Criação de pastas ao inserir blocos
   - Exclusão de diretórios e subdiretórios quando manual e/ou bloco é excluído
-- Manipulação de arquivos (Manipulação de arquivos possiblita o usuário a salvar os arquivos pdf dentro dos diretórios e no banco de dados)
+- Manipulação de arquivos (Manipulação de arquivos possibilita o usuário a salvar os arquivos pdf dentro dos diretórios e no banco de dados)
   - Import de arquivos (será usado para importação de blocos)
   - Exclusão de arquivos importados do banco e da pasta
   - Mudança no nome do arquivo salvando no modelo do mackup 
