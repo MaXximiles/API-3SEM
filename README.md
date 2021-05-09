@@ -55,19 +55,19 @@ As seguintes tecnologias foram utilizadas no desenvolvimento do projeto:
                      <tr>
                             <td align=center>Sprint 1<br>08/03/2021 a 28/03/2021</td>
                             <td > <p align=center>
-                             ✔️ Criação dos User Stories; 
-                             ✔️ Criação dos Wireframes;  
-                             ✔️ Criação do acesso ao sistema através de login e senha do usuário;
-                             ✔️ Integração da parte web com a API;                 
+                             ✓ Criação dos User Stories; 
+                             ✓ Criação dos Wireframes;  
+                             ✓ Criação do acesso ao sistema através de login e senha do usuário;
+                             ✓ Integração da parte web com a API;                 
                             </td>
                             <td><p><a href="https://github.com/MaXximiles/API-3SEM#sprint-1">Ver mais...</a></p></td>
                      </tr>
                      <tr>
                             <td align=center>Sprint 2<br>29/09/2021 a 18/04/2021</td>
                             <td> <p align=center>
-                             ✔️ Inserção do Modulo Codelist;
-                             ✔️ Modulo Traço Documentos;
-                             ✔️ Atualização do banco de dados;
+                             ✓ Inserção do Modulo Codelist;
+                             ✓ Modulo Traço Documentos;
+                             ✓ Atualização do banco de dados;
                             <p align=center>                          
                             </p>
                             </td>
@@ -76,11 +76,11 @@ As seguintes tecnologias foram utilizadas no desenvolvimento do projeto:
                      <tr>
                             <td align=center>Sprint 3<br>26/04/2021 a 17/05/2021</td>
                             <td> <p align=center>
-                            ✔️ Manipulação de diretórios;
-                            ✔️ Manipulação de arquivos;
-                            ✔️ LEP automática;
-                            ✔️ Implementação de tag;
-                            ✔️ Versionamento do Banco de Dados;
+                            ✓ Manipulação de diretórios;
+                            ✓ Manipulação de arquivos;
+                            ✓ LEP automática;
+                            ✓ Implementação de tag;
+                            ✓ Versionamento do Banco de Dados;
                       <p align=center>                          
                       </p>
                       </td>
@@ -109,7 +109,7 @@ As seguintes tecnologias foram utilizadas no desenvolvimento do projeto:
 Resumo de modificações:
 - Criação dos User Stories; 
 - Criação dos Wireframes;  
-- Criação do acesso ao sistema através de login e senha do usuário; -(Sistema de autenticação básico)-
+- Criação do acesso ao sistema através de login e senha do usuário (Sistema de autenticação básico);
 - Integração da parte web com a API;
 </p></br><h1></h1>
 
@@ -224,20 +224,20 @@ Será feita a implementação do importe de arquivos para criação da LEP autom
 ### Detalhes da Sprint:
 
 Resumo de modificações:
-- Manipulação de diretórios -(A criação de diretórios, organiza os manuais em seções, subseções e blocos)-
+- Manipulação de diretórios (A criação de diretórios, organiza os manuais em seções, subseções e blocos)
   - Criação de pastas ao inserir documento (manual)
   - Criação de pastas ao inserir blocos
   - Exclusão de diretórios e subdiretórios quando manual e/ou bloco é excluído
-- Manipulação de arquivos -(Manipulação de arquivos possiblita o usuário a salvar os arquivos pdf dentro dos diretórios e no banco de dados)-
+- Manipulação de arquivos (Manipulação de arquivos possiblita o usuário a salvar os arquivos pdf dentro dos diretórios e no banco de dados)
   - Import de arquivos (será usado para importação de blocos)
   - Exclusão de arquivos importados do banco e da pasta
   - Mudança no nome do arquivo salvando no modelo do mackup 
-- LEP automática -(Criação da LEP automática possibilita o usuário a ter mais segurança e confiabilidade nas informações, já que será gerada pelo próprio sistema)-
+- LEP automática (Criação da LEP automática possibilita o usuário a ter mais segurança e confiabilidade nas informações, já que será gerada pelo próprio sistema)
   - Criação das classes, Repositorys e Controller's da LEP
   - Criação da LEP automática, gravando no arquivo pdf modelolep 
   - Criação de arquivo modelo de LEP.pdf
-- Implementação de tag(A implementação de tags possibilita filtrar documentos, traços e blocos pelas tags correspondentes)
-  - Criação das classes tag(Documento, bloco e traço) na API
+- Implementação de tag (A implementação de tags possibilita filtrar documentos, traços e blocos pelas tags correspondentes)
+  - Criação das classes tag (Documento, bloco e traço) na API
 - Versionamento do Banco de Dados
 </p></br><h1></h1>
 
