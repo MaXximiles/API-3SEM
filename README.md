@@ -109,15 +109,7 @@ As seguintes tecnologias foram utilizadas no desenvolvimento do projeto:
 Resumo de modificações:
 - Criação dos User Stories; 
 - Criação dos Wireframes;  
-- Criação do acesso ao sistema através de login e senha do usuário (Sistema de autenticação básico);
 - Integração da parte web com a API;
-</p></br><h1></h1>
-
-### Screenshoots:
- <p align=center>
- Título</br>
- <img src=></br>
- 
 </p></br><h1></h1>
 
 ### Proposta para próxima Sprint:
@@ -157,49 +149,49 @@ Resumo de modificações:
 
 ### Screenshoots:
  <p align=center>
- Tela inicial</br>
+ Tela inicial</br></br>
  <img src=https://user-images.githubusercontent.com/18652465/115096941-c9884e80-9efd-11eb-852c-df3035b8b6b1.png></br>
  
-</p></br><h1></h1>
+</p><h1></h1></br>
  <p align=center>
- Tela de busca de blocos</br>
- <img src=https://user-images.githubusercontent.com/18652465/115096929-c55c3100-9efd-11eb-8313-74481135777b.png></br>
+ Tela de busca de blocos</br></br>
+ <img src=https://user-images.githubusercontent.com/18652465/115096929-c55c3100-9efd-11eb-8313-74481135777b.png></br></br>
  Nesta tela é possível visualizar o codelist de um determinado manual, podendo filtrar os blocos pelos traços que o documento possui, é possível também editar e deletar os blocos.
-</p></br><h1></h1>
+</p><h1></h1></br>
 <p align=center>
- Formulário de criação de bloco</br>
- <img src=https://user-images.githubusercontent.com/18652465/115096927-c3926d80-9efd-11eb-91fa-f9831d3f2826.png></br>
+ Formulário de criação de bloco</br></br>
+ <img src=https://user-images.githubusercontent.com/18652465/115096927-c3926d80-9efd-11eb-91fa-f9831d3f2826.png></br></br>
  Formulário responsável pela criação do bloco, onde deverá ser preenchido os campos seção, subseção, bloco e código do bloco.
- </p></br><h1></h1>
+</p><h1></h1></br>
  <p align=center>
- Formulário de edição de bloco
- <img src=https://user-images.githubusercontent.com/18652465/115096928-c4c39a80-9efd-11eb-9c98-6cb9e6743c9d.png></br>
+ Formulário de edição de bloco</br></br>
+ <img src=https://user-images.githubusercontent.com/18652465/115096928-c4c39a80-9efd-11eb-9c98-6cb9e6743c9d.png></br></br>
  Formulário responsável pela edição dos blocos.
- </p></br><h1></h1>
+</p><h1></h1></br>
 <p align=center>
-Tela de busca de manuais
-<img src=https://user-images.githubusercontent.com/18652465/115096933-c68d5e00-9efd-11eb-9c6a-802e6345c1c6.png></br>
+Tela de busca de manuais</br></br>
+<img src=https://user-images.githubusercontent.com/18652465/115096933-c68d5e00-9efd-11eb-9c6a-802e6345c1c6.png></br></br>
 Nesta tela temos a lista de manuais existentes no sistema, sendo possível efetuar uma busca filtrando por nome e pn do documento. Esta pesquisa possibilita a alteração e exclusão dos documentos e também a visualização do seu codelist.
-</p></br><h1></h1>
+</p><h1></h1></br>
 <p align=center>
-Formulário de criação de manual
-<img src=https://user-images.githubusercontent.com/18652465/115096937-c8572180-9efd-11eb-99dc-ff1a344c00e6.png></br>
+Formulário de criação de manual</br></br>
+<img src=https://user-images.githubusercontent.com/18652465/115096937-c8572180-9efd-11eb-99dc-ff1a344c00e6.png></br></br>
 Neste formulário criamos um novo manual e atribuímos traços a ele.
-</p></br><h1></h1>
+</p><h1></h1></br>
  <p align=center>
- Formulário de edição de manual</br>
- <img src=https://user-images.githubusercontent.com/18652465/115096935-c725f480-9efd-11eb-9dda-6ccc02474721.png></br>
+ Formulário de edição de manual</br></br>
+ <img src=https://user-images.githubusercontent.com/18652465/115096935-c725f480-9efd-11eb-9dda-6ccc02474721.png></br></br>
  Formulário responsável pela edição do manual e alteração de seus traços.
-</p></br><h1></h1>
+</p><h1></h1></br>
 <p align=center>
-Confirmação de exclusão de manual</br>
-<img src=https://user-images.githubusercontent.com/18652465/115096934-c68d5e00-9efd-11eb-9b64-0a4a568c0294.png></br>
-</p></br><h1></h1>
+Confirmação de exclusão de manual</br></br>
+<img src=https://user-images.githubusercontent.com/18652465/115096934-c68d5e00-9efd-11eb-9b64-0a4a568c0294.png></br></br>
+</p><h1></h1></br>
 <p align=center>
-Banco de dados</br>
-<img src=https://user-images.githubusercontent.com/18652465/115090209-a86a3280-9eea-11eb-9f20-b9238a84cced.jpeg border=1 />
+Banco de dados</br></br>
+<img src=https://user-images.githubusercontent.com/18652465/115090209-a86a3280-9eea-11eb-9f20-b9238a84cced.jpeg border=1 /></br></br>
  
-</p></br><h1></h1>
+</p><h1></h1></br>
 
 ### Proposta para próxima Sprint:
 <p align=center>
@@ -214,7 +206,6 @@ Será feita a implementação do importe de arquivos para criação da LEP autom
 ## Sprint 3: 
 ### Proposta:
 <p align=center>
-
 <img src="https://github.com/MaXximiles/API-3SEM/blob/main/User%20Story%20Cards/StoryCard6.png?raw=true" width=350 height=200>
 <img src="https://github.com/MaXximiles/API-3SEM/blob/main/User%20Story%20Cards/StoryCard3.png?raw=true" width=350 height=200>
 
@@ -242,10 +233,24 @@ Resumo de modificações:
 </p></br><h1></h1>
 
 ### Screenshoots:
- <p align=center>
- Título</br>
- <img src=></br>
+<p align=center>
+Criação de LEP</br></br>
+<img src=https://user-images.githubusercontent.com/68132461/117557037-73628300-b045-11eb-8cab-767ff3c6fe7c.png></br>
+</p></br><h1></h1>
  
+<p align=center>
+Upload de arquivos</br></br>
+<img src=https://user-images.githubusercontent.com/68132461/117557066-ac9af300-b045-11eb-8180-b7af0e0ca153.png></br>
+</p></br><h1></h1>
+
+<p align=center>
+Estrutura de diretórios criados pelo Trace Finder</br></br>
+<img src=https://user-images.githubusercontent.com/68132461/117557097-f8e63300-b045-11eb-85b7-33199b935c21.png></br>
+</p></br><h1></h1>
+
+<p align=center>
+Exemplo de LEP criada automaticamente</br></br>
+<img src=https://user-images.githubusercontent.com/68132461/117557085-da803780-b045-11eb-8341-371b4c37e28b.png></br>
 </p></br><h1></h1>
 
 ### Proposta para próxima Sprint:
@@ -276,9 +281,6 @@ Resumo de modificações:
 </p></br><h1></h1>
 
 ### Screenshoots:
- <p align=center>
- Título</br>
- <img src=></br>
- 
+
 </p></br><h1></h1>
 
