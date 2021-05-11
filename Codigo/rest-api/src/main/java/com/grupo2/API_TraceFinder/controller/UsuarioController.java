@@ -1,5 +1,7 @@
 package com.grupo2.API_TraceFinder.controller;
 
+import java.math.BigInteger;
+import java.security.MessageDigest;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -53,7 +55,7 @@ public class UsuarioController {
 			.collect(Collectors.toList());
 	}
 	
-	// SELECT por Nome
+	// SELECT por login
 	@GetMapping("/filtrologin")
 	public List<UsuarioRs> findUsuarioByusuariologin(@RequestParam("usuariologin") String usuariologin)
 	{
@@ -65,15 +67,18 @@ public class UsuarioController {
 	
 	// INSERT //
 	@PostMapping("/")
-	public void insertUsuario(@RequestBody UsuarioRq usuario)
+	public void insertUsuario(@RequestBody UsuarioRq usuario) throws Exception
 	{
+		String senha = md5(usuario.getUsuariosenha());
+		
 		var user = new Usuario();
 		
 		user.setUsuarionome(usuario.getUsuarionome());
 		user.setUsuariologin(usuario.getUsuariologin());
-		user.setUsuariosenha(usuario.getUsuariosenha());
+		user.setUsuariosenha(senha);
 		user.setUsuarioemail(usuario.getUsuarioemail());
 		user.setUsuarionivel(usuario.getUsuarionivel());
+		
 		usuarioRepository.save(user);
 		
 	}
@@ -86,11 +91,13 @@ public class UsuarioController {
 		
 		if(user.isPresent())
 		{
+			String senha = md5(usuario.getUsuariosenha());
+			
 			var user2 = user.get();
 			
 			user2.setUsuarionome(usuario.getUsuarionome());
 			user2.setUsuariologin(usuario.getUsuariologin());
-			user2.setUsuariosenha(usuario.getUsuariosenha());
+			user2.setUsuariosenha(senha);
 			user2.setUsuarioemail(usuario.getUsuarioemail());
 			user2.setUsuarionivel(usuario.getUsuarionivel());
 			usuarioRepository.save(user2);
@@ -106,4 +113,48 @@ public class UsuarioController {
 		usuarioRepository.deleteById(id);
 	}
 	
+	
+	// Função para criptografar senhas
+	public static String md5 (String valor) throws Exception 
+	{
+		MessageDigest md = MessageDigest.getInstance("MD5");
+		BigInteger hash = new BigInteger(1, md.digest(valor.getBytes()));
+		String s = hash.toString(16);
+		if (s.length() %2 != 0) { s = "0" + s; }
+		return s;
+	}
+	
+	// Validação de Login e senha
+	@GetMapping("/logar")
+	public void Logar(
+			@RequestParam("email") String email,
+			@RequestParam("senha") String senha)  throws Exception
+	{
+		var user = usuarioRepository.SelectUsuarioEmail(email);
+		
+		Long UserId = user.get(0).getUsuarioid();
+		String UserSenha = user.get(0).getUsuariosenha();
+		String UserEmail = user.get(0).getUsuarioemail();
+		String UserNome = user.get(0).getUsuarionome();
+		String UserNivel = user.get(0).getUsuarionivel();
+		String UserLogin = user.get(0).getUsuariologin();
+		
+		if(user.isEmpty() == false)
+		{			
+			String SenhaCripto = md5(senha);
+			
+			if(!senha.equals(SenhaCripto))
+			{
+				System.out.println("Login realizado com sucesso");
+			}
+			else
+			{
+				System.out.println("Senha não confere");
+			}
+		}
+		else { throw new Exception("Usuario não encontrado"); }
+		
+		
+				
+	}
 }
