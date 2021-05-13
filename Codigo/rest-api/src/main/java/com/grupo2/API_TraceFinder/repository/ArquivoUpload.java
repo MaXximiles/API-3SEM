@@ -1,5 +1,7 @@
 package com.grupo2.API_TraceFinder.repository;
 
+import java.awt.Rectangle;
+import java.awt.geom.Rectangle2D;
 import java.io.Closeable;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -7,11 +9,19 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.pdfbox.io.IOUtils;
+import org.apache.pdfbox.multipdf.Splitter;
+import org.apache.pdfbox.pdfparser.PDFParser;
 import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.encryption.InvalidPasswordException;
+import org.apache.pdfbox.pdmodel.fdf.FDFPage;
 import org.apache.pdfbox.pdmodel.interactive.form.PDAcroForm;
+import org.apache.pdfbox.text.PDFTextStripper;
+import org.apache.pdfbox.text.PDFTextStripperByArea;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -66,43 +76,63 @@ public class ArquivoUpload {
 		
 		String arquivo = arq.getOriginalFilename();
 
-		this.salvar(pasta, arq, nomeArquivo, CodelistId);
-
-		// Pegando quantidade de paginas do arquivo
-		File file = new File(pasta+"\\"+arquivo);
-		PDDocument document = PDDocument.load(file);
-		document.close();
+		
+	    this.salvar(pasta, arq, nomeArquivo, CodelistId);
         
-        new File(pasta+"\\"+arquivo).renameTo(new File(pasta+"\\"+nomeArquivo+".pdf")); // Renomeando o arquivo com o nome padrão mockup
+		File arqAntigo  = new File(pasta+"\\"+arquivo);
+		PDDocument pdf = PDDocument.load(arqAntigo);
+		pdf.save(pasta+"\\"+nomeArquivo+".pdf");
+		pdf.close();
 		
+		arqAntigo.delete();
+				
+		Long arqId = insertArquivo(null, id, nomeArquivo+".pdf");
 	 	
-        Long arqId = insertArquivo(null, id, nomeArquivo+".pdf");
-	 	
-	 	
-	 	File file1 = new File(pasta+"\\"+nomeArquivo+".pdf");
-		PDDocument document1 = PDDocument.load(file1);
-	 	int numPag = document1.getNumberOfPages(); 
+	 	File file = new File(pasta+"\\"+nomeArquivo+".pdf");
+		PDDocument document = PDDocument.load(file);
+	 	int numPag = document.getNumberOfPages();
 		
-	 	
-	 	
+		String revisao;
+		String modificacao = null;
+
 		// Laço para inserção das paginas na LEP
 		for(int i = 1; i <= numPag; i++)
 		{
-			
-			Long pag = (long) i;
-						
-			var lep1 = new Lep();
-			lep1.setLepBloco(nome);
-			lep1.setLepCode(code);
-			lep1.setLepPagina(pag);
-			lep1.setLepModificacao(null); // mudar quando inserir modificacao
-			lep1.setLepRevisao(null); // mudar quando inserir revisao
-			lep1.setArquivoId(arqId);
-			lep1.setDocumentoid(DocumentoId);
-			lepRepository.save(lep1);
 
+			int contPage = 0;
+	    	PDPage Pages = document.getPage(contPage);
+            		
+            PDFTextStripperByArea stripper = new PDFTextStripperByArea();
+            stripper.setSortByPosition(true);
+
+            Rectangle2D area = new Rectangle2D.Float(0f, 570f, 400f, 60f);
+            stripper.addRegion("rodape", area);
+            stripper.extractRegions(Pages);            
+
+            String pdfFileInText = stripper.getTextForRegion("rodape");
+            
+            int posicao = pdfFileInText.lastIndexOf("REVISION");
+            
+            if(posicao != -1){ revisao = pdfFileInText.substring(posicao, posicao+11); } 
+            else{ revisao = "original"; }
+            
+				Long pag = (long) i;
+							
+				var lep1 = new Lep();
+				lep1.setLepBloco(nome);
+				lep1.setLepCode(code);
+				lep1.setLepPagina(pag);
+				lep1.setLepModificacao(modificacao); // mudar quando inserir modificacao
+				lep1.setLepRevisao(revisao); // mudar quando inserir revisao
+				lep1.setArquivoId(arqId);
+				lep1.setDocumentoid(DocumentoId);
+				lepRepository.save(lep1);
+				
+				contPage++;
+            
 		}
-    	
+			
+			document.close();
 	}
 	
 	
@@ -131,5 +161,6 @@ public class ArquivoUpload {
 		return arq.getArquivoid();
 	}
 	
+
 	
 }
