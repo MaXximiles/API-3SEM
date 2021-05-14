@@ -22,6 +22,6 @@ public interface LepRepository extends JpaRepository<Lep, Long>{
 	 @Query(value = "SELECT COUNT(documento_id) "
 	 				+ "FROM lep WHERE documento_id = ?1 ", nativeQuery = true)
 	 List<Lep> SelectCountLepArquivo(Long arqid);
-	
+
 
 }

@@ -23,6 +23,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.grupo2.API_TraceFinder.DBConexao;
+import com.grupo2.API_TraceFinder.classes.Arquivo;
+import com.grupo2.API_TraceFinder.classes.Documento;
 import com.grupo2.API_TraceFinder.classes.Lep;
 import com.grupo2.API_TraceFinder.controller.dto.DocumentoRs;
 import com.grupo2.API_TraceFinder.controller.dto.LepRq;
@@ -77,6 +79,7 @@ public class LepController {
 		var codelist = codelistRepository.getOne(codelistid);
 		Long DocumentoId = codelist.getDocumentoid();
 		String CodelistCaminho = codelist.getCodelistcaminho();
+		String CodelistCode = codelist.getCodelistcodebloco();
 		String CodelistBloco = codelist.getCodelistnomebloco();
 		String CodelistSecao = codelist.getCodelistsecao();
 		String CodelistSubsecao = codelist.getCodelistsubsecao();
@@ -86,6 +89,7 @@ public class LepController {
 		String DocumentoNome = documento.getDocumentonome();
 		String DocumentoPn = documento.getDocumentopn();
 		String DocNome = DocumentoNome+"-"+DocumentoPn;
+		Long DocCdlistLep = documento.getDocumentocdlistlep();
 		
 		String CaminhoLep = CodelistCaminho+"\\"+CodelistBloco; //Criando caminho para salvar a LEP
 		if(CodelistSecao != "") {CaminhoLep = CaminhoLep+"\\"+CodelistSecao;}
@@ -94,10 +98,63 @@ public class LepController {
 		String nomeArquivo = DocNome+"-"+CodelistSecao; // Criando nome do arquivo seguindo padrão do mockup (nome doc + secao + subsecao + num - bloco)
 		if(CodelistSubsecao != "") {nomeArquivo = nomeArquivo+"-"+CodelistSubsecao;}
 		nomeArquivo = nomeArquivo+"-"+CodelistBloco;
+		/////////////////////////
+		
+		PDDocument pDDocument1 = PDDocument.load(new File("src/main/resources/models/ModeloLEP.pdf"));
+		pDDocument1.save(CaminhoLep+"\\"+nomeArquivo+".pdf");
+		int NumPag = pDDocument1.getNumberOfPages();
+		pDDocument1.close();
+		
+		
+		//////////*/*/*/*/*/*/*/*/*/*/*
+		if(DocCdlistLep == null || DocCdlistLep == 0)
+		{
+			
+			var doc = documentoRepository.findById(DocumentoId);
+		
+		    if (doc.isPresent()) 
+		    {
+		      var doc2 = doc.get();
+		      doc2.setDocumentocdlistlep(codelistid);
+		      documentoRepository.save(doc2);
+		    } 
+		    else { throw new Exception("Documento não encontrado"); }
+			
+			var lep = new Arquivo();
+			lep.setArquivonome(nomeArquivo);
+			lep.setCodelistid(codelistid);
+			arquivoRepository.save(lep);
+			Long arquivo = lep.getArquivoid();
 				
+			 Connection conn1 = null;
+		     ResultSet resultadoBanco1 = null;
+		     conn1 = DBConexao.abrirConexao();
+		     Statement stm1 = conn1.createStatement();
+		    
+		     String sql1 = "SELECT MAX(lep_revisao) FROM lep WHERE documento_id = "+DocumentoId+";";
+		     resultadoBanco1 = stm1.executeQuery(sql1);
+		     
+		     String revisao = "";
+		     while(resultadoBanco1.next()){ revisao = resultadoBanco1.getString("MAX(lep_revisao)");}
+			
+			String modificacao = "";
+			Long pagina = (long) NumPag;
+			
+			var lep1 = new Lep();
+			lep1.setLepBloco(CodelistBloco);
+			lep1.setLepCode(CodelistCode);
+			lep1.setLepPagina(pagina); // Inserir quantidade de paginas  
+			lep1.setLepModificacao(modificacao); // mudar quando inserir modificacao
+			lep1.setLepRevisao(revisao); // mudar quando inserir revisao
+			lep1.setArquivoId(arquivo);
+			lep1.setDocumentoid(DocumentoId);
+			lepRepository.save(lep1);
+					 
+		}
+
 		/* ****************************************************************************************** */
 								
-		PDDocument pDDocument = PDDocument.load(new File("src/main/resources/models/ModeloLEP.pdf"));
+		PDDocument pDDocument = PDDocument.load(new File(CaminhoLep+"\\"+nomeArquivo+".pdf"));
 		//PDDocument pDDocument = PDDocument.load(new File("C:\\trace_finder\\ModeloLEP.pdf"));
         PDAcroForm pDAcroForm = pDDocument.getDocumentCatalog().getAcroForm();       
                
@@ -106,7 +163,8 @@ public class LepController {
         conn = DBConexao.abrirConexao();
         Statement stm = conn.createStatement();
         
-        String sql = "SELECT lep_id, lep_bloco, lep_code, lep_pagina, lep_modificacao, lep_revisao, arquivo_id, documento_id FROM lep WHERE documento_id = "+DocumentoId+";";
+        String sql = "SELECT lep_id, lep_bloco, lep_code, lep_pagina, lep_modificacao, lep_revisao, arquivo_id, documento_id FROM lep WHERE documento_id = "+DocumentoId+""
+        		+ " ORDER BY lep_bloco;";
         resultadoBanco = stm.executeQuery(sql);
         
         int i = 1;
@@ -138,8 +196,7 @@ public class LepController {
         
 	        i++;
         }
-
-	    pDDocument.save(CaminhoLep+"\\"+nomeArquivo+".pdf");
+        pDDocument.save(CaminhoLep+"\\"+nomeArquivo+".pdf");
         pDDocument.close();
 	    
 	    return null;

@@ -75,7 +75,6 @@ public class ArquivoUpload {
 		nomeArquivo = nomeArquivo+"-"+nome;
 		
 		String arquivo = arq.getOriginalFilename();
-
 		
 	    this.salvar(pasta, arq, nomeArquivo, CodelistId);
         
@@ -94,12 +93,11 @@ public class ArquivoUpload {
 		
 		String revisao;
 		String modificacao = null;
-
+		
+		int contPage = 0;
 		// Laço para inserção das paginas na LEP
 		for(int i = 1; i <= numPag; i++)
-		{
-
-			int contPage = 0;
+		{	
 	    	PDPage Pages = document.getPage(contPage);
             		
             PDFTextStripperByArea stripper = new PDFTextStripperByArea();
@@ -114,7 +112,7 @@ public class ArquivoUpload {
             int posicao = pdfFileInText.lastIndexOf("REVISION");
             
             if(posicao != -1){ revisao = pdfFileInText.substring(posicao, posicao+11); } 
-            else{ revisao = "original"; }
+            else{ revisao = "ORIGINAL"; }
             
 				Long pag = (long) i;
 							
@@ -129,6 +127,7 @@ public class ArquivoUpload {
 				lepRepository.save(lep1);
 				
 				contPage++;
+				revisao = "";
             
 		}
 			

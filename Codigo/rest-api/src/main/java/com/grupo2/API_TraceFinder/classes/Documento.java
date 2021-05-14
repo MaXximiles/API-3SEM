@@ -24,8 +24,19 @@ public class Documento {
 
   @Column(name = "documento_caminho")
   private String documentocaminho;
+  
+  @Column(name = "documento_cdlistlep")
+  private Long documentocdlistlep;
 
-  public Long getDocumentoid() {
+  public Long getDocumentocdlistlep() {
+	return documentocdlistlep;
+}
+
+public void setDocumentocdlistlep(Long documentocdlistlep) {
+	this.documentocdlistlep = documentocdlistlep;
+}
+
+public Long getDocumentoid() {
     return documentoid;
   }
 
