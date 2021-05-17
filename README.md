@@ -42,6 +42,7 @@ As seguintes tecnologias foram utilizadas no desenvolvimento do projeto:
  - [Story Cards](https://github.com/MaXximiles/API-3SEM/tree/main/User%20Story%20Cards)
  - [Design Thinking](https://www.figma.com/file/6oV3Omfka5XEPipU1BUibe/Design-Thiking-Grupo-2-3oSEM-BD-2021?node-id=0%3A1)
  - [BSC](https://github.com/MaXximiles/API-3SEM/tree/main/BSC)
+ - [Backlog](https://trello.com/b/pVgsSxrF/pi-3-sem-trace-finder)
  <!--- [Tutorial Instalação](https://github.com/MaXximiles/API-3SEM/tree/main/Documenta%C3%A7%C3%A3o) -->
  
 <h2>Sprints</h2>
