@@ -90,7 +90,7 @@ const Table = ({ data, onEdit, onDelete }) => {
       const formData = new FormData();
       formData.append("arquivo", file);
 
-      const response = await restAPI.post(
+      await restAPI.post(
         `/arquivos/upload/${selectedItem.codelistid}`,
         formData,
         {

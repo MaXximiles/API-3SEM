@@ -1,8 +1,9 @@
 import "./Login.css";
 import React, { useState } from "react";
+import { Link, withRouter } from "react-router-dom";
 import NegativeMessage from "./NegativeMessage";
 
-const Login = ({ onSubmit, href }) => {
+const Login = ({ onSubmit, history }) => {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [error, setError] = useState({
@@ -17,10 +18,7 @@ const Login = ({ onSubmit, href }) => {
     setIsLoading(true);
 
     if (await onSubmit(email, senha)) {
-      window.history.pushState({}, "", href);
-
-      const navEvent = new PopStateEvent("popstate");
-      window.dispatchEvent(navEvent);
+      history.push("/documento");
     } else {
       setError({
         header: "Não foi possível realizar o login",
@@ -89,7 +87,9 @@ const Login = ({ onSubmit, href }) => {
                 />
               </div>
             </form>
-            <div className="ui message">Não possuí uma conta? Cadastre-se</div>
+            <div className="ui message">
+              Não possuí uma conta? <Link to="/cadastrar">Cadastre-se</Link>
+            </div>
           </div>
         </div>
       </div>
@@ -97,4 +97,4 @@ const Login = ({ onSubmit, href }) => {
   );
 };
 
-export default Login;
+export default withRouter(Login);

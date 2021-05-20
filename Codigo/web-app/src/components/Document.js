@@ -4,6 +4,7 @@ import Table from "./DocumentTable";
 import DocumentDelete from "./DocumentDelete";
 import DocumentEdit from "./DocumentEdit";
 import Modal from "./Modal";
+import withAuthorization from "./withAuthorization";
 import restAPI from "../apis/restAPI";
 
 const Document = () => {
@@ -150,4 +151,6 @@ const Document = () => {
   );
 };
 
-export default Document;
+const condition = (authUser) => !!authUser;
+
+export default withAuthorization(condition)(Document);
