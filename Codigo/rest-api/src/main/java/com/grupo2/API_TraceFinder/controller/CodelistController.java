@@ -240,16 +240,15 @@ public class CodelistController {
 	 String sql1 = "SELECT traco_doc_nome, traco_doc_codigo, codelist_id, codelist_secao, codelist_subsecao, codelist_nomebloco, codelist_codebloco, codelist_caminho, documento_id "
 				+ "	FROM codelist "
 				+ " INNER JOIN relacao_bloco_traco ON relacao_bloco_traco.bloco_id = codelist.codelist_id "
-				+ " INNER JOIN traco_doc ON traco_doc.traco_doc_id = relacao_bloco_traco.bloco_id "
+				+ " INNER JOIN traco_doc ON traco_doc.traco_doc_id = relacao_bloco_traco.traco_id "
 				+ " WHERE documento_id = "+docid+"  AND traco_id = "+tracoid+" ;";
 	 resultadoBanco1 = stm1.executeQuery(sql1);
 	 
-	 System.out.println(sql1);
 	 PDFMergerUtility PDFmerger = new PDFMergerUtility();
 	 PDFmerger.setDestinationFileName(DirDoc+"_"+tracoNome+"_"+tracoCode+"FULL.pdf");
 	 
 	 int i = 1;
-	 System.out.println("akifoi");
+
 	 while(resultadoBanco1.next())
 	 { 
 		 String caminhoBloco = resultadoBanco1.getString("codelist_caminho");
@@ -274,7 +273,6 @@ public class CodelistController {
 	 }
 	 
 	 PDFmerger.mergeDocuments();
-	 System.out.println("tudo certo");
 	 
 	return null;
   }
