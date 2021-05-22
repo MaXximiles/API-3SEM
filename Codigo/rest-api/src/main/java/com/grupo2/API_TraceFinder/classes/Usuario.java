@@ -1,7 +1,5 @@
 package com.grupo2.API_TraceFinder.classes;
 
-import java.util.Collection;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

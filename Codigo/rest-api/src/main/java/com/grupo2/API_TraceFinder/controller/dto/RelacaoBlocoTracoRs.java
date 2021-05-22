@@ -8,6 +8,8 @@ public class RelacaoBlocoTracoRs {
 	private String tracoid;
 	private String blocoid;
 	
+	
+	
 	public static RelacaoBlocoTracoRs converter(RelacaoBlocoTraco rBlocoTraco) {
 		var relacaoBlocoTraco = new RelacaoBlocoTracoRs();
 		relacaoBlocoTraco.setRelacaotracoblocoid(rBlocoTraco.getRelacaotracoblocoid());

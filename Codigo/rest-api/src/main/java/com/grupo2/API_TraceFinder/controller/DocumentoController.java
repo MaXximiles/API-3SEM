@@ -14,8 +14,10 @@ import com.grupo2.API_TraceFinder.classes.Documento;
 import com.grupo2.API_TraceFinder.controller.dto.CodelistRq;
 import com.grupo2.API_TraceFinder.controller.dto.DocumentoRq;
 import com.grupo2.API_TraceFinder.controller.dto.DocumentoRs;
+import com.grupo2.API_TraceFinder.controller.dto.TracoDocRs;
 import com.grupo2.API_TraceFinder.repository.DocumentoCustomRepository;
 import com.grupo2.API_TraceFinder.repository.DocumentoRepository;
+import com.grupo2.API_TraceFinder.repository.TracoDocRepository;
 
 import java.io.File;
 import java.util.List;
@@ -23,14 +25,19 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/documentos")
-public class DocumentoController {
+public class DocumentoController 
+{
   private DocumentoRepository documentoRepository = null;
   private DocumentoCustomRepository documentoCustomRepository = null;
+  private TracoDocRepository tracoDocRepository = null;
 
   public DocumentoController(DocumentoRepository documentoRepository,
-      DocumentoCustomRepository documentoCustomRepository) {
+		  					 DocumentoCustomRepository documentoCustomRepository,
+		  					 TracoDocRepository tracoDocRepository) 
+  {
     this.documentoRepository = documentoRepository;
     this.documentoCustomRepository = documentoCustomRepository;
+    this.tracoDocRepository = tracoDocRepository;
   }
   
   // Definindo raiz para criação dos diretórios dos manuais 
@@ -78,18 +85,20 @@ public class DocumentoController {
 
   // SELECT Documentos que contem aquele bloco//
   @GetMapping("/documentobloco")
-  public List<DocumentoRs> selectDocBloco(@RequestParam(value = "blocoid", required = false) Long blocoid) {
+  public List<DocumentoRs> selectDocBloco(@RequestParam(value = "blocoid", required = false) Long blocoid) 
+  {
     var documento = documentoRepository.SelectDocBloco(blocoid);
     return documento.stream().map((BlList) -> DocumentoRs.converter(BlList)).collect(Collectors.toList());
   }
   
   //SELECT Documentos que são daquele traço//
  @GetMapping("/documentotraco")
- public List<DocumentoRs> selectDocTraco(@RequestParam(value = "tracoid", required = false) Long tracoid) {
+ public List<DocumentoRs> selectDocTraco(@RequestParam(value = "tracoid", required = false) Long tracoid)
+ {
    var documento = documentoRepository.SelectDocTraco(tracoid);
    return documento.stream().map((TrList) -> DocumentoRs.converter(TrList)).collect(Collectors.toList());
  }
-
+ 
   // INSERT //
   @PostMapping("/")
   public void insertDocumento(@RequestBody DocumentoRq documento) 
@@ -141,7 +150,5 @@ public class DocumentoController {
 	  
 	  documentoRepository.deleteById(id);
   }
-  
-  
-    
+     
 }

@@ -20,14 +20,13 @@ import com.grupo2.API_TraceFinder.repository.RelacaoBlocoTracoRepository;
 
 
 @RestController
-@RequestMapping("/relacao_arquivo_traco")
+@RequestMapping("/relacao_bloco_traco")
 public class RelacaoBlocoTracoController {
 	
 	private RelacaoBlocoTracoRepository relacaoBlocoTracoRepository = null;
 	
-	public RelacaoBlocoTracoController(RelacaoBlocoTracoRepository relacaoArqTracoRepository) {
-		this.relacaoBlocoTracoRepository = relacaoArqTracoRepository;
-	}
+	public RelacaoBlocoTracoController(RelacaoBlocoTracoRepository relacaoArqTracoRepository) 
+	{ this.relacaoBlocoTracoRepository = relacaoArqTracoRepository;	}
 	
 	// SELECT de todos//
 	@GetMapping("/")

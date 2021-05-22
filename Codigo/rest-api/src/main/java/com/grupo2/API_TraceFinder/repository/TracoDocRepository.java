@@ -18,4 +18,10 @@ public interface TracoDocRepository extends JpaRepository<TracoDoc, Long>{
 			+ " WHERE doc_id = ?1  ", nativeQuery = true)
 	List<TracoDoc> SelectTracoDocumento(Long docid);
 	
+	
+	@Query(value = "SELECT traco_doc_id, traco_doc_nome, traco_doc_descricao, traco_doc_codigo "
+			+ "	FROM traco_doc "
+			+ " INNER JOIN relacao_bloco_traco ON relacao_bloco_traco.traco_id = traco_doc.traco_doc_id "
+			+ " WHERE bloco_id = ?1  ", nativeQuery = true)
+	List<TracoDoc> selectTracosBloco(Long blocoid);
 }

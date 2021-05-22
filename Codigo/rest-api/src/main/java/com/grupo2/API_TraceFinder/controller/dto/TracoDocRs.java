@@ -1,5 +1,8 @@
 package com.grupo2.API_TraceFinder.controller.dto;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.grupo2.API_TraceFinder.classes.TracoDoc;
 
 public class TracoDocRs {
@@ -18,6 +21,23 @@ public class TracoDocRs {
 		return tracoDocumento;
 		
 	}
+	
+	
+	public static List<TracoDocRs> converter(List<TracoDoc> lstTracos) {
+		
+		List<TracoDocRs> listTraco = new ArrayList<>();
+		
+		for(TracoDoc td : lstTracos)
+		{
+			
+			listTraco.add(TracoDocRs.converter(td));
+		}
+		
+		return listTraco;
+	}
+
+	
+	
 
 	public Long getTracodocid() {
 		return tracodocid;
@@ -51,6 +71,9 @@ public class TracoDocRs {
 		this.tracodoccodigo = tracodoccodigo;
 	}
 
+
+
+	
 	
 	
 }

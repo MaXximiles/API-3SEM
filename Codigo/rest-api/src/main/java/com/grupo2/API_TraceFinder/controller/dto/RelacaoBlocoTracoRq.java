@@ -7,6 +7,9 @@ public class RelacaoBlocoTracoRq {
 	private String tracoid;
 	private String blocoid;
 	
+	
+	
+	
 	public Long getRelacaotracoblocoid() {
 		return relacaotracoblocoid;
 	}

@@ -1,11 +1,21 @@
 package com.grupo2.API_TraceFinder.classes;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 @Table(name = "codelist")
@@ -33,6 +43,10 @@ public class Codelist {
 
 	@Column(name="documento_id")
 	private Long documentoid;
+	
+	
+
+	
 	
 
 	public Long getCodelistid() {
@@ -90,7 +104,7 @@ public class Codelist {
 	public void setDocumentoid(Long documentoid) {
 		this.documentoid = documentoid;
 	}
-
+	
 	
 	
 }

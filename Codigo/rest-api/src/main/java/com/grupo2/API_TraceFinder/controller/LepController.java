@@ -1,11 +1,8 @@
 package com.grupo2.API_TraceFinder.controller;
 
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,9 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.grupo2.API_TraceFinder.DBConexao;
 import com.grupo2.API_TraceFinder.classes.Arquivo;
-import com.grupo2.API_TraceFinder.classes.Documento;
 import com.grupo2.API_TraceFinder.classes.Lep;
-import com.grupo2.API_TraceFinder.controller.dto.DocumentoRs;
 import com.grupo2.API_TraceFinder.controller.dto.LepRq;
 import com.grupo2.API_TraceFinder.controller.dto.LepRs;
 import com.grupo2.API_TraceFinder.repository.ArquivoRepository;
