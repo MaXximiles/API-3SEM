@@ -22,7 +22,7 @@ public interface DocumentoRepository extends JpaRepository<Documento, Long> {
 
   
   
-  @Query(value = "SELECT documento_id, documento_nome, documento_pn, documento_caminho FROM documento"
+  @Query(value = "SELECT documento_id, documento_nome, documento_pn, documento_caminho, documento_cdlistlep FROM documento"
       + " WHERE documento_nome LIKE %?1% AND documento_pn LIKE %?2% ", nativeQuery = true)
   List<Documento> SelectDocumentoLikeNomePn(String docnome, String docpn);
 
