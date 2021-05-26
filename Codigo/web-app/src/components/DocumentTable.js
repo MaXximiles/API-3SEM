@@ -130,15 +130,6 @@ const Table = ({ data, onEdit, onDelete }) => {
 
   const renderedTableBody = data.map((item, rowIndex) => {
     const renderedTableCells = Object.entries(item).map((value, index) => {
-      if (value.length) {
-        const options = value.map((val) => val.tracodocnome);
-
-        return (
-          <td key={value[0]} data-label={value[0]} style={columnStyle[index]}>
-            {options.join(", ")}
-          </td>
-        );
-      }
       return (
         <td key={value[0]} data-label={value[0]} style={columnStyle[index]}>
           {value[1]}

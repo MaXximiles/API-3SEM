@@ -44,35 +44,33 @@ const DocumentEdit = ({ onSubmit, dataEntry }) => {
         dataEntry &&
         prevSelectedTrace
       ) {
-        var addTraces = [];
+        var addTraces = {};
         selectedTrace.forEach((value) => {
           if (!prevSelectedTrace.includes(value)) {
-            addTraces.push({
+            addTraces = {
               docid: dataEntry.documentoid,
               tracoid: value.value,
-            });
+            };
           }
         });
 
-        if (addTraces.length > 0) {
+        if (addTraces !== {}) {
           const response = await restAPI.post(`/reldoctraco/`, addTraces);
           console.log(response);
         }
 
-        var removeTraces = [];
+        var removeTraces = {};
         prevSelectedTrace.forEach((value) => {
           if (!selectedTrace.includes(value)) {
-            removeTraces.push({
+            removeTraces = {
               docid: dataEntry.documentoid,
               tracoid: value.value,
-            });
+            };
           }
         });
 
-        console.log(removeTraces);
-
-        if (removeTraces.length > 0) {
-          await restAPI.delete(`/reldotraco/`, removeTraces);
+        if (removeTraces !== {}) {
+          await restAPI.post(`/reldoctraco/delete`, removeTraces);
         }
 
         setPrevSelectedTrace(selectedTrace);
@@ -98,6 +96,8 @@ const DocumentEdit = ({ onSubmit, dataEntry }) => {
   };
 
   const submit = async () => {
+    setPrevSelectedTrace(null);
+
     const submitedEntry = {
       documentonome: name,
       documentopn: pn,
