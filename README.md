@@ -5,7 +5,7 @@
 
  
 
-## Sprint anterior:
+### Sprint anterior:
 
 ### Proposta:
 <p align=center>
