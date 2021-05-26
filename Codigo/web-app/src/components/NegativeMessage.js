@@ -5,10 +5,12 @@ const NegativeMessage = ({ error, onClose }) => {
     <div className="ui negative message">
       <i
         className="close icon"
-        onClick={onClose({
-          header: "",
-          message: "",
-        })}
+        onClick={() =>
+          onClose({
+            header: "",
+            message: "",
+          })
+        }
       ></i>
       <div className="header">{error.header}</div>
       <p>{error.message}</p>

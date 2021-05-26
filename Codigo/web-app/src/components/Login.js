@@ -31,7 +31,7 @@ const Login = ({ onSubmit, history }) => {
 
   const showError = () => {
     if (error.message !== "") {
-      return <NegativeMessage error={error} setError={setError} />;
+      return <NegativeMessage error={error} onClose={setError} />;
     }
 
     return null;

@@ -36,7 +36,7 @@ const Document = () => {
     setIsLoading(true);
 
     const response = await restAPI.get(
-      `/documentos/filtronome?documentonome=${name}`
+      `/documentos/likenomepn?docnome=${name}&docpn=${pn}`
     );
 
     setData(response.data);

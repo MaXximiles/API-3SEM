@@ -24,6 +24,8 @@ const App = ({ history }) => {
       `/usuarios/logar?email=${email}&senha=${senha}`
     );
 
+    console.log(data);
+
     setUser(data);
 
     return data;
