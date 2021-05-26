@@ -49,16 +49,15 @@ public class RelacaoDocTracoController {
     var doc = relacaoDocTracoRepository.SelectTracosDoc(docid);
     return doc.stream().map((TrList) -> RelacaoDocTracoRs.converter(TrList)).collect(Collectors.toList());
   }
+  
 
   // INSERT //
   @PostMapping("/")
   public void insertRelacaoDocTraco(@RequestBody RelacaoDocTracoRq relDocTraco) {
-    if (relDocTraco.getDocid() != null && relDocTraco.getTracoid() != null) {
-      var rDocTraco = new RelacaoDocTraco();
-      rDocTraco.setDocid(relDocTraco.getDocid());
-      rDocTraco.setTracoid(relDocTraco.getTracoid());
-      relacaoDocTracoRepository.save(rDocTraco);
-    }
+    var rDocTraco = new RelacaoDocTraco();
+    rDocTraco.setDocid(relDocTraco.getDocid());
+    rDocTraco.setTracoid(relDocTraco.getTracoid());
+    relacaoDocTracoRepository.save(rDocTraco);
   }
 
   // UPDATE
@@ -78,9 +77,12 @@ public class RelacaoDocTracoController {
   }
 
   // DELETE
-  @PostMapping("/delete")
-  public void deleteRelacaoDocTraco(@RequestBody RelacaoDocTracoRq relDocTraco) {
-    relacaoDocTracoRepository.DeleteTracosDoc(relDocTraco.getDocid(), relDocTraco.getTracoid());
+  @DeleteMapping("/")
+  public void deleteRelacaoDocTraco(@RequestBody List<Long> ids) {
+
+    for (Long id : ids) {
+      relacaoDocTracoRepository.deleteById(id);
+    }
   }
 
   // SELECT Traços de um documento//
