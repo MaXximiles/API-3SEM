@@ -44,10 +44,29 @@ const Codelist = () => {
     getData();
   }, [id]);
 
+  useEffect(() => {
+    const getData = async () => {
+      setIsLoading(true);
+
+      const response = await restAPI.get(
+        `/codelist/blocostracos?docid=${id}&tracoid=${selectedTrace[0].value}`
+      );
+
+      console.log(response.data);
+      setData(response.data);
+
+      setIsLoading(false);
+    };
+
+    selectedTrace[0] && getData();
+  }, [id, selectedTrace]);
+
   const getData = async () => {
     setIsLoading(true);
 
-    const response = await restAPI.get(`/codelist/codelistdoc?docid=${id}`);
+    const response = await restAPI.get(
+      `/codelist/blocostracos?docid=${id}&tracoid=${selectedTrace[0].value}`
+    );
 
     setData(response.data);
 

@@ -169,7 +169,7 @@ public class CodelistController {
   @GetMapping("/blocostraco")
   public List<CodelistRs> blocosTraco(@RequestParam(value = "docid", required = false) Long docid,
       @RequestParam(value = "tracoid", required = false) Long tracoid) {
-    var codelist = codelistRepository.SelectBlocosTraco(docid, String.valueOf(tracoid));
+    var codelist = codelistRepository.SelectBlocosTraco(docid, tracoid);
     return codelist.stream().map((codList) -> CodelistRs.converter(codList, Collections.EMPTY_LIST))
         .collect(Collectors.toList());
   }
@@ -181,7 +181,7 @@ public class CodelistController {
       @RequestParam(value = "tracoid", required = false) Long tracoid) {
     List<CodelistRs> lstCodelist = new ArrayList<>();
 
-    var codelist = codelistRepository.SelectBlocosTraco(docid, String.valueOf(tracoid));
+    var codelist = codelistRepository.SelectBlocosTraco(docid, tracoid);
 
     for (Codelist c : codelist) {
       CodelistRs codelistRs = CodelistRs.converter(c, tracoDocRepository.selectTracosBloco(c.getCodelistid()));
