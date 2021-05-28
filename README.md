@@ -9,7 +9,7 @@ A geração automática da LEP foi entregue incompleta, pois ainda é necessári
 </br><img src="https://github.com/MaXximiles/API-3SEM/blob/main/User%20Story%20Cards/StoryCard6.png?raw=true" width=350 height=200>
 <img src="https://github.com/MaXximiles/API-3SEM/blob/main/User%20Story%20Cards/StoryCard3.png?raw=true" width=350 height=200>
 ### Proposta:
-Nesta entrega temos como objetivo criar o controle de usuários, bem como o login de acesso ao sistema e a geração do compilado de documentos full e delta, além de finalizar as pendências da sprint passada.
+Nesta entrega, possuímos o objetivo de criar o controle de usuários, o login de acesso ao sistema, a geração do compilado de documentos full e delta e  de finalizar as pendências da sprint passada.
 </br><p align=center> 
 </br><img src="https://github.com/MaXximiles/API-3SEM/blob/main/User%20Story%20Cards/StoryCard2.png?raw=true" width=350 height=200>
 <img src="https://github.com/MaXximiles/API-3SEM/blob/main/User%20Story%20Cards/StoryCard4.png?raw=true" width=350 height=200>
