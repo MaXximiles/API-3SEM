@@ -3,8 +3,15 @@
 <p align="center"> <img src="https://user-images.githubusercontent.com/18652465/111547833-88631a00-8758-11eb-863c-ccf1e6e93f39.png"> </p>
 
 ### Sprint anterior:
+Na Sprint anterior tínhamos como proposta a reformulação da ideia inicial que não atendia as necessidades do cliente. A comunicação com o cliente foi reforçada para um melhor entendimento de suas necessidades.
+Através disso reformulamos o projeto criando o cadastro de documentos, cadastro do codelist e o cadastro de traços para os documentos. 
+</br><p align=center>
+<img src="https://github.com/MaXximiles/API-3SEM/blob/main/User%20Story%20Cards/StoryCard5.png?raw=true" width=350 height=200>
+<img src="https://github.com/MaXximiles/API-3SEM/blob/main/User%20Story%20Cards/StoryCard7.png?raw=true" width=350 height=200>
+<img src="https://github.com/MaXximiles/API-3SEM/blob/main/User%20Story%20Cards/StoryCard8.png?raw=true" width=350 height=200>
 
 ### Proposta:
+Nesta entrega temos como objetivo a criação automática da LEP e a inserção de tags nos traços, blocos e documentos, trazendo assim melhor controle e organização de documentos para o cliente.
 <p align=center>
 <img src="https://github.com/MaXximiles/API-3SEM/blob/main/User%20Story%20Cards/StoryCard6.png?raw=true" width=350 height=200>
 <img src="https://github.com/MaXximiles/API-3SEM/blob/main/User%20Story%20Cards/StoryCard3.png?raw=true" width=350 height=200>
