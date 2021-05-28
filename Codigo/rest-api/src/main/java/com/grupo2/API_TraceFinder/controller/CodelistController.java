@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.apache.pdfbox.multipdf.PDFMergerUtility;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,15 +17,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.View;
 
 import com.grupo2.API_TraceFinder.DBConexao;
 import com.grupo2.API_TraceFinder.classes.Codelist;
-import com.grupo2.API_TraceFinder.classes.RelacaoBlocoTraco;
 import com.grupo2.API_TraceFinder.controller.dto.CodelistRq;
 import com.grupo2.API_TraceFinder.controller.dto.CodelistRs;
 import com.grupo2.API_TraceFinder.controller.dto.DocumentoRq;
@@ -66,12 +61,22 @@ public class CodelistController {
 		return codelist.stream().map((CdList) -> CodelistRs.converter(CdList, Collections.EMPTY_LIST)).collect(Collectors.toList());	
 	}
 	
-	// SELECT por ID //
+	// SELECT Bloco por ID trazendo os traços //
 	@GetMapping("/{id}")
-	public CodelistRs selectID(@PathVariable("id") Long id)
+	public List<CodelistRs> selectID(@RequestParam(value = "blocoid", required = false) Long blocoid) 
 	{
-		var CdList = codelistRepository.getOne(id);
-		return CodelistRs.converter(CdList, Collections.EMPTY_LIST);
+				
+		 List<CodelistRs> lstCodelist = new ArrayList<>();
+			
+			var codelist = codelistRepository.SelectBlocoTracos(blocoid);
+			
+			for(Codelist c : codelist)
+			{
+				CodelistRs codelistRs = CodelistRs.converter(c, tracoDocRepository.selectTracosBloco(c.getCodelistid()));
+				lstCodelist.add(codelistRs);
+			}
+					
+			return lstCodelist;	
 	}
 	
 	// SELECT os Codelist's de determinado documento//
@@ -177,15 +182,6 @@ public class CodelistController {
 	}
 	
 	
-  /* Filtrando todos os blocos que fazem parte do traço selecionado	
-  @GetMapping("/blocostraco")
-  public List<CodelistRs> blocosTraco(@RequestParam(value = "docid", required = false) Long docid,
-  									 @RequestParam(value = "tracoid", required = false) Long tracoid) 
-  {
-	  var codelist = codelistRepository.SelectBlocosTraco(docid, tracoid);
-	  return codelist.stream().map((codList) -> CodelistRs.converter(codList, Collections.EMPTY_LIST)).collect(Collectors.toList());	
-  }*/
-  
 
   //Filtrando todos os blocos que fazem parte do traço selecionado Trazendo a lista de traços
  @GetMapping("/blocostracos")
