@@ -1,7 +1,7 @@
 ## 💻 Projeto
 Projeto API do 3º Semestre da turma de Banco de Dados FATEC
 
-<p align="center"> <img src="https://user-images.githubusercontent.com/18652465/111547833-88631a00-8758-11eb-863c-ccf1e6e93f39.png"> </p>
+<p align="center"> <img src="https://user-images.githubusercontent.com/18652465/111547833-88631a00-8758-11eb-863c-ccf1e6e93f39.png" height=200 width=200> </p>
 
 ## 🛠 Tecnologias
 
