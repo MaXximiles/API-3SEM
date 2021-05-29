@@ -3,8 +3,6 @@
 <p align="center"> <img src="https://user-images.githubusercontent.com/18652465/111547833-88631a00-8758-11eb-863c-ccf1e6e93f39.png" height=200 width=200> </p>
 
 
- ### Links:
- [Brundown](https://github.com/MaXximiles/API-3SEM/blob/main/Burndowns/SPRINT%202.pdf)
  
 
 ### Sprint anterior:
@@ -81,6 +79,10 @@ Confirmação de exclusão de manual</br></br>
 Banco de dados</br></br>
 <img src=https://user-images.githubusercontent.com/18652465/115090209-a86a3280-9eea-11eb-9f20-b9238a84cced.jpeg border=1 /></br></br>
  
+</p><h1></h1></br>
+
+ ### Links:
+ [Burndown](https://github.com/MaXximiles/API-3SEM/blob/main/Burndowns/SPRINT%202.pdf)
 </p><h1></h1></br>
 
 ### Proposta para próxima Sprint:
