@@ -3,8 +3,6 @@
 <p align="center"> <img src="https://user-images.githubusercontent.com/18652465/111547833-88631a00-8758-11eb-863c-ccf1e6e93f39.png" height=200 width=200> </p>
 
 
- ### Links:
- [Brundown](https://github.com/MaXximiles/API-3SEM/blob/main/Burndowns/SPRINT%201.pdf)
 
 ### Proposta:
 Nesta entrega temos como objetivo validar a ideia inicial do grupo apresentando os story cards, wireframes e um protótipo do projeto.
@@ -22,6 +20,10 @@ Resumo de modificações:
 - Criação dos Wireframes;  
 - Integração da parte web com a API;
 </p></br><h1></h1>
+
+ ### Links:
+ [Burndown](https://github.com/MaXximiles/API-3SEM/blob/main/Burndowns/SPRINT%202.pdf)
+</p><h1></h1></br>
 
 ### Proposta para próxima Sprint:
 <p align=center>
