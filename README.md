@@ -2,6 +2,9 @@
  
 <p align="center"> <img src="https://user-images.githubusercontent.com/18652465/111547833-88631a00-8758-11eb-863c-ccf1e6e93f39.png"> </p>
 
+### Links:
+[Brundown](https://github.com/MaXximiles/API-3SEM/blob/main/Burndowns/SPRINT%203.pdf)
+ 
 ### Sprint anterior:
 Na Sprint anterior tínhamos como proposta a reformulação da ideia inicial que não atendia as necessidades do cliente. A comunicação com o cliente foi reforçada para um melhor entendimento de suas necessidades.
 Através disso reformulamos o projeto criando o cadastro de documentos, cadastro do codelist e o cadastro de traços para os documentos. 
