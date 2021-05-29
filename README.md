@@ -2,8 +2,6 @@
  
 <p align="center"> <img src="https://user-images.githubusercontent.com/18652465/111547833-88631a00-8758-11eb-863c-ccf1e6e93f39.png" height=200 width=200> </p>
 
-### Links:
-[Brundown](https://github.com/MaXximiles/API-3SEM/blob/main/Burndowns/SPRINT%203.pdf)
  
 ### Sprint anterior:
 Na Sprint anterior tínhamos como proposta a reformulação da ideia inicial que não atendia as necessidades do cliente. A comunicação com o cliente foi reforçada para um melhor entendimento de suas necessidades.
@@ -64,6 +62,10 @@ Estrutura de diretórios criados pelo Trace Finder</br></br>
 Exemplo de LEP criada automaticamente</br></br>
 <img src=https://user-images.githubusercontent.com/68132461/117557085-da803780-b045-11eb-8341-371b4c37e28b.png></br>
 </p></br><h1></h1>
+
+ ### Links:
+ [Burndown](https://github.com/MaXximiles/API-3SEM/blob/main/Burndowns/SPRINT%202.pdf)
+</p><h1></h1></br>
 
 ### Proposta para próxima Sprint:
 <p align=center>
