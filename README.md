@@ -22,14 +22,17 @@ Nesta entrega, possuímos o objetivo de criar o controle de usuários, o login d
 Resumo de modificações:
 - Ferramenta de pesquisa, alteração e cadastro de novos usuários
 - Filtro de documentos "full" ou "delta"
-</p></br><h1></h1>
+
 
 Atualização dos modelos Relacional e Lógico do banco de dados:
-<br></br>
-<img src="https://github.com/MaXximiles/API-3SEM/blob/main/Documenta%C3%A7%C3%A3o/Modelo%20Relacional.jpeg?raw=true" width=700 height=400>
-<br></br>
-<img src="https://github.com/MaXximiles/API-3SEM/blob/main/Documenta%C3%A7%C3%A3o/Modelo%20Logico.jpeg?raw=true" width=700 height=400>
-<br></br>
+<p align=center>
+Modelo Relacional</br></br>
+<img src="https://github.com/MaXximiles/API-3SEM/blob/main/Documenta%C3%A7%C3%A3o/Modelo%20Relacional.jpeg?raw=true"></br>
+
+<p align=center>
+Modelo Conceitual</br></br>
+<img src="https://github.com/MaXximiles/API-3SEM/blob/main/Documenta%C3%A7%C3%A3o/Modelo%20Logico.jpeg?raw=true"></br>
+</p></br><h1></h1>
 
 ### Screenshoots:
 
