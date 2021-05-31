@@ -25,8 +25,11 @@ Resumo de modificações:
 </p></br><h1></h1>
 
 Atualização dos modelos Relacional e Lógico do banco de dados:
-<img src="https://github.com/MaXximiles/API-3SEM/blob/main/Documenta%C3%A7%C3%A3o/Modelo%20Relacional.jpeg?raw=true" width=350 height=200>
-<img src="https://github.com/MaXximiles/API-3SEM/blob/main/Documenta%C3%A7%C3%A3o/Modelo%20Logico.jpeg?raw=true" width=350 height=200>
+<br></br>
+<img src="https://github.com/MaXximiles/API-3SEM/blob/main/Documenta%C3%A7%C3%A3o/Modelo%20Relacional.jpeg?raw=true" width=700 height=400>
+<br></br>
+<img src="https://github.com/MaXximiles/API-3SEM/blob/main/Documenta%C3%A7%C3%A3o/Modelo%20Logico.jpeg?raw=true" width=700 height=400>
+<br></br>
 
 ### Screenshoots:
 
