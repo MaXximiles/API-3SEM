@@ -26,11 +26,11 @@ Resumo de modificações:
 
 Atualização dos modelos Relacional e Lógico do banco de dados:
 <p align=center>
-Modelo Relacional</br></br>
+<b>Modelo Relacional</b></br></br>
 <img src="https://github.com/MaXximiles/API-3SEM/blob/main/Documenta%C3%A7%C3%A3o/Modelo%20Relacional.jpeg?raw=true"></br>
 
 <p align=center>
-Modelo Conceitual</br></br>
+  <b>Modelo Conceitual</b></br></br>
 <img src="https://github.com/MaXximiles/API-3SEM/blob/main/Documenta%C3%A7%C3%A3o/Modelo%20Logico.jpeg?raw=true"></br>
 </p></br><h1></h1>
 
