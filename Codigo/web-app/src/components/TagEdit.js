@@ -2,14 +2,10 @@ import React, { useState, useEffect } from "react";
 
 const DocumentEdit = ({ onSubmit, dataEntry }) => {
   const [name, setName] = useState("");
-  const [descricao, setDescricao] = useState("");
-  const [codigo, setCodigo] = useState("");
 
   useEffect(() => {
     if (dataEntry) {
-      setName(dataEntry.tracodocnome);
-      setDescricao(dataEntry.tracodocdescricao);
-      setCodigo(dataEntry.tracodoccodigo);
+      setName(dataEntry.tagNome);
     } else {
       clearFields();
     }
@@ -17,15 +13,11 @@ const DocumentEdit = ({ onSubmit, dataEntry }) => {
 
   const clearFields = () => {
     setName("");
-    setDescricao("");
-    setCodigo("");
   };
 
   const submit = async () => {
     const submitedEntry = {
-      tracodocnome: name,
-      tracodocdescricao: descricao,
-      tracodoccodigo: codigo,
+      tagNome: name,
     };
 
     if (dataEntry) {
@@ -49,26 +41,6 @@ const DocumentEdit = ({ onSubmit, dataEntry }) => {
               placeholder="Nome"
               value={name}
               onChange={(e) => setName(e.target.value)}
-            />
-          </div>
-          <div className="field">
-            <label>Codigo</label>
-            <input
-              type="text"
-              name="codigo"
-              placeholder="Código"
-              value={codigo}
-              onChange={(e) => setCodigo(e.target.value)}
-            />
-          </div>
-          <div className="field">
-            <label>Descricao</label>
-            <input
-              type="text"
-              name="descricao"
-              placeholder="Descricao"
-              value={descricao}
-              onChange={(e) => setDescricao(e.target.value)}
             />
           </div>
         </form>

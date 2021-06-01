@@ -10,6 +10,7 @@ import { withRouter, Route } from "react-router-dom";
 import restAPI from "../apis/restAPI";
 import UserContext from "./UserContext";
 import Tracos from "./Tracos";
+import Tags from "./Tags";
 
 const App = ({ history }) => {
   const [user, setUser] = useState(null);
@@ -44,6 +45,9 @@ const App = ({ history }) => {
         </Route>
         <Route exact path="/traco">
           <Tracos />
+        </Route>
+        <Route exact path="/tag">
+          <Tags />
         </Route>
         <Route exact path="/documento">
           <Document />

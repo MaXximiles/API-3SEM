@@ -59,7 +59,6 @@ const CodelistEdit = ({ onSubmit, dataEntry, docId }) => {
         });
 
         if (addTraces !== {}) {
-          console.log("add", addTraces);
           const response = await restAPI.post(
             `/relacao_bloco_traco/`,
             addTraces
@@ -78,7 +77,6 @@ const CodelistEdit = ({ onSubmit, dataEntry, docId }) => {
         });
 
         if (removeTraces !== {}) {
-          console.log("del", removeTraces);
           await restAPI.post(`/relacao_bloco_traco/delete`, removeTraces);
         }
 
