@@ -13,7 +13,9 @@ const CodelistEdit = ({ onSubmit, dataEntry, docId }) => {
 
   useEffect(() => {
     const getCodelistTraces = async () => {
-      const { data } = await restAPI.get(`/traco_doc/tracodoc?docid=${0}`);
+      const { data } = await restAPI.get(
+        `/traco_doc/tracodoc?docid=${dataEntry.documentoid}`
+      );
 
       const options = data.map((value) => {
         return { value: value.tracodocid, label: value.tracodocnome };
@@ -25,7 +27,7 @@ const CodelistEdit = ({ onSubmit, dataEntry, docId }) => {
 
     const getTraceOptions = async () => {
       const { data } = await restAPI.get(
-        `/traco_doc/tracodoc?docid=${dataEntry.codelistid}`
+        `/traco_doc/tracodoc?docid=${dataEntry.documentoid}`
       );
 
       const options = data.map((value) => {
@@ -57,6 +59,7 @@ const CodelistEdit = ({ onSubmit, dataEntry, docId }) => {
         });
 
         if (addTraces !== {}) {
+          console.log("add", addTraces);
           const response = await restAPI.post(
             `/relacao_bloco_traco/`,
             addTraces
@@ -75,6 +78,7 @@ const CodelistEdit = ({ onSubmit, dataEntry, docId }) => {
         });
 
         if (removeTraces !== {}) {
+          console.log("del", removeTraces);
           await restAPI.post(`/relacao_bloco_traco/delete`, removeTraces);
         }
 
@@ -82,7 +86,9 @@ const CodelistEdit = ({ onSubmit, dataEntry, docId }) => {
       }
     };
 
-    toggleTraces();
+    if (selectedTrace !== prevSelectedTrace) {
+      toggleTraces();
+    }
   }, [selectedTrace, prevSelectedTrace, dataEntry]);
 
   useEffect(() => {

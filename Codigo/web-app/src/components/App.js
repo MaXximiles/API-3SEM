@@ -9,6 +9,7 @@ import SignUp from "./SignUp";
 import { withRouter, Route } from "react-router-dom";
 import restAPI from "../apis/restAPI";
 import UserContext from "./UserContext";
+import Tracos from "./Tracos";
 
 const App = ({ history }) => {
   const [user, setUser] = useState(null);
@@ -34,20 +35,23 @@ const App = ({ history }) => {
   return (
     <UserContext.Provider value={user}>
       <div className="App">
-        <Header />
+        <Header logout={setUser} />
         <Route exact path="/">
           <Login onSubmit={validateAccount} />
         </Route>
         <Route exact path="/index">
           <Index />
         </Route>
+        <Route exact path="/traco">
+          <Tracos />
+        </Route>
         <Route exact path="/documento">
           <Document />
         </Route>
-        <Route path="/documento/:id">
+        <Route exact path="/documento/:id">
           <Codelist />
         </Route>
-        <Route path="/cadastrar">
+        <Route exact path="/cadastrar">
           <SignUp />
         </Route>
       </div>

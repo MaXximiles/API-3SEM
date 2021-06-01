@@ -5,6 +5,7 @@ import Dropdown from "./Dropdown";
 import Modal from "./Modal";
 import CodelistEdit from "./CodelistEdit";
 import CodelistDelete from "./CodelistDelete";
+import withAuthorization from "./withAuthorization";
 import { useParams } from "react-router-dom";
 import restAPI from "../apis/restAPI";
 
@@ -33,24 +34,11 @@ const Codelist = () => {
     const getData = async () => {
       setIsLoading(true);
 
-      const response = await restAPI.get(`/codelist/codelistdoc?docid=${id}`);
-
-      setData(response.data);
-
-      setIsLoading(false);
-    };
-
-    getTraceOptions();
-    getData();
-  }, [id]);
-
-  useEffect(() => {
-    const getData = async () => {
-      setIsLoading(true);
-
-      const response = await restAPI.get(
-        `/codelist/blocostracos?docid=${id}&tracoid=${selectedTrace[0].value}`
-      );
+      const response = selectedTrace[0]
+        ? await restAPI.get(
+            `/codelist/blocostracos?docid=${id}&tracoid=${selectedTrace[0].value}`
+          )
+        : await restAPI.get(`/codelist/codelistdoc?docid=${id}`);
 
       console.log(response.data);
       setData(response.data);
@@ -58,16 +46,20 @@ const Codelist = () => {
       setIsLoading(false);
     };
 
-    selectedTrace[0] && getData();
+    getTraceOptions();
+    getData();
   }, [id, selectedTrace]);
 
   const getData = async () => {
     setIsLoading(true);
 
-    const response = await restAPI.get(
-      `/codelist/blocostracos?docid=${id}&tracoid=${selectedTrace[0].value}`
-    );
+    const response = selectedTrace[0]
+      ? await restAPI.get(
+          `/codelist/blocostracos?docid=${id}&tracoid=${selectedTrace[0].value}`
+        )
+      : await restAPI.get(`/codelist/codelistdoc?docid=${id}`);
 
+    console.log(response.data);
     setData(response.data);
 
     setIsLoading(false);
@@ -158,11 +150,19 @@ const Codelist = () => {
         </div>
         <div className="column">
           <Loader isLoading={isLoading} />
-          <Table data={data} onEdit={editItem} onDelete={deleteItem} />
+          <Table
+            data={data}
+            docId={id}
+            filter={selectedTrace}
+            onEdit={editItem}
+            onDelete={deleteItem}
+          />
         </div>
       </div>
     </div>
   );
 };
 
-export default Codelist;
+const condition = (authUser) => !!authUser;
+
+export default withAuthorization(condition)(Codelist);

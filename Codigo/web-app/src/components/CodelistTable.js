@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import restAPI from "../apis/restAPI";
 import ContextMenu from "./ContextMenu";
 
-const Table = ({ data, onEdit, onDelete }) => {
+const Table = ({ data, onEdit, onDelete, docId, filter }) => {
   const [columnStyle, setColumnStyle] = useState([]);
   const [contextPosition, setContextPosition] = useState({});
   const [selectedItem, setSelectedItem] = useState({});
@@ -108,6 +108,12 @@ const Table = ({ data, onEdit, onDelete }) => {
     await restAPI.get(`/lep/gerarlep?codelistid=${selectedItem.codelistid}`);
   };
 
+  const genFull = async () => {
+    await restAPI.get(
+      `/codelist/gerarfull?docid=${docId}&tracoid=${filter[0].value}`
+    );
+  };
+
   const onContextMenu = (event, item) => {
     event.preventDefault();
 
@@ -152,21 +158,56 @@ const Table = ({ data, onEdit, onDelete }) => {
     return null;
   };
 
+  var indexSub = 0;
   const rendredTableHead = data.length
     ? Object.keys(data[0]).map((key, index) => {
+        if (key === "codelistcaminho" || key === "documentoid") {
+          indexSub++;
+          return;
+        }
+
+        const colNames = () => {
+          switch (key) {
+            case "codelistid":
+              return "ID";
+            case "codelistsecao":
+              return "Seção";
+            case "codelistsubsecao":
+              return "Subseção";
+            case "codelistnomebloco":
+              return "Bloco";
+            case "codelistcodebloco":
+              return "Código";
+            case "tracos":
+              return "Traços";
+            default:
+              return key;
+          }
+        };
+
         return (
-          <th key={key} style={columnStyle[index]}>
-            {key}
+          <th key={key} style={columnStyle[index - indexSub]}>
+            {colNames()}
           </th>
         );
       })
     : null;
 
   const renderedTableBody = data.map((item, rowIndex) => {
+    indexSub = 0;
     const renderedTableCells = Object.entries(item).map((value, index) => {
+      if (value[0] === "codelistcaminho" || value[0] === "documentoid") {
+        indexSub++;
+        return;
+      }
+
       if (Array.isArray(value[1])) {
         return (
-          <td key={value[0]} data-label={value[0]} style={columnStyle[index]}>
+          <td
+            key={value[0]}
+            data-label={value[0]}
+            style={columnStyle[index - indexSub]}
+          >
             {value[1]
               .map((traco) => {
                 return traco.tracodocnome;
@@ -177,7 +218,11 @@ const Table = ({ data, onEdit, onDelete }) => {
       }
 
       return (
-        <td key={value[0]} data-label={value[0]} style={columnStyle[index]}>
+        <td
+          key={value[0]}
+          data-label={value[0]}
+          style={columnStyle[index - indexSub]}
+        >
           {value[1]}
         </td>
       );
@@ -211,6 +256,15 @@ const Table = ({ data, onEdit, onDelete }) => {
               >
                 <i className="plus icon"></i>
                 Adicionar Bloco
+              </div>
+              <div
+                className={`ui right floated small primary labeled icon button ${
+                  filter.length !== 1 ? "disabled" : ""
+                }`}
+                onClick={genFull}
+              >
+                <i className="book icon"></i>
+                Gerar Full
               </div>
             </th>
           </tr>

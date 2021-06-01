@@ -126,7 +126,7 @@ const DocumentEdit = ({ onSubmit, dataEntry }) => {
             <input
               type="text"
               name="section"
-              placeholder="Seção"
+              placeholder="Nome"
               value={name}
               onChange={(e) => setName(e.target.value)}
             />
@@ -136,7 +136,7 @@ const DocumentEdit = ({ onSubmit, dataEntry }) => {
             <input
               type="text"
               name="subsection"
-              placeholder="Subseção"
+              placeholder="PN"
               value={pn}
               onChange={(e) => setPn(e.target.value)}
             />

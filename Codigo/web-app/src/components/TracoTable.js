@@ -96,20 +96,14 @@ const Table = ({ data, onEdit, onDelete }) => {
               className="ui dropdown item"
               onClick={(e) => editItem(e, selectedItem)}
             >
-              Editar Manual
+              Editar Traço
             </div>
             <div
               className="ui dropdown item"
               onClick={(e) => deleteItem(e, selectedItem)}
             >
-              Deletar Manual
+              Deletar Traço
             </div>
-            <Link
-              className="ui dropdown item"
-              to={`${url}/${selectedItem.documentoid}`}
-            >
-              Ver Codelist
-            </Link>
           </div>
         </ContextMenu>
       );
@@ -120,18 +114,16 @@ const Table = ({ data, onEdit, onDelete }) => {
 
   const rendredTableHead = data.length
     ? Object.keys(data[0]).map((key, index) => {
-        if (key === "documentocaminho" || key === "documentocdlistlep") {
-          return;
-        }
-
         const colName = () => {
           switch (key) {
-            case "documentoid":
+            case "tracodocid":
               return "ID";
-            case "documentonome":
+            case "tracodocnome":
               return "Nome";
-            case "documentopn":
-              return "PN";
+            case "tracodocdescricao":
+              return "Descricao";
+            case "tracodoccodigo":
+              return "Código";
             default:
               return key;
           }
@@ -147,13 +139,6 @@ const Table = ({ data, onEdit, onDelete }) => {
 
   const renderedTableBody = data.map((item, rowIndex) => {
     const renderedTableCells = Object.entries(item).map((value, index) => {
-      if (
-        value[0] === "documentocaminho" ||
-        value[0] === "documentocdlistlep"
-      ) {
-        return;
-      }
-
       return (
         <td key={value[0]} data-label={value[0]} style={columnStyle[index]}>
           {value[1]}
@@ -188,7 +173,7 @@ const Table = ({ data, onEdit, onDelete }) => {
                 onClick={(e) => editItem(e)}
               >
                 <i className="plus icon"></i>
-                Adicionar Manual
+                Adicionar Traço
               </div>
             </th>
           </tr>
