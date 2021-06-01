@@ -21,7 +21,7 @@ Nesta entrega, possuímos o objetivo de criar o controle de usuários, o login d
 
 Resumo de modificações:
 - Ferramenta de pesquisa, alteração e cadastro de novos usuários
-- Filtro de documentos "full" ou "delta"
+- Filtro de documentos "full".
 
 
 Atualização dos modelos Relacional e Lógico do banco de dados:
