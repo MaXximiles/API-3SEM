@@ -8,6 +8,9 @@ const DocumentEdit = ({ onSubmit, dataEntry }) => {
   const [traceOptions, setTraceOptions] = useState([]);
   const [selectedTrace, setSelectedTrace] = useState([]);
   const [prevSelectedTrace, setPrevSelectedTrace] = useState(null);
+  const [tagOptions, setTagOptions] = useState([]);
+  const [selectedTag, setSelectedTag] = useState([]);
+  const [prevSelectedTag, setPrevSelectedTag] = useState(null);
 
   useEffect(() => {
     const getDocumentTraces = async () => {
@@ -33,7 +36,31 @@ const DocumentEdit = ({ onSubmit, dataEntry }) => {
       setTraceOptions(options);
     };
 
+    const getDocumentTags = async () => {
+      const { data } = await restAPI.get(
+        `/traco_doc/tracodoc?docid=${dataEntry.documentoid}`
+      );
+
+      const options = data.map((value) => {
+        return { value: value.tracodocid, label: value.tracodocnome };
+      });
+
+      setSelectedTrace(options);
+      setPrevSelectedTrace(options);
+    };
+
+    const getTagOptions = async () => {
+      const { data } = await restAPI.get(`/tag/`);
+
+      const options = data.map((value) => {
+        return { value: value.tagId, label: value.tagNome };
+      });
+
+      setTagOptions(options);
+    };
+
     getTraceOptions();
+    getTagOptions();
     dataEntry && getDocumentTraces();
   }, [dataEntry]);
 
@@ -78,7 +105,13 @@ const DocumentEdit = ({ onSubmit, dataEntry }) => {
     };
 
     toggleTraces();
-  }, [selectedTrace, prevSelectedTrace, dataEntry]);
+  }, [
+    selectedTrace,
+    prevSelectedTrace,
+    selectedTag,
+    prevSelectedTag,
+    dataEntry,
+  ]);
 
   useEffect(() => {
     if (dataEntry) {
@@ -149,6 +182,17 @@ const DocumentEdit = ({ onSubmit, dataEntry }) => {
                 options={traceOptions}
                 selected={selectedTrace}
                 onSelectedChange={setSelectedTrace}
+              />
+            )}
+          </div>
+          <div className="field">
+            {dataEntry && (
+              <Dropdown
+                label="Tags"
+                defaultText="Selecione um ou mais tags"
+                options={tagOptions}
+                selected={selectedTag}
+                onSelectedChange={setSelectedTag}
               />
             )}
           </div>

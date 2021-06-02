@@ -1,11 +1,41 @@
 import React, { useState, useEffect } from "react";
+import Dropdown from "./Dropdown";
+import restAPI from "../apis/restAPI";
 
 const DocumentEdit = ({ onSubmit, dataEntry }) => {
   const [name, setName] = useState("");
   const [descricao, setDescricao] = useState("");
   const [codigo, setCodigo] = useState("");
+  const [tagOptions, setTagOptions] = useState([]);
+  const [selectedTag, setSelectedTag] = useState([]);
+  const [prevSelectedTag, setPrevSelectedTag] = useState(null);
 
   useEffect(() => {
+    const getCodelistTags = async () => {
+      const { data } = await restAPI.get(
+        `/traco_doc/tracodoc?docid=${dataEntry.documentoid}`
+      );
+
+      const options = data.map((value) => {
+        return { value: value.tracodocid, label: value.tracodocnome };
+      });
+
+      setSelectedTag(options);
+      setPrevSelectedTag(options);
+    };
+
+    const getTagOptions = async () => {
+      const { data } = await restAPI.get(`/tag/`);
+
+      const options = data.map((value) => {
+        return { value: value.tagId, label: value.tagNome };
+      });
+
+      setTagOptions(options);
+    };
+
+    dataEntry && getTagOptions();
+
     if (dataEntry) {
       setName(dataEntry.tracodocnome);
       setDescricao(dataEntry.tracodocdescricao);
@@ -70,6 +100,17 @@ const DocumentEdit = ({ onSubmit, dataEntry }) => {
               value={descricao}
               onChange={(e) => setDescricao(e.target.value)}
             />
+          </div>
+          <div className="field">
+            {dataEntry && (
+              <Dropdown
+                label="Tags"
+                defaultText="Selecione um ou mais tags"
+                options={tagOptions}
+                selected={selectedTag}
+                onSelectedChange={setSelectedTag}
+              />
+            )}
           </div>
         </form>
       </div>
