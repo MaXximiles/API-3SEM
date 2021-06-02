@@ -7,7 +7,7 @@
 ### Proposta:
 Nesta entrega temos como objetivo validar a ideia inicial do grupo apresentando os story cards, wireframes e um protótipo do projeto.
 <p align=center>
-</br><img src="https://github.com/MaXximiles/API-3SEM/blob/main/User%20Story%20Cards/StoryCard1.png?raw=true" width=350 height=200>
+</br><img src="https://github.com/MaXximiles/API-3SEM/blob/main/Documenta%C3%A7%C3%A3o/User%20Story%20Cards/StoryCard1.png?raw=true" width=350 height=200>
 
 
 </p></br><h1></h1>
