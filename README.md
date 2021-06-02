@@ -87,8 +87,8 @@ Banco de dados</br></br>
 
 ### Proposta para próxima Sprint:
 <p align=center>
-<img src="https://github.com/MaXximiles/API-3SEM/blob/main/User%20Story%20Cards/StoryCard6.png?raw=true" width=350 height=200>
-<img src="https://github.com/MaXximiles/API-3SEM/blob/main/User%20Story%20Cards/StoryCard3.png?raw=true" width=350 height=200>
+<img src="https://github.com/MaXximiles/API-3SEM/blob/main/Documenta%C3%A7%C3%A3o/User%20Story%20Cards/StoryCard6.png?raw=true" width=350 height=200>
+<img src="https://github.com/MaXximiles/API-3SEM/blob/main/Documenta%C3%A7%C3%A3o/User%20Story%20Cards/StoryCard3.png?raw=true" width=350 height=200>
 </p></br>
 Para a próxima entrega nosso grupo pretende implementar as tags referentes a blocos, manuais e traços.
 Será feita a implementação do importe de arquivos para criação da LEP automática.
