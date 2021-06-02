@@ -27,9 +27,10 @@ Resumo de modificações:
 
 ### Proposta para próxima Sprint:
 <p align=center>
-<img src="https://github.com/MaXximiles/API-3SEM/blob/main/User%20Story%20Cards/StoryCard5.png?raw=true" width=350 height=200>
-<img src="https://github.com/MaXximiles/API-3SEM/blob/main/User%20Story%20Cards/StoryCard7.png?raw=true" width=350 height=200>
-<img src="https://github.com/MaXximiles/API-3SEM/blob/main/User%20Story%20Cards/StoryCard8.png?raw=true" width=350 height=200>
+ 
+<img src="https://github.com/MaXximiles/API-3SEM/blob/main/Documenta%C3%A7%C3%A3o/User%20Story%20Cards/StoryCard5.png?raw=true" width=350 height=200>
+<img src="https://github.com/MaXximiles/API-3SEM/blob/main/Documenta%C3%A7%C3%A3o/User%20Story%20Cards/StoryCard7.png?raw=true" width=350 height=200>
+<img src="https://github.com/MaXximiles/API-3SEM/blob/main/Documenta%C3%A7%C3%A3o/User%20Story%20Cards/StoryCard8.png?raw=true" width=350 height=200>
 </p></br>
 Para a próxima entrega nosso grupo pretende aperfeiçoar e finalizar as funcionalidades desejadas pelo cliente, além de, dentro do possível implementar funcionalidades extras ao projeto.
  
