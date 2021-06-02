@@ -90,7 +90,14 @@ As seguintes tecnologias foram utilizadas no desenvolvimento do projeto:
                      </tr>
                       <tr>
                             <td align=center>Sprint 4<br>17/05/2021 a 05/06/2021</td>
-                            <td> <p align=center>⚠ EM DESENVOLVIMENTO ⚠</td>
+                            <td> <p align=center>
+                             ✓ Módulo de controle de tags;
+                             ✓ Controle de nível de usuários;
+                             ✓ Criação do modelo conceitual do banco de dados;
+                             ✓ Criação do modelo relacional do banco de dados;
+                             <p align=center>                          
+                       </p>
+                       </td>
                             <td><p><a href="https://github.com/MaXximiles/API-3SEM/tree/sprint-4">Ver mais... </a></p></td>
                      </tr>
               </tbody>
