@@ -8,15 +8,15 @@
 ### Sprint anterior:
 Na primeira entrega tivemos por finalidade a validação da ideia proposta com o cliente, apresentando os wireframes e story cards.
 <p align=center>
-</br><img src="https://github.com/MaXximiles/API-3SEM/blob/main/User%20Story%20Cards/StoryCard1.png?raw=true" width=350 height=200>
+</br><img src="https://github.com/MaXximiles/API-3SEM/blob/main/Documenta%C3%A7%C3%A3o/User%20Story%20Cards/StoryCard1.png?raw=true" width=350 height=200>
 
 ### Proposta:
 Nesta entrega temos como proposta a reformulação da ideia inicial que não atendeu a necessidade do cliente. A tabela codelist será implementada, na qual passará ser possível atualizar os blocos dos manuais, o cadastro de manuais, seus traços e a reformulação do front-end.
 
 </br><p align=center>
-<img src="https://github.com/MaXximiles/API-3SEM/blob/main/User%20Story%20Cards/StoryCard5.png?raw=true" width=350 height=200>
-<img src="https://github.com/MaXximiles/API-3SEM/blob/main/User%20Story%20Cards/StoryCard7.png?raw=true" width=350 height=200>
-<img src="https://github.com/MaXximiles/API-3SEM/blob/main/User%20Story%20Cards/StoryCard8.png?raw=true" width=350 height=200>
+<img src="https://github.com/MaXximiles/API-3SEM/blob/main/Documenta%C3%A7%C3%A3o/User%20Story%20Cards/StoryCard5.png?raw=true" width=350 height=200>
+<img src="https://github.com/MaXximiles/API-3SEM/blob/main/Documenta%C3%A7%C3%A3o/User%20Story%20Cards/StoryCard7.png?raw=true" width=350 height=200>
+<img src="https://github.com/MaXximiles/API-3SEM/blob/main/Documenta%C3%A7%C3%A3o/User%20Story%20Cards/StoryCard8.png?raw=true" width=350 height=200>
 
 </p></br><h1></h1>
 
