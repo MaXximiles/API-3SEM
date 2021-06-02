@@ -7,15 +7,15 @@
 Na Sprint anterior tínhamos como proposta a reformulação da ideia inicial que não atendia as necessidades do cliente. A comunicação com o cliente foi reforçada para um melhor entendimento de suas necessidades.
 Através disso reformulamos o projeto criando o cadastro de documentos, cadastro do codelist e o cadastro de traços para os documentos. 
 </br><p align=center>
-</br><img src="https://github.com/MaXximiles/API-3SEM/blob/main/User%20Story%20Cards/StoryCard5.png?raw=true" width=350 height=200>
-<img src="https://github.com/MaXximiles/API-3SEM/blob/main/User%20Story%20Cards/StoryCard7.png?raw=true" width=350 height=200>
-<img src="https://github.com/MaXximiles/API-3SEM/blob/main/User%20Story%20Cards/StoryCard8.png?raw=true" width=350 height=200>
+</br><img src="https://github.com/MaXximiles/API-3SEM/blob/main/Documenta%C3%A7%C3%A3o/User%20Story%20Cards/StoryCard5.png?raw=true" width=350 height=200>
+<img src="https://github.com/MaXximiles/API-3SEM/blob/main/Documenta%C3%A7%C3%A3o/User%20Story%20Cards/StoryCard7.png?raw=true" width=350 height=200>
+<img src="https://github.com/MaXximiles/API-3SEM/blob/main/Documenta%C3%A7%C3%A3o/User%20Story%20Cards/StoryCard8.png?raw=true" width=350 height=200>
 
 ### Proposta:
 Nesta entrega temos como objetivo a criação automática da LEP e a inserção de tags nos traços, blocos e documentos, trazendo assim melhor controle e organização de documentos para o cliente.
 <p align=center>
-</br><img src="https://github.com/MaXximiles/API-3SEM/blob/main/User%20Story%20Cards/StoryCard6.png?raw=true" width=350 height=200>
-<img src="https://github.com/MaXximiles/API-3SEM/blob/main/User%20Story%20Cards/StoryCard3.png?raw=true" width=350 height=200>
+</br><img src="https://github.com/MaXximiles/API-3SEM/blob/main/Documenta%C3%A7%C3%A3o/User%20Story%20Cards/StoryCard6.png?raw=true" width=350 height=200>
+<img src="https://github.com/MaXximiles/API-3SEM/blob/main/Documenta%C3%A7%C3%A3o/User%20Story%20Cards/StoryCard3.png?raw=true" width=350 height=200>
 
 </p></br><h1></h1>
 
@@ -69,8 +69,8 @@ Exemplo de LEP criada automaticamente</br></br>
 
 ### Proposta para próxima Sprint:
 <p align=center>
-<img src="https://github.com/MaXximiles/API-3SEM/blob/main/User%20Story%20Cards/StoryCard2.png?raw=true" width=350 height=200>
-<img src="https://github.com/MaXximiles/API-3SEM/blob/main/User%20Story%20Cards/StoryCard4.png?raw=true" width=350 height=200>
+<img src="https://github.com/MaXximiles/API-3SEM/blob/main/Documenta%C3%A7%C3%A3o/User%20Story%20Cards/StoryCard2.png?raw=true" width=350 height=200>
+<img src="https://github.com/MaXximiles/API-3SEM/blob/main/Documenta%C3%A7%C3%A3o/User%20Story%20Cards/StoryCard4.png?raw=true" width=350 height=200>
 </p></br>
 Para a próxima entrega nosso grupo pretende aperfeiçoar e finalizar as funcionalidades desejadas pelo cliente, além de, dentro do possível implementar funcionalidades extras ao projeto.
  
