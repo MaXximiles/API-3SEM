@@ -31,17 +31,17 @@ Resumo de modificações:
 - Criação do modelo conceitual do banco de dados;
 - Criação do modelo relacional do banco de dados;
 
-
-Atualização dos modelos Relacional e Lógico do banco de dados:
-<p align=center>
-<b>Modelo Relacional</b></br></br>
-<img src="https://github.com/MaXximiles/API-3SEM/blob/main/Documenta%C3%A7%C3%A3o/Modelo%20Relacional.jpeg?raw=true"></br>
-
-<p align=center>
-  <b>Modelo Conceitual</b></br></br>
-<img src="https://github.com/MaXximiles/API-3SEM/blob/main/Documenta%C3%A7%C3%A3o/Modelo%20Logico.jpeg?raw=true"></br>
 </p></br><h1></h1>
 
 ### Screenshoots:
+<p align=center>
+Atualização dos modelos Relacional e Lógico do banco de dados:</p>
+<p align=center><b>Modelo Relacional</b></br></br>
+<img src="https://github.com/MaXximiles/API-3SEM/blob/main/Documenta%C3%A7%C3%A3o/Modelo%20Relacional.jpeg?raw=true">
 
+<p align=center>
+</br><b>Modelo Conceitual</b></br>
+</br><img src="https://github.com/MaXximiles/API-3SEM/blob/main/Documenta%C3%A7%C3%A3o/Modelo%20Logico.jpeg?raw=true">
+<p align=center>
+<b>Burndown<b></br></br>
 </p></br><h1></h1>
