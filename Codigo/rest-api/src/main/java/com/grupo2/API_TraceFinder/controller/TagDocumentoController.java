@@ -76,10 +76,10 @@ public class TagDocumentoController {
 	}
 	
 	// DELETE
-			@DeleteMapping("/{tagdocumentoid}")
-			public void deleteTagDocumento(@PathVariable Long tagDocumentoid)
-			{			 
-			 	 tagDocumentoRepository.deleteById(tagDocumentoid);
-			}
+	@DeleteMapping("/{tagdocumentoid}")
+	public void deleteTagDocumento(@PathVariable Long tagDocumentoid)
+	{			 
+	 	 tagDocumentoRepository.deleteById(tagDocumentoid);
+	}
 	
 }

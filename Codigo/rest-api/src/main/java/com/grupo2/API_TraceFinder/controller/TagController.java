@@ -26,11 +26,7 @@ public class TagController {
 
   private TagRepository tagRepository = null;
 
-  public TagController(TagRepository TagRepository) {
-
-    this.tagRepository = TagRepository;
-
-  }
+  public TagController(TagRepository TagRepository) { this.tagRepository = TagRepository;}
 
   // SELECT de todos//
   @GetMapping("/")
@@ -41,14 +37,43 @@ public class TagController {
 
   // SELECT por ID //
   @GetMapping("/{id}")
-  public TagRs selectID(@PathVariable("id") Long id) {
+  public TagRs selectID(@PathVariable("id") Long id) 
+  {
     var tag = tagRepository.getOne(id);
     return TagRs.converter(tag);
   }
+  
+  
+  // SELECT TAGS DOS DOCUMENTOS
+  @GetMapping("/tagsdocumentos")
+  public List<TagRs> selectTagDocumento(@PathVariable("docid") Long docid) 
+  {
+    var tag = tagRepository.selectTagDocumento(docid);
+    return tag.stream().map((tg) -> TagRs.converter(tg)).collect(Collectors.toList());
+  }
+  
+  
+  // SELECT TAGS DOS BLOCOS
+  @GetMapping("/tagsblocos")
+  public List<TagRs> selectTagBloco(@PathVariable("blocoid") Long blocoid) 
+  {
+    var tag = tagRepository.selectTagBloco(blocoid);
+    return tag.stream().map((tg) -> TagRs.converter(tg)).collect(Collectors.toList());
+  }
+  
+//SELECT TAGS DOS TRAÇOS
+ @GetMapping("/tagsblocos")
+ public List<TagRs> selectTagTraco(@PathVariable("tracocoid") Long tracoid) 
+ {
+   var tag = tagRepository.selectTagTraco(tracoid);
+   return tag.stream().map((tg) -> TagRs.converter(tg)).collect(Collectors.toList());
+ }
+  
 
   // INSERT //
   @PostMapping("/")
-  public void insertTag(@RequestBody TagRq tag) {
+  public void insertTag(@RequestBody TagRq tag) 
+  {
     var tag1 = new Tag();
     tag1.setTagNome(tag.getTagNome());
     tagRepository.save(tag1);

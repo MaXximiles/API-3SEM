@@ -5,6 +5,7 @@ import java.security.MessageDigest;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.json.JSONObject;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -117,7 +118,7 @@ public class UsuarioController {
 
   // Validação de Login e senha
   @GetMapping("/logar")
-  public boolean Logar(@RequestParam("email") String email, @RequestParam("senha") String senha) throws Exception {
+  public UsuarioRs Logar(@RequestParam("email") String email, @RequestParam("senha") String senha) throws Exception {
     var user = usuarioRepository.SelectUsuarioEmail(email);
 
     Long UserId = user.get(0).getUsuarioid();
@@ -127,18 +128,35 @@ public class UsuarioController {
     String UserNivel = user.get(0).getUsuarionivel();
     String UserLogin = user.get(0).getUsuariologin();
 
-    if (user.isEmpty() == false) {
+    if (user.isEmpty() == false) 
+    {
       String SenhaCripto = md5(senha);
 
-      if (!senha.equals(SenhaCripto)) {
-        System.out.println("Login realizado com sucesso");
-        return true;
-      } else {
-        System.out.println("Senha não confere");
-        return false;
-      }
-    } else {
-      return false;
+		  if (!senha.equals(SenhaCripto)) 
+		  {
+		    System.out.println("Login realizado com sucesso");
+		    
+		    /*String Json = "{\"UserID\":\'"+UserId+"\',"
+		    		+ "\"UserSenha\":\'"+UserSenha+"',"
+		    		+ "\"UserEmail\":\'"+UserEmail+"',"
+		    		+ "\"UserNome\":\'"+UserNome+"',"
+		    		+ "\"UserNivel\":\'"+UserNivel+"',"
+		    		+ "\"UserLogin\":\'"+UserLogin+"'";
+		    JSONObject jsonObject = new JSONObject(Json);*/
+		    
+		    var user1 = usuarioRepository.getOne(UserId);
+		    return UsuarioRs.converter(user1);
+		
+		  } 
+		  else 
+		  {
+		    System.out.println("Senha não confere");
+		    return null;
+		  }
+    } 
+    else 
+    {
+      return null;
     }
 
   }
