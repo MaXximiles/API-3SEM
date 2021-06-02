@@ -20,8 +20,16 @@ Nesta entrega, possuímos o objetivo de criar o controle de usuários, o login d
 ### Detalhes da Sprint:
 
 Resumo de modificações:
-- Ferramenta de pesquisa, alteração e cadastro de novos usuários
-- Filtro de documentos "full".
+- Módulo de controle de tags:
+  - Pesquisa de tags de traços, manuais e blocos;
+  - Cadastro tags de traços, manuais e blocos;
+  - Alteração tags de traços, manuais e blocos;
+  - Exclusão tags de traços, manuais e blocos;
+- Ferramenta de pesquisa, alteração e cadastro de novos usuários;
+- Filtro de documentos "full";
+- Controle de nível de usuários;
+- Criação do modelo conceitual do banco de dados;
+- Criação do modelo relacional do banco de dados;
 
 
 Atualização dos modelos Relacional e Lógico do banco de dados:
