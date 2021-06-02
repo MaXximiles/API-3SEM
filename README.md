@@ -37,9 +37,9 @@ Resumo de modificações:
   - Criação de arquivo modelo de LEP.pdf;
 - Implementação de tag (A implementação de tags possibilita filtrar documentos, traços e blocos pelas tags correspondentes):
   - Criação das classes tag (Documento, bloco e traço) na API;
-- Versionamento do Banco de Dados:
-- Listagem de Revisões feita através da leitura do arquivo .pdf upado para o sistema:
-- Função logar e senha criptografada:
+- Versionamento do Banco de Dados;
+- Listagem de Revisões feita através da leitura do arquivo .pdf upado para o sistema;
+- Função logar e senha criptografada;
 </p></br><h1></h1>
 
 ### Screenshoots:
