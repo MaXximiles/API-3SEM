@@ -24,9 +24,13 @@ const Codelist = () => {
     const getTraceOptions = async () => {
       const { data } = await restAPI.get(`/traco_doc/tracodoc?docid=${id}`);
 
+      console.log("tracos doc", id, data);
+
       const options = data.map((value) => {
         return { value: value.tracodocid, label: value.tracodocnome };
       });
+
+      console.log("options doc", id, options);
 
       setTraceOptions(options);
     };

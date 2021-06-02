@@ -13,12 +13,14 @@ const DocumentEdit = ({ onSubmit, dataEntry }) => {
   useEffect(() => {
     const getCodelistTags = async () => {
       const { data } = await restAPI.get(
-        `/traco_doc/tracodoc?docid=${dataEntry.documentoid}`
+        `/tag/tagstracos?tracoid=${dataEntry.tracodocid}`
       );
 
       const options = data.map((value) => {
-        return { value: value.tracodocid, label: value.tracodocnome };
+        return { value: value.tagid, label: value.tagnome };
       });
+
+      console.log("tags", options);
 
       setSelectedTag(options);
       setPrevSelectedTag(options);
@@ -35,6 +37,7 @@ const DocumentEdit = ({ onSubmit, dataEntry }) => {
     };
 
     dataEntry && getTagOptions();
+    dataEntry && getCodelistTags();
 
     if (dataEntry) {
       setName(dataEntry.tracodocnome);
@@ -44,6 +47,47 @@ const DocumentEdit = ({ onSubmit, dataEntry }) => {
       clearFields();
     }
   }, [dataEntry]);
+
+  useEffect(() => {
+    const toggleTags = async () => {
+      if (selectedTag !== prevSelectedTag && dataEntry && prevSelectedTag) {
+        var addTraces = {};
+        selectedTag.forEach((value) => {
+          if (!prevSelectedTag.includes(value)) {
+            addTraces = {
+              tracoId: dataEntry.tracodocid,
+              tagId: value.value,
+            };
+          }
+        });
+
+        console.log("Traces to be added", addTraces);
+        if (addTraces !== {}) {
+          const response = await restAPI.post(`/tagtraco/`, addTraces);
+          console.log(response);
+        }
+
+        var removeTraces = {};
+        prevSelectedTag.forEach((value) => {
+          if (!selectedTag.includes(value)) {
+            removeTraces = {
+              tracoId: dataEntry.tracodocid,
+              tagId: value.value,
+            };
+          }
+        });
+
+        console.log("Tags to be removed", removeTraces);
+        if (removeTraces !== {}) {
+          await restAPI.post(`/tagtraco/delete`, removeTraces);
+        }
+
+        setPrevSelectedTag(selectedTag);
+      }
+    };
+    console.log(prevSelectedTag, selectedTag);
+    toggleTags();
+  }, [selectedTag, prevSelectedTag, dataEntry]);
 
   const clearFields = () => {
     setName("");

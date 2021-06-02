@@ -10,42 +10,40 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "tag_traco")
 public class TagTraco {
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="tag_tracoid")
-	private Long tagTracoId;
-	
-	@Column(name="tag_id")
-	private Long tagId;
-	
-	@Column(name="traco_id")
-	private Long tracoId;
 
-	public Long getTagTracoId() {
-		return tagTracoId;
-	}
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "tag_tracoid")
+  private Long tagTracoId;
 
-	public void setTagTracoId(Long tagTracoId) {
-		this.tagTracoId = tagTracoId;
-	}
+  @Column(name = "tag_id")
+  private Long tagId;
 
-	public Long getTagId() {
-		return tagId;
-	}
+  @Column(name = "traco_doc_id")
+  private Long tracoId;
 
-	public void setTagId(Long tagId) {
-		this.tagId = tagId;
-	}
+  public Long getTagTracoId() {
+    return tagTracoId;
+  }
 
-	public Long getTracoId() {
-		return tracoId;
-	}
+  public void setTagTracoId(Long tagTracoId) {
+    this.tagTracoId = tagTracoId;
+  }
 
-	public void setTracoId(Long tracoId) {
-		this.tracoId = tracoId;
-	}
-	
-	
-	
+  public Long getTagId() {
+    return tagId;
+  }
+
+  public void setTagId(Long tagId) {
+    this.tagId = tagId;
+  }
+
+  public Long getTracoId() {
+    return tracoId;
+  }
+
+  public void setTracoId(Long tracoId) {
+    this.tracoId = tracoId;
+  }
+
 }

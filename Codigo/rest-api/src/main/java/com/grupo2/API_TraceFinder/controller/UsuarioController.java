@@ -121,43 +121,40 @@ public class UsuarioController {
   public UsuarioRs Logar(@RequestParam("email") String email, @RequestParam("senha") String senha) throws Exception {
     var user = usuarioRepository.SelectUsuarioEmail(email);
 
-    Long UserId = user.get(0).getUsuarioid();
-    String UserSenha = user.get(0).getUsuariosenha();
-    String UserEmail = user.get(0).getUsuarioemail();
-    String UserNome = user.get(0).getUsuarionome();
-    String UserNivel = user.get(0).getUsuarionivel();
-    String UserLogin = user.get(0).getUsuariologin();
+    try {
+      Long UserId = user.get(0).getUsuarioid();
+      String UserSenha = user.get(0).getUsuariosenha();
+      String UserEmail = user.get(0).getUsuarioemail();
+      String UserNome = user.get(0).getUsuarionome();
+      String UserNivel = user.get(0).getUsuarionivel();
+      String UserLogin = user.get(0).getUsuariologin();
 
-    if (user.isEmpty() == false) 
-    {
-      String SenhaCripto = md5(senha);
+      if (user.isEmpty() == false) {
+        String SenhaCripto = md5(senha);
 
-		  if (!senha.equals(SenhaCripto)) 
-		  {
-		    System.out.println("Login realizado com sucesso");
-		    
-		    /*String Json = "{\"UserID\":\'"+UserId+"\',"
-		    		+ "\"UserSenha\":\'"+UserSenha+"',"
-		    		+ "\"UserEmail\":\'"+UserEmail+"',"
-		    		+ "\"UserNome\":\'"+UserNome+"',"
-		    		+ "\"UserNivel\":\'"+UserNivel+"',"
-		    		+ "\"UserLogin\":\'"+UserLogin+"'";
-		    JSONObject jsonObject = new JSONObject(Json);*/
-		    
-		    var user1 = usuarioRepository.getOne(UserId);
-		    return UsuarioRs.converter(user1);
-		
-		  } 
-		  else 
-		  {
-		    System.out.println("Senha não confere");
-		    return null;
-		  }
-    } 
-    else 
-    {
+        if (!senha.equals(SenhaCripto)) {
+          System.out.println("Login realizado com sucesso");
+
+          /*
+           * String Json = "{\"UserID\":\'"+UserId+"\'," +
+           * "\"UserSenha\":\'"+UserSenha+"'," + "\"UserEmail\":\'"+UserEmail+"'," +
+           * "\"UserNome\":\'"+UserNome+"'," + "\"UserNivel\":\'"+UserNivel+"'," +
+           * "\"UserLogin\":\'"+UserLogin+"'"; JSONObject jsonObject = new
+           * JSONObject(Json);
+           */
+
+          var user1 = usuarioRepository.getOne(UserId);
+          return UsuarioRs.converter(user1);
+
+        } else {
+          System.out.println("Senha não confere");
+          return null;
+        }
+      } else {
+        return null;
+      }
+    } catch (Exception e) {
       return null;
     }
-
   }
 }

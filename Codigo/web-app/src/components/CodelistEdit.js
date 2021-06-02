@@ -42,12 +42,14 @@ const CodelistEdit = ({ onSubmit, dataEntry, docId }) => {
 
     const getCodelistTags = async () => {
       const { data } = await restAPI.get(
-        `/traco_doc/tracodoc?docid=${dataEntry.documentoid}`
+        `/tag/tagsblocos?blocoid=${dataEntry.codelistid}`
       );
 
       const options = data.map((value) => {
         return { value: value.tracodocid, label: value.tracodocnome };
       });
+
+      console.log(data, options);
 
       setSelectedTag(options);
       setPrevSelectedTag(options);
@@ -64,6 +66,7 @@ const CodelistEdit = ({ onSubmit, dataEntry, docId }) => {
     };
 
     dataEntry && getTagOptions();
+    dataEntry && getCodelistTags();
     dataEntry && getTraceOptions();
     dataEntry && getCodelistTraces();
   }, [dataEntry]);
@@ -111,9 +114,49 @@ const CodelistEdit = ({ onSubmit, dataEntry, docId }) => {
       }
     };
 
+    const toggleTags = async () => {
+      if (selectedTag !== prevSelectedTag && dataEntry && prevSelectedTag) {
+        var addTraces = {};
+        selectedTag.forEach((value) => {
+          if (!prevSelectedTag.includes(value)) {
+            addTraces = {
+              blocoId: dataEntry.codelistid,
+              tagId: value.value,
+            };
+          }
+        });
+
+        console.log("Traces to be added", addTraces);
+        if (addTraces !== {}) {
+          const response = await restAPI.post(`/tagbloco/`, addTraces);
+          console.log(response);
+        }
+
+        var removeTraces = {};
+        prevSelectedTag.forEach((value) => {
+          if (!selectedTag.includes(value)) {
+            removeTraces = {
+              blocoId: dataEntry.codelistid,
+              tagId: value.value,
+            };
+          }
+        });
+
+        console.log("Tags to be removed", removeTraces);
+        if (removeTraces !== {}) {
+          await restAPI.post(`/tagbloco/delete`, removeTraces);
+        }
+
+        setPrevSelectedTag(selectedTag);
+      }
+    };
+
     if (selectedTrace !== prevSelectedTrace) {
       toggleTraces();
     }
+
+    console.log(selectedTag, prevSelectedTag);
+    toggleTags();
   }, [
     selectedTrace,
     prevSelectedTrace,

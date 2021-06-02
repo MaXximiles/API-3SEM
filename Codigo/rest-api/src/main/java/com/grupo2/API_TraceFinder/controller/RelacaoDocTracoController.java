@@ -49,7 +49,6 @@ public class RelacaoDocTracoController {
     var doc = relacaoDocTracoRepository.SelectTracosDoc(docid);
     return doc.stream().map((TrList) -> RelacaoDocTracoRs.converter(TrList)).collect(Collectors.toList());
   }
-  
 
   // INSERT //
   @PostMapping("/")
@@ -74,6 +73,14 @@ public class RelacaoDocTracoController {
     } else {
       throw new Exception("Documento não encontrado");
     }
+  }
+
+  // DELETE
+  @PostMapping("/delete")
+  public void deleteRelacaoCodelistTraco(@RequestBody RelacaoDocTracoRq relBlocoTraco) {
+    relacaoDocTracoRepository.DeleteTracosDoc(Long.valueOf(relBlocoTraco.getDocid()),
+        Long.valueOf(relBlocoTraco.getTracoid()));
+
   }
 
   // DELETE

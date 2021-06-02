@@ -1,11 +1,19 @@
 package com.grupo2.API_TraceFinder.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+
+import javax.transaction.Transactional;
 
 import com.grupo2.API_TraceFinder.classes.TagBloco;
 
 @Repository
-public interface TagBlocoRepository extends JpaRepository<TagBloco, Long>{
+public interface TagBlocoRepository extends JpaRepository<TagBloco, Long> {
+  @Modifying
+  @Transactional
+  @Query(value = "DELETE FROM tag_bloco WHERE bloco_id = ?1 AND tag_id = ?2 ", nativeQuery = true)
+  void DeleteTracosDoc(Long blocoid, Long tagid);
 
 }
