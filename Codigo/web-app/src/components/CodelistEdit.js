@@ -45,8 +45,10 @@ const CodelistEdit = ({ onSubmit, dataEntry, docId }) => {
         `/tag/tagsblocos?blocoid=${dataEntry.codelistid}`
       );
 
+      console.log(data);
+
       const options = data.map((value) => {
-        return { value: value.tracodocid, label: value.tracodocnome };
+        return { value: value.tagId, label: value.tagNome };
       });
 
       console.log(data, options);

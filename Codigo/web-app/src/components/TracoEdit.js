@@ -17,7 +17,7 @@ const DocumentEdit = ({ onSubmit, dataEntry }) => {
       );
 
       const options = data.map((value) => {
-        return { value: value.tagid, label: value.tagnome };
+        return { value: value.tagId, label: value.tagNome };
       });
 
       console.log("tags", options);

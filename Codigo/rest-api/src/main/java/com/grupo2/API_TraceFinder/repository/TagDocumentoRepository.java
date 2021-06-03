@@ -13,7 +13,7 @@ import com.grupo2.API_TraceFinder.classes.TagDocumento;
 public interface TagDocumentoRepository extends JpaRepository<TagDocumento, Long> {
   @Modifying
   @Transactional
-  @Query(value = "DELETE FROM tag_documento WHERE doc_id = ?1 AND tag_id = ?2 ", nativeQuery = true)
+  @Query(value = "DELETE FROM tag_documento WHERE documento_id = ?1 AND tag_id = ?2 ", nativeQuery = true)
   void DeleteTracosDoc(Long docid, Long tagid);
 
 }

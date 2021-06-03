@@ -16,10 +16,8 @@ const App = ({ history }) => {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    if (user === null) {
-      history.push("/");
-    }
-  }, [user, history]);
+    setUser(window.localStorage.getItem("token"));
+  });
 
   const validateAccount = async (email, senha) => {
     const { data } = await restAPI.get(
@@ -28,15 +26,21 @@ const App = ({ history }) => {
 
     console.log(data);
 
+    window.localStorage.setItem("token", "logado");
     setUser(data);
 
     return data;
   };
 
+  const logout = () => {
+    window.localStorage.removeItem("token");
+    setUser(null);
+  };
+
   return (
     <UserContext.Provider value={user}>
       <div className="App">
-        <Header logout={setUser} />
+        <Header logout={logout} />
         <Route exact path="/">
           <Login onSubmit={validateAccount} />
         </Route>

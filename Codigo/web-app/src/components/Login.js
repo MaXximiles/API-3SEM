@@ -18,7 +18,7 @@ const Login = ({ onSubmit, history }) => {
     setIsLoading(true);
 
     if (await onSubmit(email, senha)) {
-      history.push("/documento");
+      history.push("/index");
     } else {
       setError({
         header: "Não foi possível realizar o login",
@@ -87,9 +87,9 @@ const Login = ({ onSubmit, history }) => {
                 />
               </div>
             </form>
-            <div className="ui message">
+            {/* <div className="ui message">
               Não possuí uma conta? <Link to="/cadastrar">Cadastre-se</Link>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

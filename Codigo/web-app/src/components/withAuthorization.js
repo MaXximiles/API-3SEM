@@ -1,11 +1,9 @@
-import React, { useContext, useEffect } from "react";
+import React, { useEffect } from "react";
 import { withRouter } from "react-router-dom";
-
-import UserContext from "./UserContext";
 
 const withAuthorization = (condition) => (Component) => {
   const WithAuthorization = (props) => {
-    const userContext = useContext(UserContext);
+    const userContext = window.localStorage.getItem("token");
 
     useEffect(() => {
       if (!condition(userContext)) {
