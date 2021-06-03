@@ -9,7 +9,7 @@ A geração automática da LEP foi entregue incompleta, pois ainda é necessári
 </br><img src="https://github.com/MaXximiles/API-3SEM/blob/main/Documenta%C3%A7%C3%A3o/User%20Story%20Cards/StoryCard6.png?raw=true" width=350 height=200>
 <img src="https://github.com/MaXximiles/API-3SEM/blob/main/Documenta%C3%A7%C3%A3o/User%20Story%20Cards/StoryCard3.png?raw=true" width=350 height=200>
 ### Proposta:
-Nesta entrega, possuímos o objetivo de criar o controle de usuários, o login de acesso ao sistema, a geração do compilado de documentos full e delta e  de finalizar as pendências da sprint passada.
+Nesta entrega, possuímos o objetivo de criar o controle de usuários, o login de acesso ao sistema, a geração do compilado de documentos FULL e DELTA e  de finalizar as pendências da sprint passada.
 </br><p align=center> 
 </br><img src="https://github.com/MaXximiles/API-3SEM/blob/main/Documenta%C3%A7%C3%A3o/User%20Story%20Cards/StoryCard2.png?raw=true" width=350 height=200>
 <img src="https://github.com/MaXximiles/API-3SEM/blob/main/Documenta%C3%A7%C3%A3o/User%20Story%20Cards/StoryCard4.png?raw=true" width=350 height=200>
@@ -25,12 +25,21 @@ Resumo de modificações:
   - Cadastro tags de traços, manuais e blocos;
   - Alteração tags de traços, manuais e blocos;
   - Exclusão tags de traços, manuais e blocos;
-- Ferramenta de pesquisa, alteração e cadastro de novos usuários;
-- Filtro de documentos "full";
-- Controle de nível de usuários;
+- Modulo de controle de usuários;
+  - Pesquisa de usuários;
+  - Alteração de usuários;
+  - Cadastro de novos usuários;
+  - Token de validação de login;
+  - Controle de nível de usuários;
+- Modulo de traços:
+  - Pesquisa de traços;
+  - Cadastro de traços;
+  - Alteração de traços;
+  - Exclusão de traços;
+- Filtro de documentos "FULL";
+- Geração de FULL do documento;
 - Criação do modelo conceitual do banco de dados;
 - Criação do modelo relacional do banco de dados;
-
 </p></br><h1></h1>
 
 ### Screenshoots:
@@ -111,7 +120,7 @@ Resumo de modificações:
 </p></br><h1></h1>
 
 <p align=center>
-<b>Botão gerar full habilitado, full gerada com sucesso</b></br></br>
+<b>Botão gerar FULL habilitado, FULL gerada com sucesso</b></br></br>
 <img src=https://user-images.githubusercontent.com/68132461/120644300-8fdbba80-c44d-11eb-8671-e3ab97de208f.png></br>
 </p></br><h1></h1>
 
