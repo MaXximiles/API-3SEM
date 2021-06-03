@@ -63,9 +63,12 @@ Exemplo de LEP criada automaticamente</br></br>
 <img src=https://user-images.githubusercontent.com/68132461/117557085-da803780-b045-11eb-8341-371b4c37e28b.png></br>
 </p></br><h1></h1>
 
- ### Links:
- [Burndown](https://github.com/MaXximiles/API-3SEM/blob/main/Burndowns/SPRINT%202.pdf)
-</p><h1></h1></br>
+<p align=center>
+Burndown:</p>
+<p align=center>
+</br><b>Gráfico</b></br></br>
+<img src=https://user-images.githubusercontent.com/68132461/120649268-f1525800-c452-11eb-9249-51179f41683d.png></br>
+</p></br><h1></h1>
 
 ### Proposta para próxima Sprint:
 <p align=center>
