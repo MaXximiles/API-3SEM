@@ -9,7 +9,8 @@ import org.springframework.stereotype.Repository;
 import com.grupo2.API_TraceFinder.classes.Tag;
 
 @Repository
-public interface TagRepository extends JpaRepository<Tag, Long> {
+public interface TagRepository extends JpaRepository<Tag, Long> 
+{
 
   @Query(value = "SELECT tag.tag_id, tag_nome FROM tag " 
 		  	+ " INNER JOIN tag_documento ON tag_documento.tag_id = tag.tag_id "
@@ -25,4 +26,5 @@ public interface TagRepository extends JpaRepository<Tag, Long> {
 		  	+ " INNER JOIN  tag_traco ON tag_traco.tag_id = tag.tag_id"
 		  	+ " WHERE tag_traco.traco_doc_id = ?1", nativeQuery = true)
   List<Tag> selectTagTraco(Long tracoid);
+  
 }

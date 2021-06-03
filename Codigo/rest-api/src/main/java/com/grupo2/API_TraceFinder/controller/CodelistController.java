@@ -207,7 +207,7 @@ public class CodelistController {
 public List<CodelistRs> blocosTracos(@RequestParam(value = "docid", required = false) Long docid) 
 {
 	 List<CodelistRs> lstCodelist = new ArrayList<>();
-		
+	 
 		var codelist = codelistRepository.SelectBlocosDocTraco(docid);
 		
 		for(Codelist c : codelist)
