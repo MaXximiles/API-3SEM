@@ -113,7 +113,7 @@ const Document = () => {
       <div className="ui one column stackable grid container">
         <div className="column">
           <div className="ui form">
-            <h4 className="ui dividing header">Informações do Manual</h4>
+            <h4 className="ui dividing header">Pesquisa de Manuais</h4>
             <div className="two fields">
               <div className="field">
                 <label>Nome</label>

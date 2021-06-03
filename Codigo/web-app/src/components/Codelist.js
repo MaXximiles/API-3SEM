@@ -42,7 +42,7 @@ const Codelist = () => {
         ? await restAPI.get(
             `/codelist/blocostracos?docid=${id}&tracoid=${selectedTrace[0].value}`
           )
-        : await restAPI.get(`/codelist/codelistdoc?docid=${id}`);
+        : await restAPI.get(`/codelist/blocosdoctracos?docid=${id}`);
 
       console.log(response.data);
       setData(response.data);
@@ -61,7 +61,7 @@ const Codelist = () => {
       ? await restAPI.get(
           `/codelist/blocostracos?docid=${id}&tracoid=${selectedTrace[0].value}`
         )
-      : await restAPI.get(`/codelist/codelistdoc?docid=${id}`);
+      : await restAPI.get(`/codelist/blocosdoctracos?docid=${id}`);
 
     console.log(response.data);
     setData(response.data);
@@ -138,7 +138,7 @@ const Codelist = () => {
       <div className="ui one column stackable grid container">
         <div className="column">
           <div className="ui form">
-            <h4 className="ui dividing header">Codelist do Manual</h4>
+            <h4 className="ui dividing header">Pesquisa do Codelist</h4>
             <div className="one field">
               <div className="field">
                 <Dropdown
