@@ -21,9 +21,12 @@ Resumo de modificações:
 - Integração da parte web com a API;
 </p></br><h1></h1>
 
- ### Links:
- [Burndown](https://github.com/MaXximiles/API-3SEM/blob/main/Burndowns/SPRINT%202.pdf)
-</p><h1></h1></br>
+<p align=center>
+Burndown:</p>
+<p align=center>
+</br><b>Gráfico</b></br></br>
+<img src=https://user-images.githubusercontent.com/68132461/120649668-66259200-c453-11eb-8a75-62871e4a03c2.png></br>
+</p></br><h1></h1>
 
 ### Proposta para próxima Sprint:
 <p align=center>
