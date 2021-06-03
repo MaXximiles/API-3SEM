@@ -147,6 +147,9 @@ const Document = () => {
   );
 };
 
-const condition = (authUser) => !!authUser;
+const condition = (authUser) => {
+  const authUserParsed = JSON.parse(authUser);
+  return !!authUser && authUserParsed.usuarionivel === "1";
+};
 
 export default withAuthorization(condition)(Document);

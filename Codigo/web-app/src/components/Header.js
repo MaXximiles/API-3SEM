@@ -32,9 +32,12 @@ const AuthenticatedHeader = ({ logout }) => {
       <Link to="/tag" className="item">
         Tags
       </Link>
-      <Link to="/usuarios" className="item">
-        Usuarios
-      </Link>
+      {JSON.parse(window.localStorage.getItem("token")).usuarionivel ===
+        "1" && (
+        <Link to="/usuarios" className="item">
+          Usuarios
+        </Link>
+      )}
       <Link to="/" className="right item" onClick={() => logout(null)}>
         Logout
       </Link>

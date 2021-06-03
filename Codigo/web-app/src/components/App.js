@@ -27,8 +27,10 @@ const App = ({ history }) => {
 
     console.log(data);
 
-    window.localStorage.setItem("token", "logado");
-    setUser(data);
+    if (data) {
+      window.localStorage.setItem("token", JSON.stringify(data));
+      setUser(data);
+    }
 
     return data;
   };
