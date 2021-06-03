@@ -44,22 +44,22 @@ Resumo de modificações:
 
 ### Screenshoots:
 <p align=center>
-Criação de LEP</br></br>
+<b>Criação de LEP</b></br></br>
 <img src=https://user-images.githubusercontent.com/68132461/117557037-73628300-b045-11eb-8cab-767ff3c6fe7c.png></br>
 </p></br><h1></h1>
  
 <p align=center>
-Upload de arquivos</br></br>
+<b>Upload de arquivos</b></br></br>
 <img src=https://user-images.githubusercontent.com/68132461/117557066-ac9af300-b045-11eb-8180-b7af0e0ca153.png></br>
 </p></br><h1></h1>
 
 <p align=center>
-Estrutura de diretórios criados pelo Trace Finder</br></br>
+<b>Estrutura de diretórios criados pelo Trace Finder</b></br></br>
 <img src=https://user-images.githubusercontent.com/68132461/117557097-f8e63300-b045-11eb-85b7-33199b935c21.png></br>
 </p></br><h1></h1>
 
 <p align=center>
-Exemplo de LEP criada automaticamente</br></br>
+<b>Exemplo de LEP criada automaticamente</b></br></br>
 <img src=https://user-images.githubusercontent.com/68132461/117557085-da803780-b045-11eb-8341-371b4c37e28b.png></br>
 </p></br><h1></h1>
 
