@@ -32,6 +32,9 @@ const AuthenticatedHeader = ({ logout }) => {
       <Link to="/tag" className="item">
         Tags
       </Link>
+      <Link to="/usuarios" className="item">
+        Usuarios
+      </Link>
       <Link to="/" className="right item" onClick={() => logout(null)}>
         Logout
       </Link>

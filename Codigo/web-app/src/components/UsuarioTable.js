@@ -1,14 +1,16 @@
 import "./Table.css";
 import React, { useEffect, useRef, useState } from "react";
-import restAPI from "../apis/restAPI";
 import ContextMenu from "./ContextMenu";
+import { Link, useRouteMatch } from "react-router-dom";
 
-const Table = ({ data, onEdit, onDelete, docId, filter }) => {
+const Table = ({ data, onEdit, onDelete }) => {
   const [columnStyle, setColumnStyle] = useState([]);
   const [contextPosition, setContextPosition] = useState({});
   const [selectedItem, setSelectedItem] = useState({});
   const thead = useRef();
   const tbody = useRef();
+
+  const { url } = useRouteMatch();
 
   useEffect(() => {
     const onBodyClick = () => {
@@ -78,48 +80,6 @@ const Table = ({ data, onEdit, onDelete, docId, filter }) => {
     onDelete(item);
   };
 
-  const uploadFile = (e, selectedItem) => {
-    const input = document.createElement("input");
-    input.id = "upload";
-    input.type = "file";
-    input.style.display = "none";
-
-    input.onchange = async (e) => {
-      const file = e.target.files[0];
-
-      const formData = new FormData();
-      formData.append("arquivo", file);
-
-      await restAPI.post(
-        `/arquivos/upload/${selectedItem.codelistid}`,
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
-
-      alert("Arquivo salvo com sucesso!");
-    };
-
-    input.click();
-  };
-
-  const createLEP = async (e, selectedItem) => {
-    await restAPI.get(`/lep/gerarlep?codelistid=${selectedItem.codelistid}`);
-
-    alert("LEP gerada com sucesso!");
-  };
-
-  const genFull = async () => {
-    await restAPI.get(
-      `/codelist/gerarfull?docid=${docId}&tracoid=${filter[0].value}`
-    );
-
-    alert("Full gerada com sucesso!");
-  };
-
   const onContextMenu = (event, item) => {
     event.preventDefault();
 
@@ -136,25 +96,13 @@ const Table = ({ data, onEdit, onDelete, docId, filter }) => {
               className="ui dropdown item"
               onClick={(e) => editItem(e, selectedItem)}
             >
-              Editar Bloco
+              Editar Usuario
             </div>
             <div
               className="ui dropdown item"
               onClick={(e) => deleteItem(e, selectedItem)}
             >
-              Deletar Bloco
-            </div>
-            <div
-              className="ui dropdown item"
-              onClick={(e) => uploadFile(e, selectedItem)}
-            >
-              Fazer upload
-            </div>
-            <div
-              className="ui dropdown item"
-              onClick={(e) => createLEP(e, selectedItem)}
-            >
-              Criar LEP
+              Deletar Usuario
             </div>
           </div>
         </ContextMenu>
@@ -167,25 +115,23 @@ const Table = ({ data, onEdit, onDelete, docId, filter }) => {
   var indexSub = 0;
   const rendredTableHead = data.length
     ? Object.keys(data[0]).map((key, index) => {
-        if (key === "codelistcaminho" || key === "documentoid") {
+        if (key === "usuariosenha") {
           indexSub++;
           return;
         }
 
-        const colNames = () => {
+        const colName = () => {
           switch (key) {
-            case "codelistid":
+            case "usuarioid":
               return "ID";
-            case "codelistsecao":
-              return "Seção";
-            case "codelistsubsecao":
-              return "Subseção";
-            case "codelistnomebloco":
-              return "Bloco";
-            case "codelistcodebloco":
-              return "Código";
-            case "tracos":
-              return "Traços";
+            case "usuarionome":
+              return "Nome";
+            case "usuarionivel":
+              return "Nível";
+            case "usuarioemail":
+              return "Email";
+            case "usuarionivel":
+              return "Login";
             default:
               return key;
           }
@@ -193,7 +139,7 @@ const Table = ({ data, onEdit, onDelete, docId, filter }) => {
 
         return (
           <th key={key} style={columnStyle[index - indexSub]}>
-            {colNames()}
+            {colName()}
           </th>
         );
       })
@@ -202,25 +148,9 @@ const Table = ({ data, onEdit, onDelete, docId, filter }) => {
   const renderedTableBody = data.map((item, rowIndex) => {
     indexSub = 0;
     const renderedTableCells = Object.entries(item).map((value, index) => {
-      if (value[0] === "codelistcaminho" || value[0] === "documentoid") {
+      if (value[0] === "usuariosenha") {
         indexSub++;
         return;
-      }
-
-      if (Array.isArray(value[1])) {
-        return (
-          <td
-            key={value[0]}
-            data-label={value[0]}
-            style={columnStyle[index - indexSub]}
-          >
-            {value[1]
-              .map((traco) => {
-                return traco.tracodocnome;
-              })
-              .join(", ")}
-          </td>
-        );
       }
 
       return (
@@ -261,16 +191,7 @@ const Table = ({ data, onEdit, onDelete, docId, filter }) => {
                 onClick={(e) => editItem(e)}
               >
                 <i className="plus icon"></i>
-                Adicionar Bloco
-              </div>
-              <div
-                className={`ui right floated small primary labeled icon button ${
-                  filter.length !== 1 ? "disabled" : ""
-                }`}
-                onClick={genFull}
-              >
-                <i className="book icon"></i>
-                Gerar Full
+                Adicionar Usuario
               </div>
             </th>
           </tr>

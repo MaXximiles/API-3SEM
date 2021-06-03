@@ -11,6 +11,7 @@ import restAPI from "../apis/restAPI";
 import UserContext from "./UserContext";
 import Tracos from "./Tracos";
 import Tags from "./Tags";
+import Usuario from "./Usuario";
 
 const App = ({ history }) => {
   const [user, setUser] = useState(null);
@@ -58,6 +59,9 @@ const App = ({ history }) => {
         </Route>
         <Route exact path="/documento/:id">
           <Codelist />
+        </Route>
+        <Route exact path="/usuarios">
+          <Usuario />
         </Route>
         <Route exact path="/cadastrar">
           <SignUp />
