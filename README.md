@@ -77,13 +77,15 @@ Confirmação de exclusão de manual</br></br>
 </p><h1></h1></br>
 <p align=center>
 Banco de dados</br></br>
-<img src=https://user-images.githubusercontent.com/18652465/115090209-a86a3280-9eea-11eb-9f20-b9238a84cced.jpeg border=1 /></br></br>
- 
+<img src=https://user-images.githubusercontent.com/18652465/115090209-a86a3280-9eea-11eb-9f20-b9238a84cced.jpeg border=1 /></br></br> 
 </p><h1></h1></br>
 
- ### Links:
- [Burndown](https://github.com/MaXximiles/API-3SEM/blob/main/Burndowns/SPRINT%202.pdf)
-</p><h1></h1></br>
+<p align=center>
+Burndown:</p>
+<p align=center>
+</br><b>Gráfico</b></br></br>
+<img src=https://user-images.githubusercontent.com/68132461/120649557-47270000-c453-11eb-9b77-d8276d82f8c3.png></br>
+</p></br><h1></h1>
 
 ### Proposta para próxima Sprint:
 <p align=center>
