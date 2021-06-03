@@ -25,13 +25,13 @@ Resumo de modificações:
   - Cadastro tags de traços, manuais e blocos;
   - Alteração tags de traços, manuais e blocos;
   - Exclusão tags de traços, manuais e blocos;
-- Modulo de controle de usuários;
+- Módulo de controle de usuários;
   - Pesquisa de usuários;
   - Alteração de usuários;
   - Cadastro de novos usuários;
   - Token de validação de login;
   - Controle de nível de usuários;
-- Modulo de traços:
+- Módulo de traços:
   - Pesquisa de traços;
   - Cadastro de traços;
   - Alteração de traços;
