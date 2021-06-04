@@ -44,6 +44,9 @@ As seguintes tecnologias foram utilizadas no desenvolvimento do projeto:
  - [BSC](https://github.com/MaXximiles/API-3SEM/blob/main/Documenta%C3%A7%C3%A3o/BSC.jpg)
  - [Backlog](https://trello.com/b/pVgsSxrF/pi-3-sem-trace-finder)
  - [PETI](https://github.com/MaXximiles/API-3SEM/blob/main/Documenta%C3%A7%C3%A3o/PETI_TraceFinder.pdf)
+ - [Modelo Relacional do Banco de Dados](https://github.com/MaXximiles/API-3SEM/blob/main/Documentação/Modelo%20Relacional.jpeg)
+ - [Modelo Conceitual do Banco de Dados](https://github.com/MaXximiles/API-3SEM/blob/main/Documentação/Modelo%20Logico.jpeg)
+ - [Instruções de Instalação](https://github.com/MaXximiles/API-3SEM/tree/main/Documenta%C3%A7%C3%A3o)
  <!--- [Tutorial Instalação](https://github.com/MaXximiles/API-3SEM/tree/main/Documenta%C3%A7%C3%A3o) -->
  
 <h2>Sprints</h2>
