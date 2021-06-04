@@ -151,3 +151,11 @@ Burndown:</p>
 <img src=https://user-images.githubusercontent.com/68132461/120645381-c403ab00-c44e-11eb-8656-f1252c09078e.png></br>
 </p></br><h1></h1>
 
+### Pendências:
+- Gerar registro de modificação feita por cada usuário;
+- Diferentes níveis de acesso (adm, usuário, auditor);
+- Melhorias visuais na LEP;
+- Importar codelist pronto em Excel;
+- Implementação da DELTA;
+- Visualização dos arquivos de cada bloco no codelist;
+- Opção de baixar os arquivos dos blocos separadamente;
