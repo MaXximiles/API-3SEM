@@ -95,7 +95,10 @@ As seguintes tecnologias foram utilizadas no desenvolvimento do projeto:
                             <td align=center>Sprint 4<br>17/05/2021 a 05/06/2021</td>
                             <td> <p align=center>
                              ✓ Módulo de controle de tags;
-                             ✓ Controle de nível de usuários;
+                             ✓ Módulo de controle de usuários;
+                             ✓ Módulo de traços;
+                             ✓ Filtro de documentos "FULL";
+                             ✓ Geração de FULL do documento;
                              ✓ Criação do modelo conceitual do banco de dados;
                              ✓ Criação do modelo relacional do banco de dados;
                              <p align=center>                          
