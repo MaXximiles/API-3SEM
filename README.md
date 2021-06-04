@@ -46,7 +46,7 @@ As seguintes tecnologias foram utilizadas no desenvolvimento do projeto:
  - [PETI](https://github.com/MaXximiles/API-3SEM/blob/main/Documenta%C3%A7%C3%A3o/PETI_TraceFinder.pdf)
  - [Modelo Relacional do Banco de Dados](https://github.com/MaXximiles/API-3SEM/blob/main/Documentação/Modelo%20Relacional.jpeg)
  - [Modelo Conceitual do Banco de Dados](https://github.com/MaXximiles/API-3SEM/blob/main/Documentação/Modelo%20Logico.jpeg)
- - [Instruções de Instalação](https://github.com/MaXximiles/API-3SEM/tree/main/Documenta%C3%A7%C3%A3o)
+ - [Instruções](https://github.com/MaXximiles/API-3SEM/tree/main/Documenta%C3%A7%C3%A3o)
  <!--- [Tutorial Instalação](https://github.com/MaXximiles/API-3SEM/tree/main/Documenta%C3%A7%C3%A3o) -->
  
 <h2>Sprints</h2>
