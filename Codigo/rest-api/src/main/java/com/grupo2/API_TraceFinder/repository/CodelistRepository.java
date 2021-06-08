@@ -39,7 +39,7 @@ public interface CodelistRepository extends JpaRepository<Codelist, Long> {
 				+ "	FROM codelist "
 				+ " LEFT JOIN relacao_bloco_traco ON relacao_bloco_traco.bloco_id = codelist.codelist_id "
 				+ " LEFT JOIN traco_doc ON traco_doc.traco_doc_id = relacao_bloco_traco.traco_id "
-				+ " WHERE documento_id = ?1 ;", nativeQuery = true)
+				+ " WHERE documento_id = ?1 GROUP BY codelist_id;", nativeQuery = true)
 	List<Codelist> SelectBlocosDocTraco(Long docId);
 	
 	//Pesquisa do bloco com os traços

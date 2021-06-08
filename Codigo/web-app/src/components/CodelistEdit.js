@@ -80,37 +80,41 @@ const CodelistEdit = ({ onSubmit, dataEntry, docId }) => {
         dataEntry &&
         prevSelectedTrace
       ) {
-        var addTraces = {};
-        selectedTrace.forEach((value) => {
-          if (!prevSelectedTrace.includes(value)) {
-            addTraces = {
-              blocoid: dataEntry.codelistid,
-              tracoid: value.value,
-            };
-          }
-        });
-
-        if (addTraces !== {}) {
-          const response = await restAPI.post(
-            `/relacao_bloco_traco/`,
-            addTraces
-          );
-          console.log(response);
-        }
-
-        var removeTraces = {};
         prevSelectedTrace.forEach((value) => {
           if (!selectedTrace.includes(value)) {
-            removeTraces = {
+            var removeTraces = {
               blocoid: dataEntry.codelistid,
               tracoid: value.value,
             };
+
+            console.log("removeTraces: ", removeTraces);
+            restAPI.post(`/relacao_bloco_traco/delete`, removeTraces);
           }
         });
 
-        if (removeTraces !== {}) {
-          await restAPI.post(`/relacao_bloco_traco/delete`, removeTraces);
-        }
+        selectedTrace.forEach((value) => {
+          if (!prevSelectedTrace.includes(value)) {
+            var addTraces = {
+              blocoid: dataEntry.codelistid,
+              tracoid: value.value,
+            };
+
+            console.log("addTraces: ", addTraces);
+            restAPI.post(`/relacao_bloco_traco/`, addTraces);
+          }
+        });
+
+        // if (addTraces !== {}) {
+        //   const response = await restAPI.post(
+        //     `/relacao_bloco_traco/`,
+        //     addTraces
+        //   );
+        //   console.log(response);
+        // }
+
+        // if (removeTraces !== {}) {
+        //   await restAPI.post(`/relacao_bloco_traco/delete`, removeTraces);
+        // }
 
         setPrevSelectedTrace(selectedTrace);
       }
@@ -118,46 +122,34 @@ const CodelistEdit = ({ onSubmit, dataEntry, docId }) => {
 
     const toggleTags = async () => {
       if (selectedTag !== prevSelectedTag && dataEntry && prevSelectedTag) {
-        var addTraces = {};
-        selectedTag.forEach((value) => {
-          if (!prevSelectedTag.includes(value)) {
-            addTraces = {
-              blocoId: dataEntry.codelistid,
-              tagId: value.value,
-            };
-          }
-        });
-
-        console.log("Traces to be added", addTraces);
-        if (addTraces !== {}) {
-          const response = await restAPI.post(`/tagbloco/`, addTraces);
-          console.log(response);
-        }
-
-        var removeTraces = {};
         prevSelectedTag.forEach((value) => {
           if (!selectedTag.includes(value)) {
-            removeTraces = {
+            var removeTraces = {
               blocoId: dataEntry.codelistid,
               tagId: value.value,
             };
+
+            restAPI.post(`/tagbloco/delete`, removeTraces);
           }
         });
 
-        console.log("Tags to be removed", removeTraces);
-        if (removeTraces !== {}) {
-          await restAPI.post(`/tagbloco/delete`, removeTraces);
-        }
+        selectedTag.forEach((value) => {
+          if (!prevSelectedTag.includes(value)) {
+            var addTraces = {
+              blocoId: dataEntry.codelistid,
+              tagId: value.value,
+            };
+
+            restAPI.post(`/tagbloco/`, addTraces);
+          }
+        });
 
         setPrevSelectedTag(selectedTag);
       }
     };
 
-    if (selectedTrace !== prevSelectedTrace) {
-      toggleTraces();
-    }
+    toggleTraces();
 
-    console.log(selectedTag, prevSelectedTag);
     toggleTags();
   }, [
     selectedTrace,
@@ -186,8 +178,6 @@ const CodelistEdit = ({ onSubmit, dataEntry, docId }) => {
   };
 
   const submit = async () => {
-    setPrevSelectedTrace(null);
-
     const submitedEntry = {
       codelistcodebloco: blockCode,
       codelistnomebloco: block,

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.grupo2.API_TraceFinder.classes.TagBloco;
@@ -73,14 +74,19 @@ public class TagTracoController {
 
   // DELETE
   @PostMapping("/delete")
-  public void deleteTagDocument(@RequestBody TagTracoRq tagDocumento) {
+  public void deleteTagDocument(@RequestBody TagTracoRq tagDocumento) 
+  {
     tagTracoRepository.DeleteTracosDoc(tagDocumento.getTracoId(), tagDocumento.getTagId());
   }
 
   // DELETE
   @DeleteMapping("/{tagtracoid}")
-  public void deleteTagTraco(@PathVariable Long tagTracoid) {
+  public void deleteTagTraco(@PathVariable Long tagTracoid)
+  {
     tagTracoRepository.deleteById(tagTracoid);
   }
+  
+ 
+  
 
 }

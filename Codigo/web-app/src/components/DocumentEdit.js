@@ -78,37 +78,32 @@ const DocumentEdit = ({ onSubmit, dataEntry }) => {
         dataEntry &&
         prevSelectedTrace
       ) {
-        var addTraces = {};
-        selectedTrace.forEach((value) => {
-          if (!prevSelectedTrace.includes(value)) {
-            addTraces = {
-              docid: dataEntry.documentoid,
-              tracoid: value.value,
-            };
-          }
-        });
-
-        if (addTraces !== {}) {
-          const response = await restAPI.post(`/reldoctraco/`, addTraces);
-          console.log(response);
-        }
-
-        var removeTraces = {};
-
-        console.log(prevSelectedTrace, selectedTrace);
         prevSelectedTrace.forEach((value) => {
           if (!selectedTrace.includes(value)) {
-            removeTraces = {
+            var removeTraces = {
               docid: dataEntry.documentoid,
               tracoid: value.value,
             };
+
+            restAPI.post(`/reldoctraco/delete`, removeTraces);
           }
         });
 
-        if (removeTraces !== {}) {
-          console.log("traces to be removed", removeTraces);
-          await restAPI.post(`/reldoctraco/delete`, removeTraces);
-        }
+        selectedTrace.forEach((value) => {
+          if (!prevSelectedTrace.includes(value)) {
+            var addTraces = {
+              docid: dataEntry.documentoid,
+              tracoid: value.value,
+            };
+
+            restAPI.post(`/reldoctraco/`, addTraces);
+          }
+        });
+
+        // if (addTraces !== {}) {
+        //   console.log("traces to be added", addTraces);
+        //   const response = await console.log(response);
+        // }
 
         setPrevSelectedTrace(selectedTrace);
       }
@@ -116,36 +111,38 @@ const DocumentEdit = ({ onSubmit, dataEntry }) => {
 
     const toggleTags = async () => {
       if (selectedTag !== prevSelectedTag && dataEntry && prevSelectedTag) {
-        var addTraces = {};
-        selectedTag.forEach((value) => {
-          if (!prevSelectedTag.includes(value)) {
-            addTraces = {
-              documentoId: dataEntry.documentoid,
-              tagId: value.value,
-            };
-          }
-        });
-
-        console.log("Traces to be added", addTraces);
-        if (addTraces !== {}) {
-          const response = await restAPI.post(`/tagdocumento/`, addTraces);
-          console.log(response);
-        }
-
-        var removeTraces = {};
         prevSelectedTag.forEach((value) => {
           if (!selectedTag.includes(value)) {
-            removeTraces = {
+            var removeTraces = {
               documentoId: dataEntry.documentoid,
               tagId: value.value,
             };
+
+            restAPI.post(`/tagdocumento/delete`, removeTraces);
           }
         });
 
-        console.log("Tags to be removed", removeTraces);
-        if (removeTraces !== {}) {
-          await restAPI.post(`/tagdocumento/delete`, removeTraces);
-        }
+        selectedTag.forEach((value) => {
+          if (!prevSelectedTag.includes(value)) {
+            var addTraces = {
+              documentoId: dataEntry.documentoid,
+              tagId: value.value,
+            };
+
+            restAPI.post(`/tagdocumento/`, addTraces);
+          }
+        });
+
+        // if (addTraces !== {}) {
+        //   console.log("Tags to be added", addTraces);
+        //   const response = await restAPI.post(`/tagdocumento/`, addTraces);
+        //   console.log(response);
+        // }
+
+        // if (removeTraces !== {}) {
+        //   console.log("Tags to be removed", removeTraces);
+        //   await restAPI.post(`/tagdocumento/delete`, removeTraces);
+        // }
 
         setPrevSelectedTag(selectedTag);
       }

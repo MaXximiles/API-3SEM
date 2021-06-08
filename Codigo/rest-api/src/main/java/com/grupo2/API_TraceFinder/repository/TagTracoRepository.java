@@ -13,6 +13,6 @@ import com.grupo2.API_TraceFinder.classes.TagTraco;
 public interface TagTracoRepository extends JpaRepository<TagTraco, Long> {
   @Modifying
   @Transactional
-  @Query(value = "DELETE FROM tag_traco WHERE traco_id = ?1 AND tag_id = ?2 ", nativeQuery = true)
+  @Query(value = "DELETE FROM tag_traco WHERE traco_doc_id = ?1 AND tag_id = ?2 ", nativeQuery = true)
   void DeleteTracosDoc(Long tracoid, Long tagid);
 }

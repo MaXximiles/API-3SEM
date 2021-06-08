@@ -25,6 +25,7 @@ import com.grupo2.API_TraceFinder.classes.Codelist;
 import com.grupo2.API_TraceFinder.controller.dto.CodelistRq;
 import com.grupo2.API_TraceFinder.controller.dto.CodelistRs;
 import com.grupo2.API_TraceFinder.controller.dto.DocumentoRq;
+import com.grupo2.API_TraceFinder.controller.dto.TracoDocRs;
 import com.grupo2.API_TraceFinder.repository.CodelistRepository;
 import com.grupo2.API_TraceFinder.repository.DocumentoRepository;
 import com.grupo2.API_TraceFinder.repository.RelacaoBlocoTracoRepository;
@@ -53,134 +54,50 @@ public class CodelistController {
 	// Definindo raiz para criação dos diretórios dos manuais 
 	private String raiz = "C:\\trace_finder\\";
 	
-	// SELECT de todos//
-	@GetMapping("/")
-	public List<CodelistRs> selectAll()
-	{
-		var codelist = codelistRepository.findAll();
-		return codelist.stream().map((CdList) -> CodelistRs.converter(CdList, Collections.EMPTY_LIST)).collect(Collectors.toList());	
-	}
+// SELECT de todos//
+@GetMapping("/")
+public List<CodelistRs> selectAll()
+{
+	var codelist = codelistRepository.findAll();
+	return codelist.stream().map((CdList) -> CodelistRs.converter(CdList, Collections.EMPTY_LIST)).collect(Collectors.toList());	
+}
 	
-	// SELECT Bloco por ID trazendo os traços //
-	@GetMapping("/{id}")
-	public List<CodelistRs> selectID(@RequestParam(value = "blocoid", required = false) Long blocoid) 
-	{
-				
-		 List<CodelistRs> lstCodelist = new ArrayList<>();
+// SELECT Bloco por ID trazendo os traços //
+@GetMapping("/{id}")
+public List<CodelistRs> selectID(@RequestParam(value = "blocoid", required = false) Long blocoid) 
+{
 			
-			var codelist = codelistRepository.SelectBlocoTracos(blocoid);
-			
-			for(Codelist c : codelist)
-			{
-				CodelistRs codelistRs = CodelistRs.converter(c, tracoDocRepository.selectTracosBloco(c.getCodelistid()));
-				lstCodelist.add(codelistRs);
-			}
-					
-			return lstCodelist;	
-	}
-	
-	// SELECT os Codelist's de determinado documento//
-	@GetMapping("/codelistdoc")
-	public List<CodelistRs> selectJoin(@RequestParam(value = "docid", required = false) Long docid)
-	{
-		var codelist = codelistRepository.SelectCodelistDoc(docid);
-		return codelist.stream().map((codList) -> CodelistRs.converter(codList, Collections.EMPTY_LIST)).collect(Collectors.toList());	
-	}
-	
-	
-	// SELECT os Codelist's de determinado documento//
-	@GetMapping("/blocotraco")
-	public List<CodelistRs> selectTracoBloco(@RequestParam(value = "tracoid", required = false) Long tracoid)
-	{
-		var codelist = codelistRepository.SelectTracoCodelist(tracoid);
-		return codelist.stream().map((codList) -> CodelistRs.converter(codList, Collections.EMPTY_LIST)).collect(Collectors.toList());	
-	}
-	
-	
-	
-	// INSERT //
-	// precisa do ID do documento//
-	@PostMapping("/{docId}")
-	public void insertCodelist(@RequestBody CodelistRq CdList, DocumentoRq Doc, @PathVariable Long docId) throws Exception
-	{						
-		// Busca na tabela documento, salvando dados do caminho dos diretórios
-		var doc = documentoRepository.getOne(docId);	
-	    String docNome = doc.getDocumentonome();
-	    String docPn = doc.getDocumentopn();
-	    String docCaminho = doc.getDocumentocaminho();
-	    
-	    String pasta = docCaminho + "\\" + docNome + "-" + docPn;  
-	    	    
-		var cdList = new Codelist();
-		cdList.setCodelistcaminho(pasta);
-		cdList.setCodelistcodebloco(CdList.getCodelistcodebloco());
-		cdList.setCodelistnomebloco(CdList.getCodelistnomebloco());
-		cdList.setCodelistsecao(CdList.getCodelistsecao());
-		cdList.setCodelistsubsecao(CdList.getCodelistsubsecao());
-		cdList.setDocumentoid(CdList.getDocumentoid());
-		codelistRepository.save(cdList);
+	 List<CodelistRs> lstCodelist = new ArrayList<>();
 		
-		// criando diretório do bloco
+		var codelist = codelistRepository.SelectBlocoTracos(blocoid);
 		
-		String caminhoBloco = pasta+"\\"+CdList.getCodelistnomebloco();
-		File newDir1 = new File("\\" + caminhoBloco);
-		newDir1.mkdir();
-		if(CdList.getCodelistsecao() != "") 
-		{ 
-			caminhoBloco = caminhoBloco+"\\"+CdList.getCodelistsecao();
-			File newDir2 = new File("\\" + caminhoBloco);
-		    newDir2.mkdir();
-		}
-		if(CdList.getCodelistsubsecao() != "")
-		{ 
-			caminhoBloco = caminhoBloco+"\\"+CdList.getCodelistsubsecao();
-			File newDir3 = new File("\\" + caminhoBloco);
-		    newDir3.mkdir();
-		}
-
-	}
-	
-	// UPDATE
-	@PutMapping("/{id}")
-	public void updateCodelist(@PathVariable Long id, @RequestBody CodelistRq CdList) throws Exception
-	{
-		var cdList = codelistRepository.findById(id);
-		
-		if(cdList.isPresent())
+		for(Codelist c : codelist)
 		{
-			var cdList2 = cdList.get();
-			cdList2.setCodelistcaminho(CdList.getCodelistcaminho());
-			cdList2.setCodelistcodebloco(CdList.getCodelistcodebloco());
-			cdList2.setCodelistnomebloco(CdList.getCodelistnomebloco());
-			cdList2.setCodelistsecao(CdList.getCodelistsecao());
-			cdList2.setCodelistsubsecao(CdList.getCodelistsubsecao());
-			cdList2.setDocumentoid(CdList.getDocumentoid());
-			codelistRepository.save(cdList2);
+			CodelistRs codelistRs = CodelistRs.converter(c, tracoDocRepository.selectTracosBloco(c.getCodelistid()));
+			lstCodelist.add(codelistRs);
 		}
-		else { throw new Exception("Documento não encontrado"); }
-	}
+				
+		return lstCodelist;	
+}
 	
-	// DELETE
-	@DeleteMapping("/{id}")
-	public void deleteCodelist(@PathVariable Long id)
-	{	
-		 var doc = codelistRepository.getOne(id);	
-		 String nome = doc.getCodelistnomebloco();
-		 String caminho = doc.getCodelistcaminho();
-		 
-		   
-		 String pasta = caminho + "\\" + nome;
-		 File folder = new File(pasta);
-		 if (folder.isDirectory()) 
-		 {
-		 	File[] sun = folder.listFiles();
-		 	for (File toDelete : sun){toDelete.delete();}
-		 	folder.delete();
-		 }
-		
-		codelistRepository.deleteById(id);
-	}
+// SELECT os Codelist's de determinado documento//
+@GetMapping("/codelistdoc")
+public List<CodelistRs> selectJoin(@RequestParam(value = "docid", required = false) Long docid)
+{
+	var codelist = codelistRepository.SelectCodelistDoc(docid);
+	return codelist.stream().map((codList) -> CodelistRs.converter(codList, Collections.EMPTY_LIST)).collect(Collectors.toList());	
+}
 	
+	
+// SELECT os Codelist's de determinado documento//
+@GetMapping("/blocotraco")
+public List<CodelistRs> selectTracoBloco(@RequestParam(value = "tracoid", required = false) Long tracoid)
+{
+	var codelist = codelistRepository.SelectTracoCodelist(tracoid);
+	return codelist.stream().map((codList) -> CodelistRs.converter(codList, Collections.EMPTY_LIST)).collect(Collectors.toList());	
+}
+	
+
 	
 
   //Filtrando todos os blocos que fazem parte do traço selecionado Trazendo a lista de traços
@@ -219,7 +136,104 @@ public List<CodelistRs> blocosTracos(@RequestParam(value = "docid", required = f
 		return lstCodelist;	
 }
  
+
+//Filtrando todos os tracos que fazem parte do bloco
+@GetMapping("/tracosbloco")
+public List<TracoDocRs> tracosBlocos(@RequestParam(value = "blocoid", required = false) Long blocoid) 
+{		
+	var tracos = tracoDocRepository.selectTracosBloco(blocoid);
+	return tracos.stream().map((CdList) -> TracoDocRs.converter(CdList)).collect(Collectors.toList());
+	
+}
+
   
+
+
+
+// INSERT //
+// precisa do ID do documento//
+@PostMapping("/{docId}")
+public void insertCodelist(@RequestBody CodelistRq CdList, DocumentoRq Doc, @PathVariable Long docId) throws Exception
+{						
+	// Busca na tabela documento, salvando dados do caminho dos diretórios
+	var doc = documentoRepository.getOne(docId);	
+    String docNome = doc.getDocumentonome();
+    String docPn = doc.getDocumentopn();
+    String docCaminho = doc.getDocumentocaminho();
+    
+    String pasta = docCaminho + "\\" + docNome + "-" + docPn;  
+    	    
+	var cdList = new Codelist();
+	cdList.setCodelistcaminho(pasta);
+	cdList.setCodelistcodebloco(CdList.getCodelistcodebloco());
+	cdList.setCodelistnomebloco(CdList.getCodelistnomebloco());
+	cdList.setCodelistsecao(CdList.getCodelistsecao());
+	cdList.setCodelistsubsecao(CdList.getCodelistsubsecao());
+	cdList.setDocumentoid(CdList.getDocumentoid());
+	codelistRepository.save(cdList);
+	
+	// criando diretório do bloco
+	
+	String caminhoBloco = pasta+"\\"+CdList.getCodelistnomebloco();
+	File newDir1 = new File("\\" + caminhoBloco);
+	newDir1.mkdir();
+	if(CdList.getCodelistsecao() != "") 
+	{ 
+		caminhoBloco = caminhoBloco+"\\"+CdList.getCodelistsecao();
+		File newDir2 = new File("\\" + caminhoBloco);
+	    newDir2.mkdir();
+	}
+	if(CdList.getCodelistsubsecao() != "")
+	{ 
+		caminhoBloco = caminhoBloco+"\\"+CdList.getCodelistsubsecao();
+		File newDir3 = new File("\\" + caminhoBloco);
+	    newDir3.mkdir();
+	}
+
+}
+
+// UPDATE
+@PutMapping("/{id}")
+public void updateCodelist(@PathVariable Long id, @RequestBody CodelistRq CdList) throws Exception
+{
+	var cdList = codelistRepository.findById(id);
+	
+	if(cdList.isPresent())
+	{
+		var cdList2 = cdList.get();
+		cdList2.setCodelistcaminho(CdList.getCodelistcaminho());
+		cdList2.setCodelistcodebloco(CdList.getCodelistcodebloco());
+		cdList2.setCodelistnomebloco(CdList.getCodelistnomebloco());
+		cdList2.setCodelistsecao(CdList.getCodelistsecao());
+		cdList2.setCodelistsubsecao(CdList.getCodelistsubsecao());
+		cdList2.setDocumentoid(CdList.getDocumentoid());
+		codelistRepository.save(cdList2);
+	}
+	else { throw new Exception("Documento não encontrado"); }
+}
+
+// DELETE
+@DeleteMapping("/{id}")
+public void deleteCodelist(@PathVariable Long id)
+{	
+	 var doc = codelistRepository.getOne(id);	
+	 String nome = doc.getCodelistnomebloco();
+	 String caminho = doc.getCodelistcaminho();
+	 
+	   
+	 String pasta = caminho + "\\" + nome;
+	 File folder = new File(pasta);
+	 if (folder.isDirectory()) 
+	 {
+	 	File[] sun = folder.listFiles();
+	 	for (File toDelete : sun){toDelete.delete();}
+	 	folder.delete();
+	 }
+	
+	codelistRepository.deleteById(id);
+}
+
+
   //Gerar FULL
   
   /*

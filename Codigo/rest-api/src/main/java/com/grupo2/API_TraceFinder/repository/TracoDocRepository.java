@@ -24,4 +24,9 @@ public interface TracoDocRepository extends JpaRepository<TracoDoc, Long>{
 			+ " INNER JOIN relacao_bloco_traco ON relacao_bloco_traco.traco_id = traco_doc.traco_doc_id "
 			+ " WHERE bloco_id = ?1  ", nativeQuery = true)
 	List<TracoDoc> selectTracosBloco(Long blocoid);
+	
+	
+	
+	
+	
 }
