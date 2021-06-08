@@ -1,7 +1,8 @@
 import "./Login.css";
 import React, { useState } from "react";
-import { Link, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import NegativeMessage from "./NegativeMessage";
+import withAuthorization from "./withAuthorization";
 
 const Login = ({ onSubmit, history }) => {
   const [email, setEmail] = useState("");
@@ -97,4 +98,6 @@ const Login = ({ onSubmit, history }) => {
   );
 };
 
-export default withRouter(Login);
+const condition = (authUser) => !authUser;
+
+export default withAuthorization(condition, "/index")(withRouter(Login));

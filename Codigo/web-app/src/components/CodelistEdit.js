@@ -17,7 +17,7 @@ const CodelistEdit = ({ onSubmit, dataEntry, docId }) => {
   useEffect(() => {
     const getCodelistTraces = async () => {
       const { data } = await restAPI.get(
-        `/traco_doc/tracodoc?docid=${dataEntry.documentoid}`
+        `/codelist/tracosbloco?blocoid=${dataEntry.codelistid}`
       );
 
       const options = data.map((value) => {

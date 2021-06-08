@@ -65,9 +65,9 @@ const App = ({ history }) => {
         <Route exact path="/usuarios">
           <Usuario />
         </Route>
-        <Route exact path="/cadastrar">
+        {/* <Route exact path="/cadastrar">
           <SignUp />
-        </Route>
+        </Route> */}
       </div>
     </UserContext.Provider>
   );

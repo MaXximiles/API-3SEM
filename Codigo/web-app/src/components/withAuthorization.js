@@ -1,13 +1,17 @@
 import React, { useEffect } from "react";
 import { withRouter } from "react-router-dom";
 
-const withAuthorization = (condition) => (Component) => {
+const withAuthorization = (condition, pushPath) => (Component) => {
   const WithAuthorization = (props) => {
     const userContext = window.localStorage.getItem("token");
 
     useEffect(() => {
       if (!condition(userContext)) {
-        props.history.push("/");
+        if (pushPath) {
+          props.history.push(pushPath);
+        } else {
+          props.history.push("/");
+        }
       }
     }, [userContext, props.history]);
 
