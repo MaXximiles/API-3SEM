@@ -51,41 +51,43 @@ const DocumentEdit = ({ onSubmit, dataEntry }) => {
   useEffect(() => {
     const toggleTags = async () => {
       if (selectedTag !== prevSelectedTag && dataEntry && prevSelectedTag) {
-        var addTraces = {};
         selectedTag.forEach((value) => {
           if (!prevSelectedTag.includes(value)) {
-            addTraces = {
+            var addTraces = {
               tracoId: dataEntry.tracodocid,
               tagId: value.value,
             };
+
+            restAPI.post(`/tagtraco/`, addTraces);
           }
         });
 
-        console.log("Traces to be added", addTraces);
-        if (addTraces !== {}) {
-          const response = await restAPI.post(`/tagtraco/`, addTraces);
-          console.log(response);
-        }
+        // console.log("Traces to be added", addTraces);
+        // if (addTraces !== {}) {
+        //   const response = await restAPI.post(`/tagtraco/`, addTraces);
+        //   console.log(response);
+        // }
 
-        var removeTraces = {};
         prevSelectedTag.forEach((value) => {
           if (!selectedTag.includes(value)) {
-            removeTraces = {
+            var removeTraces = {
               tracoId: dataEntry.tracodocid,
               tagId: value.value,
             };
+
+            restAPI.post(`/tagtraco/delete`, removeTraces);
           }
         });
 
-        console.log("Tags to be removed", removeTraces);
-        if (removeTraces !== {}) {
-          await restAPI.post(`/tagtraco/delete`, removeTraces);
-        }
+        // console.log("Tags to be removed", removeTraces);
+        // if (removeTraces !== {}) {
+        //   await restAPI.post(`/tagtraco/delete`, removeTraces);
+        // }
 
         setPrevSelectedTag(selectedTag);
       }
     };
-    console.log(prevSelectedTag, selectedTag);
+
     toggleTags();
   }, [selectedTag, prevSelectedTag, dataEntry]);
 
