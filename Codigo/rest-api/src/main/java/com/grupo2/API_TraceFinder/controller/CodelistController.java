@@ -21,15 +21,21 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.grupo2.API_TraceFinder.DBConexao;
+import com.grupo2.API_TraceFinder.classes.Arquivo;
 import com.grupo2.API_TraceFinder.classes.Codelist;
+import com.grupo2.API_TraceFinder.classes.Documento;
+import com.grupo2.API_TraceFinder.controller.dto.ArquivoRs;
 import com.grupo2.API_TraceFinder.controller.dto.CodelistRq;
 import com.grupo2.API_TraceFinder.controller.dto.CodelistRs;
 import com.grupo2.API_TraceFinder.controller.dto.DocumentoRq;
 import com.grupo2.API_TraceFinder.controller.dto.TracoDocRs;
+import com.grupo2.API_TraceFinder.repository.ArquivoRepository;
 import com.grupo2.API_TraceFinder.repository.CodelistRepository;
 import com.grupo2.API_TraceFinder.repository.DocumentoRepository;
 import com.grupo2.API_TraceFinder.repository.RelacaoBlocoTracoRepository;
 import com.grupo2.API_TraceFinder.repository.TracoDocRepository;
+
+import net.bytebuddy.agent.builder.AgentBuilder.InitializationStrategy.SelfInjection.Split;
 
 @RestController
 @RequestMapping("/codelist")
@@ -39,15 +45,17 @@ public class CodelistController {
 	private DocumentoRepository documentoRepository;
 	private RelacaoBlocoTracoRepository relacaoBlocoTracoRepository;
 	private TracoDocRepository tracoDocRepository;
+	private ArquivoRepository arquivoRepository;
 	
 	
 	public CodelistController(CodelistRepository codelistRepository, DocumentoRepository documentoRepository, RelacaoBlocoTracoRepository relacaoBlocoTracoRepository,
-							  TracoDocRepository tracoDocRepository)
+							  TracoDocRepository tracoDocRepository, ArquivoRepository arquivoRepository)
 	{
 		this.codelistRepository = codelistRepository;
 		this.documentoRepository = documentoRepository;
 		this.relacaoBlocoTracoRepository = relacaoBlocoTracoRepository;
 		this.tracoDocRepository = tracoDocRepository;
+		this.arquivoRepository = arquivoRepository;
 	}
 	
 	
@@ -96,9 +104,7 @@ public List<CodelistRs> selectTracoBloco(@RequestParam(value = "tracoid", requir
 	var codelist = codelistRepository.SelectTracoCodelist(tracoid);
 	return codelist.stream().map((codList) -> CodelistRs.converter(codList, Collections.EMPTY_LIST)).collect(Collectors.toList());	
 }
-	
-
-	
+		
 
   //Filtrando todos os blocos que fazem parte do traço selecionado Trazendo a lista de traços
  @GetMapping("/blocostracos")
@@ -146,7 +152,14 @@ public List<TracoDocRs> tracosBlocos(@RequestParam(value = "blocoid", required =
 	
 }
 
-  
+ 
+
+//SELECT das Revisões do documento //
+@GetMapping("/revisoes")
+public List selectRevisoes(@RequestParam(value = "docid", required = false) Long docid)
+{
+	return arquivoRepository.selectRevisoes(docid);
+}
 
 
 
@@ -243,7 +256,9 @@ public void deleteCodelist(@PathVariable Long id)
 	
   
   @GetMapping("/gerarfull")
-  public List<CodelistRs> gerarfull(@RequestParam(value = "docid", required = false) Long docid, @RequestParam(value = "tracoid", required = false) Long tracoid) throws Exception 
+  public List<CodelistRs> gerarfull(@RequestParam(value = "docid", required = false) Long docid, 
+		  							@RequestParam(value = "tracoid", required = false) Long tracoid,
+		  							@RequestParam(value = "revisao", required = false) String revisao) throws Exception 
   { 
 	  
 	// Pegando nome do documento
@@ -259,21 +274,25 @@ public void deleteCodelist(@PathVariable Long id)
 	String tracoNome = traco.getTracodocnome();
 	String tracoCode = traco.getTracodoccodigo();
 	
+	
+	String rev[] = revisao.split(" ");
+	String revision = "REV"+rev[1]; 
 	  
 	 Connection conn1 = null;
 	 ResultSet resultadoBanco1 = null;
 	 conn1 = DBConexao.abrirConexao();
 	 Statement stm1 = conn1.createStatement();
 		 
-	 String sql1 = "SELECT traco_doc_nome, traco_doc_codigo, codelist_id, codelist_secao, codelist_subsecao, codelist_nomebloco, codelist_codebloco, codelist_caminho, documento_id "
+	 String sql1 = "SELECT traco_doc_nome, traco_doc_codigo, codelist.codelist_id, codelist_secao, codelist_subsecao, codelist_nomebloco, codelist_codebloco, codelist_caminho, documento_id "
 				+ "	FROM codelist "
 				+ " INNER JOIN relacao_bloco_traco ON relacao_bloco_traco.bloco_id = codelist.codelist_id "
 				+ " INNER JOIN traco_doc ON traco_doc.traco_doc_id = relacao_bloco_traco.traco_id "
-				+ " WHERE documento_id = "+docid+"  AND traco_id = "+tracoid+" ;";
+				+ " INNER JOIN arquivo ON arquivo.codelist_id = codelist.codelist_id "
+				+ " WHERE documento_id = "+docid+"  AND traco_id = "+tracoid+" AND arquivo_revisao <= '"+revisao+"' ;";
 	 resultadoBanco1 = stm1.executeQuery(sql1);
 	 
 	 PDFMergerUtility PDFmerger = new PDFMergerUtility();
-	 PDFmerger.setDestinationFileName(DirDoc+"_"+tracoNome+"_"+tracoCode+"FULL.pdf");
+	 PDFmerger.setDestinationFileName(DirDoc+"\\"+DocNome+"-"+tracoNome+"-"+tracoCode+"-"+revision+"-FULL.pdf");
 	 
 	 int i = 1;
 

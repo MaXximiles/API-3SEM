@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-
+import com.grupo2.API_TraceFinder.classes.Arquivo;
 import com.grupo2.API_TraceFinder.classes.Codelist;
 
 @Repository
@@ -49,4 +49,6 @@ public interface CodelistRepository extends JpaRepository<Codelist, Long> {
 			+ " INNER JOIN traco_doc ON traco_doc.traco_doc_id = relacao_bloco_traco.traco_id "
 			+ " WHERE codelist_id = ?1 ;", nativeQuery = true)
 	List<Codelist> SelectBlocoTracos(Long id);
+	
+
 }

@@ -9,6 +9,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,9 +26,12 @@ import org.apache.pdfbox.pdmodel.interactive.form.PDAcroForm;
 import org.apache.pdfbox.text.PDFTextStripper;
 import org.apache.pdfbox.text.PDFTextStripperByArea;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.grupo2.API_TraceFinder.DBConexao;
 import com.grupo2.API_TraceFinder.classes.Arquivo;
 import com.grupo2.API_TraceFinder.classes.Lep;
 import com.grupo2.API_TraceFinder.controller.ArquivoController;
@@ -49,7 +55,7 @@ public class ArquivoUpload {
 		this.arquivoRepository = ArquivoRepository;
 	}
 	
-	public void salvarArquivo(MultipartFile arq, Long id) throws IOException
+	public void salvarArquivo(MultipartFile arq, Long id) throws Exception
 	{	
 		var doc = codelistRepository.getOne(id);
 		Long CodelistId = doc.getCodelistid();
@@ -91,6 +97,7 @@ public class ArquivoUpload {
 		PDDocument document = PDDocument.load(file);
 	 	int numPag = document.getNumberOfPages();
 		
+	 	String caminhoArquivo = pasta+"\\"+nomeArquivo+".pdf";
 		String revisao;
 		String modificacao = null;
 		
@@ -132,6 +139,8 @@ public class ArquivoUpload {
 		}
 			
 			document.close();
+			
+			updateArquivo(null, arqId, caminhoArquivo);
 	}
 	
 	
@@ -160,6 +169,31 @@ public class ArquivoUpload {
 		return arq.getArquivoid();
 	}
 	
+  public void updateArquivo(@RequestBody ArquivoRq arquivo, Long arqId, String arqCaminho ) throws Exception 
+  {
+	 Connection conn1 = null;
+     ResultSet resultadoBanco1 = null;
+     conn1 = DBConexao.abrirConexao();
+     Statement stm1 = conn1.createStatement();
+    
+     String sql1 = "SELECT MAX(lep_revisao) FROM lep WHERE arquivo_id = "+arqId+";";
+     resultadoBanco1 = stm1.executeQuery(sql1);
+     
+     String revisao = "";
+     while(resultadoBanco1.next()){ revisao = resultadoBanco1.getString("MAX(lep_revisao)");}
+	  
+	  
+	var arq = arquivoRepository.findById(arqId);
+        
+    if (arq.isPresent())
+    {
+      var arq2 = arq.get();
+      arq2.setArquivorevisao(revisao);
+      arq2.setArquivocaminho(arqCaminho);
+      arquivoRepository.save(arq2);
 
+    } else { throw new Exception("Documento não encontrado"); }
+  }
+	
 	
 }

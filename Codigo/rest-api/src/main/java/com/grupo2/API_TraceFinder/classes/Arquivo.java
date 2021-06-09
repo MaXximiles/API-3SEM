@@ -21,7 +21,29 @@ public class Arquivo {
 	
 	@Column(name="codelist_id")
 	private Long codelistid;
+	
+	@Column(name="arquivo_revisao")
+	private String arquivorevisao;
+	
+	@Column(name="arquivo_caminho")
+	private String arquivocaminho;
  
+	public String getArquivorevisao() {
+		return arquivorevisao;
+	}
+
+	public void setArquivorevisao(String arquivorevisao) {
+		this.arquivorevisao = arquivorevisao;
+	}
+
+	public String getArquivocaminho() {
+		return arquivocaminho;
+	}
+
+	public void setArquivocaminho(String arquivocaminho) {
+		this.arquivocaminho = arquivocaminho;
+	}
+
 	public Long getArquivoid() {
 		return arquivoid;
 	}

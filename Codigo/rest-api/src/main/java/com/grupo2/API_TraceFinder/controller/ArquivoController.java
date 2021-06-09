@@ -51,6 +51,7 @@ public class ArquivoController {
     var doc = arquivoRepository.getOne(id);
     return ArquivoRs.converter(doc);
   }
+  
 
   // INSERT //
   @PostMapping("/")
@@ -99,7 +100,7 @@ public class ArquivoController {
 
   // Upload do arquivo necessário id do codelist
   @PostMapping("/upload/{id}")
-  public void upload(@RequestBody MultipartFile arquivo, @PathVariable Long id) throws IOException {
+  public void upload(@RequestBody MultipartFile arquivo, @PathVariable Long id) throws Exception {
 
     arquivoUpload.salvarArquivo(arquivo, id);
     // String arqNome = arquivo.getOriginalFilename();
