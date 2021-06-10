@@ -1,5 +1,6 @@
 package com.grupo2.API_TraceFinder.controller;
 
+import java.awt.geom.Rectangle2D;
 import java.io.File;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -10,6 +11,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.apache.pdfbox.multipdf.PDFMergerUtility;
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.pdmodel.PDPage;
+import org.apache.pdfbox.text.PDFTextStripperByArea;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -324,5 +328,124 @@ public void deleteCodelist(@PathVariable Long id)
 	return null;
   }
 
+
+  
+  //Gerar DELTA
+  
+  /*
+   * Pesquisar todos os blocos do documento que são do traço selecionado OK
+   * Pegar todos os caminhos dos blocos e baixar os arquivos em um só
+   */
 	
+  
+  @GetMapping("/gerardelta")
+  public List<CodelistRs> gerarDelta(@RequestParam(value = "docid", required = false) Long docid, 
+		  							@RequestParam(value = "tracoid", required = false) Long tracoid,
+		  							@RequestParam(value = "revisao", required = false) String revisao) throws Exception 
+  { 
+	  
+	// Pegando nome do documento
+	var documento = documentoRepository.getOne(docid);
+	String DocumentoNome = documento.getDocumentonome();
+	String DocumentoPn = documento.getDocumentopn();
+	String DocCaminho = documento.getDocumentocaminho();
+	String DocNome = DocumentoNome+"-"+DocumentoPn;
+	String DirDoc = DocCaminho+DocNome;
+	
+	
+	var traco = tracoDocRepository.getOne(tracoid);
+	String tracoNome = traco.getTracodocnome();
+	String tracoCode = traco.getTracodoccodigo();
+	
+	
+	String rev[] = revisao.split(" ");
+	String revision = "REV"+rev[1]; 
+	  
+	 Connection conn1 = null;
+	 ResultSet resultadoBanco1 = null;
+	 conn1 = DBConexao.abrirConexao();
+	 Statement stm1 = conn1.createStatement();
+		 
+	 String sql1 = "SELECT traco_doc_nome, traco_doc_codigo, codelist.codelist_id, codelist_secao, codelist_subsecao, codelist_nomebloco, codelist_codebloco, codelist_caminho, documento_id "
+				+ "	FROM codelist "
+				+ " INNER JOIN relacao_bloco_traco ON relacao_bloco_traco.bloco_id = codelist.codelist_id "
+				+ " INNER JOIN traco_doc ON traco_doc.traco_doc_id = relacao_bloco_traco.traco_id "
+				+ " INNER JOIN arquivo ON arquivo.codelist_id = codelist.codelist_id "
+				+ " WHERE documento_id = "+docid+"  AND traco_id = "+tracoid+" AND arquivo_revisao LIKE '"+revisao+"' ;";
+	 resultadoBanco1 = stm1.executeQuery(sql1);
+	 
+	 /*Criando arquivo Delta*/
+	 PDDocument novodelta = new PDDocument();
+	 novodelta.save(DirDoc+"\\"+DocNome+"-"+tracoNome+"-"+tracoCode+"-"+revision+"-DELTA.pdf");
+	 novodelta.close();
+	
+	 File file = new File(DirDoc+"\\"+DocNome+"-"+tracoNome+"-"+tracoCode+"-"+revision+"-DELTA.pdf");
+	 PDDocument delta = PDDocument.load(file);
+	 
+	 int i = 1;
+
+	 while(resultadoBanco1.next())
+	 { 
+		 String caminhoBloco = resultadoBanco1.getString("codelist_caminho");
+		 String Bloco = resultadoBanco1.getString("codelist_nomebloco");
+		 String Secao = resultadoBanco1.getString("codelist_secao");
+		 String subSecao = resultadoBanco1.getString("codelist_subsecao");
+		 		 
+		String caminhoarquivo = caminhoBloco+"\\"+Bloco; //Criando caminho para carregar o arquivo
+		if(Secao != "") {caminhoarquivo = caminhoarquivo+"\\"+Secao;}
+		if(subSecao != "") {caminhoarquivo = caminhoarquivo+"\\"+subSecao;}
+		 
+		String nomeArquivo = DocNome+"-"+Secao; // Criando nome do arquivo seguindo padrão do mockup (nome doc + secao + subsecao + num - bloco)
+		if(subSecao != "") {nomeArquivo = nomeArquivo+"-"+subSecao;}
+		nomeArquivo = nomeArquivo+"-"+Bloco;
+
+		
+		 File file1 = new File(caminhoarquivo+"\\"+nomeArquivo+".pdf");
+		 PDDocument document = PDDocument.load(file1);
+		 int numPag = document.getNumberOfPages();
+		 	
+		 int contPage = 0;
+		 String rev1 = null;
+		 
+		// Laço para inserção das paginas na LEP
+		for(int n = 1; n <= numPag; n++)
+		{	
+		    	PDPage Pages = document.getPage(contPage);
+	            		
+	            PDFTextStripperByArea stripper = new PDFTextStripperByArea();
+	            stripper.setSortByPosition(true);
+
+	            Rectangle2D area = new Rectangle2D.Float(0f, 570f, 400f, 60f);
+	            stripper.addRegion("rodape", area);
+	            stripper.extractRegions(Pages);            
+
+	            String pdfFileInText = stripper.getTextForRegion("rodape");
+	            
+	            int posicao = pdfFileInText.lastIndexOf("REVISION");
+	            
+	            
+	            if(posicao != -1){ rev1 = pdfFileInText.substring(posicao, posicao+11); } 
+	            else{ rev1 = "ORIGINAL"; }
+	            
+	            if(revisao.equals(rev1))
+	            {
+	            	delta.addPage(Pages);
+	            	delta.save(file);
+	            }
+	            
+	            contPage++;
+		}
+		document.close();
+		 
+ 
+		i++;
+	 }
+	 
+	 delta.close();
+
+	return null; 
+	 
+  } 
+
+  
 }
