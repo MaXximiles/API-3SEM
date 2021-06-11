@@ -8,7 +8,9 @@ import java.util.stream.Collectors;
 
 import java.io.File;
 
+import org.apache.pdfbox.multipdf.PDFMergerUtility;
 import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.interactive.form.PDAcroForm;
 import org.apache.pdfbox.pdmodel.interactive.form.PDField;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,6 +30,10 @@ import com.grupo2.API_TraceFinder.repository.ArquivoRepository;
 import com.grupo2.API_TraceFinder.repository.CodelistRepository;
 import com.grupo2.API_TraceFinder.repository.DocumentoRepository;
 import com.grupo2.API_TraceFinder.repository.LepRepository;
+import com.itextpdf.io.codec.Base64.InputStream;
+import com.itextpdf.kernel.utils.PdfMerger;
+
+import ch.qos.logback.core.util.Loader;
 
 
 @RestController
@@ -93,6 +99,174 @@ public class LepController {
 		String nomeArquivo = DocNome+"-"+CodelistSecao; // Criando nome do arquivo seguindo padrão do mockup (nome doc + secao + subsecao + num - bloco)
 		if(CodelistSubsecao != "") {nomeArquivo = nomeArquivo+"-"+CodelistSubsecao;}
 		nomeArquivo = nomeArquivo+"-"+CodelistBloco;
+		
+		//////////////////////////////////////////////////////////////////
+		
+		
+		
+		
+		/*PDDocument pDDocument1 = PDDocument.load(new File("src/main/resources/models/ModeloLEP.pdf"));
+		pDDocument1.save(CaminhoLep+"\\"+nomeArquivo+".pdf");
+		int NumPag = pDDocument1.getNumberOfPages();
+		pDDocument1.close();*/
+		
+			    
+			
+					 
+		
+
+		/* *****************************CARREGANDO ARQUIVO MODELO DE LEP ************************************************************* */
+	
+		
+		// Destino
+		PDDocument lepvazia = new PDDocument();
+		lepvazia.save(CaminhoLep+"\\"+nomeArquivo+".pdf");
+		lepvazia.close();
+		
+		File file1 = new File(CaminhoLep+"\\"+nomeArquivo+".pdf");
+		PDDocument destino = PDDocument.load(file1);
+		
+		// Modelo
+		File file2 = new File("src/main/resources/models/ModeloLEP.pdf");
+		PDDocument modelo = PDDocument.load(file2);
+		PDAcroForm pDAcroForm = modelo.getDocumentCatalog().getAcroForm();    
+         
+        PDFMergerUtility PDFmerger = new PDFMergerUtility();
+    	//PDFmerger.setDestinationFileName(CaminhoLep+"\\"+nomeArquivo+".pdf");
+         
+         
+         
+        Connection conn = null;
+        ResultSet resultadoBanco = null;
+        conn = DBConexao.abrirConexao();
+        Statement stm = conn.createStatement();
+        
+        String sql = "SELECT lep_id, lep_bloco, lep_code, lep_pagina, lep_modificacao, lep_revisao, arquivo_id, documento_id FROM lep WHERE documento_id = "+DocumentoId+""
+        		+ " ORDER BY lep_bloco;";
+        resultadoBanco = stm.executeQuery(sql);
+        
+                 
+        int i = 1;
+        int numPag = 1;
+        while(resultadoBanco.next())
+        { 
+        		String num1 = Integer.toString(i);
+		    	String lepBloco = (resultadoBanco.getString("lep_bloco"));
+		    	String arqId = (resultadoBanco.getString("arquivo_id"));
+		    	String lepCode = (resultadoBanco.getString("lep_code"));
+		    	String lepPage = (resultadoBanco.getString("lep_pagina"));
+		    	String lepmodificacao = (resultadoBanco.getString("lep_modificacao"));
+		    	String leprevisao = (resultadoBanco.getString("lep_revisao"));
+		    		    			    	
+	    		PDField field = pDAcroForm.getField("bloco"+num1);
+		        field.setValue(lepBloco);
+		        field = pDAcroForm.getField("code"+num1);
+		        field.setValue(lepCode);        
+		        field = pDAcroForm.getField("page"+num1);
+		        field.setValue(lepPage);
+		        field = pDAcroForm.getField("status"+num1);
+		        field.setValue(lepmodificacao);
+		        field = pDAcroForm.getField("revisao"+num1);
+		        field.setValue(leprevisao);
+		        field = pDAcroForm.getField("numPage");
+		        field.setValue(Integer.toString(numPag));
+		        field = pDAcroForm.getField("docNome"); 
+		        field.setValue(DocNome);	
+		        
+		        i++;
+		        
+		        if(i % 20 == 0)
+		        {	     
+		        	PDFmerger.appendDocument(destino, modelo);
+		        	i = 1;
+		        	numPag++;
+		        	
+		        	System.out.println(numPag);
+		        }
+ 
+        }
+        
+        modelo.close();
+        destino.save(file1);
+        destino.close();
+        
+        File file3 = new File(CaminhoLep+"\\"+nomeArquivo+".pdf");
+        PDDocument Lep = PDDocument.load(file3);
+        int NumPag = Lep.getNumberOfPages();
+        Lep.close();
+	  
+        /* Salvando Informações no Banco */
+        var lep2 = new Arquivo();
+		lep2.setArquivonome(nomeArquivo);
+		lep2.setCodelistid(codelistid);
+		arquivoRepository.save(lep2);
+		Long arquivo = lep2.getArquivoid();
+			
+		 Connection conn1 = null;
+	     ResultSet resultadoBanco1 = null;
+	     conn1 = DBConexao.abrirConexao();
+	     Statement stm1 = conn1.createStatement();
+	    
+	     String sql1 = "SELECT MAX(lep_revisao) FROM lep WHERE documento_id = "+DocumentoId+";";
+	     resultadoBanco1 = stm1.executeQuery(sql1);
+	     
+	     String revisao = "";
+	     while(resultadoBanco1.next()){ revisao = resultadoBanco1.getString("MAX(lep_revisao)");}
+		
+		String modificacao = "";
+		Long pagina = (long) NumPag;
+		
+		var lep1 = new Lep();
+		lep1.setLepBloco(CodelistBloco);
+		lep1.setLepCode(CodelistCode);
+		lep1.setLepPagina(pagina); // Inserir quantidade de paginas  
+		lep1.setLepModificacao(modificacao); // mudar quando inserir modificacao
+		lep1.setLepRevisao(revisao); // mudar quando inserir revisao
+		lep1.setArquivoId(arquivo);
+		lep1.setDocumentoid(DocumentoId);
+		lepRepository.save(lep1);
+        
+        
+        
+	    return null;
+	}
+	
+	// SELECT de todos//
+	@GetMapping("/")
+	public List<LepRs> selectAll() 
+	{
+	   var lep = lepRepository.findAll();
+	   return lep.stream().map((lp) -> LepRs.converter(lp)).collect(Collectors.toList());
+	}
+	
+	
+	/*// Criar PDF LEP, precisa do ID do codelist
+	@GetMapping("/gerarlep")
+	public List<LepRs> criarLep(@RequestParam(value = "codelistid", required = false) Long codelistid, MultipartFile arq) throws Exception
+	{			
+		// Pegando ID do Documento, e caminho para salvar arquivo LEP através do Codelist
+		var codelist = codelistRepository.getOne(codelistid);
+		Long DocumentoId = codelist.getDocumentoid();
+		String CodelistCaminho = codelist.getCodelistcaminho();
+		String CodelistCode = codelist.getCodelistcodebloco();
+		String CodelistBloco = codelist.getCodelistnomebloco();
+		String CodelistSecao = codelist.getCodelistsecao();
+		String CodelistSubsecao = codelist.getCodelistsubsecao();
+
+		// Pegando nome do documento
+		var documento = documentoRepository.getOne(DocumentoId);
+		String DocumentoNome = documento.getDocumentonome();
+		String DocumentoPn = documento.getDocumentopn();
+		String DocNome = DocumentoNome+"-"+DocumentoPn;
+		Long DocCdlistLep = documento.getDocumentocdlistlep();
+		
+		String CaminhoLep = CodelistCaminho+"\\"+CodelistBloco; //Criando caminho para salvar a LEP
+		if(CodelistSecao != "") {CaminhoLep = CaminhoLep+"\\"+CodelistSecao;}
+		if(CodelistSubsecao != "") {CaminhoLep = CaminhoLep+"\\"+CodelistSubsecao;}
+		
+		String nomeArquivo = DocNome+"-"+CodelistSecao; // Criando nome do arquivo seguindo padrão do mockup (nome doc + secao + subsecao + num - bloco)
+		if(CodelistSubsecao != "") {nomeArquivo = nomeArquivo+"-"+CodelistSubsecao;}
+		nomeArquivo = nomeArquivo+"-"+CodelistBloco;
 		/////////////////////////
 		
 		PDDocument pDDocument1 = PDDocument.load(new File("src/main/resources/models/ModeloLEP.pdf"));
@@ -101,7 +275,7 @@ public class LepController {
 		pDDocument1.close();
 		
 		
-		//////////*/*/*/*/*/*/*/*/*/*/*
+		
 		if(DocCdlistLep == null || DocCdlistLep == 0)
 		{
 			
@@ -147,7 +321,7 @@ public class LepController {
 					 
 		}
 
-		/* ****************************************************************************************** */
+		/* *****************************CARREGANDO ARQUIVO MODELO DE LEP ************************************************************* *//*
 								
 		PDDocument pDDocument = PDDocument.load(new File(CaminhoLep+"\\"+nomeArquivo+".pdf"));
 		//PDDocument pDDocument = PDDocument.load(new File("C:\\trace_finder\\ModeloLEP.pdf"));
@@ -195,14 +369,5 @@ public class LepController {
         pDDocument.close();
 	    
 	    return null;
-	}
-	
-	// SELECT de todos//
-	@GetMapping("/")
-	public List<LepRs> selectAll() 
-	{
-	   var lep = lepRepository.findAll();
-	   return lep.stream().map((lp) -> LepRs.converter(lp)).collect(Collectors.toList());
-	}
-	
+	}*/
 }
