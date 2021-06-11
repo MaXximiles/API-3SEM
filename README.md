@@ -106,6 +106,21 @@ As seguintes tecnologias foram utilizadas no desenvolvimento do projeto:
                        </td>
                             <td><p><a href="https://github.com/MaXximiles/API-3SEM/tree/sprint-4">Ver mais... </a></p></td>
                      </tr>
+                      <tr>
+                            <td align=center>Sprint 5<br>05/06/2021 a 26/06/2021</td>
+                            <td> <p align=center>
+                             ✓ Gerar registro de modificação feita por cada usuário;
+                             ✓ Diferentes níveis de acesso (adm, usuário, auditor);
+                             ✓ Melhorias visuais na LEP;
+                             ✓ Importar codelist pronto em Excel;
+                             ✓ Implementação da DELTA;
+                             ✓ Visualização dos arquivos de cada bloco no codelist;
+                             ✓ Opção de baixar os arquivos dos blocos separadamente;
+                             <p align=center>                          
+                       </p>
+                       </td>
+                            <td><p><a href="https://github.com/MaXximiles/API-3SEM/tree/sprint-5">Ver mais... </a></p></td>
+                     </tr>
               </tbody>
        </table>
 
