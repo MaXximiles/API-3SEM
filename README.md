@@ -19,13 +19,19 @@ Nesta última entrega possuímos o objetivo de finalizar todas as pendências da
 
 ### Detalhes da Sprint:
 Resumo de modificações:
-- Gerar registro de modificação feita por cada usuário;
-- Diferentes níveis de acesso (adm, usuário, auditor);
-- Melhorias visuais na LEP;
-- Importar codelist pronto em Excel;
-- Implementação da DELTA;
-- Visualização dos arquivos de cada bloco no codelist;
-- Opção de baixar os arquivos dos blocos separadamente;
+- Correções:
+  - Correção bugs na edição dos traços e tags;
+  - Correção das autorizações das páginas para usuário comum e admin;
+  - Correção da criação da FULL por traços;
+  - Correção da LEP gerando mais de uma página;
+- Adições:
+  - Adição de seleção de revisões na criação do FULL e do DELTA;
+  - Adição criação do FULL e do DELTA;
+  - Adição do componente de dropdown com pesquisa seleção simples;
+  - Adição da função criar DELTA por traços;
+- Atualizações:
+  - Atualização da tabela arquivos e classes arquivos;
+
 </p></br><h1></h1>
 
 ### Screenshoots:
