@@ -1,12 +1,17 @@
 import "./Table.css";
 import React, { useEffect, useRef, useState } from "react";
-import restAPI from "../apis/restAPI";
+import Modal from "./Modal";
 import ContextMenu from "./ContextMenu";
+import CodelistGenerate from "./CodelistGenerate";
+
+import restAPI from "../apis/restAPI";
 
 const Table = ({ data, onEdit, onDelete, docId, filter }) => {
   const [columnStyle, setColumnStyle] = useState([]);
   const [contextPosition, setContextPosition] = useState({});
   const [selectedItem, setSelectedItem] = useState({});
+  const [isGenerating, setIsGenerating] = useState(false);
+  const [genetationType, setGenerationType] = useState(null);
   const thead = useRef();
   const tbody = useRef();
 
@@ -112,7 +117,7 @@ const Table = ({ data, onEdit, onDelete, docId, filter }) => {
     alert("LEP gerada com sucesso!");
   };
 
-  const genFull = async () => {
+  const generate = async (generate) => {
     await restAPI.get(
       `/codelist/gerarfull?docid=${docId}&tracoid=${filter[0].value}`
     );
@@ -162,6 +167,22 @@ const Table = ({ data, onEdit, onDelete, docId, filter }) => {
     }
 
     return null;
+  };
+
+  const renderModal = () => {
+    return (
+      <Modal
+        title="Selecione uma revisão"
+        isOpen={isGenerating}
+        setIsOpen={setIsGenerating}
+      >
+        <CodelistGenerate
+          docId={docId}
+          generate={genetationType}
+          onSubmit={generate}
+        />
+      </Modal>
+    );
   };
 
   var indexSub = 0;
@@ -248,6 +269,7 @@ const Table = ({ data, onEdit, onDelete, docId, filter }) => {
   return (
     <div className="Table">
       {renderContextMenu()}
+      {renderModal()}
       <table className="ui selectable celled table unstackable">
         <thead>
           <tr ref={thead}>{rendredTableHead}</tr>
@@ -267,10 +289,25 @@ const Table = ({ data, onEdit, onDelete, docId, filter }) => {
                 className={`ui right floated small primary labeled icon button ${
                   filter.length !== 1 ? "disabled" : ""
                 }`}
-                onClick={genFull}
+                onClick={() => {
+                  setGenerationType("full");
+                  setIsGenerating(true);
+                }}
               >
                 <i className="book icon"></i>
                 Gerar Full
+              </div>
+              <div
+                className={`ui right floated small primary labeled icon button ${
+                  filter.length !== 1 ? "disabled" : ""
+                }`}
+                onClick={() => {
+                  setGenerationType("delta");
+                  setIsGenerating(true);
+                }}
+              >
+                <i className="book icon"></i>
+                Gerar Delta
               </div>
             </th>
           </tr>

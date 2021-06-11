@@ -9,3 +9,7 @@ tbody {
     max-height: 500px;
     overflow-y: auto !important;    /* Trigger vertical scroll    */
 }
+
+td, th {
+  white-space: nowrap;
+}
