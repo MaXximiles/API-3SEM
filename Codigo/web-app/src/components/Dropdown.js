@@ -24,7 +24,7 @@ const Dropdown = ({
         return;
       }
 
-			setHoveredOption(null);
+      setHoveredOption(null);
       setOpen(false);
     };
 
@@ -143,6 +143,10 @@ const Dropdown = ({
   };
 
   const onKeyDown = (event) => {
+    if (!isOpen) {
+      setOpen(true);
+    }
+
     const filteredOptions = options.filter(
       (option) =>
         !selected.includes(option) &&

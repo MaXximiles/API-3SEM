@@ -11,7 +11,7 @@ const Table = ({ data, onEdit, onDelete, docId, filter }) => {
   const [contextPosition, setContextPosition] = useState({});
   const [selectedItem, setSelectedItem] = useState({});
   const [isGenerating, setIsGenerating] = useState(false);
-  const [genetationType, setGenerationType] = useState(null);
+  const [generationType, setGenerationType] = useState(null);
   const thead = useRef();
   const tbody = useRef();
 
@@ -117,12 +117,19 @@ const Table = ({ data, onEdit, onDelete, docId, filter }) => {
     alert("LEP gerada com sucesso!");
   };
 
-  const generate = async (generate) => {
-    await restAPI.get(
-      `/codelist/gerarfull?docid=${docId}&tracoid=${filter[0].value}`
-    );
+  const generate = async (generate, revision) => {
+    if (generate === "full") {
+      await restAPI.get(
+        `/codelist/gerarfull?docid=${docId}&tracoid=${filter[0].value}&revisao=${revision}`
+      );
+    } else {
+      await restAPI.get(
+        `/codelist/gerardelta?docid=${docId}&tracoid=${filter[0].value}&revisao=${revision}`
+      );
+    }
 
-    alert("Full gerada com sucesso!");
+    alert(`${generate} gerado com sucesso!`);
+    setIsGenerating(false);
   };
 
   const onContextMenu = (event, item) => {
@@ -172,13 +179,13 @@ const Table = ({ data, onEdit, onDelete, docId, filter }) => {
   const renderModal = () => {
     return (
       <Modal
-        title="Selecione uma revisão"
+        title={`Selecione uma revisão para gerar o ${generationType} do manual`}
         isOpen={isGenerating}
         setIsOpen={setIsGenerating}
       >
         <CodelistGenerate
           docId={docId}
-          generate={genetationType}
+          generate={generationType}
           onSubmit={generate}
         />
       </Modal>

@@ -26,21 +26,24 @@ const CodelistGenerate = ({ generate, onSubmit, docId }) => {
   return (
     <React.Fragment>
       <div className="content">
-        Selecione uma revisão para gerar o {generate} do manual.
-        <p>
-          <DropdownSimple
-            label="Selecione uma revisão"
-            defaultText="Selecione uma revisão"
-            options={options}
-            selected={selectedOption}
-            onSelectedChange={setSelectedOption}
-          />
-        </p>
+        <form className="ui form">
+          <div className="field">
+            <DropdownSimple
+              label="Selecione uma revisão"
+              defaultText="Selecione uma revisão"
+              options={options}
+              selected={selectedOption}
+              onSelectedChange={setSelectedOption}
+            />
+          </div>
+        </form>
       </div>
       <div className="actions">
         <div
-          className="ui positive right labeled icon button"
-          onClick={() => onSubmit(generate)}
+          className={`ui positive right labeled icon button ${
+            selectedOption.label ? "" : "disabled"
+          }`}
+          onClick={() => onSubmit(generate, selectedOption.value)}
         >
           Confirmar
           <i className="checkmark icon"></i>

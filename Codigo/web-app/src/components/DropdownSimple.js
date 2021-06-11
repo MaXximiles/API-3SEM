@@ -34,6 +34,12 @@ const DropdownSimple = ({
     };
   }, []);
 
+  useEffect(() => {
+    if (selected) {
+      setSearch("");
+    }
+  }, [selected]);
+
   useLayoutEffect(() => {
     if (selectedRef.current) {
       selectedRef.current.scrollIntoView(false);
@@ -63,9 +69,11 @@ const DropdownSimple = ({
   const renderMenu = () => {
     const filteredOptions = options.filter(
       (option) =>
-        !selected === option &&
+        selected !== option &&
         option.label.toLowerCase().includes(search.toLowerCase())
     );
+
+    console.log("options", options, "filtered options", filteredOptions);
 
     const renderedOptions = filteredOptions.map((option, index) => {
       return (
@@ -88,9 +96,13 @@ const DropdownSimple = ({
   };
 
   const onKeyDown = (event) => {
+    if (!isOpen) {
+      setOpen(true);
+    }
+
     const filteredOptions = options.filter(
       (option) =>
-        !selected.includes(option) &&
+        selected !== option &&
         option.label.toLowerCase().includes(search.toLowerCase())
     );
 
@@ -127,9 +139,11 @@ const DropdownSimple = ({
     }
   };
 
-  const renderedSelected = selected.label;
-
-  const renderedPlaceholder = <div className="default text">{defaultText}</div>;
+  const renderedPlaceholder = (
+    <div className={`${search || selected.label ? "" : "default"} text`}>
+      {selected.label || defaultText}
+    </div>
+  );
 
   return (
     <div ref={ref} className="field">
@@ -141,7 +155,6 @@ const DropdownSimple = ({
         onClick={openMenu}
       >
         <i className="dropdown icon" />
-        {renderedSelected}
         <input
           ref={inputRef}
           className="search"
@@ -154,7 +167,6 @@ const DropdownSimple = ({
           {visible && search}
         </span>
         {!search && renderedPlaceholder}
-        <div className="text">{selected.label}</div>
         <div className={`menu ${isOpen ? "visible transition" : ""}`}>
           {renderMenu()}
         </div>
