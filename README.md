@@ -4,8 +4,15 @@
 
 ### Sprint anterior:
 Na Sprint anterior tínhamos como proposta criar o controle de usuários, o login de acesso ao sistema, a geração do compilado de documentos FULL e DELTA e de finalizar as pendências da sprint passada.
+</br><p align=center> 
+</br><img src="https://github.com/MaXximiles/API-3SEM/blob/main/Documenta%C3%A7%C3%A3o/User%20Story%20Cards/StoryCard2.png?raw=true" width=350 height=200>
+<img src="https://github.com/MaXximiles/API-3SEM/blob/main/Documenta%C3%A7%C3%A3o/User%20Story%20Cards/StoryCard4.png?raw=true" width=350 height=200>
+
 ### Proposta:
 Nesta última entrega possuímos o objetivo de finalizar todas as pendências da sprint passada como: melhorias no controle de usuários, melhorias na LEP e geração da DELTA, além de pequenos reparos para melhorar a experiencia do usuário.
+</br><p align=center> 
+</br><img src="https://github.com/MaXximiles/API-3SEM/blob/main/Documenta%C3%A7%C3%A3o/User%20Story%20Cards/StoryCard2.png?raw=true" width=350 height=200>
+<img src="https://github.com/MaXximiles/API-3SEM/blob/main/Documenta%C3%A7%C3%A3o/User%20Story%20Cards/StoryCard4.png?raw=true" width=350 height=200>
 
 </p></br><h1></h1>
 
