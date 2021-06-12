@@ -36,6 +36,18 @@ Resumo de modificações:
 
 ### Screenshoots:
 <p align=center>
+<b>Gerando FULL</br></br></br>
+<img src=https://user-images.githubusercontent.com/68132461/121760555-c4acd900-cb01-11eb-8c15-963bf0b66b7b.png></br>
+</p></br><h1></h1>
+
+<p align=center>
+<b>Gerando DELTA</br></br></br>
+<img src=https://user-images.githubusercontent.com/68132461/121760565-d2625e80-cb01-11eb-9604-b161889d2aab.png></br>
+</p></br><h1></h1>
+
+
+
+<p align=center>
 Burndown:</p>
 <p align=center>
 </br><b>Gráfico</b></br></br>
