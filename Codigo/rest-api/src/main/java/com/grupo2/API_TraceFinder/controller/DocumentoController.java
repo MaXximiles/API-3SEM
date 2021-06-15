@@ -143,16 +143,6 @@ public class DocumentoController
 	  //File folder = new File(pasta);
 	  
 	  remover(new File(pasta));
-	  /*if (folder.isDirectory()) 
-	  {
-	  	File[] sun = folder.listFiles();
-	  	for (File toDelete : sun)
-	  	{
-	  		toDelete.delete();
-	  		
-	  	}
-	  	folder.delete();
-	  }*/
 	  	  	  
 	  documentoRepository.deleteById(id);
   }

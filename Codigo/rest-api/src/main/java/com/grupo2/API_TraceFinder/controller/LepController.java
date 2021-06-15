@@ -81,7 +81,8 @@ public class LepController {
 		Long DocumentoId = codelist.getDocumentoid();
 		String CodelistCaminho = codelist.getCodelistcaminho();
 		String CodelistCode = codelist.getCodelistcodebloco();
-		String CodelistBloco = codelist.getCodelistnumbloco();
+		String CodelistBloco = codelist.getCodelistnomebloco();
+		String CodelistnumBloco = codelist.getCodelistnumbloco();
 		String CodelistSecao = codelist.getCodelistsecao();
 		String CodelistSubsecao = codelist.getCodelistsubsecao();
 
@@ -92,17 +93,17 @@ public class LepController {
 		String DocNome = DocumentoNome+"-"+DocumentoPn;
 		Long DocCdlistLep = documento.getDocumentocdlistlep();
 		
-		String CaminhoLep = CodelistCaminho+"\\"+CodelistBloco; //Criando caminho para salvar a LEP
-		if(CodelistSecao != "") {CaminhoLep = CaminhoLep+"\\"+CodelistSecao;}
+		String CaminhoLep = CodelistCaminho+"\\"+CodelistSecao; //Criando caminho para salvar a LEP
 		if(CodelistSubsecao != "") {CaminhoLep = CaminhoLep+"\\"+CodelistSubsecao;}
+		CaminhoLep = CaminhoLep+"\\"+CodelistnumBloco+"_"+CodelistBloco;
 		
 		String nomeArquivo = DocNome+"-"+CodelistSecao; // Criando nome do arquivo seguindo padrão do mockup (nome doc + secao + subsecao + num - bloco)
 		if(CodelistSubsecao != "") {nomeArquivo = nomeArquivo+"-"+CodelistSubsecao;}
-		nomeArquivo = nomeArquivo+"-"+CodelistBloco;
+		nomeArquivo = nomeArquivo+"-"+CodelistnumBloco+"_"+CodelistBloco;
 		
 		//////////////////////////////////////////////////////////////////					 
 		
-
+ 
 		/* *****************************CARREGANDO ARQUIVO MODELO DE LEP ************************************************************* */
 				
 		// Destino

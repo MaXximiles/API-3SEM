@@ -67,9 +67,9 @@ public class ArquivoUpload {
 		String CodelistSecao = doc.getCodelistsecao();
 		String CodelistSubsecao = doc.getCodelistsubsecao();
 		
-		String pasta = caminho + "\\" + num;
-		if(CodelistSecao != "") {pasta = pasta+"\\"+CodelistSecao;}
-		if(CodelistSubsecao != "") {pasta = pasta+"\\"+CodelistSubsecao;}
+		String pasta = caminho + "\\" + CodelistSecao ;
+		if(CodelistSecao != "") {pasta = pasta+"\\"+ CodelistSubsecao;}
+		pasta = pasta+"\\"+num+"_"+nome;
 		
 		// Pegando nome do documento
 		var documento = documentoRepository.getOne(DocumentoId);

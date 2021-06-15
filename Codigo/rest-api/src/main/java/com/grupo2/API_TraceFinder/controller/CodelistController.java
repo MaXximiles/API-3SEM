@@ -203,7 +203,7 @@ public void insertCodelist(@RequestBody CodelistRq CdList, DocumentoRq Doc, @Pat
 	}
 	if(CdList.getCodelistnumbloco() != "")
 	{ 
-		caminhoBloco = caminhoBloco+"\\"+CdList.getCodelistnumbloco()+" "+CdList.getCodelistnomebloco();
+		caminhoBloco = caminhoBloco+"\\"+CdList.getCodelistnumbloco()+"_"+CdList.getCodelistnomebloco();
 		File newDir3 = new File("\\" + caminhoBloco);
 	    newDir3.mkdir();
 	}
@@ -252,7 +252,7 @@ public void deleteCodelist(@PathVariable Long id)
 	
 	String caminhoBloco = caminho+"\\"+CodelistSecao;
 	if(CodelistSubsecao != ""){	caminhoBloco = caminhoBloco+"\\"+CodelistSubsecao;}
-	if(num != ""){caminhoBloco = caminhoBloco+"\\"+num+" "+nome;}
+	if(num != ""){caminhoBloco = caminhoBloco+"\\"+num+"_"+nome;}
 	 
 	
 	 File folder = new File(caminhoBloco);
@@ -327,7 +327,8 @@ public void deleteCodelist(@PathVariable Long id)
 	 while(resultadoBanco1.next())
 	 { 
 		 String caminhoBloco = resultadoBanco1.getString("codelist_caminho");
-		 String Bloco = resultadoBanco1.getString("codelist_numbloco");
+		 String numBloco = resultadoBanco1.getString("codelist_numbloco");
+		 String Bloco = resultadoBanco1.getString("codelist_nomebloco");
 		 String Secao = resultadoBanco1.getString("codelist_secao");
 		 String subSecao = resultadoBanco1.getString("codelist_subsecao");
 		 		 
@@ -337,7 +338,7 @@ public void deleteCodelist(@PathVariable Long id)
 		 
 		String nomeArquivo = DocNome+"-"+Secao; // Criando nome do arquivo seguindo padrão do mockup (nome doc + secao + subsecao + num - bloco)
 		if(subSecao != "") {nomeArquivo = nomeArquivo+"-"+subSecao;}
-		nomeArquivo = nomeArquivo+"-"+Bloco;
+		nomeArquivo = nomeArquivo+"-"+numBloco+"_"+Bloco;
 
 		
 		 File file = new File(caminhoarquivo+"\\"+nomeArquivo+".pdf");
@@ -411,7 +412,8 @@ public void deleteCodelist(@PathVariable Long id)
 	 while(resultadoBanco1.next())
 	 { 
 		 String caminhoBloco = resultadoBanco1.getString("codelist_caminho");
-		 String Bloco = resultadoBanco1.getString("codelist_numbloco");
+		 String numBloco = resultadoBanco1.getString("codelist_numbloco");
+		 String Bloco = resultadoBanco1.getString("codelist_nomebloco");
 		 String Secao = resultadoBanco1.getString("codelist_secao");
 		 String subSecao = resultadoBanco1.getString("codelist_subsecao");
 		 		 
@@ -421,7 +423,7 @@ public void deleteCodelist(@PathVariable Long id)
 		 
 		String nomeArquivo = DocNome+"-"+Secao; // Criando nome do arquivo seguindo padrão do mockup (nome doc + secao + subsecao + num - bloco)
 		if(subSecao != "") {nomeArquivo = nomeArquivo+"-"+subSecao;}
-		nomeArquivo = nomeArquivo+"-"+Bloco;
+		nomeArquivo = nomeArquivo+"-"+numBloco+"_"+Bloco;
 
 		
 		 File file1 = new File(caminhoarquivo+"\\"+nomeArquivo+".pdf");
