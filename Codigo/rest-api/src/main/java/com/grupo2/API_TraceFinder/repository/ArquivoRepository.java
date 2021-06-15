@@ -26,4 +26,9 @@ public interface ArquivoRepository extends JpaRepository<Arquivo, Long>
 			+ " INNER JOIN documento ON documento.documento_id = codelist.documento_id "
 			+ " WHERE documento.documento_id = ?1 ;", nativeQuery = true)
 	String selectRevisoes(Long docid);*/
+	
+	@Query(value = "SELECT arquivo_caminho"
+			+ "	FROM arquivo "
+			+ " WHERE codelist_id = ?1 ", nativeQuery = true)
+	String selectArquivoCaminho(Long blocoid);
 }

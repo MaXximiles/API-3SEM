@@ -5,12 +5,19 @@ public class CodelistRq {
 	private Long codelistid;	
 	private String codelistsecao;
 	private String codelistsubsecao;
+	private String codelistnumbloco;
 	private String codelistnomebloco;
 	private String codelistcodebloco;
 	private String codelistcaminho;
 	private Long documentoid;
 	
 	
+	public String getCodelistnumbloco() {
+		return codelistnumbloco;
+	}
+	public void setCodelistnumbloco(String codelistnumbloco) {
+		this.codelistnumbloco = codelistnumbloco;
+	}
 	public Long getCodelistid() {
 		return codelistid;
 	}

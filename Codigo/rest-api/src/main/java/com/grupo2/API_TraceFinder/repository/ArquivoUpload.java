@@ -60,13 +60,14 @@ public class ArquivoUpload {
 		var doc = codelistRepository.getOne(id);
 		Long CodelistId = doc.getCodelistid();
 		Long DocumentoId = doc.getDocumentoid();
+		String num = doc.getCodelistnumbloco();
 		String nome = doc.getCodelistnomebloco();
 		String caminho = doc.getCodelistcaminho();
 		String code = doc.getCodelistcodebloco();
 		String CodelistSecao = doc.getCodelistsecao();
 		String CodelistSubsecao = doc.getCodelistsubsecao();
 		
-		String pasta = caminho + "\\" + nome;
+		String pasta = caminho + "\\" + num;
 		if(CodelistSecao != "") {pasta = pasta+"\\"+CodelistSecao;}
 		if(CodelistSubsecao != "") {pasta = pasta+"\\"+CodelistSubsecao;}
 		
@@ -76,9 +77,9 @@ public class ArquivoUpload {
 		String DocumentoPn = documento.getDocumentopn();
 		String DocNome = DocumentoNome+"-"+DocumentoPn;
 				
-		String nomeArquivo = DocNome+"-"+CodelistSecao; // Criando nome do arquivo seguindo padrão do mockup (nome doc + secao + subsecao + num - bloco)
+		String nomeArquivo = DocNome+"-"+CodelistSecao; // Criando nome do arquivo seguindo padrão do mockup (nome doc + secao + subsecao + num - bloco + cod bloco)
 		if(CodelistSubsecao != "") {nomeArquivo = nomeArquivo+"-"+CodelistSubsecao;}
-		nomeArquivo = nomeArquivo+"-"+nome;
+		nomeArquivo = nomeArquivo+"-"+num+"c"+code;
 		
 		String arquivo = arq.getOriginalFilename();
 		
@@ -124,7 +125,7 @@ public class ArquivoUpload {
 				Long pag = (long) i;
 							
 				var lep1 = new Lep();
-				lep1.setLepBloco(nome);
+				lep1.setLepBloco(num);
 				lep1.setLepCode(code);
 				lep1.setLepPagina(pag);
 				lep1.setLepModificacao(modificacao); // mudar quando inserir modificacao

@@ -183,26 +183,27 @@ public void insertCodelist(@RequestBody CodelistRq CdList, DocumentoRq Doc, @Pat
 	var cdList = new Codelist();
 	cdList.setCodelistcaminho(pasta);
 	cdList.setCodelistcodebloco(CdList.getCodelistcodebloco());
+	cdList.setCodelistnumbloco(CdList.getCodelistnumbloco());
 	cdList.setCodelistnomebloco(CdList.getCodelistnomebloco());
 	cdList.setCodelistsecao(CdList.getCodelistsecao());
 	cdList.setCodelistsubsecao(CdList.getCodelistsubsecao());
 	cdList.setDocumentoid(CdList.getDocumentoid());
 	codelistRepository.save(cdList);
 	
-	// criando diretório do bloco
+	// criando diretório do bloco 
 	
-	String caminhoBloco = pasta+"\\"+CdList.getCodelistnomebloco();
+	String caminhoBloco = pasta+"\\"+CdList.getCodelistsecao();
 	File newDir1 = new File("\\" + caminhoBloco);
 	newDir1.mkdir();
-	if(CdList.getCodelistsecao() != "") 
+	if(CdList.getCodelistsubsecao() != "") 
 	{ 
-		caminhoBloco = caminhoBloco+"\\"+CdList.getCodelistsecao();
+		caminhoBloco = caminhoBloco+"\\"+CdList.getCodelistsubsecao();
 		File newDir2 = new File("\\" + caminhoBloco);
 	    newDir2.mkdir();
 	}
-	if(CdList.getCodelistsubsecao() != "")
+	if(CdList.getCodelistnumbloco() != "")
 	{ 
-		caminhoBloco = caminhoBloco+"\\"+CdList.getCodelistsubsecao();
+		caminhoBloco = caminhoBloco+"\\"+CdList.getCodelistnumbloco()+" "+CdList.getCodelistnomebloco();
 		File newDir3 = new File("\\" + caminhoBloco);
 	    newDir3.mkdir();
 	}
@@ -221,6 +222,7 @@ public void updateCodelist(@PathVariable Long id, @RequestBody CodelistRq CdList
 		cdList2.setCodelistcaminho(CdList.getCodelistcaminho());
 		cdList2.setCodelistcodebloco(CdList.getCodelistcodebloco());
 		cdList2.setCodelistnomebloco(CdList.getCodelistnomebloco());
+		cdList2.setCodelistnumbloco(CdList.getCodelistnumbloco());
 		cdList2.setCodelistsecao(CdList.getCodelistsecao());
 		cdList2.setCodelistsubsecao(CdList.getCodelistsubsecao());
 		cdList2.setDocumentoid(CdList.getDocumentoid());
@@ -233,20 +235,42 @@ public void updateCodelist(@PathVariable Long id, @RequestBody CodelistRq CdList
 @DeleteMapping("/{id}")
 public void deleteCodelist(@PathVariable Long id)
 {	
-	 var doc = codelistRepository.getOne(id);	
-	 String nome = doc.getCodelistnomebloco();
-	 String caminho = doc.getCodelistcaminho();
+	// Pegando caminho do arquivo 
+	String arquivoCaminho = arquivoRepository.selectArquivoCaminho(id);	
 	 
-	   
-	 String pasta = caminho + "\\" + nome;
-	 File folder = new File(pasta);
-	 if (folder.isDirectory()) 
-	 {
-	 	File[] sun = folder.listFiles();
-	 	for (File toDelete : sun){toDelete.delete();}
-	 	folder.delete();
-	 }
+	// Pegando caminho do bloco
+	var doc = codelistRepository.getOne(id);
+	Long CodelistId = doc.getCodelistid();
+	Long DocumentoId = doc.getDocumentoid();
+	String num = doc.getCodelistnumbloco();
+	String nome = doc.getCodelistnomebloco();
+	String caminho = doc.getCodelistcaminho();
+	String code = doc.getCodelistcodebloco();
+	String CodelistSecao = doc.getCodelistsecao();
+	String CodelistSubsecao = doc.getCodelistsubsecao();
 	
+	
+	String caminhoBloco = caminho+"\\"+CodelistSecao;
+	if(CodelistSubsecao != ""){	caminhoBloco = caminhoBloco+"\\"+CodelistSubsecao;}
+	if(num != ""){caminhoBloco = caminhoBloco+"\\"+num+" "+nome;}
+	 
+	
+	 File folder = new File(caminhoBloco);
+	 boolean Caminho = folder.exists();
+	 boolean Diretorio = folder.isDirectory();
+	 
+	 if(Caminho && Diretorio)
+	 {
+		 File arquivo = new File(arquivoCaminho);
+		 arquivo.delete();
+	 }
+	 else 
+	 {
+		 File[] sun = folder.listFiles();
+		 for (File toDelete : sun){toDelete.delete();}
+		 folder.delete(); 
+	 }
+	 	
 	codelistRepository.deleteById(id);
 }
 
@@ -287,7 +311,7 @@ public void deleteCodelist(@PathVariable Long id)
 	 conn1 = DBConexao.abrirConexao();
 	 Statement stm1 = conn1.createStatement();
 		 
-	 String sql1 = "SELECT traco_doc_nome, traco_doc_codigo, codelist.codelist_id, codelist_secao, codelist_subsecao, codelist_nomebloco, codelist_codebloco, codelist_caminho, documento_id "
+	 String sql1 = "SELECT traco_doc_nome, traco_doc_codigo, codelist.codelist_id, codelist_secao, codelist_subsecao, codelist_numbloco, codelist_nomebloco, codelist_codebloco, codelist_caminho, documento_id "
 				+ "	FROM codelist "
 				+ " INNER JOIN relacao_bloco_traco ON relacao_bloco_traco.bloco_id = codelist.codelist_id "
 				+ " INNER JOIN traco_doc ON traco_doc.traco_doc_id = relacao_bloco_traco.traco_id "
@@ -303,7 +327,7 @@ public void deleteCodelist(@PathVariable Long id)
 	 while(resultadoBanco1.next())
 	 { 
 		 String caminhoBloco = resultadoBanco1.getString("codelist_caminho");
-		 String Bloco = resultadoBanco1.getString("codelist_nomebloco");
+		 String Bloco = resultadoBanco1.getString("codelist_numbloco");
 		 String Secao = resultadoBanco1.getString("codelist_secao");
 		 String subSecao = resultadoBanco1.getString("codelist_subsecao");
 		 		 
@@ -366,7 +390,7 @@ public void deleteCodelist(@PathVariable Long id)
 	 conn1 = DBConexao.abrirConexao();
 	 Statement stm1 = conn1.createStatement();
 		 
-	 String sql1 = "SELECT traco_doc_nome, traco_doc_codigo, codelist.codelist_id, codelist_secao, codelist_subsecao, codelist_nomebloco, codelist_codebloco, codelist_caminho, documento_id "
+	 String sql1 = "SELECT traco_doc_nome, traco_doc_codigo, codelist.codelist_id, codelist_secao, codelist_subsecao, codelist_numbloco, codelist_nomebloco, codelist_codebloco, codelist_caminho, documento_id "
 				+ "	FROM codelist "
 				+ " INNER JOIN relacao_bloco_traco ON relacao_bloco_traco.bloco_id = codelist.codelist_id "
 				+ " INNER JOIN traco_doc ON traco_doc.traco_doc_id = relacao_bloco_traco.traco_id "
@@ -387,7 +411,7 @@ public void deleteCodelist(@PathVariable Long id)
 	 while(resultadoBanco1.next())
 	 { 
 		 String caminhoBloco = resultadoBanco1.getString("codelist_caminho");
-		 String Bloco = resultadoBanco1.getString("codelist_nomebloco");
+		 String Bloco = resultadoBanco1.getString("codelist_numbloco");
 		 String Secao = resultadoBanco1.getString("codelist_secao");
 		 String subSecao = resultadoBanco1.getString("codelist_subsecao");
 		 		 

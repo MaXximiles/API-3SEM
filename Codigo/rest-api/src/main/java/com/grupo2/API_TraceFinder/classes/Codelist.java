@@ -35,6 +35,9 @@ public class Codelist {
 	@Column(name="codelist_nomebloco")
 	private String codelistnomebloco;
 	
+	@Column(name="codelist_numbloco")
+	private String codelistnumbloco;
+	
 	@Column(name="codelist_codebloco")
 	private String codelistcodebloco;
 	
@@ -48,6 +51,14 @@ public class Codelist {
 
 	
 	
+
+	public String getCodelistnumbloco() {
+		return codelistnumbloco;
+	}
+
+	public void setCodelistnumbloco(String codelistnumbloco) {
+		this.codelistnumbloco = codelistnumbloco;
+	}
 
 	public Long getCodelistid() {
 		return codelistid;

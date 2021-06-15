@@ -81,7 +81,7 @@ public class LepController {
 		Long DocumentoId = codelist.getDocumentoid();
 		String CodelistCaminho = codelist.getCodelistcaminho();
 		String CodelistCode = codelist.getCodelistcodebloco();
-		String CodelistBloco = codelist.getCodelistnomebloco();
+		String CodelistBloco = codelist.getCodelistnumbloco();
 		String CodelistSecao = codelist.getCodelistsecao();
 		String CodelistSubsecao = codelist.getCodelistsubsecao();
 

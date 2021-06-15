@@ -12,6 +12,7 @@ public class CodelistRs {
 	private Long codelistid;	
 	private String codelistsecao;
 	private String codelistsubsecao;
+	private String codelistnumbloco;
 	private String codelistnomebloco;
 	private String codelistcodebloco;
 	private String codelistcaminho;
@@ -23,6 +24,7 @@ public class CodelistRs {
 		codelist.setCodelistid(code.getCodelistid());
 		codelist.setCodelistcaminho(code.getCodelistcaminho());
 		codelist.setCodelistcodebloco(code.getCodelistcodebloco());
+		codelist.setCodelistnumbloco(code.getCodelistnumbloco());
 		codelist.setCodelistnomebloco(code.getCodelistnomebloco());
 		codelist.setCodelistsecao(code.getCodelistsecao());
 		codelist.setCodelistsubsecao(code.getCodelistsubsecao());
@@ -33,6 +35,18 @@ public class CodelistRs {
 	
 	
 	
+	public String getCodelistnumbloco() {
+		return codelistnumbloco;
+	}
+
+
+
+	public void setCodelistnumbloco(String codelistnumbloco) {
+		this.codelistnumbloco = codelistnumbloco;
+	}
+
+
+
 	public List<TracoDocRs> getTracos() {
 		return tracos;
 	}

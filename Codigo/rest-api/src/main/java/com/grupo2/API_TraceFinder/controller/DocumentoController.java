@@ -140,15 +140,35 @@ public class DocumentoController
 	  String docCaminho = doc.getDocumentocaminho();
 	   
 	  String pasta = docCaminho + "\\" + docNome + "-" + docPn;
-	  File folder = new File(pasta);
-	  if (folder.isDirectory()) 
+	  //File folder = new File(pasta);
+	  
+	  remover(new File(pasta));
+	  /*if (folder.isDirectory()) 
 	  {
 	  	File[] sun = folder.listFiles();
-	  	for (File toDelete : sun){toDelete.delete();}
+	  	for (File toDelete : sun)
+	  	{
+	  		toDelete.delete();
+	  		
+	  	}
 	  	folder.delete();
-	  }
-	  
+	  }*/
+	  	  	  
 	  documentoRepository.deleteById(id);
+  }
+  
+ public void remover (File f) 
+  {
+      if (f.isDirectory()) 
+      {
+          File[] files = f.listFiles();
+      
+          for (int i = 0; i < files.length; ++i) 
+          {
+              remover (files[i]);
+          }
+      }
+      f.delete();
   }
      
 }
