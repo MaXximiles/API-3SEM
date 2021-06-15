@@ -31,4 +31,9 @@ public interface ArquivoRepository extends JpaRepository<Arquivo, Long>
 			+ "	FROM arquivo "
 			+ " WHERE codelist_id = ?1 ", nativeQuery = true)
 	String selectArquivoCaminho(Long blocoid);
+	
+	@Query(value = "SELECT arquivo_id, arquivo_nome, codelist_id, arquivo_revisao, arquivo_caminho"
+			+ "	FROM arquivo "
+			+ " WHERE codelist_id = ?1 ;", nativeQuery = true)
+	List<Arquivo> selectArquivos(Long blocoid);
 }

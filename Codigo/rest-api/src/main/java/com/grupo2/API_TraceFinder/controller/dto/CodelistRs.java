@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.grupo2.API_TraceFinder.classes.Arquivo;
 import com.grupo2.API_TraceFinder.classes.Codelist;
 import com.grupo2.API_TraceFinder.classes.TracoDoc;
 
@@ -19,7 +20,9 @@ public class CodelistRs {
 	private Long documentoid;
 	private List<TracoDocRs> tracos; 
 	
-	public static CodelistRs converter(Codelist code, List<TracoDoc> lstTracos) {
+	private List<ArquivoRs> arquivos;
+	
+	public static CodelistRs converter(Codelist code, List<TracoDoc> lstTracos, List<Arquivo> lstArquivos) {
 		var codelist = new CodelistRs();
 		codelist.setCodelistid(code.getCodelistid());
 		codelist.setCodelistcaminho(code.getCodelistcaminho());
@@ -30,6 +33,9 @@ public class CodelistRs {
 		codelist.setCodelistsubsecao(code.getCodelistsubsecao());
 		codelist.setDocumentoid(code.getDocumentoid());
 		codelist.setTracos(TracoDocRs.converter(lstTracos));
+		
+		codelist.setArquivos(ArquivoRs.converter(lstArquivos));
+		
 		return codelist;
 	}
 	
@@ -39,10 +45,18 @@ public class CodelistRs {
 		return codelistnumbloco;
 	}
 
-
-
 	public void setCodelistnumbloco(String codelistnumbloco) {
 		this.codelistnumbloco = codelistnumbloco;
+	}
+
+	public List<ArquivoRs> getArquivos() {
+		return arquivos;
+	}
+
+
+
+	public void setArquivos(List<ArquivoRs> arquivos) {
+		this.arquivos = arquivos;
 	}
 
 

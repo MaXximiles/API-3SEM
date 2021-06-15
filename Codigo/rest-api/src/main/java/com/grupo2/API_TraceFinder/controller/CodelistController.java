@@ -71,7 +71,7 @@ public class CodelistController {
 public List<CodelistRs> selectAll()
 {
 	var codelist = codelistRepository.findAll();
-	return codelist.stream().map((CdList) -> CodelistRs.converter(CdList, Collections.EMPTY_LIST)).collect(Collectors.toList());	
+	return codelist.stream().map((CdList) -> CodelistRs.converter(CdList, Collections.EMPTY_LIST, Collections.EMPTY_LIST)).collect(Collectors.toList());	
 }
 	
 // SELECT Bloco por ID trazendo os traços //
@@ -85,9 +85,11 @@ public List<CodelistRs> selectID(@RequestParam(value = "blocoid", required = fal
 		
 		for(Codelist c : codelist)
 		{
-			CodelistRs codelistRs = CodelistRs.converter(c, tracoDocRepository.selectTracosBloco(c.getCodelistid()));
+			CodelistRs codelistRs = CodelistRs.converter(c, tracoDocRepository.selectTracosBloco(c.getCodelistid()), arquivoRepository.selectArquivos(c.getCodelistid()));
 			lstCodelist.add(codelistRs);
 		}
+		
+		
 				
 		return lstCodelist;	
 }
@@ -97,7 +99,7 @@ public List<CodelistRs> selectID(@RequestParam(value = "blocoid", required = fal
 public List<CodelistRs> selectJoin(@RequestParam(value = "docid", required = false) Long docid)
 {
 	var codelist = codelistRepository.SelectCodelistDoc(docid);
-	return codelist.stream().map((codList) -> CodelistRs.converter(codList, Collections.EMPTY_LIST)).collect(Collectors.toList());	
+	return codelist.stream().map((codList) -> CodelistRs.converter(codList, Collections.EMPTY_LIST, Collections.EMPTY_LIST)).collect(Collectors.toList());	
 }
 	
 	
@@ -106,7 +108,7 @@ public List<CodelistRs> selectJoin(@RequestParam(value = "docid", required = fal
 public List<CodelistRs> selectTracoBloco(@RequestParam(value = "tracoid", required = false) Long tracoid)
 {
 	var codelist = codelistRepository.SelectTracoCodelist(tracoid);
-	return codelist.stream().map((codList) -> CodelistRs.converter(codList, Collections.EMPTY_LIST)).collect(Collectors.toList());	
+	return codelist.stream().map((codList) -> CodelistRs.converter(codList, Collections.EMPTY_LIST, Collections.EMPTY_LIST)).collect(Collectors.toList());	
 }
 		
 
@@ -121,7 +123,7 @@ public List<CodelistRs> selectTracoBloco(@RequestParam(value = "tracoid", requir
 		
 		for(Codelist c : codelist)
 		{
-			CodelistRs codelistRs = CodelistRs.converter(c, tracoDocRepository.selectTracosBloco(c.getCodelistid()));
+			CodelistRs codelistRs = CodelistRs.converter(c, tracoDocRepository.selectTracosBloco(c.getCodelistid()), arquivoRepository.selectArquivos(c.getCodelistid()));
 			lstCodelist.add(codelistRs);
 		}
 				
@@ -139,7 +141,7 @@ public List<CodelistRs> blocosTracos(@RequestParam(value = "docid", required = f
 		
 		for(Codelist c : codelist)
 		{
-			CodelistRs codelistRs = CodelistRs.converter(c, tracoDocRepository.selectTracosBloco(c.getCodelistid()));
+			CodelistRs codelistRs = CodelistRs.converter(c, tracoDocRepository.selectTracosBloco(c.getCodelistid()), arquivoRepository.selectArquivos(c.getCodelistid()));
 			lstCodelist.add(codelistRs);
 		}
 				

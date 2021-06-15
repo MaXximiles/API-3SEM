@@ -1,8 +1,12 @@
 package com.grupo2.API_TraceFinder.controller.dto;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 
 import com.grupo2.API_TraceFinder.classes.Arquivo;
+import com.grupo2.API_TraceFinder.classes.TracoDoc;
 
 public class ArquivoRs {
 
@@ -22,6 +26,20 @@ public class ArquivoRs {
 		return arquivo;
 	}
 
+	public static List<ArquivoRs> converter(List<Arquivo> lstArq) 
+	{
+		List<ArquivoRs> listArq = new ArrayList<>();
+		
+		for(Arquivo td : lstArq)
+		{
+			
+			listArq.add(ArquivoRs.converter(td));
+		}
+		
+		return listArq;
+	}
+	
+	
 	public Long getArquivoid() {
 		return arquivoid;
 	}
