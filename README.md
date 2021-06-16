@@ -137,11 +137,11 @@ Resumo de modificações:
 <p align=center>
 Atualização dos modelos Relacional e Conceitual do banco de dados:</p>
 <p align=center><b>Modelo Relacional</b></br></br>
-<img src="https://github.com/MaXximiles/API-3SEM/blob/main/Documenta%C3%A7%C3%A3o/Modelo%20Relacional.jpeg?raw=true">
+<img src=https://github.com/MaXximiles/API-3SEM/blob/main/Documentação/Modelo%20Relacional.png>
 
 <p align=center>
 </br><b>Modelo Conceitual</b></br>
-</br><img src="https://github.com/MaXximiles/API-3SEM/blob/main/Documenta%C3%A7%C3%A3o/Modelo%20Logico.jpeg?raw=true">
+</br><img src=https://github.com/MaXximiles/API-3SEM/blob/main/Documentação/Modelo%20Logico.png>
 </p></br><h1></h1>
 
 <p align=center>
