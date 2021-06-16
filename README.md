@@ -24,11 +24,17 @@ Resumo de modificações:
   - Correção das autorizações das páginas para usuário comum e admin;
   - Correção da criação da FULL por traços;
   - Correção da LEP gerando mais de uma página;
+  - Correção da LEP por traço;
+  - Correção da geração do DELTA por traço;
+  - Correção  Apagar  diretórios e arquivo ao excluir no front 
 - Adições:
   - Adição de seleção de revisões na criação do FULL e do DELTA;
   - Adição criação do FULL e do DELTA;
   - Adição do componente de dropdown com pesquisa seleção simples;
   - Adição da função criar DELTA por traços;
+  - Adição da inserção do código do bloco no nome dos arquivos;
+  - Adição da exibição do nome do bloco no codelist;
+  - Adição da pesquisa de blocos existentes na tela de edição de blocos;
 - Atualizações:
   - Atualização da tabela arquivos e classes arquivos;
 
