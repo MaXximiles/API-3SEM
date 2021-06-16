@@ -50,5 +50,9 @@ public interface CodelistRepository extends JpaRepository<Codelist, Long> {
 			+ " WHERE codelist_id = ?1 ;", nativeQuery = true)
 	List<Codelist> SelectBlocoTracos(Long id);
 	
-
+	
+	
+	@Query(value = "SELECT codelist_id, codelist_secao, codelist_subsecao, codelist_numbloco, codelist_nomebloco, codelist_codebloco, codelist_caminho, documento_id "
+			+ "	FROM codelist WHERE codelist_nomebloco LIKE %?1% GROUP BY codelist_numbloco, codelist_nomebloco ", nativeQuery = true)
+	List<Codelist> SelectNomeBloco(String bloconome);
 }

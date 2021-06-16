@@ -110,6 +110,14 @@ public List<CodelistRs> selectTracoBloco(@RequestParam(value = "tracoid", requir
 	var codelist = codelistRepository.SelectTracoCodelist(tracoid);
 	return codelist.stream().map((codList) -> CodelistRs.converter(codList, Collections.EMPTY_LIST, Collections.EMPTY_LIST)).collect(Collectors.toList());	
 }
+
+//SELECT blocos do sistema filtrando pelo nome do bloco //
+@GetMapping("/blocosnome")
+public List<CodelistRs> selectNomesBloco(@RequestParam(value = "bloconome", required = false) String bloconome)
+{
+	var codelist = codelistRepository.SelectNomeBloco(bloconome);
+	return codelist.stream().map((codList) -> CodelistRs.converter(codList, Collections.EMPTY_LIST, Collections.EMPTY_LIST)).collect(Collectors.toList());	
+}
 		
 
   //Filtrando todos os blocos que fazem parte do traço selecionado Trazendo a lista de traços
@@ -331,17 +339,19 @@ public void deleteCodelist(@PathVariable Long id)
 		 String caminhoBloco = resultadoBanco1.getString("codelist_caminho");
 		 String numBloco = resultadoBanco1.getString("codelist_numbloco");
 		 String Bloco = resultadoBanco1.getString("codelist_nomebloco");
+		 String Code = resultadoBanco1.getString("codelist_codebloco");
 		 String Secao = resultadoBanco1.getString("codelist_secao");
 		 String subSecao = resultadoBanco1.getString("codelist_subsecao");
 		 		 
-		String caminhoarquivo = caminhoBloco+"\\"+Bloco; //Criando caminho para carregar o arquivo
-		if(Secao != "") {caminhoarquivo = caminhoarquivo+"\\"+Secao;}
+		String caminhoarquivo = caminhoBloco+"\\"+Secao; //Criando caminho para carregar o arquivo
 		if(subSecao != "") {caminhoarquivo = caminhoarquivo+"\\"+subSecao;}
-		 
+		caminhoarquivo = caminhoarquivo+"\\"+numBloco+"_"+Bloco;
+		
+		
 		String nomeArquivo = DocNome+"-"+Secao; // Criando nome do arquivo seguindo padrão do mockup (nome doc + secao + subsecao + num - bloco)
 		if(subSecao != "") {nomeArquivo = nomeArquivo+"-"+subSecao;}
-		nomeArquivo = nomeArquivo+"-"+numBloco+"_"+Bloco;
-
+		nomeArquivo = nomeArquivo+"-"+numBloco+"c"+Code;
+		
 		
 		 File file = new File(caminhoarquivo+"\\"+nomeArquivo+".pdf");
 		 		 
@@ -416,18 +426,19 @@ public void deleteCodelist(@PathVariable Long id)
 		 String caminhoBloco = resultadoBanco1.getString("codelist_caminho");
 		 String numBloco = resultadoBanco1.getString("codelist_numbloco");
 		 String Bloco = resultadoBanco1.getString("codelist_nomebloco");
+		 String Code = resultadoBanco1.getString("codelist_codebloco");
 		 String Secao = resultadoBanco1.getString("codelist_secao");
 		 String subSecao = resultadoBanco1.getString("codelist_subsecao");
-		 		 
-		String caminhoarquivo = caminhoBloco+"\\"+Bloco; //Criando caminho para carregar o arquivo
-		if(Secao != "") {caminhoarquivo = caminhoarquivo+"\\"+Secao;}
+		
+		 
+		String caminhoarquivo = caminhoBloco+"\\"+Secao; //Criando caminho para carregar o arquivo
 		if(subSecao != "") {caminhoarquivo = caminhoarquivo+"\\"+subSecao;}
+		caminhoarquivo = caminhoarquivo+"\\"+numBloco+"_"+Bloco;
 		 
 		String nomeArquivo = DocNome+"-"+Secao; // Criando nome do arquivo seguindo padrão do mockup (nome doc + secao + subsecao + num - bloco)
 		if(subSecao != "") {nomeArquivo = nomeArquivo+"-"+subSecao;}
-		nomeArquivo = nomeArquivo+"-"+numBloco+"_"+Bloco;
+		nomeArquivo = nomeArquivo+"-"+numBloco+"c"+Code;
 
-		
 		 File file1 = new File(caminhoarquivo+"\\"+nomeArquivo+".pdf");
 		 PDDocument document = PDDocument.load(file1);
 		 int numPag = document.getNumberOfPages();
@@ -457,18 +468,16 @@ public void deleteCodelist(@PathVariable Long id)
 	            
 	            if(revisao.equals(rev1))
 	            {
-	            	delta.addPage(Pages);
+	            	delta.importPage(Pages);
 	            	delta.save(file);
 	            }
 	            
 	            contPage++;
 		}
-		document.close();
+		//document.close(); // Deixar comentado
 		 
- 
 		i++;
 	 }
-	 
 	 delta.close();
 
 	return null; 
