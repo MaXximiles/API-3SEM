@@ -47,6 +47,7 @@ As seguintes tecnologias foram utilizadas no desenvolvimento do projeto:
  - [Modelo Relacional do Banco de Dados](https://github.com/MaXximiles/API-3SEM/blob/main/Documentação/Modelo%20Relacional.jpeg)
  - [Modelo Conceitual do Banco de Dados](https://github.com/MaXximiles/API-3SEM/blob/main/Documentação/Modelo%20Logico.jpeg)
  - [Instruções](https://github.com/MaXximiles/API-3SEM/tree/main/Documenta%C3%A7%C3%A3o)
+ - [Vídeo Apresentação](https://drive.google.com/file/d/18xXZb9L5s-jFXsGRHqO5VS3kYoatRzow/view?usp=sharing)
  <!--- [Tutorial Instalação](https://github.com/MaXximiles/API-3SEM/tree/main/Documenta%C3%A7%C3%A3o) -->
  
 <h2>Sprints</h2>
