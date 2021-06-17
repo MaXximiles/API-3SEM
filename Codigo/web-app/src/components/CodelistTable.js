@@ -6,7 +6,7 @@ import CodelistGenerate from "./CodelistGenerate";
 
 import restAPI from "../apis/restAPI";
 
-const Table = ({ data, onEdit, onDelete, docId, filter }) => {
+const Table = ({ data, onEdit, onDelete, docId, filter, reload }) => {
   const [columnStyle, setColumnStyle] = useState([]);
   const [contextPosition, setContextPosition] = useState({});
   const [selectedItem, setSelectedItem] = useState({});
@@ -106,6 +106,7 @@ const Table = ({ data, onEdit, onDelete, docId, filter }) => {
       );
 
       alert("Arquivo salvo com sucesso!");
+      reload();
     };
 
     input.click();
@@ -210,10 +211,14 @@ const Table = ({ data, onEdit, onDelete, docId, filter }) => {
               return "Subseção";
             case "codelistnomebloco":
               return "Bloco";
+            case "codelistnumbloco":
+              return "Número";
             case "codelistcodebloco":
               return "Código";
             case "tracos":
               return "Traços";
+            case "arquivos":
+              return "Arquivos";
             default:
               return key;
           }
@@ -243,8 +248,8 @@ const Table = ({ data, onEdit, onDelete, docId, filter }) => {
             style={columnStyle[index - indexSub]}
           >
             {value[1]
-              .map((traco) => {
-                return traco.tracodocnome;
+              .map((array) => {
+                return Object.values(array)[1];
               })
               .join(", ")}
           </td>

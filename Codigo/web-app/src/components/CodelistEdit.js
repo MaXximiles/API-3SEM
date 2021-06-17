@@ -3,10 +3,12 @@ import Dropdown from "./Dropdown";
 import restAPI from "../apis/restAPI";
 
 const CodelistEdit = ({ onSubmit, dataEntry, docId }) => {
+  const [search, setSearch] = useState("");
   const [section, setSection] = useState("");
   const [subsection, setSubsection] = useState("");
   const [block, setBlock] = useState("");
   const [blockCode, setBlockCode] = useState("");
+  const [blockNum, setBlockNum] = useState("");
   const [traceOptions, setTraceOptions] = useState([]);
   const [selectedTrace, setSelectedTrace] = useState([]);
   const [prevSelectedTrace, setPrevSelectedTrace] = useState(null);
@@ -165,6 +167,7 @@ const CodelistEdit = ({ onSubmit, dataEntry, docId }) => {
       setSubsection(dataEntry.codelistsubsecao);
       setBlock(dataEntry.codelistnomebloco);
       setBlockCode(dataEntry.codelistcodebloco);
+      setBlockNum(dataEntry.codelistnumbloco);
     } else {
       clearFields();
     }
@@ -177,10 +180,27 @@ const CodelistEdit = ({ onSubmit, dataEntry, docId }) => {
     setBlockCode("");
   };
 
+  const submitSearch = async (event) => {
+    if (event.key === "Enter") {
+      const { data } = await restAPI.get(
+        `/codelist/blocosnome?bloconome=${search}`
+      );
+
+      const blockInfo = data[0];
+
+      setSection(blockInfo.codelistsecao);
+      setSubsection(blockInfo.codelistsubsecao);
+      setBlock(blockInfo.codelistnomebloco);
+      setBlockCode(blockInfo.codelistcodebloco);
+      setBlockNum(blockInfo.codelistnumbloco);
+    }
+  };
+
   const submit = async () => {
     const submitedEntry = {
       codelistcodebloco: blockCode,
       codelistnomebloco: block,
+      codelistnumbloco: blockNum,
       codelistsecao: section,
       codelistsubsecao: subsection,
       documentoid: docId,
@@ -200,6 +220,22 @@ const CodelistEdit = ({ onSubmit, dataEntry, docId }) => {
     <React.Fragment>
       <div className="content">
         <form className="ui form">
+          {!dataEntry && (
+            <React.Fragment>
+              <div className="field">
+                <label>Localizar Bloco Existente por Nome</label>
+                <input
+                  type="text"
+                  name="search"
+                  placeholder="Nome Bloco"
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                  onKeyDown={(e) => submitSearch(e)}
+                />
+              </div>
+              <div class="ui divider"></div>
+            </React.Fragment>
+          )}
           <div className="field">
             <label>Seção</label>
             <input
@@ -231,7 +267,17 @@ const CodelistEdit = ({ onSubmit, dataEntry, docId }) => {
             />
           </div>
           <div className="field">
-            <label>Código do bloco</label>
+            <label>Número do Bloco</label>
+            <input
+              type="text"
+              name="block"
+              placeholder="Bloco"
+              value={blockNum}
+              onChange={(e) => setBlockNum(e.target.value)}
+            />
+          </div>
+          <div className="field">
+            <label>Código do Bloco</label>
             <input
               type="text"
               name="blockCode"

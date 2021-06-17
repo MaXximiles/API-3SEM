@@ -160,6 +160,7 @@ const Codelist = () => {
             filter={selectedTrace}
             onEdit={editItem}
             onDelete={deleteItem}
+            reload={getData}
           />
         </div>
       </div>

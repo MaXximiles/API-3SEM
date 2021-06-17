@@ -26,16 +26,16 @@ const Modal = ({
   };
 
   useEffect(() => {
-    if (isOpen) {
-      const onBodyClick = (event) => {
-        if (ref.current && ref.current.contains(event.target)) {
-          return;
-        }
+    const onBodyClick = (event) => {
+      if (ref.current && ref.current.contains(event.target)) {
+        return;
+      }
 
-        setIsOpen(false);
-      };
+      setIsOpen(false);
+    };
 
-      const onResize = () => {
+    const onResize = () => {
+      if (containerRef.current) {
         document.body.classList.toggle(
           "scrolling",
           hasElementOverflown(containerRef.current)
@@ -45,20 +45,20 @@ const Modal = ({
           "scrolling",
           hasElementOverflown(containerRef.current)
         );
-      };
-
-      if (!forceChoice) {
-        document.body.addEventListener("mousedown", onBodyClick);
       }
+    };
 
-      window.addEventListener("resize", onResize);
-
-      return () => {
-        document.body.removeEventListener("mousedown", onBodyClick);
-        window.removeEventListener("resize", onResize);
-      };
+    if (!forceChoice) {
+      document.body.addEventListener("mousedown", onBodyClick);
     }
-  }, [setIsOpen, forceChoice]);
+
+    window.addEventListener("resize", onResize);
+
+    return () => {
+      document.body.removeEventListener("mousedown", onBodyClick);
+      window.removeEventListener("resize", onResize);
+    };
+  }, [forceChoice, wasModalOpen]);
 
   useLayoutEffect(() => {
     if (isOpen) {
