@@ -55,7 +55,8 @@ public class ArquivoController {
 
   // INSERT //
   @PostMapping("/")
-  public void insertArquivo(@RequestBody ArquivoRq arquivo, Long id, String nome) {
+  public void insertArquivo(@RequestBody ArquivoRq arquivo, Long id, String nome)
+  {
     var arq = new Arquivo();
     arq.setArquivonome(nome);
     arq.setCodelistid(id);
@@ -64,17 +65,19 @@ public class ArquivoController {
 
   // UPDATE
   @PutMapping("/{id}")
-  public void updateArquivo(@PathVariable Long id, @RequestBody ArquivoRq arquivo) throws Exception {
+  public void updateArquivo(@PathVariable Long id, @RequestBody ArquivoRq arquivo) throws Exception
+  {
     var arq = arquivoRepository.findById(id);
 
-    if (arq.isPresent()) {
+    if (arq.isPresent()) 
+    {
       var arq2 = arq.get();
       arq2.setArquivonome(arquivo.getArquivonome());
       arq2.setCodelistid(arquivo.getCodelistid());
       arquivoRepository.save(arq2);
 
     } else {
-      throw new Exception("Documento não encontrado");
+      throw new Exception("Arquivo não encontrado");
     }
   }
 
@@ -100,10 +103,11 @@ public class ArquivoController {
 
   // Upload do arquivo necessário id do codelist
   @PostMapping("/upload/{id}")
-  public void upload(@RequestBody MultipartFile arquivo, @PathVariable Long id) throws Exception {
-
-    arquivoUpload.salvarArquivo(arquivo, id);
-    // String arqNome = arquivo.getOriginalFilename();
+  public void upload(@RequestBody MultipartFile arquivo, @PathVariable Long id) throws Exception 
+  {
+	  	  
+	  arquivoUpload.salvarArquivo(arquivo, id);
+	  // String arqNome = arquivo.getOriginalFilename();
 
   }
 }

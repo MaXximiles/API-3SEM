@@ -36,4 +36,7 @@ public interface ArquivoRepository extends JpaRepository<Arquivo, Long>
 			+ "	FROM arquivo "
 			+ " WHERE codelist_id = ?1 ;", nativeQuery = true)
 	List<Arquivo> selectArquivos(Long blocoid);
+	
+	
+	
 }

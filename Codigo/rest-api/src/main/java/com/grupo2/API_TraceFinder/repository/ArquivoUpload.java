@@ -25,6 +25,7 @@ import org.apache.pdfbox.pdmodel.fdf.FDFPage;
 import org.apache.pdfbox.pdmodel.interactive.form.PDAcroForm;
 import org.apache.pdfbox.text.PDFTextStripper;
 import org.apache.pdfbox.text.PDFTextStripperByArea;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -57,6 +58,7 @@ public class ArquivoUpload {
 	
 	public void salvarArquivo(MultipartFile arq, Long id) throws Exception
 	{	
+		
 		var doc = codelistRepository.getOne(id);
 		Long CodelistId = doc.getCodelistid();
 		Long DocumentoId = doc.getDocumentoid();
@@ -82,8 +84,9 @@ public class ArquivoUpload {
 		nomeArquivo = nomeArquivo+"-"+num+"c"+code;
 		
 		String arquivo = arq.getOriginalFilename();
+
 		
-	    this.salvar(pasta, arq, nomeArquivo, CodelistId);
+		this.salvar(pasta, arq, nomeArquivo, CodelistId);
         
 		File arqAntigo  = new File(pasta+"\\"+arquivo);
 		PDDocument pdf = PDDocument.load(arqAntigo);
@@ -91,10 +94,35 @@ public class ArquivoUpload {
 		pdf.close();
 		
 		arqAntigo.delete();
-				
-		Long arqId = insertArquivo(null, id, nomeArquivo+".pdf");
-	 	
-	 	File file = new File(pasta+"\\"+nomeArquivo+".pdf");
+
+		
+		Connection conn1 = null;
+		ResultSet resultadoBanco1 = null;
+		conn1 = DBConexao.abrirConexao();
+		Statement stm1 = conn1.createStatement();
+			 		
+		String sql1 = "SELECT arquivo_id, arquivo_nome, codelist_id, arquivo_revisao, arquivo_caminho"
+					+ "	FROM arquivo "
+					+ " WHERE arquivo_nome = '"+nomeArquivo+".pdf' ;";
+		resultadoBanco1 = stm1.executeQuery(sql1);
+		
+		
+		Long arqExisteid = null;
+		String arqExisteNome = null; 
+		Long arqId;
+		
+		
+		while(resultadoBanco1.next())
+		{
+			arqExisteid = Long.parseLong(resultadoBanco1.getString("arquivo_id"));
+			arqExisteNome = resultadoBanco1.getString("arquivo_nome");
+		}
+					
+		if(!arqExisteNome.equals(null)){ arqId = arqExisteid;}
+		else { arqId = insertArquivo(null, id, nomeArquivo+".pdf"); }
+	 			
+		
+		File file = new File(pasta+"\\"+nomeArquivo+".pdf");
 		PDDocument document = PDDocument.load(file);
 	 	int numPag = document.getNumberOfPages();
 		
@@ -169,6 +197,7 @@ public class ArquivoUpload {
 		
 		return arq.getArquivoid();
 	}
+		
 	
   public void updateArquivo(@RequestBody ArquivoRq arquivo, Long arqId, String arqCaminho ) throws Exception 
   {
