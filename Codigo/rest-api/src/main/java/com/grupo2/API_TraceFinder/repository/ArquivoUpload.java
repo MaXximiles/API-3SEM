@@ -108,7 +108,7 @@ public class ArquivoUpload {
 		
 		
 		Long arqExisteid = null;
-		String arqExisteNome = null; 
+		String arqExisteNome = ""; 
 		Long arqId;
 		
 		
@@ -118,7 +118,7 @@ public class ArquivoUpload {
 			arqExisteNome = resultadoBanco1.getString("arquivo_nome");
 		}
 					
-		if(!arqExisteNome.equals(null)){ arqId = arqExisteid;}
+		if(!arqExisteNome.equals("")){ arqId = arqExisteid;}
 		else { arqId = insertArquivo(null, id, nomeArquivo+".pdf"); }
 	 			
 		
