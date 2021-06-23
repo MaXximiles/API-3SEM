@@ -38,7 +38,7 @@ Resumo de modificações:
   - Adição da exibição do nome do bloco no codelist;
   - Adição da pesquisa de blocos existentes na tela de edição de blocos;
   - Adição do campo de nome de arquivos;
-  - Adição do campo de pesquisa de blocos para rapida inserção;
+  - Adição do campo pesquisa de blocos para rápida inserção;
 - Atualizações:
   - Atualização da tabela arquivos e classes arquivos;
 
