@@ -27,6 +27,8 @@ Resumo de modificações:
   - Correção da LEP por traço;
   - Correção da geração do DELTA por traço;
   - Correção  Apagar  diretórios e arquivo ao excluir no front 
+  - Correção de arquivos duplicados no banco;
+  - Correção de barra de rolagem na tela de exibição do codelist;
 - Adições:
   - Adição de seleção de revisões na criação do FULL e do DELTA;
   - Adição criação do FULL e do DELTA;
@@ -35,6 +37,8 @@ Resumo de modificações:
   - Adição da inserção do código do bloco no nome dos arquivos;
   - Adição da exibição do nome do bloco no codelist;
   - Adição da pesquisa de blocos existentes na tela de edição de blocos;
+  - Adição do campo de nome de arquivos;
+  - Adição do campo de pesquisa de blocos para rapida inserção;
 - Atualizações:
   - Atualização da tabela arquivos e classes arquivos;
 
@@ -51,6 +55,25 @@ Resumo de modificações:
 <img src=https://user-images.githubusercontent.com/68132461/121760565-d2625e80-cb01-11eb-9604-b161889d2aab.png></br>
 </p></br><h1></h1>
 
+<p align=center>
+<b>Gerando LEP</br></br></br>
+<img src=https://user-images.githubusercontent.com/68132461/123144988-b086a700-d432-11eb-8050-63a8e6daaf29.png></br>
+</p></br><h1></h1>
+
+<p align=center>
+<b>Arquivos adicionado ao Codelist</br></br></br>
+<img src=https://user-images.githubusercontent.com/68132461/123145337-1d01a600-d433-11eb-9a78-4dd6eae83a47.png></br>
+</p></br><h1></h1>
+
+<p align=center>
+<b>Gerando revisão da FULL</br></br></br>
+<img src=https://user-images.githubusercontent.com/68132461/123148658-e037ae00-d436-11eb-8684-9b008949aeed.png></br>
+</p></br><h1></h1>
+
+<p align=center>
+<b>Exemplo no Explorador de Arquivos</br></br></br>
+<img src=https://user-images.githubusercontent.com/68132461/123145153-e9268080-d432-11eb-9e52-29c6e2d1f136.png></br>
+</p></br><h1></h1>
 
 
 <p align=center>
@@ -59,4 +82,5 @@ Burndown:</p>
 </br><b>Gráfico</b></br></br>
 <img src=></br>
 </p></br><h1></h1>
+
 
