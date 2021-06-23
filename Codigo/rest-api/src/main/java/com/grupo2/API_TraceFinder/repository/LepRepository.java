@@ -2,7 +2,10 @@ package com.grupo2.API_TraceFinder.repository;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
@@ -22,6 +25,11 @@ public interface LepRepository extends JpaRepository<Lep, Long>{
 	 @Query(value = "SELECT COUNT(documento_id) "
 	 				+ "FROM lep WHERE documento_id = ?1 ", nativeQuery = true)
 	 List<Lep> SelectCountLepArquivo(Long arqid);
+	 
+	 
 
-
+	 @Modifying
+	  @Transactional
+	  @Query(value = "DELETE FROM lep WHERE arquivo_id = ?1", nativeQuery = true)
+	  void deleteArquivoLep(Long arquivoId);
 }

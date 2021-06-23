@@ -16,4 +16,11 @@ public interface RelacaoBlocoTracoRepository extends JpaRepository<RelacaoBlocoT
   @Transactional
   @Query(value = "DELETE FROM relacao_bloco_traco WHERE bloco_id = ?1 AND traco_id = ?2 ", nativeQuery = true)
   void DeleteTracosDoc(Long blocoid, Long tracoid);
+  
+  @Modifying
+  @Transactional
+  @Query(value = "DELETE FROM relacao_bloco_traco WHERE bloco_id = ?1", nativeQuery = true)
+  void deleteRelacaoBlocoTraco(Long blocoid);
+  
+  
 }

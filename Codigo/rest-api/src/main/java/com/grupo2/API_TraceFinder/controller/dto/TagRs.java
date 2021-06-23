@@ -1,5 +1,9 @@
 package com.grupo2.API_TraceFinder.controller.dto;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.grupo2.API_TraceFinder.classes.Arquivo;
 import com.grupo2.API_TraceFinder.classes.Tag;
 
 public class TagRs {
@@ -15,6 +19,21 @@ public class TagRs {
 		ta.setTagNome(tag.getTagNome());
 		return ta;	
 	}
+	
+	
+	public static List<TagRs> converter(List<Tag> lstTag) 
+	{
+		List<TagRs> listTag = new ArrayList<>();
+		
+		for(Tag td : lstTag)
+		{
+			
+			listTag.add(TagRs.converter(td));
+		}
+		
+		return listTag;
+	}
+	
 	
 	
 	public Long getTagId() {

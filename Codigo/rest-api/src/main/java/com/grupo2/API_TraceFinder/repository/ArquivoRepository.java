@@ -4,7 +4,10 @@ import com.grupo2.API_TraceFinder.classes.Arquivo;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
@@ -19,7 +22,14 @@ public interface ArquivoRepository extends JpaRepository<Arquivo, Long>
 			+ " WHERE documento.documento_id = ?1 GROUP BY arquivo_revisao ORDER BY arquivo_revisao;", nativeQuery = true)
 	List selectRevisoes(Long docid);
 	
-	/*//Pesquisa da maior revisão do documento
+	
+	/*
+	@Query(value = "SELECT lep_revisao"
+			+ "	FROM lep "
+			+ " WHERE documento_id = ?1 GROUP BY lep_revisao ORDER BY lep_revisao;", nativeQuery = true)
+	List selectRevisoes(Long docid);
+	
+	//Pesquisa da maior revisão do documento
 	@Query(value = "SELECT MAX(arquivo_revisao) "
 			+ "	FROM arquivo "
 			+ " INNER JOIN codelist ON codelist.codelist_id = arquivo.codelist_id "
@@ -37,6 +47,11 @@ public interface ArquivoRepository extends JpaRepository<Arquivo, Long>
 			+ " WHERE codelist_id = ?1 ;", nativeQuery = true)
 	List<Arquivo> selectArquivos(Long blocoid);
 	
+	
+	  @Modifying
+	  @Transactional
+	  @Query(value = "DELETE FROM arquivo WHERE codelist_id = ?1", nativeQuery = true)
+	  void deleteBlocoId(Long blocoid);
 	
 	
 }

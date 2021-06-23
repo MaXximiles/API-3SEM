@@ -1,5 +1,6 @@
 package com.grupo2.API_TraceFinder.controller;
 
+
 import java.awt.geom.Rectangle2D;
 import java.io.File;
 import java.sql.Connection;
@@ -36,7 +37,9 @@ import com.grupo2.API_TraceFinder.controller.dto.TracoDocRs;
 import com.grupo2.API_TraceFinder.repository.ArquivoRepository;
 import com.grupo2.API_TraceFinder.repository.CodelistRepository;
 import com.grupo2.API_TraceFinder.repository.DocumentoRepository;
+import com.grupo2.API_TraceFinder.repository.LepRepository;
 import com.grupo2.API_TraceFinder.repository.RelacaoBlocoTracoRepository;
+import com.grupo2.API_TraceFinder.repository.TagRepository;
 import com.grupo2.API_TraceFinder.repository.TracoDocRepository;
 
 import net.bytebuddy.agent.builder.AgentBuilder.InitializationStrategy.SelfInjection.Split;
@@ -50,16 +53,21 @@ public class CodelistController {
 	private RelacaoBlocoTracoRepository relacaoBlocoTracoRepository;
 	private TracoDocRepository tracoDocRepository;
 	private ArquivoRepository arquivoRepository;
+	private TagRepository tagRepository;
+	private LepRepository lepRepository;
 	
 	
 	public CodelistController(CodelistRepository codelistRepository, DocumentoRepository documentoRepository, RelacaoBlocoTracoRepository relacaoBlocoTracoRepository,
-							  TracoDocRepository tracoDocRepository, ArquivoRepository arquivoRepository)
+							  TracoDocRepository tracoDocRepository, ArquivoRepository arquivoRepository, TagRepository tagRepository, LepRepository lepRepository)
 	{
 		this.codelistRepository = codelistRepository;
 		this.documentoRepository = documentoRepository;
 		this.relacaoBlocoTracoRepository = relacaoBlocoTracoRepository;
 		this.tracoDocRepository = tracoDocRepository;
 		this.arquivoRepository = arquivoRepository;
+		this.tagRepository = tagRepository;
+		this.lepRepository = lepRepository;
+		
 	}
 	
 	
@@ -71,10 +79,10 @@ public class CodelistController {
 public List<CodelistRs> selectAll()
 {
 	var codelist = codelistRepository.findAll();
-	return codelist.stream().map((CdList) -> CodelistRs.converter(CdList, Collections.EMPTY_LIST, Collections.EMPTY_LIST)).collect(Collectors.toList());	
+	return codelist.stream().map((CdList) -> CodelistRs.converter(CdList, Collections.EMPTY_LIST, Collections.EMPTY_LIST, Collections.EMPTY_LIST)).collect(Collectors.toList());	
 }
 	
-// SELECT Bloco por ID trazendo os traços //
+// SELECT Bloco por ID trazendo os traços com Tags //
 @GetMapping("/{id}")
 public List<CodelistRs> selectID(@RequestParam(value = "blocoid", required = false) Long blocoid) 
 {
@@ -85,7 +93,7 @@ public List<CodelistRs> selectID(@RequestParam(value = "blocoid", required = fal
 		
 		for(Codelist c : codelist)
 		{
-			CodelistRs codelistRs = CodelistRs.converter(c, tracoDocRepository.selectTracosBloco(c.getCodelistid()), arquivoRepository.selectArquivos(c.getCodelistid()));
+			CodelistRs codelistRs = CodelistRs.converter(c, tracoDocRepository.selectTracosBloco(c.getCodelistid()), arquivoRepository.selectArquivos(c.getCodelistid()), tagRepository.selectTagBloco(c.getCodelistid()));
 			lstCodelist.add(codelistRs);
 		}
 		
@@ -99,7 +107,7 @@ public List<CodelistRs> selectID(@RequestParam(value = "blocoid", required = fal
 public List<CodelistRs> selectJoin(@RequestParam(value = "docid", required = false) Long docid)
 {
 	var codelist = codelistRepository.SelectCodelistDoc(docid);
-	return codelist.stream().map((codList) -> CodelistRs.converter(codList, Collections.EMPTY_LIST, Collections.EMPTY_LIST)).collect(Collectors.toList());	
+	return codelist.stream().map((codList) -> CodelistRs.converter(codList, Collections.EMPTY_LIST, Collections.EMPTY_LIST, Collections.EMPTY_LIST)).collect(Collectors.toList());	
 }
 	
 	
@@ -108,7 +116,7 @@ public List<CodelistRs> selectJoin(@RequestParam(value = "docid", required = fal
 public List<CodelistRs> selectTracoBloco(@RequestParam(value = "tracoid", required = false) Long tracoid)
 {
 	var codelist = codelistRepository.SelectTracoCodelist(tracoid);
-	return codelist.stream().map((codList) -> CodelistRs.converter(codList, Collections.EMPTY_LIST, Collections.EMPTY_LIST)).collect(Collectors.toList());	
+	return codelist.stream().map((codList) -> CodelistRs.converter(codList, Collections.EMPTY_LIST, Collections.EMPTY_LIST, Collections.EMPTY_LIST)).collect(Collectors.toList());	
 }
 
 //SELECT blocos do sistema filtrando pelo nome do bloco //
@@ -116,7 +124,7 @@ public List<CodelistRs> selectTracoBloco(@RequestParam(value = "tracoid", requir
 public List<CodelistRs> selectNomesBloco(@RequestParam(value = "bloconome", required = false) String bloconome)
 {
 	var codelist = codelistRepository.SelectNomeBloco(bloconome);
-	return codelist.stream().map((codList) -> CodelistRs.converter(codList, Collections.EMPTY_LIST, Collections.EMPTY_LIST)).collect(Collectors.toList());	
+	return codelist.stream().map((codList) -> CodelistRs.converter(codList, Collections.EMPTY_LIST, Collections.EMPTY_LIST, Collections.EMPTY_LIST)).collect(Collectors.toList());	
 }
 		
 
@@ -131,7 +139,7 @@ public List<CodelistRs> selectNomesBloco(@RequestParam(value = "bloconome", requ
 		
 		for(Codelist c : codelist)
 		{
-			CodelistRs codelistRs = CodelistRs.converter(c, tracoDocRepository.selectTracosBloco(c.getCodelistid()), arquivoRepository.selectArquivos(c.getCodelistid()));
+			CodelistRs codelistRs = CodelistRs.converter(c, tracoDocRepository.selectTracosBloco(c.getCodelistid()), arquivoRepository.selectArquivos(c.getCodelistid()), tagRepository.selectTagBloco(c.getCodelistid()));
 			lstCodelist.add(codelistRs);
 		}
 				
@@ -149,7 +157,7 @@ public List<CodelistRs> blocosTracos(@RequestParam(value = "docid", required = f
 		
 		for(Codelist c : codelist)
 		{
-			CodelistRs codelistRs = CodelistRs.converter(c, tracoDocRepository.selectTracosBloco(c.getCodelistid()), arquivoRepository.selectArquivos(c.getCodelistid()));
+			CodelistRs codelistRs = CodelistRs.converter(c, tracoDocRepository.selectTracosBloco(c.getCodelistid()), arquivoRepository.selectArquivos(c.getCodelistid()), tagRepository.selectTagBloco(c.getCodelistid()));
 			lstCodelist.add(codelistRs);
 		}
 				
@@ -241,13 +249,27 @@ public void updateCodelist(@PathVariable Long id, @RequestBody CodelistRq CdList
 	else { throw new Exception("Documento não encontrado"); }
 }
 
+// DELETE ARQUIVOS E PASTAS	
+public void removerArquivos(File f) {
+    if (f.isDirectory()) {
+        File[] files = f.listFiles();
+        for (File file : files) {
+            removerArquivos(file);
+        }
+    }
+    f.delete();
+ }
+
+
 // DELETE
 @DeleteMapping("/{id}")
 public void deleteCodelist(@PathVariable Long id)
 {	
 	// Pegando caminho do arquivo 
-	String arquivoCaminho = arquivoRepository.selectArquivoCaminho(id);	
-	 
+	//String arquivoCaminho = arquivoRepository.selectArquivoCaminho(id);	
+	var arquivo = arquivoRepository.selectArquivos(id); 
+	String arquivoCaminho = arquivo.get(0).getArquivocaminho();
+	Long arquivoId = arquivo.get(0).getArquivoid();
 	// Pegando caminho do bloco
 	var doc = codelistRepository.getOne(id);
 	Long CodelistId = doc.getCodelistid();
@@ -269,19 +291,39 @@ public void deleteCodelist(@PathVariable Long id)
 	 boolean Caminho = folder.exists();
 	 boolean Diretorio = folder.isDirectory();
 	 
-	 if(Caminho && Diretorio)
-	 {
-		 File arquivo = new File(arquivoCaminho);
-		 arquivo.delete();
-	 }
-	 else 
-	 {
-		 File[] sun = folder.listFiles();
-		 for (File toDelete : sun){toDelete.delete();}
-		 folder.delete(); 
-	 }
+	 
+	 
+
+		 if(arquivoCaminho != null)
+		 {	
+			 if (folder.list().length == 1) 
+			 {
+				File pasta = new File(caminho+"\\"+CodelistSecao);
+				removerArquivos(pasta);
+			}
+			 else 
+			 {
+				 File arquivo1 = new File(arquivoCaminho);
+				 arquivo1.delete();
+			 }
+		 }
+		 else
+		 {	
+			
+			if (folder.list().length == 0) 
+			{
+				File pasta = new File(caminho+"\\"+CodelistSecao);
+				removerArquivos(pasta);
+			}
+		 }
+	 
+	 
 	 	
 	codelistRepository.deleteById(id);
+	arquivoRepository.deleteBlocoId(id);
+	lepRepository.deleteArquivoLep(arquivoId);
+	relacaoBlocoTracoRepository.deleteRelacaoBlocoTraco(id);
+	
 }
 
 
@@ -312,9 +354,20 @@ public void deleteCodelist(@PathVariable Long id)
 	String tracoNome = traco.getTracodocnome();
 	String tracoCode = traco.getTracodoccodigo();
 	
-	
 	String rev[] = revisao.split(" ");
-	String revision = "REV"+rev[1]; 
+	String revision = "REV"+rev[1];
+	
+	String and;
+	if(rev[0] == "REVISION")
+	{
+		and = " AND arquivo_revisao <= '"+revisao+"'";
+	}
+	else
+	{
+		and = " AND arquivo_revisao LIKE 'ORIGINAL'";
+	}
+	
+	 
 	  
 	 Connection conn1 = null;
 	 ResultSet resultadoBanco1 = null;
@@ -326,7 +379,7 @@ public void deleteCodelist(@PathVariable Long id)
 				+ " INNER JOIN relacao_bloco_traco ON relacao_bloco_traco.bloco_id = codelist.codelist_id "
 				+ " INNER JOIN traco_doc ON traco_doc.traco_doc_id = relacao_bloco_traco.traco_id "
 				+ " INNER JOIN arquivo ON arquivo.codelist_id = codelist.codelist_id "
-				+ " WHERE documento_id = "+docid+"  AND traco_id = "+tracoid+" AND arquivo_revisao <= '"+revisao+"' ;";
+				+ " WHERE documento_id = "+docid+"  AND traco_id = "+tracoid+" "+and+" ;";
 	 resultadoBanco1 = stm1.executeQuery(sql1);
 	 
 	 PDFMergerUtility PDFmerger = new PDFMergerUtility();
@@ -397,6 +450,19 @@ public void deleteCodelist(@PathVariable Long id)
 	
 	String rev[] = revisao.split(" ");
 	String revision = "REV"+rev[1]; 
+	
+	
+	String and;
+	if(rev[0] == "REVISION")
+	{
+		and = " AND arquivo_revisao LIKE '"+revisao+"'";
+	}
+	else
+	{
+		and = " AND arquivo_revisao LIKE 'ORIGINAL'";
+	}
+	
+	 
 	  
 	 Connection conn1 = null;
 	 ResultSet resultadoBanco1 = null;
@@ -408,7 +474,7 @@ public void deleteCodelist(@PathVariable Long id)
 				+ " INNER JOIN relacao_bloco_traco ON relacao_bloco_traco.bloco_id = codelist.codelist_id "
 				+ " INNER JOIN traco_doc ON traco_doc.traco_doc_id = relacao_bloco_traco.traco_id "
 				+ " INNER JOIN arquivo ON arquivo.codelist_id = codelist.codelist_id "
-				+ " WHERE documento_id = "+docid+"  AND traco_id = "+tracoid+" AND arquivo_revisao LIKE '"+revisao+"' ;";
+				+ " WHERE documento_id = "+docid+"  AND traco_id = "+tracoid+" "+and+" ;";
 	 resultadoBanco1 = stm1.executeQuery(sql1);
 	 
 	 /*Criando arquivo Delta*/

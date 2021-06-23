@@ -6,6 +6,7 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.grupo2.API_TraceFinder.classes.Arquivo;
 import com.grupo2.API_TraceFinder.classes.Codelist;
+import com.grupo2.API_TraceFinder.classes.Tag;
 import com.grupo2.API_TraceFinder.classes.TracoDoc;
 
 public class CodelistRs {
@@ -21,8 +22,10 @@ public class CodelistRs {
 	private List<TracoDocRs> tracos; 
 	
 	private List<ArquivoRs> arquivos;
+	private List<TagRs> tags;
 	
-	public static CodelistRs converter(Codelist code, List<TracoDoc> lstTracos, List<Arquivo> lstArquivos) {
+	
+	public static CodelistRs converter(Codelist code, List<TracoDoc> lstTracos, List<Arquivo> lstArquivos, List<Tag> lstTags) {
 		var codelist = new CodelistRs();
 		codelist.setCodelistid(code.getCodelistid());
 		codelist.setCodelistcaminho(code.getCodelistcaminho());
@@ -35,12 +38,24 @@ public class CodelistRs {
 		codelist.setTracos(TracoDocRs.converter(lstTracos));
 		
 		codelist.setArquivos(ArquivoRs.converter(lstArquivos));
+		codelist.setTags(TagRs.converter(lstTags));
 		
 		return codelist;
 	}
 	
 	
 	
+	public List<TagRs> getTags() {
+		return tags;
+	}
+
+
+	public void setTags(List<TagRs> tags) {
+		this.tags = tags;
+	}
+
+
+
 	public String getCodelistnumbloco() {
 		return codelistnumbloco;
 	}
