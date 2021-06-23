@@ -46,7 +46,8 @@ import net.bytebuddy.agent.builder.AgentBuilder.InitializationStrategy.SelfInjec
 
 @RestController
 @RequestMapping("/codelist")
-public class CodelistController {
+public class CodelistController 
+{
 	
 	private CodelistRepository codelistRepository = null;
 	private DocumentoRepository documentoRepository;
@@ -176,11 +177,19 @@ public List<TracoDocRs> tracosBlocos(@RequestParam(value = "blocoid", required =
 
  
 
-//SELECT das Revisões do documento //
+//SELECT das Revisões do documento para FULL //
 @GetMapping("/revisoes")
 public List selectRevisoes(@RequestParam(value = "docid", required = false) Long docid)
 {
 	return arquivoRepository.selectRevisoes(docid);
+}
+
+//SELECT das Revisões do documento para Delta //
+@GetMapping("/revisoesdelta")
+public List selectRevisoesDelta(@RequestParam(value = "docid", required = false) Long docid,
+								@RequestParam(value = "tracoid", required = false) Long tracoid)
+{
+	return arquivoRepository.SelectRevisoesDelta(docid, tracoid);
 }
 
 
@@ -453,14 +462,8 @@ public void deleteCodelist(@PathVariable Long id)
 	
 	
 	String and;
-	if(rev[0] == "REVISION")
-	{
-		and = " AND arquivo_revisao LIKE '"+revisao+"'";
-	}
-	else
-	{
-		and = " AND arquivo_revisao LIKE 'ORIGINAL'";
-	}
+	if(rev[0] == "REVISION"){ and = " AND arquivo_revisao LIKE '"+revisao+"'"; }
+	else{ and = " AND arquivo_revisao LIKE 'ORIGINAL'"; }
 	
 	 
 	  
@@ -474,7 +477,7 @@ public void deleteCodelist(@PathVariable Long id)
 				+ " INNER JOIN relacao_bloco_traco ON relacao_bloco_traco.bloco_id = codelist.codelist_id "
 				+ " INNER JOIN traco_doc ON traco_doc.traco_doc_id = relacao_bloco_traco.traco_id "
 				+ " INNER JOIN arquivo ON arquivo.codelist_id = codelist.codelist_id "
-				+ " WHERE documento_id = "+docid+"  AND traco_id = "+tracoid+" "+and+" ;";
+				+ " WHERE documento_id = "+docid+"  AND traco_id = "+tracoid+" ;";
 	 resultadoBanco1 = stm1.executeQuery(sql1);
 	 
 	 /*Criando arquivo Delta*/
