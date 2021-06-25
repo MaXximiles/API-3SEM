@@ -186,6 +186,7 @@ const Table = ({ data, onEdit, onDelete, docId, filter, reload }) => {
       >
         <CodelistGenerate
           docId={docId}
+          tracoId={filter.length > 0 ? filter[0].value : null}
           generate={generationType}
           onSubmit={generate}
         />
@@ -219,6 +220,8 @@ const Table = ({ data, onEdit, onDelete, docId, filter, reload }) => {
               return "Traços";
             case "arquivos":
               return "Arquivos";
+            case "tags":
+              return "Tags";
             default:
               return key;
           }

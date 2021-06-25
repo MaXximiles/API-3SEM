@@ -3,20 +3,27 @@ import DropdownSimple from "./DropdownSimple";
 
 import restAPI from "../apis/restAPI";
 
-const CodelistGenerate = ({ generate, onSubmit, docId }) => {
+const CodelistGenerate = ({ generate, onSubmit, docId, tracoId }) => {
   const [options, setOptions] = useState([]);
   const [selectedOption, setSelectedOption] = useState({});
 
   useEffect(() => {
     const getRevisions = async () => {
-      const { data } = await restAPI.get(`/codelist/revisoes?docid=${docId}`);
+      if (generate === "full") {
+      } else {
+      }
+      const { data } =
+        generate === "full"
+          ? await restAPI.get(`/codelist/revisoes?docid=${docId}`)
+          : await restAPI.get(
+              `/codelist/revisoesdelta?docid=${docId}&tracoid=${tracoId}`
+            );
 
       var resultOptions = [];
       data.forEach((el) => {
         resultOptions = [...resultOptions, { label: el, value: el }];
       });
 
-      console.log("result options", resultOptions);
       setOptions(resultOptions);
     };
 

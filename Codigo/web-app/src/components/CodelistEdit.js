@@ -236,7 +236,7 @@ const CodelistEdit = ({ onSubmit, dataEntry, docId }) => {
               <div class="ui divider"></div>
             </React.Fragment>
           )}
-          <div className="field">
+          <div className={`${dataEntry ? "disabled" : ""} field`}>
             <label>Seção</label>
             <input
               type="text"
@@ -246,7 +246,7 @@ const CodelistEdit = ({ onSubmit, dataEntry, docId }) => {
               onChange={(e) => setSection(e.target.value)}
             />
           </div>
-          <div className="field">
+          <div className={`${dataEntry ? "disabled" : ""} field`}>
             <label>Subseção</label>
             <input
               type="text"
@@ -256,7 +256,7 @@ const CodelistEdit = ({ onSubmit, dataEntry, docId }) => {
               onChange={(e) => setSubsection(e.target.value)}
             />
           </div>
-          <div className="field">
+          <div className={`${dataEntry ? "disabled" : ""} field`}>
             <label>Bloco</label>
             <input
               type="text"
@@ -266,7 +266,7 @@ const CodelistEdit = ({ onSubmit, dataEntry, docId }) => {
               onChange={(e) => setBlock(e.target.value)}
             />
           </div>
-          <div className="field">
+          <div className={`${dataEntry ? "disabled" : ""} field`}>
             <label>Número do Bloco</label>
             <input
               type="text"
@@ -276,7 +276,7 @@ const CodelistEdit = ({ onSubmit, dataEntry, docId }) => {
               onChange={(e) => setBlockNum(e.target.value)}
             />
           </div>
-          <div className="field">
+          <div className={`${dataEntry ? "disabled" : ""} field`}>
             <label>Código do Bloco</label>
             <input
               type="text"
