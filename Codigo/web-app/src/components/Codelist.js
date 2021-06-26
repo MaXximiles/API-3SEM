@@ -135,7 +135,7 @@ const Codelist = () => {
     <div className="Codelist">
       {renderedEditModal}
       {renderedDeleteModal}
-      <div className="ui one column stackable grid container">
+      <div className="ui one column grid container">
         <div className="column">
           <div className="ui form">
             <h4 className="ui dividing header">Pesquisa do Codelist</h4>

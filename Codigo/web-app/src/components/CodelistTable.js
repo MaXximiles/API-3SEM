@@ -116,6 +116,7 @@ const Table = ({ data, onEdit, onDelete, docId, filter, reload }) => {
     await restAPI.get(`/lep/gerarlep?codelistid=${selectedItem.codelistid}`);
 
     alert("LEP gerada com sucesso!");
+    reload();
   };
 
   const generate = async (generate, revision) => {

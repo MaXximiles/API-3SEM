@@ -62,11 +62,17 @@ const Dropdown = ({
   };
 
   const renderMenu = () => {
-    const filteredOptions = options.filter(
-      (option) =>
-        !selected.includes(option) &&
-        option.label.toLowerCase().includes(search.toLowerCase())
-    );
+    const filteredOptions = options.filter((option) => {
+      if (selected.includes(option)) {
+        return false;
+      }
+
+      if (option.label.toLowerCase().includes(search.toLowerCase())) {
+        return true;
+      }
+
+      return false;
+    });
 
     const renderedOptions = filteredOptions.map((option, index) => {
       return (
