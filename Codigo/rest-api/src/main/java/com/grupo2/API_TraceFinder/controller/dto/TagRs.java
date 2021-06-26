@@ -18,7 +18,7 @@ public class TagRs {
 		ta.setTagId(tag.getTagId());
 		ta.setTagNome(tag.getTagNome());
 		return ta;	
-	}
+	} 
 	
 	
 	public static List<TagRs> converter(List<Tag> lstTag) 

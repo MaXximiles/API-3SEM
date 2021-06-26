@@ -24,6 +24,7 @@ public class CodelistRs {
 	private List<ArquivoRs> arquivos;
 	private List<TagRs> tags;
 	
+
 	
 	public static CodelistRs converter(Codelist code, List<TracoDoc> lstTracos, List<Arquivo> lstArquivos, List<Tag> lstTags) {
 		var codelist = new CodelistRs();
@@ -144,6 +145,9 @@ public class CodelistRs {
 		this.documentoid = documentoid;
 	}
 
+
+
+	
 	
 
 	

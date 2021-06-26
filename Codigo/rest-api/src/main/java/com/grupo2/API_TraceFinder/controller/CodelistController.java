@@ -277,8 +277,13 @@ public void deleteCodelist(@PathVariable Long id)
 	// Pegando caminho do arquivo 
 	//String arquivoCaminho = arquivoRepository.selectArquivoCaminho(id);	
 	var arquivo = arquivoRepository.selectArquivos(id); 
-	String arquivoCaminho = arquivo.get(0).getArquivocaminho();
-	Long arquivoId = arquivo.get(0).getArquivoid();
+	String arquivoCaminho = null;
+	Long arquivoId = null;
+	if(!arquivo.isEmpty()) 
+	{
+		arquivoCaminho = arquivo.get(0).getArquivocaminho();
+		arquivoId = arquivo.get(0).getArquivoid();
+	}
 	// Pegando caminho do bloco
 	var doc = codelistRepository.getOne(id);
 	Long CodelistId = doc.getCodelistid();
@@ -319,18 +324,22 @@ public void deleteCodelist(@PathVariable Long id)
 		 else
 		 {	
 			
-			if (folder.list().length == 0) 
-			{
+			if (folder.exists() && folder.list().length == 0) 
+			{	
 				File pasta = new File(caminho+"\\"+CodelistSecao);
 				removerArquivos(pasta);
 			}
 		 }
-	 
+	  
 	 
 	 	
 	codelistRepository.deleteById(id);
 	arquivoRepository.deleteBlocoId(id);
-	lepRepository.deleteArquivoLep(arquivoId);
+	if (arquivoId != null) 
+	{
+		lepRepository.deleteArquivoLep(arquivoId);
+	}
+	
 	relacaoBlocoTracoRepository.deleteRelacaoBlocoTraco(id);
 	
 }
@@ -364,16 +373,20 @@ public void deleteCodelist(@PathVariable Long id)
 	String tracoCode = traco.getTracodoccodigo();
 	
 	String rev[] = revisao.split(" ");
-	String revision = "REV"+rev[1];
+	
+	String revision;
+	
+	if (revisao.equals("ORIGINAL")) {  revision = "ORIGINAL"; } 
+	else{revision = "REV"+rev[1];}
 	
 	String and;
-	if(rev[0] == "REVISION")
-	{
-		and = " AND arquivo_revisao <= '"+revisao+"'";
-	}
-	else
+	if(rev[0] == "ORIGINAL")
 	{
 		and = " AND arquivo_revisao LIKE 'ORIGINAL'";
+	}
+	else
+	{	
+		and = " AND arquivo_revisao <= '"+revisao+"'";
 	}
 	
 	 
@@ -390,6 +403,7 @@ public void deleteCodelist(@PathVariable Long id)
 				+ " INNER JOIN arquivo ON arquivo.codelist_id = codelist.codelist_id "
 				+ " WHERE documento_id = "+docid+"  AND traco_id = "+tracoid+" "+and+" ;";
 	 resultadoBanco1 = stm1.executeQuery(sql1);
+	 System.out.println(sql1);
 	 
 	 PDFMergerUtility PDFmerger = new PDFMergerUtility();
 	 PDFmerger.setDestinationFileName(DirDoc+"\\"+DocNome+"-"+tracoNome+"-"+tracoCode+"-"+revision+"-FULL.pdf");
@@ -420,7 +434,9 @@ public void deleteCodelist(@PathVariable Long id)
 		 PDFmerger.addSource(file);
 		 
 		 i++;
+		 
 	 }
+	 
 	 
 	 PDFmerger.mergeDocuments();
 	 
@@ -455,11 +471,14 @@ public void deleteCodelist(@PathVariable Long id)
 	var traco = tracoDocRepository.getOne(tracoid);
 	String tracoNome = traco.getTracodocnome();
 	String tracoCode = traco.getTracodoccodigo();
-	
-	
 	String rev[] = revisao.split(" ");
-	String revision = "REV"+rev[1]; 
+	String revision;
 	
+	if (revisao.equals("ORIGINAL")) {  revision = "ORIGINAL"; }
+	else 
+	{
+	revision = "REV"+rev[1]; 
+	}
 	
 	String and;
 	if(rev[0] == "REVISION"){ and = " AND arquivo_revisao LIKE '"+revisao+"'"; }

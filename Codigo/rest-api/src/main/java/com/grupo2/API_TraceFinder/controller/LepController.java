@@ -30,6 +30,7 @@ import com.grupo2.API_TraceFinder.repository.ArquivoRepository;
 import com.grupo2.API_TraceFinder.repository.CodelistRepository;
 import com.grupo2.API_TraceFinder.repository.DocumentoRepository;
 import com.grupo2.API_TraceFinder.repository.LepRepository;
+import com.grupo2.API_TraceFinder.repository.RelacaoBlocoTracoRepository;
 import com.itextpdf.io.codec.Base64.InputStream;
 import com.itextpdf.kernel.utils.PdfMerger;
 
@@ -45,13 +46,16 @@ public class LepController {
 	private DocumentoRepository documentoRepository;
 	private CodelistRepository codelistRepository;
 	private ArquivoRepository arquivoRepository;
+	private RelacaoBlocoTracoRepository relacaoBlocoTracoRepository;
 	
-	public LepController(LepRepository LepRepository, CodelistRepository CodelistRepository, DocumentoRepository DocumentoRepository, ArquivoRepository ArquivoRepository)
+	public LepController(LepRepository LepRepository, CodelistRepository CodelistRepository, 
+			DocumentoRepository DocumentoRepository, ArquivoRepository ArquivoRepository, RelacaoBlocoTracoRepository RelacaoBlocoTracoRepository)
 	{
 		this.lepRepository = LepRepository;
 		this.documentoRepository = DocumentoRepository;
 		this.codelistRepository = CodelistRepository;
 		this.arquivoRepository = ArquivoRepository;
+		this.relacaoBlocoTracoRepository = RelacaoBlocoTracoRepository;
 	}
 	
 	
@@ -85,7 +89,14 @@ public class LepController {
 		String CodelistnumBloco = codelist.getCodelistnumbloco();
 		String CodelistSecao = codelist.getCodelistsecao();
 		String CodelistSubsecao = codelist.getCodelistsubsecao();
-
+		
+		// Verificando se já existe LEP criada
+		String arquivoExiste = null;
+		arquivoExiste = arquivoRepository.selectArquivoCaminho(codelistid);
+		
+		// Pegando traço do bloco
+		String traco = relacaoBlocoTracoRepository.SelectTraco(codelistid);
+				
 		// Pegando nome do documento
 		var documento = documentoRepository.getOne(DocumentoId);
 		String DocumentoNome = documento.getDocumentonome();
@@ -99,7 +110,8 @@ public class LepController {
 		
 		String nomeArquivo = DocNome+"-"+CodelistSecao; // Criando nome do arquivo seguindo padrão do mockup (nome doc + secao + subsecao + num - bloco)
 		if(CodelistSubsecao != "") {nomeArquivo = nomeArquivo+"-"+CodelistSubsecao;}
-		nomeArquivo = nomeArquivo+"-"+CodelistnumBloco+"_"+CodelistBloco;
+		nomeArquivo = nomeArquivo+"-"+CodelistnumBloco+"c"+CodelistCode;
+		
 		
 		//////////////////////////////////////////////////////////////////					 
 		
@@ -127,22 +139,35 @@ public class LepController {
         conn = DBConexao.abrirConexao();
         Statement stm = conn.createStatement();
         
-        String sql = "SELECT lep_id, lep_bloco, lep_code, lep_pagina, lep_modificacao, lep_revisao, arquivo_id, documento_id FROM lep WHERE documento_id = "+DocumentoId+""
-        		+ " ORDER BY lep_bloco;";
+       // String sql = "SELECT lep_id, lep_bloco, lep_code, lep_pagina, lep_modificacao, lep_revisao, arquivo_id, documento_id FROM lep WHERE documento_id = "+DocumentoId+""
+        //		+ " ORDER BY lep_bloco;";
+        
+	   	 String sql = "SELECT lep_id, lep_bloco, lep_code, lep_pagina, lep_modificacao, lep_revisao, lep.arquivo_id, lep.documento_id "
+					+ "	FROM codelist "
+					+ " INNER JOIN relacao_bloco_traco ON relacao_bloco_traco.bloco_id = codelist.codelist_id "
+					+ " INNER JOIN traco_doc ON traco_doc.traco_doc_id = relacao_bloco_traco.traco_id "
+					+ " INNER JOIN arquivo ON arquivo.codelist_id = codelist.codelist_id "
+					+ "	INNER JOIN lep ON lep.arquivo_id = arquivo.arquivo_id "
+					+ " WHERE codelist.documento_id = "+DocumentoId+"  AND traco_id = "+traco+" ;";
+        
+        
         resultadoBanco = stm.executeQuery(sql);
         
                  
         int i = 1;
         int numPag = 1;
+        Long lepId = null;
+        Long arqId = null;
         while(resultadoBanco.next())
         { 
         		String num1 = Integer.toString(i);
 		    	String lepBloco = (resultadoBanco.getString("lep_bloco"));
-		    	String arqId = (resultadoBanco.getString("arquivo_id"));
+		    	arqId = (resultadoBanco.getLong("arquivo_id"));
 		    	String lepCode = (resultadoBanco.getString("lep_code"));
 		    	String lepPage = (resultadoBanco.getString("lep_pagina"));
 		    	String lepmodificacao = (resultadoBanco.getString("lep_modificacao"));
 		    	String leprevisao = (resultadoBanco.getString("lep_revisao"));
+		    	lepId = (resultadoBanco.getLong("lep_id"));
 		    		    			    	
 	    		PDField field = pDAcroForm.getField("bloco"+num1);
 		        field.setValue(lepBloco);
@@ -197,27 +222,71 @@ public class LepController {
 	     while(resultadoBanco1.next()){ revisao = resultadoBanco1.getString("MAX(lep_revisao)");}
 		
 	    /* Salvando Informações no Banco */
-        var lep2 = new Arquivo();
-		lep2.setArquivonome(nomeArquivo);
-		lep2.setCodelistid(codelistid);
-		lep2.setArquivocaminho(CaminhoLep+"\\"+nomeArquivo+".pdf");
-		lep2.setArquivorevisao(revisao);
-		arquivoRepository.save(lep2);
-		Long arquivo = lep2.getArquivoid();
+	     
+	    if (arquivoExiste == null)
+	    {
+			
+	        var lep2 = new Arquivo();
+			lep2.setArquivonome(nomeArquivo);
+			lep2.setCodelistid(codelistid);
+			lep2.setArquivocaminho(CaminhoLep+"\\"+nomeArquivo+".pdf");
+			lep2.setArquivorevisao(revisao);
+			arquivoRepository.save(lep2);
+			Long arquivo = lep2.getArquivoid();
+	
+			String modificacao = "";
+			Long pagina = (long) NumPag;
+			
+			var lep1 = new Lep();
+			lep1.setLepBloco(CodelistBloco);
+			lep1.setLepCode(CodelistCode);
+			lep1.setLepPagina(pagina); // Inserir quantidade de paginas  
+			lep1.setLepModificacao(modificacao); // mudar quando inserir modificacao
+			lep1.setLepRevisao(revisao); // mudar quando inserir revisao
+			lep1.setArquivoId(arquivo);
+			lep1.setDocumentoid(DocumentoId);
+			lepRepository.save(lep1);
 
-		String modificacao = "";
-		Long pagina = (long) NumPag;
-		
-		var lep1 = new Lep();
-		lep1.setLepBloco(CodelistBloco);
-		lep1.setLepCode(CodelistCode);
-		lep1.setLepPagina(pagina); // Inserir quantidade de paginas  
-		lep1.setLepModificacao(modificacao); // mudar quando inserir modificacao
-		lep1.setLepRevisao(revisao); // mudar quando inserir revisao
-		lep1.setArquivoId(arquivo);
-		lep1.setDocumentoid(DocumentoId);
-		lepRepository.save(lep1);
-        
+			
+
+	    }
+	    else 
+	    {
+	    	
+	    	String modificacao = "";
+			Long pagina = (long) NumPag;
+			
+	        var lep3 = lepRepository.findById(lepId);
+	        
+	        if (lep3.isPresent()) 
+	        {
+				var lep1 = lep3.get();
+				lep1.setLepBloco(CodelistBloco);
+				lep1.setLepCode(CodelistCode);
+				lep1.setLepPagina(pagina); // Inserir quantidade de paginas  
+				lep1.setLepModificacao(modificacao); // mudar quando inserir modificacao
+				lep1.setLepRevisao(revisao); // mudar quando inserir revisao
+				lep1.setArquivoId(arqId);
+				lep1.setDocumentoid(DocumentoId);
+				lepRepository.save(lep1);
+	        }
+	        
+	        
+	        var arq2 = arquivoRepository.findById(arqId);
+	        
+	        if (arq2.isPresent())
+	        {
+		        var lep2 = arq2.get();
+				lep2.setArquivonome(nomeArquivo);
+				lep2.setCodelistid(codelistid);
+				lep2.setArquivocaminho(CaminhoLep+"\\"+nomeArquivo+".pdf");
+				lep2.setArquivorevisao(revisao);
+				arquivoRepository.save(lep2);
+				Long arquivo = lep2.getArquivoid();
+	        }
+	    	
+
+	    }
         
         
 	    return null;

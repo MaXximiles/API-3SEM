@@ -28,7 +28,7 @@ public interface LepRepository extends JpaRepository<Lep, Long>{
 	 
 	 
 
-	 @Modifying
+	  @Modifying
 	  @Transactional
 	  @Query(value = "DELETE FROM lep WHERE arquivo_id = ?1", nativeQuery = true)
 	  void deleteArquivoLep(Long arquivoId);

@@ -30,7 +30,7 @@ public interface ArquivoRepository extends JpaRepository<Arquivo, Long>
 			+ "	INNER JOIN arquivo ON arquivo.arquivo_id = lep.arquivo_id "
 			+ "	INNER JOIN codelist ON codelist.codelist_id = arquivo.codelist_id "
 			+ "	INNER JOIN relacao_bloco_traco ON relacao_bloco_traco.bloco_id = codelist.codelist_id "
-			+ " WHERE lep.documento_id = ?1" + " AND traco_id = ?2 ;", nativeQuery = true)
+			+ " WHERE lep.documento_id = ?1" + " AND traco_id = ?2 GROUP BY lep_revisao ORDER BY lep_revisao;", nativeQuery = true)
 	List SelectRevisoesDelta(Long docid, Long tracoid);
 	
 	

@@ -5,6 +5,8 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import com.grupo2.API_TraceFinder.classes.Codelist;
@@ -22,5 +24,8 @@ public interface RelacaoBlocoTracoRepository extends JpaRepository<RelacaoBlocoT
   @Query(value = "DELETE FROM relacao_bloco_traco WHERE bloco_id = ?1", nativeQuery = true)
   void deleteRelacaoBlocoTraco(Long blocoid);
   
+	@Query(value = "SELECT traco_id "
+			+ "	FROM relacao_bloco_traco WHERE bloco_id = ?1 GROUP BY traco_id ", nativeQuery = true)
+	String SelectTraco(Long blocoId);
   
 }
