@@ -110,13 +110,11 @@ As seguintes tecnologias foram utilizadas no desenvolvimento do projeto:
                       <tr>
                             <td align=center>Sprint 5<br>05/06/2021 a 26/06/2021</td>
                             <td> <p align=center>
-                             ✓ Gerar registro de modificação feita por cada usuário;
-                             ✓ Diferentes níveis de acesso (adm, usuário, auditor);
-                             ✓ Melhorias visuais na LEP;
-                             ✓ Importar codelist pronto em Excel;
-                             ✓ Implementação da DELTA;
-                             ✓ Visualização dos arquivos de cada bloco no codelist;
-                             ✓ Opção de baixar os arquivos dos blocos separadamente;
+                             ✓ Criação do DELTA;
+                             ✓ LEP por traço;
+                             ✓ FULL por revisão;
+                             ✓ DELTA por revisão;
+                             ✓ Inserção rápida de blocos;                            
                              <p align=center>                          
                        </p>
                        </td>
