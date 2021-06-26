@@ -18,7 +18,7 @@ const App = ({ history }) => {
 
   useEffect(() => {
     setUser(window.localStorage.getItem("token"));
-  });
+  }, []);
 
   const validateAccount = async (email, senha) => {
     const { data } = await restAPI.get(

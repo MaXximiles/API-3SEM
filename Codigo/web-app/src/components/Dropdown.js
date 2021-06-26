@@ -63,7 +63,7 @@ const Dropdown = ({
 
   const renderMenu = () => {
     const filteredOptions = options.filter((option) => {
-      if (selected.includes(option)) {
+      if (selected.some(({ value }) => value === option.value)) {
         return false;
       }
 
@@ -241,7 +241,7 @@ const Dropdown = ({
         {!search && renderedPlaceholder}
         <div className="text">{selected.label}</div>
         <div className={`menu ${isOpen ? "visible transition" : ""}`}>
-          {renderMenu()}
+          {isOpen && renderMenu()}
         </div>
       </div>
     </div>
