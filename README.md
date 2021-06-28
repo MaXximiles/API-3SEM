@@ -83,5 +83,5 @@ Burndown:</p>
 <img src=https://user-images.githubusercontent.com/68132461/123179087-fe190900-d45e-11eb-814e-e86a8f481bdc.png></br>
 </p></br><h1></h1>
 
-### Considerações Finais:
+
 
