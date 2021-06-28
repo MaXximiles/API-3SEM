@@ -155,7 +155,6 @@ Burndown:</p>
 - Gerar registro de modificação feita por cada usuário;
 - Diferentes níveis de acesso (adm, usuário, auditor);
 - Melhorias visuais na LEP;
-- Importar codelist pronto em Excel;
 - Implementação da DELTA;
 - Visualização dos arquivos de cada bloco no codelist;
-- Opção de baixar os arquivos dos blocos separadamente;
+
